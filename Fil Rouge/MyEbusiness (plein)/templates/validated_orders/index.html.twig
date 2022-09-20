@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ValidatedOrdersController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if validatedOrder %}
+        <table class="table table-dark table-stripped">
+            <thead>
+                <tr class="text-primary">
+                	{% if is_granted('ROLE_ADMIN') %}
+                        <th>Email</th>
+                    {% endif %}
+                    <th>N° Commande</th>
+                    <th>Date de commande</th>
+                    <th>Expédié?</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>{{ order.user.email }}</td>
+                    {% endif %}
+                    <td>{{order.ClientOrderId}}</td>
+                    <td>{{order.orderDate|format_datetime('short', 'none', locale='fr')}}</td>
+                    <td>{% if order.shipped == 1 %}{{order.shipmentDate|format_datetime('short', 'none', locale='fr')}}{% else %} - {% endif %}</td>
+                    <td><button class="btn btn-primary border-light mb-1"><a class="text-decoration-none text-light" href="
+                    {{ path('app_validated_orders_show', {'id': order.id}) }}
+                    ">Détails</a></button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1 class="text-center mt-5 mb-5">Aucune commande validée en cours</h3>
+    {% endif %}
+ </div>
+{% endblock %}

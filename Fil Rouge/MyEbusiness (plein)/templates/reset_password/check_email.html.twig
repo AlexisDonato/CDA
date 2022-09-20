@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mail de réinitialisation de mot de passe envoyé{% endblock %}
+
+{% block body %}
+<div class="container">
+<h3 class="text-warning">Mail de réinitialisation de mot de passe envoyé</h3>
+
+    <p class=" ml-3 mt-5 mb-5">
+    Si un compte correspondant à votre adresse mail existe, alors un email contenant un lien pour réinitialiser votre mot de passe a été envoyé.
+    Ce lien expirera dans <b>2 heuress</b>.</p>
+    <p class=" ml-3 mt-5 mb-5">Vous pourrez retenter la réinitialisation dans <b>1 heure</b>.</p>
+    <p class="ml-3 mb-5">Si vous n'avez pas reçu l'email, merci de vérifier votre dossier de spams ou <a href="{{ path('app_forgot_password_request') }}">Essayer de nouveau</a>.</p>
+    </div>
+    <p>L'équipe de Travel-Int</p>
+    <img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/logo.png">
+{% endblock %}

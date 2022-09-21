@@ -1,9 +1,16 @@
-stagiaire_id			VARCHAR(50)
+stagiaire_id			VARCHAR(50) / INT
 stagiaire_nom			VARCHAR(50)
-stagiaire_prenom		VARCHAR(50)
+stagiaire_ville			VARCHAR(50)
+stagiaire_codepostal		VARCHAR(10)
+stagiaire_telephone		VARCHAR(20)
+stagiaire_adresse		VARCHAR(50)
+stagiaire_mail			VARCHAR(50)
+stagiaire_sexe			VARCHAR(1)
 
-formation_id			VARCHAR(50)
-formation_nom			VARCHAR(50)
+formation_id			VARCHAR(50) /INT
+formation_intitule		VARCHAR(50)
 formation_niveau		VARCHAR(50)
+formation_duree 		INT
 formation_date_debut		DATETIME
 formation_date_fin  		DATETIME
+formation_titrepro		BOOLEAN

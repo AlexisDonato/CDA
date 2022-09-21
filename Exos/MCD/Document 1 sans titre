@@ -1,9 +1,0 @@
-stagiaire_id			VARCHAR(50)
-stagiaire_nom			VARCHAR(50)
-stagiaire_prenom		VARCHAR(50)
-
-formation_id			VARCHAR(50)
-formation_nom			VARCHAR(50)
-formation_niveau		VARCHAR(50)
-formation_date_debut		DATETIME
-formation_date_fin  		DATETIME

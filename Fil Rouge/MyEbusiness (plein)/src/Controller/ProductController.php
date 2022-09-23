@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Data\SearchData;
 use App\Entity\Category;
 use App\Form\SearchType;
@@ -46,6 +47,30 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
+    public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails): Response
+    {
+     
+        $categories = $categoryRepository->findAll();
+        $data = new SearchData();
+        $products = $productRepository->findSearch($data);
+        $products2 =$productRepository->findAll();
+        $discount = $productRepository->findDiscount($data);
+        $discount2 =$productRepository->findBy(['discount' => true]);
+
+        return $this->render('product/product_show.html.twig', [
+            'items'     => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'total' => $cartService->getTotal($orderDetails),
+            'product' => $product,
+            'products' => $products,
+            'products2' => $products2,
+            'categories' => $categories,
+            'discount' => $discount,
+            'discount2' => $discount2,
+        ]);
+    }
+
     #[Route('/catalogue/{category}', name: 'app_catalogue')]
     public function index2(CartService $cartService, ProductRepository $productRepository, Request $request, Category $category, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
@@ -75,7 +100,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/discount/{disc}', name: 'app_discount',defaults:['disc'=>1])]
-    public function index3(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository,int $disc, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+    public function index3(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, int $disc, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
         switch($disc){
             case "0": $disc=false;

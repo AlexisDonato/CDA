@@ -6,17 +6,54 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class="text-center mb-5 mt-3 text-warning">Muse, as we see you stride !</h1>
+		<h1 class="text-center mb-5 mt-3 text-danger">Muse, as we see you stride !</h1>
 	</div>
+
+	<div id="carouselExampleIndicators" class="carousel slide mb-5 text-center" data-ride="carousel" data-interval="2000">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<a href="{{ path('app_product_show', {'id': 985}) }}"><img class="w-50 img-thumbnail" src="http://picsum.photos/id/158/290/180" alt="First slide"></a>
+				<div class="carousel-caption d-none d-md-block">
+					<h1 class="text-primary">Awesome Steel Keyboard</h1>
+					<p>...</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<a href="{{ path('app_product_show', {'id': 987}) }}"><img class="w-50 img-thumbnail" src="http://picsum.photos/id/173/290/180" alt="Second slide"></a>
+				<div class="carousel-caption d-none d-md-block">
+					<h1 class="text-primary">Small Steel Car</h1>
+					<p>...</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<a href="{{ path('app_product_show', {'id': 988}) }}"><img class="w-50 img-thumbnail" src="http://picsum.photos/id/223/290/180" alt="Third slide"></a>
+				<div class="carousel-caption d-none d-md-block">
+					<h1 class="text-primary">Practical Granite Chair</h1>
+					<p>...</p>
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+
 	<div class="row d-flex justify-content-center">
 		<img src="/img/Discount.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div>
 	<div class="row d-flex justify-content-center">
 		<img src="/img/Discount2.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div>
-		<div class="row d-flex justify-content-center">
-		<img src="/img/Discount3.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div>
-	</div>
 	<div class="row d-flex justify-content-center">
-		<img src="/img/Discount4.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div>
-	</div>
-
-{% endblock %}
+		<img src="/img/Discount3.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div>
+</div>
+<div class="row d-flex justify-content-center">
+	<img src="/img/Discount4.jpeg" class="img-thumbnail mb-5 mb-1 mr-1" style="width: 400px; height: auto;"></div></div>{% endblock %}

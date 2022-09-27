@@ -24,7 +24,7 @@ class SearchData
      */
     public $max;
 
-        /**
+    /**
      * @var null|integer
      */
     public $min;
@@ -33,5 +33,4 @@ class SearchData
      * @var boolean
      */
     public $discount = false;
-    
 }

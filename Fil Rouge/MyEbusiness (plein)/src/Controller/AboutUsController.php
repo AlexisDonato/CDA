@@ -4,21 +4,17 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
-use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AboutUsController extends AbstractController
 {
     #[Route('/aboutus', name: 'app_about_us')]
-    public function index(?UserInterface $user, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartRepository $cartRepository, OrderDetailsRepository $orderDetails, Security $security, EntityManagerInterface $entityManager): Response
+    public function index(CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
         $categories = $categoryRepository->findAll();
         $data = new SearchData();

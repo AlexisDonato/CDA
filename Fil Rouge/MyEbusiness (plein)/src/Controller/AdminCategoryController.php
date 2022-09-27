@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Category;
-use App\Form\SearchType;
 use App\Form\CategoryType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;

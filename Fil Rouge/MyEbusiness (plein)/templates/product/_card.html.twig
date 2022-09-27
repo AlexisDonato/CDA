@@ -9,7 +9,7 @@
 			{{ product.price | number_format(0, ',', '') }}
 			€
 			{% if product.discount %}
-				<div class="text text-warning">En promotion!</div>
+				<h4 class="text text-warning">En promotion!</h4>
 			{% endif %}
 		</div>
 		<p class="text text-muted">{{ product.description }}</p>

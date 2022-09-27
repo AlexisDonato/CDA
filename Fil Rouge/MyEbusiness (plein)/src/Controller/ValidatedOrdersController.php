@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ValidatedOrdersController extends AbstractController
 {
-    public function getData(CartRepository $cartRepository, CartService $cartService, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, ProductRepository $productRepository, CategoryRepository $categoryRepository)
+    public function getData(?CartRepository $cartRepository, CartService $cartService, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -114,8 +114,8 @@ class ValidatedOrdersController extends AbstractController
         $cart->setShipped(true);
         $date = new \DateTime('@'.strtotime('now'));
         $cart->setShipmentDate($date);
-        $cart->setCarrierShipmentId(uniqid('SHIP'));
-        $cart->setCarrier(uniqid('CARRIER'));
+        $cart->setCarrierShipmentId(uniqid('SHIP::'));
+        $cart->setCarrier(uniqid('CARRIER::'));
         $entityManager->persist($cart);
         $entityManager->flush();
 

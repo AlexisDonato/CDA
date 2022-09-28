@@ -29,7 +29,7 @@ Codification | Type | Contraintes
   
 # Script
 ```sql
-DROP DATABASE groupes;  
+DROP DATABASE IF EXISTS groupes;  
 CREATE DATABASE groupes;  
 USE groupes;
 

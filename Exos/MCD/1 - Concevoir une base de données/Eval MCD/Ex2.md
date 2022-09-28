@@ -19,7 +19,7 @@ comprend = (#commande_id, #article_id, quantite INT, tva_taux DECIMAL(15,2));
 
 # SCRIPT
 ```sql
-DROP DATABASE Magasin;
+DROP DATABASE IF EXISTS Magasin;
 CREATE DATABASE Magasin;
 USE Magasin;
 

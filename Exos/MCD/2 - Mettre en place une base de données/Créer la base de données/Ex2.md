@@ -53,7 +53,7 @@ Codification | Type | Contraintes
 
 # Script
 ```sql
-DROP DATABASE hotels;
+DROP DATABASE IF EXISTS hotels;
 CREATE DATABASE hotels; 
 USE hotels;
 

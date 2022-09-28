@@ -1,6 +1,6 @@
 # Creation de la base Papyrus
 ```sql
-DROP DATABASE Papyrus;
+DROP DATABASE IF EXISTS Papyrus;
 CREATE DATABASE papyrus;
 USE Papyrus;
 

@@ -3,7 +3,7 @@
 ## Table Client
 Codification | Type | Contraintes
 ---------|----------| -----------
- client_id | INT AUTOINCREMENT | PRIMARY KEY
+ client_id | INT AUTO_INCREMENT | PRIMARY KEY
  client_nom |   VARCHAR(50)
  client_prenom | VARCHAR(50)
  client_adresse | VARCHAR(150)
@@ -24,7 +24,7 @@ Codification | Type | Contraintes
 ## Table Chambre
 Codification | Type | Contraintes
 ---------|----------| -----------
- chambre_id | INT AUTOINCREMENT | PRIMARY KEY
+ chambre_id | INT AUTO_INCREMENT | PRIMARY KEY
  chambre_hotel_id | INT | FOREIGN KEY
  chambre_capacite | INT
  chambre_type | VARCHAR(50)
@@ -35,7 +35,7 @@ Codification | Type | Contraintes
 ## Table Hotel
 Codification | Type | Contraintes
 ---------|----------| -----------
- hotel_id | INT AUTOINCREMENT | PRIMARY KEY
+ hotel_id | INT AUTO_INCREMENT | PRIMARY KEY
  hotel_station_id| INT | FOREIGN KEY
  hotel_nom | VARCHAR(50)
  hotel_adresse | VARCHAR(150)
@@ -46,7 +46,7 @@ Codification | Type | Contraintes
 ## Table Station
 Codification | Type | Contraintes
 ---------|----------| -----------
- station_id | INT AUTOINCREMENT | PRIMARY KEY
+ station_id | INT AUTO_INCREMENT | PRIMARY KEY
  station_nom | INT | VARCHAR(50)
 
 

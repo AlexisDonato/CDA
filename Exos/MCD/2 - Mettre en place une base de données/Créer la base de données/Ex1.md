@@ -1,8 +1,8 @@
 # Dictionnaire de données
 
 ```sql
-Personne = (per_num INT AUTOINCREMENT, per_nom varchar(50), per_prenom varchar(50), per_adresse varchar(150), per_ville varchar(100));
-Groupe = (gro_num INT AUTOINCREMENT, gro_libelle VARCHAR(50));
+Personne = (per_num INT AUTOINCREMENT PRIMARY KEY, per_nom varchar(50), per_prenom varchar(50), per_adresse varchar(150), per_ville varchar(100));
+Groupe = (gro_num INT AUTOINCREMENT PRIMARY KEY, gro_libelle VARCHAR(50));
 Appartient = (#per_num, #gro_num);
 ```
 

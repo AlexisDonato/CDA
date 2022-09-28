@@ -48,9 +48,9 @@ Codification | Type | Contraintes
 ---------|----------| -----------
  station_id | INT AUTO_INCREMENT | PRIMARY KEY
  station_nom | INT | VARCHAR(50)
-
-
-
+  
+  
+  
 # Script
 ```sql
 DROP DATABASE IF EXISTS hotels;

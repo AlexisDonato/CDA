@@ -3,7 +3,7 @@
 ## Table Abonne
 Codification | Type | Contraintes
 ---------|----------| -----------
- abonné_id | INT AUTO_INCREMENT| PRIMARY KEY
+ abonne_id | INT AUTO_INCREMENT| PRIMARY KEY
  abonne_nom | VARCHAR (50) 
  abonne_prenom | VARCHAR (50)
  abonne_adresse | VARCHAR (150)

@@ -25,7 +25,7 @@ CREATE TABLE fournis (
 CHECK (satisf >-1 AND satisf < 11 )
 );
 
-CREATE INDEX nf ON entcom(num_fou);
+CREATE INDEX numero_fournisseur ON entcom(num_fou);
 
 CREATE TABLE entcom (
   numcom INT AUTO_INCREMENT PRIMARY KEY,

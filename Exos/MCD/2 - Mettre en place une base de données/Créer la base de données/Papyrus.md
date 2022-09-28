@@ -1,4 +1,4 @@
-# Creation de la base Papyrus
+# BDD Papyrus
 ```sql
 DROP DATABASE IF EXISTS Papyrus;
 CREATE DATABASE papyrus;

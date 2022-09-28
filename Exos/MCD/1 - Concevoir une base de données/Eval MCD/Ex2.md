@@ -19,6 +19,10 @@ comprend = (#commande_id, #article_id, quantite INT, tva_taux DECIMAL(15,2));
 
 # SCRIPT
 ```sql
+DROP DATABASE Magasin;
+CREATE DATABASE Magasin;
+USE Magasin;
+
 CREATE TABLE client(
    client_id COUNTER,
    client_nom VARCHAR(50),

@@ -1,6 +1,6 @@
 # Disctionnaire de données
 
-## Table abonne
+## Table Abonne
 Codification | Type | Contraintes
 ---------|----------| -----------
  abonné_id | INT AUTOINCREMENT| PRIMARY KEY

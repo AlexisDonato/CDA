@@ -52,5 +52,4 @@ CREATE TABLE comprend(
    FOREIGN KEY(article_id) REFERENCES article(article_id)
 );
 ```
-<!-- ![MCDEx2](/home/alex/AFPA/CDA/Exos/MCD/1 - Concevoir une base de données/Eval MCD/MCD Ex2.jpg) -->
-<img src="/home/alex/AFPA/CDA/Exos/MCD/1 - Concevoir une base de données/Eval MCD/MCD Ex2.jpg">
+<img src="MCD Ex2.jpg">

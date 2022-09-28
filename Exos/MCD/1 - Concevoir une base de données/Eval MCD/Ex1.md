@@ -66,4 +66,4 @@ Codification | Type | Contraintes
 
 # MCD
 
-<img src="/home/alex/AFPA/CDA/Exos/MCD/1 - Concevoir une base de données/Eval MCD/MCD Ex1.jpg">
+<img src="MCD Ex1.jpg">

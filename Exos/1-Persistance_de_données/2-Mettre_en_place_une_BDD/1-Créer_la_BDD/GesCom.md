@@ -63,7 +63,6 @@ CREATE TABLE details (
   pro_id INT REFERENCES products(pro_id),
   ord_id INT REFERENCES orders(ord_id),
   det_price DECIMAL(6,2) NOT NULL,
-  det_quantity INT(5) NOT NULL,
-  CHECK (det_quantity > 0 AND det_quantity < 101 ),
+  det_quantity INT(5) NOT NULL CHECK (det_quantity BETWEEN 1 AND 100)
 );
 ```

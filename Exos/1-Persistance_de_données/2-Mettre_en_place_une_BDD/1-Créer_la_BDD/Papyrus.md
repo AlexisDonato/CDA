@@ -11,7 +11,7 @@ CREATE TABLE produit (
   stkale INT NOT NULL,
   stkphy INT NOT NULL,
   qteann INT NOT NULL,
-  unimes CHAR(5) NOT NULL,
+  unimes CHAR(5) NOT NULL
 );
 
 CREATE TABLE fournis (
@@ -21,18 +21,17 @@ CREATE TABLE fournis (
   posfou CHAR(5) NOT NULL,
   vilfou VARCHAR(30) NOT NULL,
   confou VARCHAR(15) NOT NULL,
-  satisf TINYINT(2),
-CHECK (satisf >-1 AND satisf < 11 )
+  satisf TINYINT(2) CHECK (satisf BETWEEN 0 and 10)
 );
-
-CREATE INDEX numero_fournisseur ON entcom(num_fou);
 
 CREATE TABLE entcom (
   numcom INT AUTO_INCREMENT PRIMARY KEY,
   numfou VARCHAR(25) REFERENCES fournis(numfou),
   obscom VARCHAR(50),
-  datcom TIMESTAMP NOT NULL,
+  datcom TIMESTAMP NOT NULL
 );
+
+CREATE INDEX numero_fournisseur ON entcom(numfou);
 
 CREATE TABLE ligcom (
   numcom INT REFERENCES entcom(numcom),
@@ -42,7 +41,7 @@ CREATE TABLE ligcom (
   priuni DECIMAL(9,2) NOT NULL,
   qteliv INT,
   derliv DATETIME NOT NULL,
-  PRIMARY KEY (numcom, numlig),
+  PRIMARY KEY (numcom, numlig)
 );
 
 CREATE TABLE vente (
@@ -55,6 +54,6 @@ CREATE TABLE vente (
   prix2 DECIMAL(9,2),
   qte3 INT,
   prix3 DECIMAL(9,2),
-  PRIMARY KEY (codart, numfou),
+  PRIMARY KEY (codart, numfou)
 );
 ```

@@ -100,7 +100,7 @@ FROM orders;
 ## Requête 9 : Date de dernière commande
 ```sql
 DELIMITER //
-CREATE PROCEDURE date_derniere_commande(IN company_name VARCHAR(40))
+CREATE PROCEDURE date_derniere_commande()
 BEGIN
   SELECT CompanyName, MAX(OrderDate) AS `Date de la dernière commande`
   FROM orders
@@ -115,7 +115,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE delai_livraison_moyen()
 BEGIN
-  SELECT ROUND(AVG(DATEDIFF(ShippedDate, OrderDate))) AS `Délai de livraison moyen (jours)`
+  SELECT ROUND(AVG(DATEDIFF(ShippedDate, OrderDate))) AS `Délai moyen de livraison en jours`
   FROM orders;
 END //
 DELIMITER ;

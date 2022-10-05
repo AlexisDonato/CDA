@@ -15,7 +15,7 @@ SELECT nomfou FROM fournis WHERE numfou=120
 
 ## Que concluez-vous ?
 
-Les modifications ne sont pas effectives dans la base de données et elles ne sont pas annulées.
+Les modifications ne sont pas effectives dans la base de données (tant que l'instruction `COMMIT;` n'est pas effectuée) et elles ne sont pas annulées (tant que l'instruction `ROLLBACK;`n'est pas effectuée ou que le développeur ne quitte le client).
 
 ## Les données sont-elles modifiables par d'autres utilisateurs (ouvrez une nouvelle fenêtre de requête pour interroger le fournisseur 120 par une instruction SELECT) ?
 
@@ -31,7 +31,7 @@ En utilisant l'instruction `COMMIT;`.
 
 ## Comment annuler la transaction ?
 
-En utilisant l'instruction `ROLLBACK;`.
+En utilisant l'instruction `ROLLBACK;` ou en quittant le client.
 
 
 # Exercice 2
@@ -48,8 +48,8 @@ Selon les critères ACID, las transaction est `Isolée` :
 ```sql
 LOCK TABLES fournis WRITE;
 ```
-Pour dévérouliller les tables, utilisez la commande suivante:
 ```sql
+-- Pour dévérouliller les tables, utiliser la commande suivante:
 UNLOCK TABLES;
 ```
 

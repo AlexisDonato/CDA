@@ -170,4 +170,4 @@ CREATE TABLE order_details(
 );
 ```
 
-<img src="/Fil_Rouge_MCD.jpg">
+<img src="Fil_Rouge_MCD.jpg">

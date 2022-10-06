@@ -101,6 +101,8 @@ product = (product_id INT, product_name VARCHAR(50) , product_description VARCHA
 
 order_details = (orderdetails_id INT, orderdetails_quantity INT, order_details_unit_price VARCHAR(50) , order_additional_discount DECIMAL(3,2)  , #cart_id*, #product_id*);
 ```
+<img src="MLD.jpg">
+
 
 # Script SQL
 ```sql
@@ -169,5 +171,4 @@ CREATE TABLE order_details(
    order_additional_discount DECIMAL(3,2)
 );
 ```
-
 <img src="Fil_Rouge_MCD.jpg">

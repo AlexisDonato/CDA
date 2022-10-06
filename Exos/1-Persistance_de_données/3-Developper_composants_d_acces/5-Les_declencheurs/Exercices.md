@@ -12,25 +12,35 @@ ALTER TABLE nom_table ENGINE=InnoDB;
 
 ```sql
 CREATE TABLE articles_a_commander (
-  codart VARVARCHAR(4) REFERENCES produit(codart),
+  codart VARCHAR(4) REFERENCES produit(codart),
   date DATETIME,
   qte INT
 );
 
 
 -- Créer un déclencheur UPDATE sur la table produit : lorsque le stock physique devient inférieur ou égal au stock d'alerte, une nouvelle ligne est insérée dans la table ARTICLES_A_COMMANDER.
-CREATE OR REPLACE TRIGGER commander AFTER UPDATE ON produit
+
+
+
+DELIMITER //
+
+CREATE TRIGGER commander AFTER UPDATE ON produit
 FOR EACH ROW
 BEGIN
   DECLARE new_qte INT;
-  IF NEW.stkphy < NEW.stkale THEN
     SET new_qte = (
-      SELECT sum(qte) FROM articles_a_commander
-      WHERE codart = NEW.codart
+    SELECT sum(qte) FROM articles_a_commander
+    WHERE codart = NEW.codart
     );
-    SET new_qte = (NEW.stkale-NEW.stkphy-new_qte);
-    INSERT INTO articles_a_commander (codart, qte) VALUES (NEW.codart, new_qte);
+  IF NEW.stkphy < NEW.stkale 
+    THEN
+        IF new_qte IS NULL
+            THEN
+                SET new_qte = 0;
+        END IF;
+    INSERT INTO articles_a_commander (codart, qte) VALUES (NEW.codart, NEW.stkale - NEW.stkphy - new_qte);
   END IF;
-
 END //
+
+DELIMITER ;
 ```

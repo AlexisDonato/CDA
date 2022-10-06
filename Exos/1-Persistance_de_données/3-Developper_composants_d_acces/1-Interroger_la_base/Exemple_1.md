@@ -142,14 +142,14 @@ where tauxcom > 15;
 
 
 -- 26.Afficher le nom, le salaire, le taux de commission et la commission des employés dont le taux de commission n'est pas nul. (la commission est calculée en multipliant le salaire par le taux de commission)
-select salaire, tauxcom, salaire*tauxcom/100  as 'taux de comission'
+select salaire, tauxcom, salaire*tauxcom/100  as 'commission'
 from employe
 where tauxcom is not null;
 
 
 
 -- 27. Afficher le nom, le salaire, le taux de commission, la commission des employés dont le taux de commission n'est pas nul, classé par taux de commission croissant.
-select salaire, tauxcom, salaire*tauxcom/100  as 'taux de comission'
+select salaire, tauxcom, salaire*tauxcom/100  as 'commission'
 from employe
 where tauxcom is not null
 order by 3;

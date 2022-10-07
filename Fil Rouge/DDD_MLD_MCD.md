@@ -113,7 +113,7 @@ product = (product_id INT, product_name VARCHAR(50) , product_image VARCHAR(50) 
 
 order_details = (order_details_id INT, order_details_quantity INT, order_details_unit_price VARCHAR(50) , order_details_optional_discount DECIMAL(3,2)  , #order_delivery_id*, #cart_id*, #product_id*);
 ```
-<img src="MLD.jpg">
+<img src="Fil_Rouge_MLD.jpg">
 
 
 # Script SQL

@@ -29,8 +29,8 @@ CREATE TABLE commande (
 CREATE TABLE detail (
   com_num INT REFERENCES commande(com_num),
   pro_num INT REFERENCES produit(pro_num),
-  est_qte INT NOT NULL,
-  PRIMARY KEY (com_num, pro_num)
+  PRIMARY KEY (com_num, pro_num),
+  est_qte INT NOT NULL
 );
 ```
 
@@ -83,14 +83,14 @@ CREATE TABLE ligcom (
 CREATE TABLE vente (
   codart CHAR(4) REFERENCES produit(codart),
   numfou VARCHAR(25) REFERENCES fournis(numfou),
+  PRIMARY KEY (codart, numfou),
   delliv SMALLINT NOT NULL,
   qte1 INT NOT NULL,
   prix1 DECIMAL(9,2) NOT NULL,
   qte2 INT,
   prix2 DECIMAL(9,2),
   qte3 INT,
-  prix3 DECIMAL(9,2),
-  PRIMARY KEY (codart, numfou)
+  prix3 DECIMAL(9,2)
 ```
 
 # Script Gestion Utilisateurs

@@ -7,10 +7,9 @@ DELIMITER |
 CREATE PROCEDURE lst_fournis()
 
 BEGIN
-  SELECT DISTINCT fournis.numfou, nomfou, FROM entcom
+  SELECT DISTINCT fournis.numfou, nomfou FROM entcom
   JOIN fournis ON entcom.numfou = fournis.numfou;
-END //
-
+END |
 
 DELIMITER ;
 ```

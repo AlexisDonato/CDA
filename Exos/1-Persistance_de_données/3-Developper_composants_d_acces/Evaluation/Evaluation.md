@@ -43,11 +43,11 @@ HAVING Nbre_commandes > 10;
 ## 5 : Liste des clients dont le montant cumulé de toutes les commandes passées est supérieur à 30000 € :
 ```sql
 -- (NB: chiffre d'affaires (CA) = total des ventes)
-SELECT CompanyName AS Client, SUM((UnitPrice*Quantity)-Discount) AS ca
+SELECT CompanyName AS Client, SUM((UnitPrice*Quantity)-Discount) AS ca, country
 FROM `order details`
 JOIN orders ON `order details`.OrderID = orders.OrderID
 JOIN customers ON orders.CustomerID = customers.CustomerID
-GROUP BY CompanyName
+GROUP BY CompanyName, country
 HAVING ca > 30000
 ORDER BY ca DESC;
 ```

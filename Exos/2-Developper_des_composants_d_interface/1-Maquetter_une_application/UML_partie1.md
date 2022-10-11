@@ -6,3 +6,7 @@
 # Diagramme de séquence système
 
 <img src="Diagramme_sequence_systeme.jpg">
+
+---
+# Diagramme d'activité
+

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discs list
+{% endblock %}
+
+{% block body %}
+
+		<div class="text-center pt-3">
+			<h1 class="text-info">
+				<b>Discs List</b>
+			</h1>
+			<form class="d-flex justify-content-end mb-3" role="search">
+				<input class="form-control col-2" type="search" placeholder="Disc info?" aria-label="Search">
+				<button class="btn btn-outline-warning ml-1 mr-1" type="submit">Search</button>
+			</form>
+			<br>
+		</div>
+
+		<div class="container">
+			{% set col = 1 %}
+		{% for disc in discs %}
+			{% if (col == 1)%}
+				<div class="row mb-2 justify-content-around">
+				{% endif %}
+
+				<div class="col-2 p-0">
+					<img class="img-fluid img-thumbnail" src="/img/{{disc.picture}}" alt="{{disc.picture}}" title="{{disc.picture}}" width="200px">
+				</div>
+				<div class="col-3 d-flex flex-column p-0">
+					<div class="small">
+						<h5>{{disc.title}}<br></h5>
+						<b>{{disc.artist.name}}</b><br>
+						<b>Label :
+						</b>
+						{{disc.label}}<br>
+						<b>Year :
+						</b>
+						{{disc.year}}<br>
+						<b>Genre :
+						</b>
+						{{disc.genre}}<br>
+						<b>Price :
+						</b>
+						{{disc.price}}<br>
+					</div>
+					<div class="mt-auto mb-2 d-flex justify-content-around">
+						<a href="{{ path('app_disc_show', {'id': disc.id}) }}" style="font-size: 2rem; color: #17a2b8;">
+							<i class="fa-solid fa-eye fa-sm" title="Details" alt="Details"></i>
+						</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('app_disc_edit', {'id': disc.id}) }}" style="font-size: 2rem; color: #17a2b8;">
+								<i class="fa-solid fa-pencil fa-sm" title="Edit" alt="Edit"></i>
+							</a>
+						{% endif %}
+					</div>
+				</div>
+				{% if (col == 2) %}
+				</div>
+				{% set col = 1 %}
+			{% else %}
+				{% set col = col + 1 %}
+			{% endif %}
+
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Disc{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-info mt-3 mb-3 ml-5">Create new Disc</h1>
+
+
+    {{ include('disc/_form.html.twig') }}
+
+    <a href="{{ path('app_disc_index') }}"><button class="btn btn-outline-info mt-3 ml-3">Discs list</button></a>
+{% endblock %}

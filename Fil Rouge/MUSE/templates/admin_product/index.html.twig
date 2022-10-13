@@ -17,6 +17,7 @@
                 <th>Image principale</th>
                 <th>Image1</th>
                 <th>Image2</th>
+                <th>Quantité stock</th>
                 <th>Promotion</th>
                 <th></th>
             </tr>
@@ -32,6 +33,7 @@
                 <td class="text-break">{{ product.image }}</td>
                 <td class="text-break">{{ product.image1 }}</td>
                 <td class="text-break">{{ product.image2 }}</td>
+                <td>{{ product.quantity }}</td>
                 <td>{{ product.discount ? 'Oui' : 'Non' }}</td>
                 <td>
                     <button class="btn btn-warning text-warning mb-1"><a class="text-decoration-none" href="{{ path('app_admin_product_show', {'id': product.id}) }}">Détails</a></button>

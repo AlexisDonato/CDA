@@ -14,7 +14,7 @@
 				<div id="carouselExampleIndicators" class="carousel slide mb-5 text-center" data-ride="carousel" data-interval="8000">
 					<ol class="carousel-indicators">
 						{% if product.image1 %}
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 						{% endif %}
@@ -65,14 +65,21 @@
 								<td>{{ product.content }}</td>
 							</tr>
 							<tr>
+								<th>En stock</th>
+								<td>
+									{% if product.quantity > 0 %}Oui{% else %}Non
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
 								<th>Promotion</th>
 								<td>{{ product.discount ? 'Oui' : 'Non' }}</td>
 							</tr>
 							<tr>
 								<th class="text-success">Achat</th>
 								<td>
-									<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary {% if product.quantity == 0 %} disabled btn-secondary {% endif %}">
-										<i class="fa-solid fa-cart-plus mr-1"></i>
+									<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary{% if product.quantity == 0 %} disabled btn-secondary {% endif %}">
+										<i class="fa-solid fa-cart-plus"></i>
 									</a>
 								</td>
 							</tr>

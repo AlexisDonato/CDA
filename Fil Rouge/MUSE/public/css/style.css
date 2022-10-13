@@ -56,6 +56,38 @@ h3 {
 }
 
 
+/* CAROUSEL */
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '}';
+  font-size: 55px;
+  color: rgb(15, 186, 209);
+}
+
+.carousel-control-prev-icon:after {
+  content: '{';
+  font-size: 55px;
+  color: rgb(15, 186, 209);
+}
+
+.carousel .carousel-indicators li {
+    background-color: rgb(48, 121, 131);
+}
+
+.carousel .carousel-indicators li.active {
+    background-color: rgb(15, 186, 209);
+}
+
 /* FOOTER */
 
 .col_white_amrc {

@@ -126,23 +126,24 @@ DELIMITER ;
 ```sql
 DELIMITER //
 
-CREATE TRIGGER pays_identique AFTER INSERT ON orders
+CREATE TRIGGER pays_identique AFTER INSERT ON `orders details`
 FOR EACH ROW
 BEGIN
     DECLARE pays_livraison VARCHAR(20);
     DECLARE pays_fournisseur VARCHAR(20);
       SET pays_livraison = (
       SELECT ShipCountry
-      FROM orders
-      WHERE ShipCountry=NEW.ShipCountry
+      FROM `order details`
+      JOIN orders ON `order details`.OrderID = orders.OrderID
+      WHERE orders.OrdersID=NEW.OrderID
       );
       SET pays_fournisseur = (
         SELECT Country
         FROM suppliers
         JOIN products ON suppliers.SuplierID = products.SupplierID
-        JOIN `order details` ON orders.OrderID = `order details`.OrderID
-        JOIN products ON `order details`.ProductID = products.ProductID
-
+        JOIN `order details` ON `order details`.ProductID = products.ProductID
+        JOIN orders ON orders.OrderID = `order details`.OrderID
+        WHERE products.ProductID = NEW.ProductID
       );
       IF pays_livraison != pays_fournisseur THEN
               SIGNAL SQLSTATE '40000' SET MESSAGE_TEXT = 'Le pays de livraison doit être identique à celui du fournisseur !';

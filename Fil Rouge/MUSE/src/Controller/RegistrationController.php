@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Data\SearchData;
 use App\Security\EmailVerifier;
@@ -56,13 +57,23 @@ class RegistrationController extends AbstractController
             );
             $user->setBirthdate($form->get('birthdate')->getData());
             $user->setRoles(['ROLE_CLIENT']);
+
+            // if (isgranted('ROLE_CLIENT')) {
+            //     $user->setVat('20,00')};
+            // if (isgranted('ROLE_PRO')) {
+            //     $user->setVat('10,00')
+            // };
+
+            $date = new DateTime('@'.strtotime('now'));
+            $user->setRegisterDate($date);
+
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
+                    ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -105,11 +116,18 @@ class RegistrationController extends AbstractController
         $roles = $user->getRoles();
         array_push($roles, 'ROLE_CLIENT');
         $user->setRoles($roles);
+        $user->setVat(20,00);
+        if ($user->setPro(true)) {
+            $user->setRoles('ROLE_PRO');
+            $user->setVat(10,00);
+        }
+        $date = new DateTime('@'.strtotime('now'));
+        $user->setRegisterDate($date);
 
         $email = (new TemplatedEmail())
-        ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
+        ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
         ->to($user->getEmail())
-        ->subject('Bienvenue sur My E-Business!')
+        ->subject('Bienvenue sur Muse!')
         ->htmlTemplate('registration/user_information_email.html.twig')
         ->context([
             'user' => $user,

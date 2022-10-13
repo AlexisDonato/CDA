@@ -28,7 +28,7 @@ class CartService
     private $user;
 
     #[IsGranted('ROLE_CLIENT')]
-    public function __construct(CartRepository $cartRepository, OrderDetailsRepository $orderDetailsRepository, ?UserInterface $user, SessionInterface $session, ProductRepository $productRepository, Security $security, EntityManagerInterface $entityManager)
+    public function __construct(?CartRepository $cartRepository, OrderDetailsRepository $orderDetailsRepository, ?UserInterface $user, SessionInterface $session, ProductRepository $productRepository, Security $security, EntityManagerInterface $entityManager)
     {
         if ($security->isGranted('ROLE_CLIENT')) {
             $this->user = $user;

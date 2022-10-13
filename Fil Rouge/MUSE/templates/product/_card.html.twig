@@ -6,8 +6,13 @@
 	<div class="card-body d-flex flex-column">
 		<h3 class="card-title">{{ product.name }}</h3>
 		<div class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem; text-align: right;">
+			{% if product.discount %}
+			<s class="text-warning">{{ product.price | number_format(0, ',', '') }}
+			€</s>
+			{% else %}
 			{{ product.price | number_format(0, ',', '') }}
 			€
+			{% endif %}
 			{% if product.discount %}
 				<h4 class="text text-warning">En promotion!</h4>
 			{% endif %}

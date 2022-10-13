@@ -18,6 +18,7 @@ class ProductType extends AbstractType
             ->add('price')
             ->add('description')
             ->add('content')
+
             ->add('image',FileType::class, [
                 'mapped' => true, 
                 'required'=>false,
@@ -32,9 +33,47 @@ class ProductType extends AbstractType
                             'image/jpg',
                             'image/png'
                         ],
-                        'mimeTypesMessage' => 'Invalid type of file',
+                        'mimeTypesMessage' => 'Type de fichier invalide',
                     ])],
                 'data_class' => null])
+
+                ->add('image1',FileType::class, [
+                    'mapped' => true, 
+                    'required'=>false,
+                    'attr' => [
+                        'accept' => 'image/*' , 
+                        'class' => 'form-control-file'
+                    ],
+                    'constraints' => [
+                        new File ([
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/jpg',
+                                'image/png'
+                            ],
+                            'mimeTypesMessage' => 'Type de fichier invalide',
+                        ])],
+                    'data_class' => null])
+
+                        ->add('image2',FileType::class, [
+                            'mapped' => true, 
+                            'required'=>false,
+                            'attr' => [
+                                'accept' => 'image/*' , 
+                                'class' => 'form-control-file'
+                            ],
+                            'constraints' => [
+                                new File ([
+                                    'mimeTypes' => [
+                                        'image/jpeg',
+                                        'image/jpg',
+                                        'image/png'
+                                    ],
+                                    'mimeTypesMessage' => 'Type de fichier invalide',
+                                ])],
+                            'data_class' => null])
+
+            ->add('quantity')
             ->add('discount')
             ->add('categories')
         ;

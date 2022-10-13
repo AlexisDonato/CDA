@@ -52,6 +52,10 @@
                 <th>Votre compte est vérifié :</th>
                 <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
             </tr>
+            <tr>
+                <th>Date d'enregistrement</th>
+                <td>{{ user.registerDate|format_datetime('short', 'none', locale='fr') }}</td>
+            </tr>
         </tbody>
     </table>
 <div class="d-flex">

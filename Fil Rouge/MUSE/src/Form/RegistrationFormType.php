@@ -29,7 +29,7 @@ class RegistrationFormType extends AbstractType
                     'constraints' => [
                         new Regex([
                             'pattern' => "/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/",
-                            'message' => 'Invalid first name (numbers are not granted)'
+                            'message' => 'Prénom invalide (numéros non autorisés)'
                         ]),
                     ]
                 ])
@@ -43,7 +43,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => "/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/",
-                        'message' => 'Invalid name (numbers are not granted)'
+                        'message' => 'Nom invalide (numéros non autorisés)'
                     ]),
                 ]
             ])
@@ -76,7 +76,7 @@ class RegistrationFormType extends AbstractType
                     'constraints' => [
                         new Regex([
                             'pattern' => "/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/", // French phone number
-                            'message' => 'Invalid Phone number'
+                            'message' => 'Numéro de téléphone invalide'
                         ]),
                     ]
                 ])
@@ -90,7 +90,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
-                        'message' => 'Invalid email'
+                        'message' => 'Email invalide'
                     ]),
                 ]
             ])
@@ -99,10 +99,16 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => "Veuillez accepter nos conditions d'utilisation",
                     ]),
                 ],
             ])
+
+            ->add('pro', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                ],
+            )
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -115,11 +121,11 @@ class RegistrationFormType extends AbstractType
                     ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Merci de renseigner votre mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

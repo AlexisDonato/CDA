@@ -39,6 +39,12 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image1 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image2 = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -158,6 +164,30 @@ class Product
     public function setQuantity(?int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getImage1(): ?string
+    {
+        return $this->image1;
+    }
+
+    public function setImage1(?string $image1): self
+    {
+        $this->image1 = $image1;
+
+        return $this;
+    }
+
+    public function getImage2(): ?string
+    {
+        return $this->image2;
+    }
+
+    public function setImage2(?string $image2): self
+    {
+        $this->image2 = $image2;
 
         return $this;
     }

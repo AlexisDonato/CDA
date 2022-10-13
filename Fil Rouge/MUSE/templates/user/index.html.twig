@@ -17,6 +17,7 @@
                 <th>Date de naissance</th>
                 <th>Adresse</th>
                 <th>Compte vérifié</th>
+                <th>Date d'enregistrement</th>
                 <th></th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{ user.birthdate|format_datetime('short', 'none', locale='fr') }}</td>
                 <td>{{ user.adress }}</td>
                 <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+                <td>{{ user.registerDate|format_datetime('short', 'none', locale='fr') }}</td>
                 <td>
                     <button class="btn btn-danger border-light mb-1"><a class="text-decoration-none text-light" href="{{ path('app_user_show', {'id': user.id}) }}">Détails</a></button>
                     <button class="btn btn-danger border-light mb-1" ><a class="text-decoration-none text-light" style="width: 1150px;" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a></button>

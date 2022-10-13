@@ -5,13 +5,14 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class="text-center text-light mt-3 mb-5">Votre Panier :</h1>
+		<h1 class="text-center text-primary mt-3 mb-5">Votre Panier :</h1>
 		{% if count > 0 %}
 			<table class="table table-dark">
 				<thead>
 					<tr class="text-primary">
 						<th>Produit</th>
 						<th>Prix</th>
+						<th>Promotion</th>
 						<th>Quantité</th>
 						<th>Total</th>
 						<th></th>
@@ -22,8 +23,9 @@
 						<tr>
 							<td>{{item.Product.name}}</td>
 							<td>{{item.Product.price}}</td>
+							{% if item.product.discount %}<td class="text text-warning">-{{ item.product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
 							<td>{{item.Quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td>{{item.Product.price * item.Quantity}}
+							<td{% if item.product.discount %} class="text-warning"{% endif %}>{{(item.Product.price * item.Quantity) * ( 1 - ( item.product.discountRate))}}
 								€</td>
 							<td>
 								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">

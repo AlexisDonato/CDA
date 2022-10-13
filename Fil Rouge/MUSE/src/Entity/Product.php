@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -44,6 +45,9 @@ class Product
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image2 = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2, nullable: true)]
+    private ?string $discountRate = null;
 
     public function __construct()
     {
@@ -188,6 +192,18 @@ class Product
     public function setImage2(?string $image2): self
     {
         $this->image2 = $image2;
+
+        return $this;
+    }
+
+    public function getDiscountRate(): ?string
+    {
+        return $this->discountRate;
+    }
+
+    public function setDiscountRate(?string $discountRate): self
+    {
+        $this->discountRate = $discountRate;
 
         return $this;
     }

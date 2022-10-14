@@ -101,6 +101,7 @@ class OrderController extends AbstractController
         $cart = $cartService->getClientCart();
         $cart->setValidated(true);
         $cart->setShipped(false);
+        $cart->setTotal($cartService->getTotal($orderDetails));
         $date = new \DateTime('@'.strtotime('now'));
         $cart->setOrderDate($date);
         $entityManager->persist($cart);

@@ -95,7 +95,11 @@ class CartService
         $orderDetails->setProduct($product);
         $quantity = $orderDetails->getQuantity();
         $productQuantity = $product->getQuantity();
-        
+        $cart = $this->getCart();
+        $vat = $clientCart->getUser()->getVat();
+
+        $discountRate = $product->getDiscountRate();
+
         if ($remove) {
             $product->setQuantity($productQuantity + 1);
             $quantity--;
@@ -108,9 +112,10 @@ class CartService
             $product->setQuantity($productQuantity - 1);
             $quantity++;
         }
-        
+
         $orderDetails->setQuantity($quantity); 
-        $orderDetails->setTotal($product->getPrice() * $quantity);
+        $orderDetails->setSubTotal($product->getPrice() * $quantity * (1 - $discountRate) * (1 + $vat));
+
         $this->entityManager->persist($orderDetails);
         $this->entityManager->persist($product);
         $this->entityManager->flush();
@@ -191,14 +196,17 @@ class CartService
             }
             
     }
-
+              
     public function getTotal(?OrderDetailsRepository $orderDetails) : float
     {
         $clientCart =$this->getClientCart();
+
         if ($clientCart != null) {
             $total = $orderDetails->createQueryBuilder('o')
-            ->select('sum(p.price * o.Quantity * (1-COALESCE(p.discountRate,0)))') 
+            ->select('sum((p.price * o.Quantity) * (1-COALESCE(p.discountRate,0)) * (1+u.vat))')
             ->join(Product::class, 'p', 'WITH', 'o.Product = p.id')
+            ->join(Cart::class, 'c', 'WITH', 'o.cart = c.id')
+            ->join(User::class, 'u', 'WITH', 'c.user = u.id')
             ->where('o.cart = :val')
             ->setParameter('val', $clientCart->getId())
             ->getQuery()
@@ -209,6 +217,7 @@ class CartService
             }
 
             return $total;
+
         }
 
         return 0;

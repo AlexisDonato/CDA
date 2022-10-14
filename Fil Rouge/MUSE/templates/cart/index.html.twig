@@ -13,8 +13,9 @@
 						<th>Produit</th>
 						<th>Prix</th>
 						<th>Promotion</th>
+						<th>TVA</th>
 						<th>Quantité</th>
-						<th>Total</th>
+						<th>Sous-total</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -24,8 +25,9 @@
 							<td>{{item.Product.name}}</td>
 							<td>{{item.Product.price}}</td>
 							{% if item.product.discount %}<td class="text text-warning">-{{ item.product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
+							<td>{{ app.user.vat * 100}}%</td>
 							<td>{{item.Quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td{% if item.product.discount %} class="text-warning"{% endif %}>{{(item.Product.price * item.Quantity) * ( 1 - ( item.product.discountRate))}}
+							<td{% if item.product.discount %} class="text-warning"{% endif %}>{{(item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat )}}
 								€</td>
 							<td>
 								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">

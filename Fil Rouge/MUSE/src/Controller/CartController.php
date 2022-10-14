@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+// use App\Entity\Cart;
 use App\Data\SearchData;
+// use Doctrine\ORM\EntityManager;
 use App\Service\Cart\CartService;
+use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderDetailsRepository;
@@ -35,11 +38,15 @@ class CartController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
 
         $cartService->setUser($user);
+        $total = $cartService->getTotal($orderDetails);
+        // $cart = $cart->setTotal($cartService->getTotal($orderDetails));
+        // $entityManager->persist($cart);
+        // $entityManager->flush();
 
         return $this->render('cart/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
+            'total'     => $total,
             'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,

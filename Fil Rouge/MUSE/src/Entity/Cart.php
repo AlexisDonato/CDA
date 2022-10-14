@@ -46,6 +46,10 @@ class Cart
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $carrierShipmentId = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 3, nullable: true)]
+    private ?string $total = null;
+
+
     public function __construct()
     {
         $this->OrderDetails = new ArrayCollection();
@@ -178,6 +182,18 @@ class Cart
     public function setCarrierShipmentId(?string $carrierShipmentId): self
     {
         $this->carrierShipmentId = $carrierShipmentId;
+
+        return $this;
+    }
+
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(?int $total): self
+    {
+        $this->total = $total;
 
         return $this;
     }

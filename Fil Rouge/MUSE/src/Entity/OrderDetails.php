@@ -31,7 +31,7 @@ class OrderDetails
     private ?Product $Product = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $total = null;
+    private ?float $subTotal = null;
 
     public function __construct()
     {
@@ -103,14 +103,14 @@ class OrderDetails
         return $this;
     }
 
-    public function getTotal(): ?float
+    public function getSubTotal(): ?float
     {
-        return $this->total;
+        return $this->subTotal;
     }
 
-    public function setTotal(?float $total): self
+    public function setSubTotal(?float $subTotal): self
     {
-        $this->total = $total;
+        $this->subTotal = $subTotal;
 
         return $this;
     }

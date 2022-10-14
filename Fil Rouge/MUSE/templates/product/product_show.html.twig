@@ -75,6 +75,12 @@
 								<th>Promotion</th>
 								<td>{{ product.discount ? 'Oui' : 'Non' }}{% if product.discountRate %} : <p class="text-warning">-{{ product.discountRate *100}}%</p>{% endif %}</td>
 							</tr>
+							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<tr>
+								<th>TVA</th>
+								<td>{{ app.user.vat * 100}}% {% if is_granted('ROLE_PRO') %}(PRO){% endif %}</td>
+							</tr>
+							{% endif %}
 							<tr>
 								<th class="text-success">Achat</th>
 								<td>

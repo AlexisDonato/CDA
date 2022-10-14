@@ -17,6 +17,7 @@
 					<th>Produit</th>
 					<th>Prix</th>
 					<th>Promotion</th>
+					<th>TVA</th>
 					<th>Quantité</th>
 					<th>Sous-total</th>
 					<th></th>
@@ -25,32 +26,46 @@
 			<tbody>
 				{% for item in items %}
 					<tr>
-						<td>{{item.Product.name}}</td>
-							<td>{{item.Product.price}}</td>
-							{% if item.product.discount %}<td class="text text-warning">-{{ item.product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
-							<td>{{item.Quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td{% if item.product.discount %} class="text-warning"{% endif %}>{{(item.Product.price * item.Quantity) * ( 1 - ( item.product.discountRate))}}
-								€</td>
-						<td>
-							<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm">
-								<i class="bi bi-cart-plus"></i>
-							</a>
-							<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
-								<i class="bi bi-cart-dash"></i>
-								<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
-									<i class="fas fa-trash"></i>
-								</a>
-							</td>
+						<td>{{item.Product.name}}
 						</td>
+						<td>{{item.Product.price}}
+						</td>
+						{% if item.product.discount %}
+							<td class="text text-warning">-{{ item.product.discountRate * 100 }}%
+						{% else %}
+							<td>-
+						{% endif %}
+							</td>
+							<td>{{ app.user.vat * 100}}%
+							</td>
+							<td>{{item.Quantity}}
+								{% if item.product.quantity == 0 %}
+									({{item.product.quantity}}
+									left in stock)
+								{% endif %}
+							</td>
+							<td {% if item.product.discount %} class="text-warning" {% endif %}>{{(item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat )}} €
+							</td>
+							<td>
+								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
+									<i class="bi bi-cart-plus"></i>
+								</a>
+								<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
+									<i class="bi bi-cart-dash"></i>
+									<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
+										<i class="fas fa-trash"></i>
+									</a>
+							</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3" class="text-right"><b>Total :</b>
+					<td colspan="3" class="text-right">
+						<b>Total :</b>
 					</td>
-					<td>{{ total }}
-						€</td>
+					<td>{{ total }}	€
+					</td>
 					<td>
 						<a href="{{ path("app_cart_deleteAll") }}" class="btn btn-danger" title="Supprimer le panier">
 							<i class="bi bi-cart-x"></i>
@@ -58,7 +73,7 @@
 					</td>
 				</tr>
 				<tr class="text-center">
-					<td colspan="5">Date de la commande :
+					<td colspan="8">Date de la commande :
 						<b>{{ "now" | date('d-m-Y') }}</b>
 					</td>
 				</tr>

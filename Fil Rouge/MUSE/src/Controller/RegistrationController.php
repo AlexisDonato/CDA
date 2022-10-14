@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(CartService $cartService, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
+    public function register(CartService $cartService, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -48,6 +48,11 @@ class RegistrationController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $pro = $form->get('pro')->getData();
+            $user->setPro($pro);
+
+
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -58,11 +63,15 @@ class RegistrationController extends AbstractController
             $user->setBirthdate($form->get('birthdate')->getData());
             $user->setRoles(['ROLE_CLIENT']);
 
-            // if (isgranted('ROLE_CLIENT')) {
-            //     $user->setVat('20,00')};
-            // if (isgranted('ROLE_PRO')) {
-            //     $user->setVat('10,00')
-            // };
+            if ($user->setPro(true)) {
+                $user->setRoles(['ROLE_PRO']);
+                // $user->setVat('10,00');
+            } 
+            // else {
+            //     $user->setVat('20,00');
+            // }
+            // ;
+
 
             $date = new DateTime('@'.strtotime('now'));
             $user->setRegisterDate($date);

@@ -6,15 +6,15 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
+// use Symfony\Component\Validator\Constraints\Length;
+// use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+// use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
@@ -67,6 +67,8 @@ class UserType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => (array)[
                     'ROLE_ADMIN' => 'ROLE_ADMIN',
+                    'ROLE_SALES' => 'ROLE_SALES',
+                    'ROLE_PRO' => 'ROLE_PRO',
                     'ROLE_CLIENT' => 'ROLE_CLIENT',
                     'ROLE_USER' => 'ROLE_USER',
                 ],

@@ -53,7 +53,7 @@
 						<tbody>
 							<tr>
 								<th>Prix</th>
-								<td>{{ product.price }}
+								{% if product.discountRate %}<td class="text-warning"><s>{{ product.price }}</s> {{ product.price * (1 - product.discountRate)}}{% else %}<td>{{ product.price }}{% endif %}
 									€</td>
 							</tr>
 							<tr>
@@ -73,7 +73,7 @@
 							</tr>
 							<tr>
 								<th>Promotion</th>
-								<td>{{ product.discount ? 'Oui' : 'Non' }}</td>
+								<td>{{ product.discount ? 'Oui' : 'Non' }}{% if product.discountRate %} : <p class="text-warning">-{{ product.discountRate *100}}%</p>{% endif %}</td>
 							</tr>
 							<tr>
 								<th class="text-success">Achat</th>

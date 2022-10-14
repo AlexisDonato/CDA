@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $registerDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
-    private ?string $vat = "20";
+    private ?string $vat = "0.2";
 
     #[ORM\Column]
     private ?bool $pro = false;

@@ -61,16 +61,12 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setBirthdate($form->get('birthdate')->getData());
-            $user->setRoles(['ROLE_CLIENT']);
+            $user->setRoles(['ROLE_CLIENT','ROLE_USER']);
 
             if ($user->setPro(true)) {
-                $user->setRoles(['ROLE_PRO']);
-                // $user->setVat('10,00');
+                $user->setRoles(['ROLE_PRO','ROLE_CLIENT','ROLE_USER']);
+                $user->setVat('0.1');
             } 
-            // else {
-            //     $user->setVat('20,00');
-            // }
-            // ;
 
 
             $date = new DateTime('@'.strtotime('now'));
@@ -123,13 +119,9 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre adresse mail a bien été vérifiée. Un mail de confirmation vous a été envoyé');
         $user = $this->getUser();
         $roles = $user->getRoles();
-        array_push($roles, 'ROLE_CLIENT');
+        array_push($roles, ['ROLE_CLIENT','ROLE_USER']);
         $user->setRoles($roles);
-        $user->setVat(20,00);
-        if ($user->setPro(true)) {
-            $user->setRoles('ROLE_PRO');
-            $user->setVat(10,00);
-        }
+
         $date = new DateTime('@'.strtotime('now'));
         $user->setRegisterDate($date);
 

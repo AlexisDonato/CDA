@@ -197,9 +197,7 @@ class CartService
         $clientCart =$this->getClientCart();
         if ($clientCart != null) {
             $total = $orderDetails->createQueryBuilder('o')
-            // ->select('sum(p.price * o.Quantity)')
             ->select('sum(p.price * o.Quantity * (1-COALESCE(p.discountRate,0)))') 
-            // ===> NE FONCTIONNE PAS!!!!!!!
             ->join(Product::class, 'p', 'WITH', 'o.Product = p.id')
             ->where('o.cart = :val')
             ->setParameter('val', $clientCart->getId())

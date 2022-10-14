@@ -26,7 +26,7 @@
 						<i class="fa-solid fa-guitar text-secondary"></i>
 					</div>
 				</div>
-				{% for product in products|slice(5,5) %}
+				{% for product in products|slice(0,5) %}
 					<div class="carousel-item">
 						<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{product.image}}" alt="Slide n°{{product.id}}"></a>
 						<div class="carousel-caption d-none d-md-block">

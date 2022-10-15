@@ -83,6 +83,10 @@ class ValidatedOrdersController extends AbstractController
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
         $shipmentDate = $cart->getShipmentDate();
+ 
+dd($details, $cart);
+
+        $total = $details->getCart($id)->getTotal();
 
         $user = $cart->getUser();
         return $this->render(
@@ -97,6 +101,7 @@ class ValidatedOrdersController extends AbstractController
                 'carrier' =>$carrier,
                 'carrierShipmentId' => $carrierShipmentId,
                 'user' => $user,
+                'total' => $total,
             ]
         );
     }

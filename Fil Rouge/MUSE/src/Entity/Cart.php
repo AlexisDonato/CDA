@@ -46,7 +46,7 @@ class Cart
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $carrierShipmentId = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 3, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 2, nullable: true)]
     private ?string $total = null;
 
 
@@ -186,12 +186,12 @@ class Cart
         return $this;
     }
 
-    public function getTotal(): ?int
+    public function getTotal(): ?string
     {
         return $this->total;
     }
 
-    public function setTotal(?int $total): self
+    public function setTotal(?string $total): self
     {
         $this->total = $total;
 

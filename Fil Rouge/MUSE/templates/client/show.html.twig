@@ -21,7 +21,7 @@
     <li class="list-group-item bg-dark text-light"><b>Adresse :</b> {{ user.adress }}</li>
     <li class="list-group-item bg-dark text-light"><b>N° téléphone :</b> {{ user.phoneNumber }}</li>
     <li class="list-group-item bg-dark text-light"><b>Votre compte est vérifié :</b> {{ user.isVerified ? 'Oui' : 'Non' }}</li>
-    <li class="list-group-item bg-dark text-light"><b>Date d'enregistrement' :</b> {{ user.registerDate ? user.registerDate|date('d-m-Y') : '' }}</li>
+    <li class="list-group-item bg-dark text-light"><b>Date d'enregistrement :</b> {{ user.registerDate ? user.registerDate|date('d-m-Y') : '' }}</li>
   </ul>
   <div class="card-body text-center">
 <a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': user.id}) }}"><i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier"></i></a>

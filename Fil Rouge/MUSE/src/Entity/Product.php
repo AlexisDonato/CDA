@@ -46,7 +46,7 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image2 = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
     private ?string $discountRate = '0';
 
     public function __construct()
@@ -198,6 +198,8 @@ class Product
 
     public function getDiscountRate(): ?string
     {
+        $discountRate = $this->discountRate;
+        $discountRate = '0';
         return $this->discountRate;
     }
 

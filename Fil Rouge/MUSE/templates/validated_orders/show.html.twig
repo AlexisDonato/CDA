@@ -31,30 +31,27 @@
 					</tr>
 				</thead>
 				<tbody>
+				{% set total = 0 %}
 					{% for detail in details %}
 						<tr>
 							<td>{{detail.Product.name}}</td>
 							<td>{{detail.Product.price}}</td>
-							{% if detail.product.discount %}<td class="text text-warning">-{{ detail.product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
+							{% if detail.Product.discount %}<td class="text text-warning">-{{ detail.Product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
 							<td>{{ app.user.vat * 100}}%</td>
-							<td>{{detail.Quantity}} {% if detail.product.quantity == 0 %} ({{detail.product.quantity}} left in stock) {% endif %}</td>
-							<td{% if detail.product.discount %} class="text-warning"{% endif %}>{{(detail.Product.price * detail.Quantity) * (1 - ( detail.product.discountRate)) * (1 +  app.user.vat )}}
+							<td>{{detail.Quantity}} {% if detail.Product.quantity == 0 %} ({{detail.Product.quantity}} left in stock) {% endif %}</td>
+							<td{% if detail.Product.discount %} class="text-warning"{% endif %}>{{(detail.Product.price * detail.Quantity) * (1 - ( detail.Product.discountRate)) * (1 +  app.user.vat)}}
 								€</td>
 							<td>
 								</td>
 							</td>
 						</tr>
-					{% endfor %}
+					{% set total = total + (detail.Product.price * detail.Quantity) * (1 - ( detail.Product.discountRate)) * (1 +  app.user.vat ) %}{% endfor %}
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="3" class="text-right"><b>Total :</b>
 						</td>
 						<td>{{ total }}
-						{# {% for detail in details %}
-						{{ sum((detail.Product.price * detail.Quantity) * (1 - ( detail.product.discountRate)) * (1 +  app.user.vat )) }}
-							€
-							{% endfor %} #}
 							</td>
 						<td colspan="5">
 						</td>

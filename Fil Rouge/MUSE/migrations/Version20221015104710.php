@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221014190524 extends AbstractMigration
+final class Version20221015104710 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20221014190524 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE cart (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, client_order_id VARCHAR(255) NOT NULL, validated TINYINT(1) NOT NULL, order_date DATETIME DEFAULT NULL, shipped TINYINT(1) NOT NULL, shipment_date DATETIME DEFAULT NULL, carrier VARCHAR(255) DEFAULT NULL, carrier_shipment_id VARCHAR(255) DEFAULT NULL, INDEX IDX_BA388B7A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE cart (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, client_order_id VARCHAR(255) NOT NULL, validated TINYINT(1) NOT NULL, order_date DATETIME DEFAULT NULL, shipped TINYINT(1) NOT NULL, shipment_date DATETIME DEFAULT NULL, carrier VARCHAR(255) DEFAULT NULL, carrier_shipment_id VARCHAR(255) DEFAULT NULL, total NUMERIC(12, 2) DEFAULT NULL, INDEX IDX_BA388B7A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE contact (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, name VARCHAR(255) DEFAULT NULL, email VARCHAR(255) DEFAULT NULL, message VARCHAR(255) DEFAULT NULL, subject LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\', enquiry_date DATETIME DEFAULT NULL, INDEX IDX_4C62E638A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE order_details (id INT AUTO_INCREMENT NOT NULL, product_id INT NOT NULL, cart_id INT NOT NULL, quantity INT NOT NULL, sub_total DOUBLE PRECISION DEFAULT NULL, INDEX IDX_845CA2C11AD5CDBF (cart_id), INDEX IDX_845CA2C14584665A (product_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

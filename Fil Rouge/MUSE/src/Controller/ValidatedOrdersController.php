@@ -84,11 +84,12 @@ class ValidatedOrdersController extends AbstractController
         $carrierShipmentId= $cart->getCarrierShipmentId();
         $shipmentDate = $cart->getShipmentDate();
  
-dd($details, $cart);
+//  dd($details, $cart, $orderId);
 
-        $total = $details->getCart($id)->getTotal();
+        $total = $details[0]->getCart()->getTotal();
 
         $user = $cart->getUser();
+
         return $this->render(
             'validated_orders/show.html.twig',
             $this->getData($cartRepository, $cartService, $user, $orderDetails, $productRepository, $categoryRepository) + [
@@ -132,11 +133,11 @@ dd($details, $cart);
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
 
-        $cart->setCarrierShipmentId(uniqid('SHIP'));
-        $cart->setCarrier(uniqid('CARRIER'));
+        // $cart->setCarrierShipmentId(uniqid('SHIP'));
+        // $cart->setCarrier(uniqid('CARRIER'));
 
         $email = (new TemplatedEmail())
-        ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
+        ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
         ->to($cart->getUser()->getEmail())
         ->subject('Votre commande a bien été expédiée!')
         ->htmlTemplate('validated_orders/order_shipment_email.html.twig')

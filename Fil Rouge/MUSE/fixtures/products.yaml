@@ -8,7 +8,7 @@ App\Entity\Product:
     # https://images.unsplash.com/photo-1590054387835
     categories: '<numberBetween(1,11)>x @category_*'
     discount: '15%? 1 : 0'
-    discountRate: '20%? 0.2'
+    discountRate: '20%? 0.2 : 0'
     content: "H:<numberBetween(0, 50)>, L:<numberBetween(0, 50)>, l:<numberBetween(0, 50)>"
     quantity: <numberBetween(0, 50)>
 

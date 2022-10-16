@@ -16,7 +16,6 @@
 			<th>TVA</th>
 			<th>Quantité</th>
 			<th>Sous-total</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,9 +28,6 @@
 							<td style="text-align:right;">{{ app.user.vat * 100}}%</td>
 							<td style="text-align:right;">{{detail.Quantity}}</td>
 							<td style="text-align:right;">{{(detail.Product.price * detail.Quantity) * (1 - ( detail.Product.discountRate)) * (1 +  app.user.vat)}}	€</td>
-							<td>
-								</td>
-							</td>
 						</tr>
 					{% set total = total + (detail.Product.price * detail.Quantity) * (1 - ( detail.Product.discountRate)) * (1 +  app.user.vat ) %}{% endfor %}
 				</tbody><tfoot><tr>

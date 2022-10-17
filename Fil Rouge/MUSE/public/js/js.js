@@ -17,6 +17,8 @@ function checkForm(event) {
     let wrongPhone = document.getElementById("wrongPhone");
     let phoneRE = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/); // French phone numbers
 
+    let pro_cb =document.getElementById("registration_form_pro");
+
     let duns = document.getElementById("registration_form_proDuns");
     let wrongDuns = document.getElementById("wrongDuns");
     let dunsRE = new RegExp(/^[0-9]{9}$/);

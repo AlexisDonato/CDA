@@ -140,7 +140,13 @@ class RegistrationFormType extends AbstractType
 
             ->add('proDuns', TextType::class, [
                 'required' => false,
-                ])
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[0-9]{9}$/',
+                        'message' => 'Numéro invalide : entrée à 9 chiffres (ex: "123456789")'
+                    ]),
+                ]
+            ])
 
             ->add('proJobPosition', TextType::class, [
                 'required' => false,

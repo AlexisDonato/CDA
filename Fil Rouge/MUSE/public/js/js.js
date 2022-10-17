@@ -17,59 +17,68 @@ function checkForm(event) {
     let wrongPhone = document.getElementById("wrongPhone");
     let phoneRE = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/); // French phone numbers
 
-
+    let duns = document.getElementById("registration_form_proDuns");
+    let wrongDuns = document.getElementById("wrongDuns");
+    let dunsRE = new RegExp(/^[0-9]{9}$/);
 
     if (name.validity.valueMissing) {
         event.preventDefault();
         wrongName.style.color = "red";
-        wrongName.textContent = "Name required";
+        wrongName.textContent = "Nom requis";
         name.focus();
     }
     if (!nameRE.test(name.value)) {
         event.preventDefault();
         wrongName.style.color = "orange";
-        wrongName.textContent = "Invalid name (numbers are not granted)";
+        wrongName.textContent = "Nom invalide (numéros non autorisés)";
         name.focus();
     } else wrongName.textContent = ""
 
     if (firstName.validity.valueMissing) {
         event.preventDefault();
         wrongFirstName.style.color = "red";
-        wrongFirstName.textContent = "First name required";
+        wrongFirstName.textContent = "Prénom requis";
         firstName.focus();
     }
     if (!firstNameRE.test(firstName.value)) {
         event.preventDefault();
         wrongFirstName.style.color = "orange";
-        wrongFirstName.textContent = "Invalid first name (numbers are not granted)";
+        wrongFirstName.textContent = "Prénom invalide (numéros non autorisés)";
         firstName.focus();
     } else wrongFirstName.textContent = ""
 
     if (email.validity.valueMissing) {
         event.preventDefault();
         wrongEmail.style.color = "red";
-        wrongEmail.textContent = "Email required";
+        wrongEmail.textContent = "Email requis";
         email.focus();
     }
     if (!emailRE.test(email.value)) {
         event.preventDefault();
         wrongEmail.style.color = "orange";
-        wrongEmail.textContent = "Invalid email (ex: info_noreply@mye-business.com)";
+        wrongEmail.textContent = "Email invalide (ex: info_noreply@muse.com)";
         email.focus();
     } else wrongEmail.textContent = ""
 
     if (phone.validity.valueMissing) {
         event.preventDefault();
         wrongPhone.style.color = "red";
-        wrongPhone.textContent = "Phone number required";
+        wrongPhone.textContent = "Numéro de téléphone requis";
         phone.focus();
     }
     if (!phoneRE.test(phone.value)) {
         event.preventDefault();
         wrongPhone.style.color = "orange";
-        wrongPhone.textContent = "Invalid phone number (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
+        wrongPhone.textContent = "Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
         phone.focus();
     } else wrongPhone.textContent = ""
+    if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {
+        event.preventDefault();
+        wrongDuns.style.color = "orange";
+        wrongDuns.textContent = 'Numéro invalide : entrée à 9 chiffres (ex: "123456789")';
+        pro_form.style.display="block";
+        duns.focus();
+    } else wrongDuns.textContent = ""
 }
 
 if (document.getElementById("submit")) {

@@ -37,7 +37,7 @@
             label: "Etes-vous un professionnel?"
         }) }}
 
-		<div id="proForm" class = 'col-6 ml-3'>
+		<div id="proForm" class = 'col-6 ml-5'>
 			{{ form_row(registrationForm.proCompanyName, {
 				label: "Raison sociale"
 			}) }}
@@ -46,7 +46,7 @@
 			}) }}
 			{{ form_row(registrationForm.proDuns, {
 				label: "Numéro DUNS (SIRET International)"
-			}) }}
+			}) }}<span id="wrongDuns"></span>
 		</div>
 
 		{{ form_row(registrationForm.agreeTerms, {

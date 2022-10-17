@@ -17,6 +17,14 @@
 	<div class="alert alert-danger text-center">{{ message }}</div>
 {% endfor %}
 
+{# Breadcrumbs #}
+{% import 'breadcrumbs.html.twig' as breadcrumbs %}
+{{ breadcrumbs.render([
+    {'url': url('app_home'), 'text': 'Homepage'}, 
+    {'url': url('app_category'), 'text': ' > Articles'}, 
+
+]) }}
+
 {% block body %}
 {% endblock %}
 

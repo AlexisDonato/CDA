@@ -60,6 +60,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $pro = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $proCompanyName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $proDuns = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -294,6 +300,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPro(bool $pro): self
     {
         $this->pro = $pro;
+
+        return $this;
+    }
+
+    public function getProCompanyName(): ?string
+    {
+        return $this->proCompanyName;
+    }
+
+    public function setProCompanyName(?string $proCompanyName): self
+    {
+        $this->proCompanyName = $proCompanyName;
+
+        return $this;
+    }
+
+    public function getProDuns(): ?string
+    {
+        return $this->proDuns;
+    }
+
+    public function setProDuns(?string $proDuns): self
+    {
+        $this->proDuns = $proDuns;
 
         return $this;
     }

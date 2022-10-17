@@ -131,8 +131,14 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            
+            ->add('proCompanyName')
+            ->add('proDuns')
         ;
     }
+
+
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -22,7 +22,7 @@ class CartController extends AbstractController
     public function index(CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
-            $this->addFlash('info', 'Please login or register first');
+            $this->addFlash('info', 'Merci de vous connecter ou de vous inscrire au préalable');
             return $this->redirectToRoute('login');  
         }
 
@@ -59,7 +59,7 @@ class CartController extends AbstractController
     public function add($id, CartService $cartService, ?UserInterface $user) 
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
-            $this->addFlash('info', 'Please login or register first');
+            $this->addFlash('info', 'Merci de vous connecter ou de vous inscrire au préalable');
             return $this->redirectToRoute('login');  
         }
 

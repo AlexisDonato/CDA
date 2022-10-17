@@ -9,7 +9,6 @@
 		<div class="row">
 			<div
 				class="col-4 d-flex align-items-center">
-				{# <img src="{{ product.image }}" class="img-thumbnail mb-3"> #}
 
 				<div id="carouselExampleIndicators" class="carousel slide mb-5 text-center" data-ride="carousel" data-interval="8000">
 					<ol class="carousel-indicators">
@@ -19,7 +18,7 @@
 							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 						{% endif %}
 					</ol>
-					<div class="carousel-inner">
+					<div class="carousel-inner zoom">
 						<div class="carousel-item active">
 							<img class="img-thumbnail border border-info bg bg-dark" src="/img/{{ product.image }}" onerror="this.onerror=null; this.src='{{ product.image }}'" alt="...">
 							<div class="carousel-caption d-none d-md-block"></div>

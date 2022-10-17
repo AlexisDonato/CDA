@@ -51,7 +51,7 @@ class ClientController extends AbstractController
         } else {
             $this->addFlash(
                 'error',
-                'Please verifiy your mail before accessing your personnal information'
+                "Merci de vérifier votre email afin d'accéder à vos informations personnelles"
             );
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
 
@@ -103,7 +103,7 @@ class ClientController extends AbstractController
         } else {
             $this->addFlash(
                 'error',
-                'Please verifiy your mail before accessing your personnal information'
+                "Merci de vérifier votre email afin d'accéder à vos informations personnelles"
             );
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }

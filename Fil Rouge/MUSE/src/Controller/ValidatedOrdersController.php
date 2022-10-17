@@ -48,7 +48,7 @@ class ValidatedOrdersController extends AbstractController
     public function index(CartRepository $cartRepository, CartService $cartService, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, ProductRepository $productRepository, CategoryRepository $categoryRepository): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
-            $this->addFlash('info', 'Please login or register first');
+            $this->addFlash('info', 'Merci de vous connecter ou de vous inscrire au préalable');
             return $this->redirectToRoute('login');
         }
 

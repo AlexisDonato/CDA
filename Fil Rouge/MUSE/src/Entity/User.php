@@ -66,6 +66,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $proDuns = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $proJobPosition = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -324,6 +327,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProDuns(?string $proDuns): self
     {
         $this->proDuns = $proDuns;
+
+        return $this;
+    }
+
+    public function getProJobPosition(): ?string
+    {
+        return $this->proJobPosition;
+    }
+
+    public function setProJobPosition(?string $proJobPosition): self
+    {
+        $this->proJobPosition = $proJobPosition;
 
         return $this;
     }

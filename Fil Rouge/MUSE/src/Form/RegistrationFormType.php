@@ -107,8 +107,10 @@ class RegistrationFormType extends AbstractType
             ->add('pro', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
+                'row_attr' => [
+                    'onclick' => 'proSubForm()',
                 ],
-            )
+                ])
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -132,8 +134,17 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             
-            ->add('proCompanyName')
-            ->add('proDuns')
+            ->add('proCompanyName', TextType::class, [
+                'required' => false,
+                ])
+
+            ->add('proDuns', TextType::class, [
+                'required' => false,
+                ])
+
+            ->add('proJobPosition', TextType::class, [
+                'required' => false,
+                ])
         ;
     }
 

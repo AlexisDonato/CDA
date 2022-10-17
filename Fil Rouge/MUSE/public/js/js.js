@@ -77,6 +77,34 @@ if (document.getElementById("submit")) {
 }
 
 
+function proSubForm() {
+
+    let pro_cb =document.getElementById("registration_form_pro");
+    let pro_form = document.getElementById("proForm");
+    let company_name = document.getElementById("registration_form_proCompanyName");
+    let duns = document.getElementById("registration_form_proDuns");
+    let job = document.getElementById("registration_form_proJobPosition");
+
+        if (pro_cb.checked==true) {
+            pro_form.style.display="block";
+            company_name.setAttribute('required', '');
+            duns.setAttribute('required', '');
+            job.setAttribute('required', '');
+        } else {
+            pro_form.style.display="none";
+            company_name.removeAttribute('required', '');
+            duns.removeAttribute('required', '');
+            job.removeAttribute('required', '');
+        }
+        if (pro_cb.checked==false) {
+            pro_form.style.display="none";
+            company_name.removeAttribute('required', '');
+            duns.removeAttribute('required', '');
+            job.removeAttribute('required', '');
+        }
+    }
+
+
 // Nouislider
 
 // import noUiSlider from 'nouislider'

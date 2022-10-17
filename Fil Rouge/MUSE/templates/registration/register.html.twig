@@ -32,18 +32,22 @@
 		{{ form_row(registrationForm.phoneNumber, {
             label: 'Numéro de téléphone'
         }) }}<span id="wrongPhone"></span>
-		<input type="checkbox" onclick="document.getElementById('proForm').style.display = (this.checked? 'block':'none');"{{ form_row(registrationForm.pro, {
-            label: "Etes-vous un professionnel?"
-        }) }}>
 
-	<div id="proForm">
-		{{ form_row(registrationForm.proCompanyName, {
-            label: "Raison sociale"
+		{{ form_row(registrationForm.pro, {
+            label: "Etes-vous un professionnel?"
         }) }}
-		{{ form_row(registrationForm.proDuns, {
-            label: "Numéro DUNS (SIRET International)"
-        }) }}
-	</div>
+
+		<div id="proForm" class = 'col-6 ml-3'>
+			{{ form_row(registrationForm.proCompanyName, {
+				label: "Raison sociale"
+			}) }}
+			{{ form_row(registrationForm.proJobPosition, {
+				label: "Votre poste au sein de la société"
+			}) }}
+			{{ form_row(registrationForm.proDuns, {
+				label: "Numéro DUNS (SIRET International)"
+			}) }}
+		</div>
 
 		{{ form_row(registrationForm.agreeTerms, {
             label: "Accepter nos conditions d'utilisation"

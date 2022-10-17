@@ -16,6 +16,16 @@ body {
 
 /* FONTS */
 
+.hometitle {
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    text-shadow: 0 0 5px rgb(167, 14, 14);   
+}
+
+.hometitle2 {
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    text-shadow: 0 0 5px rgb(255, 187, 0);  
+}
+
 h1 {
     font-family: Orbitron;
     font-size: 40px;
@@ -38,6 +48,26 @@ h3 {
 
 .navbar {
     backdrop-filter: blur(5px);
+}
+
+
+/* BREADCRUMBS */
+
+.breadcrumb {
+    padding: 0px 15px !important;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(47,47,47,0.8183648459383753) 49%, rgba(0,0,1,0.4514180672268907) 100%);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    /* content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0yLjUgMEwxIDEuNSAzLjUgNCAxIDYuNSAyLjUgOGw0LTQtNC00eiIgZmlsbD0iY3VycmVudENvbG9yIi8+PC9zdmc+) !important; */
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    text-shadow: 0 0 6upx rgb(0, 233, 250);
+    color: rgb(51, 85, 85);
+    content: '>';
+    font-style: bold;
+    filter: brightness(1.25);
+    filter: saturate(300%);
 }
 
 

@@ -17,13 +17,31 @@
 	<div class="alert alert-danger text-center">{{ message }}</div>
 {% endfor %}
 
+{% block breadcrumbs %}
+<div class="container">
+<div class="row">
+<div class="col">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-info" href="#">Home</a></li>
+    <li class="breadcrumb-item"><a class="text-info" href="#">Library</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data</li>
+  </ol>
+</nav>
+</div>
+</div>
+</div>
+{% endblock %}
+
 {# Breadcrumbs #}
+{#
 {% import 'breadcrumbs.html.twig' as breadcrumbs %}
 {{ breadcrumbs.render([
-    {'url': url('app_home'), 'text': 'Homepage'}, 
-    {'url': url('app_category'), 'text': ' > Articles'}, 
-
+	{'url': url('app_home'), 'text': 'Homepage'}, 
+    {'url': url('app_category'), 'text': ' > Categories'}, 
+    {'text': article.title},
 ]) }}
+ #}
 
 {% block body %}
 {% endblock %}

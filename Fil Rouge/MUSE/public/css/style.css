@@ -45,7 +45,7 @@ h3 {
     font-weight: 700;
     color: rgb(162, 209, 236);
     line-height: 15.4px;
-    -webkit-text-stroke: 1px rgb(0, 0, 0);
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .navbar {

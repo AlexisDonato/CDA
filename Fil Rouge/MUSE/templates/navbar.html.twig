@@ -20,7 +20,7 @@
 				</a>
 			</li>
 			<li class="nav-item text-center ml-5 mr-5">
-				<a class="nav-link text-decoration-none == 'app_category' %}active{% endif %}" href="{{ path('app_category') }}">
+				<a class="nav-link text-decoration-none{% if app.request.attributes.get('_route') == 'app_category' %}active{% endif %}" href="{{ path('app_category') }}">
 					<div>
 						<i class="fa-solid fa-list-ul fa-lg mb-1"></i>
 						<span class="badge rounded-pill badge-notification bg-secondary position-absolute top-0 start-100 translate-middle">

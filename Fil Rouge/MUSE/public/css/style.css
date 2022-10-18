@@ -85,6 +85,14 @@ h3 {
     display: block;
     position: sticky;
     top: 153px;
+    scale: 0,8;
+}
+
+.filterCat {
+    max-height: 100px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
 }
 
 

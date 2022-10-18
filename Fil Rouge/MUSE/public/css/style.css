@@ -34,6 +34,7 @@ h1 {
     font-weight: 700;
     color: rgb(151, 215, 252);
     line-height: 26.4px;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
 
 h3 {
@@ -44,6 +45,7 @@ h3 {
     font-weight: 700;
     color: rgb(162, 209, 236);
     line-height: 15.4px;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
 
 .navbar {
@@ -62,7 +64,7 @@ h3 {
 .breadcrumb-item + .breadcrumb-item::before {
     /* content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0yLjUgMEwxIDEuNSAzLjUgNCAxIDYuNSAyLjUgOGw0LTQtNC00eiIgZmlsbD0iY3VycmVudENvbG9yIi8+PC9zdmc+) !important; */
     -webkit-text-stroke: 1px rgb(0, 0, 0);
-    text-shadow: 0 0 6upx rgb(0, 233, 250);
+    text-shadow: 0 0 6px rgb(0, 233, 250);
     color: rgb(51, 85, 85);
     content: '>';
     font-style: bold;

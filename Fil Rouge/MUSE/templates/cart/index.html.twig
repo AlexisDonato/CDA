@@ -22,7 +22,7 @@
 				<tbody>
 					{% for item in items %}
 						<tr>
-							<td>{{item.Product.name}}</td>
+							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.Product.name}}</p></a></td>
 							<td>{{item.Product.price}}</td>
 							{% if item.product.discount %}<td class="text text-warning">-{{ item.product.discountRate * 100 }}%{% else %}<td>-{% endif %}</td>
 							<td>{{ app.user.vat * 100}}%</td>

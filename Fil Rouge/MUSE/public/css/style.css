@@ -176,6 +176,30 @@ h2:hover {
 }
 
 
+/* CART */
+
+.productHl {
+    font-family: Orbitron;
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    line-height: 20px;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.productHl:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
+}
+
 /* FOOTER */
 
 .col_white_amrc {

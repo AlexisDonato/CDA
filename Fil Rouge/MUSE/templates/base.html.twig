@@ -18,28 +18,26 @@
 		{% endfor %}
 
 		{# Bootstrap Breadcrumbs #}
-		{% if (app.request.attributes.get('_route') != 'login') %}
-			{% if (app.request.attributes.get('_route') != 'app_home') %}
-				{% block breadcrumbs %}
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<nav aria-label="breadcrumb">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item">
-											<a class="text-info" href="{{path('app_home')}}">Home</a>
-										</li>
-										<li class="breadcrumb-item">
-											<a class="text-info" href="{{path('app_category')}}">Catégories</a>
-										</li>
-										<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
-									</ol>
-								</nav>
-							</div>
+		{% if (app.request.attributes.get('_route') != 'login') and (app.request.attributes.get('_route') != 'app_home') %}
+			{% block breadcrumbs %}
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item">
+										<a class="text-info" href="{{path('app_home')}}">Home</a>
+									</li>
+									<li class="breadcrumb-item">
+										<a class="text-info" href="{{path('app_category')}}">Catégories</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
+								</ol>
+							</nav>
 						</div>
 					</div>
-				{% endblock %}
-			{% endif %}
+				</div>
+			{% endblock %}
 		{% endif %}
 
 		{% block body %}{% endblock %}

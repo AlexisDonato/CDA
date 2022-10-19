@@ -52,7 +52,7 @@
 						<tbody>
 							<tr>
 								<th>Prix</th>
-								{% if product.discountRate %}<td class="text-warning"><s>{{ product.price }}</s> {{ product.price * (1 - product.discountRate)}}{% else %}<td>{{ product.price }}{% endif %}
+								{% if product.discountRate %}<td class="text-warning"><s>{{ product.price }}</s> <i class="fa-solid fa-arrow-right"></i> <b>{{ product.price * (1 - product.discountRate)}}{% else %}</b><td>{{ product.price }}{% endif %}
 									€</td>
 							</tr>
 							<tr>

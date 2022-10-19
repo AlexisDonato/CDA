@@ -84,13 +84,13 @@ h2 {
     color: rgb(162, 209, 236);
     line-height: 20px;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-  cursor: pointer;
-  transition: 0.5s;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
 h2:hover {
-  color: #fff;
-  text-shadow: 0 0 5px #03e9f4,
+    color: #fff;
+    text-shadow: 0 0 5px #03e9f4,
               0 0 25px #03e9f4,
               0 0 50px #03e9f4,
               0 0 100px #03e9f4;
@@ -130,6 +130,7 @@ h2:hover {
   outline: black;
   background-size: 100%, 100%;
   background-image: none;
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .carousel-control-next-icon:after
@@ -137,12 +138,14 @@ h2:hover {
   content: '}';
   font-size: 55px;
   color: rgb(15, 186, 209);
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .carousel-control-prev-icon:after {
   content: '{';
   font-size: 55px;
   color: rgb(15, 186, 209);
+  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .carousel .carousel-indicators li {

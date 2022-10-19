@@ -66,7 +66,7 @@ class ValidatedOrdersController extends AbstractController
             'validated_orders/index.html.twig',
             $this->getData($cartRepository, $cartService, $user, $orderDetails, $productRepository, $categoryRepository) + [
                 'orders'    => $clientCarts,
-                'validatedOrder' => $validatedOrder,
+                'validatedOrder' => $clientCarts,
             ]
         );
     }

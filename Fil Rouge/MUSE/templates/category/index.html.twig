@@ -7,19 +7,19 @@
 		<div class="container d-flex justify-content-center">
 		{% if categories|length > 0 %}
 			<div class="row">
-				<h1 class="col-12 text-info mb-5 mt-3">Catégories :</h1>
+				<h1 class="col-12 text-info mb-3 mt-3">Catégories :</h1>
 				<div class="col-12 col-md-6">
 					<ul style="list-style-type: none;" class="list-group">
 						{% for category in categories %}
 							<li class="mt-1 mb-1">
-								<button class="btn btn-dark border border-secondary text-decoration-none d-flex mt-1 mb-2 position-relative">
+								<button class="btn btn-dark border border-secondary text-decoration-none d-flex mt-1 mb-1 position-relative align-items-center">
 									<i class="fa-solid fa-guitar text-secondary"></i>
 									<h2>
 										<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">
 											{{ category.name }}
 										</a>
 									</h2>
-									<span class="badge rounded-pill border border-light bg-secondary ml-1">{{ category.products|length }}</span>
+									<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.products|length }}</h2>
 								</button>
 							</li>
 						{% endfor %}

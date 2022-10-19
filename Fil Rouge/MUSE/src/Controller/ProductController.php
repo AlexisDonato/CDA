@@ -48,7 +48,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails): Response
+    public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
      
         $categories = $categoryRepository->findAll();
@@ -58,9 +58,7 @@ class ProductController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
-// $total = $cartService->getItemCount($orderDetails);
-// dd($total);
-
+        $cartService->setUser($user);
 
         return $this->render('product/product_show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),

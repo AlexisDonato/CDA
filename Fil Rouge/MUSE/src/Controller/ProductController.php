@@ -28,7 +28,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
@@ -37,13 +37,13 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
-            'discount' => $discount,
+            'discount'  => $discount,
             'discount2' => $discount2,
-            'form' => $form->createView()
+            'form'      => $form->createView()
         ]);
     }
 
@@ -54,19 +54,23 @@ class ProductController extends AbstractController
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
+
+// $total = $cartService->getItemCount($orderDetails);
+// dd($total);
+
 
         return $this->render('product/product_show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'product' => $product,
-            'products' => $products,
+            'total'     => $cartService->getTotal($orderDetails),
+            'product'   => $product,
+            'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
-            'discount' => $discount,
+            'discount'  => $discount,
             'discount2' => $discount2,
         ]);
     }
@@ -81,7 +85,7 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
@@ -89,13 +93,13 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
-            'discount' => $discount,
+            'discount'  => $discount,
             'discount2' => $discount2,
-            'form' => $form->createView(),
+            'form'      => $form->createView(),
         ]);
     }
 
@@ -116,7 +120,7 @@ class ProductController extends AbstractController
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
-        $products =$productRepository->findSearch($data);
+        $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => $disc]);
@@ -126,13 +130,13 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
-            'discount' => $discount,
+            'discount'  => $discount,
             'discount2' => $discount2,
-            'form' => $form->createView()
+            'form'      => $form->createView()
         ]);
     }
 

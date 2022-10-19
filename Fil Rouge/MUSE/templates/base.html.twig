@@ -42,17 +42,6 @@
 			{% endif %}
 		{% endif %}
 
-
-		{# Google Breadcrumbs #}
-		{#
-											{% import 'breadcrumbs.html.twig' as breadcrumbs %}
-											{{ breadcrumbs.render([
-												{'url': url('app_home'), 'text': 'Homepage'}, 
-											    {'url': url('app_category'), 'text': ' > Categories'}, 
-											    {'text': article.title},
-											]) }}
-											 #}
-
 		{% block body %}{% endblock %}
 
 		{% include 'footer.html.twig' %}

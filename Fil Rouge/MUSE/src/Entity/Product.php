@@ -49,6 +49,9 @@ class Product
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
     private ?string $discountRate = '0';
 
+    #[ORM\ManyToOne]
+    private ?Supplier $supplier = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -206,6 +209,18 @@ class Product
     public function setDiscountRate(?string $discountRate): self
     {
         $this->discountRate = $discountRate;
+
+        return $this;
+    }
+
+    public function getSupplier(): ?Supplier
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier(?Supplier $supplier): self
+    {
+        $this->supplier = $supplier;
 
         return $this;
     }

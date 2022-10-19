@@ -76,6 +76,7 @@ class ProductType extends AbstractType
             ->add('quantity')
             ->add('discount')
             ->add('discountRate')
+            ->add('supplier')
             ->add('categories')
         ;
     }

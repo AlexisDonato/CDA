@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use App\Data\SearchData;
-use App\Entity\Category;
-use App\Form\SearchType;
+use App\Entity\Supplier;
+use App\Form\SupplierType;
 use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\SupplierRepository;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,41 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-class ProductController extends AbstractController
+#[Route('/supplier')]
+class SupplierController extends AbstractController
 {
-    #[Route('/product', name: 'app_product')]
-    public function index(CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
+    #[Route('/', name: 'app_supplier_index', methods: ['GET'])]
+    public function index(SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-        $categories = $categoryRepository->findAll();
-        $data = new SearchData();
-        $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
-
-        $cartService->setUser($user);
-        
-        return $this->render('product/index.html.twig', [
-            'items'     => $cartService->getFullCart($orderDetails),
-            'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
-            'form'      => $form->createView()
-        ]);
-    }
-
-    #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
-    {
-     
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -60,11 +31,10 @@ class ProductController extends AbstractController
 
         $cartService->setUser($user);
 
-        return $this->render('product/product_show.html.twig', [
+        return $this->render('supplier/index.html.twig', [
+            'suppliers' => $supplierRepository->findAll(),
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
-            'product'   => $product,
             'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
@@ -73,70 +43,106 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/catalogue/{category}', name: 'app_catalogue')]
-    public function index2(CartService $cartService, ProductRepository $productRepository, Request $request, Category $category, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
+    #[Route('/new', name: 'app_supplier_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $data->categories = [$category];
-        $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $cartService->setUser($user);
 
-        return $this->render('product/index.html.twig', [
-            'items'     => $cartService->getFullCart($orderDetails),
-            'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
-            'form'      => $form->createView(),
-        ]);
-    }
+        $supplier = new Supplier();
+        $form = $this->createForm(SupplierType::class, $supplier);
+        $form->handleRequest($request);
 
-    #[Route('/discount/{disc}', name: 'app_discount',defaults:['disc'=>1])]
-    public function index3(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, int $disc, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
-    {
-        switch($disc){
-            case "0": $disc=false;
-            break;
-            case "1": $disc=true;
-            break;
-            default: $disc= false;
-            break;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $supplierRepository->save($supplier, true);
+
+            return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
         }
-        $categories = $categoryRepository->findAll();
-        $data = new SearchData();
-        $data->discount = $disc;
-        $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => $disc]);
 
-        $cartService->setUser($user);
-
-        return $this->render('product/index.html.twig', [
+        return $this->renderForm('supplier/new.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
             'products'  => $products,
             'products2' => $products2,
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
-            'form'      => $form->createView()
+            'supplier' => $supplier,
+            'form' => $form,
         ]);
     }
 
-}
+    #[Route('/{id}', name: 'app_supplier_show', methods: ['GET'])]
+    public function show(Supplier $supplier, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+    {
+        $categories = $categoryRepository->findAll();
+        $data = new SearchData();
+        $products = $productRepository->findSearch($data);
+        $products2 = $productRepository->findAll();
+        $discount = $productRepository->findDiscount($data);
+        $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $cartService->setUser($user);
+
+        return $this->render('supplier/show.html.twig', [
+            'items'     => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'products'  => $products,
+            'products2' => $products2,
+            'categories' => $categories,
+            'discount'  => $discount,
+            'discount2' => $discount2,
+            'supplier' => $supplier,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_supplier_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Supplier $supplier, SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+    {
+        $categories = $categoryRepository->findAll();
+        $data = new SearchData();
+        $products = $productRepository->findSearch($data);
+        $products2 = $productRepository->findAll();
+        $discount = $productRepository->findDiscount($data);
+        $discount2 =$productRepository->findBy(['discount' => true]);
+
+        $cartService->setUser($user);
+
+        $form = $this->createForm(SupplierType::class, $supplier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $supplierRepository->save($supplier, true);
+
+            return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('supplier/edit.html.twig', [
+            'items'     => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'products'  => $products,
+            'products2' => $products2,
+            'categories' => $categories,
+            'discount'  => $discount,
+            'discount2' => $discount2,
+            'supplier' => $supplier,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_supplier_delete', methods: ['POST'])]
+    public function delete(Request $request, Supplier $supplier, SupplierRepository $supplierRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$supplier->getId(), $request->request->get('_token'))) {
+            $supplierRepository->remove($supplier, true);
+        }
+
+        return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
+    }
+}

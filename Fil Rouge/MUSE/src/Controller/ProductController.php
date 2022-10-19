@@ -48,7 +48,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+    public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
      
         $categories = $categoryRepository->findAll();

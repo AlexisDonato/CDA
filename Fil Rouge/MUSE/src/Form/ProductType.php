@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProductType extends AbstractType
 {
@@ -75,7 +76,11 @@ class ProductType extends AbstractType
 
             ->add('quantity')
             ->add('discount')
-            ->add('discountRate')
+            
+            ->add('discountRate', TextType::class, [
+                'help' => 'ex: entrez 0.20 pour 20%',
+                ])
+
             ->add('supplier')
             ->add('categories')
         ;

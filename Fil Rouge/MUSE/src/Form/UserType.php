@@ -74,7 +74,7 @@ class UserType extends AbstractType
                 ],
                 'mapped' => true,
                 'multiple' => true,
-                'help' => 'Maintain Ctrl to select multiple roles',
+                'help' => 'Maintenez Ctrl pour sélectionner plusieurs rôles',
                 'required' => true,
                 'row_attr' => [
                     'class' => 'col-md-6 ml-3',

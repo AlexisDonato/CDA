@@ -122,7 +122,7 @@ class UserType extends AbstractType
                     ],
             ])
 
-            ->add('adress', CollectionType::class, [
+            ->add('address', CollectionType::class, [
                 // each entry in the array will be an "email" field
                 'entry_type' => TextType::class,
                 // these options are passed to each "email" type

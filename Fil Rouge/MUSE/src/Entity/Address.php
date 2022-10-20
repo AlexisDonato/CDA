@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\AdressRepository;
+use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AdressRepository::class)]
-class Adress
+#[ORM\Entity(repositoryClass: AddressRepository::class)]
+class Address
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,7 +31,7 @@ class Adress
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pathNumber = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adress')]
+    #[ORM\ManyToOne(inversedBy: 'address')]
     private ?User $user = null;
 
     public function getId(): ?int

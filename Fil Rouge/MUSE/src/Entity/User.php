@@ -66,13 +66,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $proJobPosition = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Adress::class)]
-    private Collection $adress;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
+    private Collection $address;
 
     public function __construct()
     {
         $this->carts = new ArrayCollection();
-        $this->adress = new ArrayCollection();
+        $this->address = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -333,29 +333,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Adress>
+     * @return Collection<int, Address>
      */
-    public function getAdress(): Collection
+    public function getAddress(): Collection
     {
-        return $this->adress;
+        return $this->Address;
     }
 
-    public function addAdress(Adress $adress): self
+    public function addAddress(Address $address): self
     {
-        if (!$this->adress->contains($adress)) {
-            $this->adress->add($adress);
-            $adress->setUser($this);
+        if (!$this->Address->contains($address)) {
+            $this->Address->add($address);
+            $address->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeAdress(Adress $adress): self
+    public function removeAddress(Address $address): self
     {
-        if ($this->adress->removeElement($adress)) {
+        if ($this->Address->removeElement($address)) {
             // set the owning side to null (unless already changed)
-            if ($adress->getUser() === $this) {
-                $adress->setUser(null);
+            if ($address->getUser() === $this) {
+                $address->setUser(null);
             }
         }
 

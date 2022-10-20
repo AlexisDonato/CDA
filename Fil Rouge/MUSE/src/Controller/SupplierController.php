@@ -22,6 +22,12 @@ class SupplierController extends AbstractController
     #[Route('/', name: 'app_supplier_index', methods: ['GET'])]
     public function index(SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Accès refusé');
+            return $this->redirectToRoute('login');  
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -46,6 +52,12 @@ class SupplierController extends AbstractController
     #[Route('/new', name: 'app_supplier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Accès refusé');
+            return $this->redirectToRoute('login');  
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -83,6 +95,12 @@ class SupplierController extends AbstractController
     #[Route('/{id}', name: 'app_supplier_show', methods: ['GET'])]
     public function show(Supplier $supplier, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Accès refusé');
+            return $this->redirectToRoute('login');  
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -107,6 +125,12 @@ class SupplierController extends AbstractController
     #[Route('/{id}/edit', name: 'app_supplier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Supplier $supplier, SupplierRepository $supplierRepository, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Accès refusé');
+            return $this->redirectToRoute('login');  
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -143,6 +167,12 @@ class SupplierController extends AbstractController
     #[Route('/{id}', name: 'app_supplier_delete', methods: ['POST'])]
     public function delete(Request $request, Supplier $supplier, SupplierRepository $supplierRepository): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            $this->addFlash('error', 'Accès refusé');
+            return $this->redirectToRoute('login');  
+        }
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        
         if ($this->isCsrfTokenValid('delete'.$supplier->getId(), $request->request->get('_token'))) {
             $supplierRepository->remove($supplier, true);
         }

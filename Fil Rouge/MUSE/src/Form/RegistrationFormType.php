@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Entity\Adress;
+use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -61,9 +61,12 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
 
-            ->add('adress', EntityType::class, [
+            ->add('address', EntityType::class, [
                 'mapped' => false,
-                'class' => Adress::class,
+                'class' => Address::class,
+                'row_attr' => [
+                    'class' => 'col-6 ml-3',
+                    ],
                 // each entry in the array will be a "text" field
                 // 'entry_type' => TextType::class,
                 // these options are passed to each "adress" type

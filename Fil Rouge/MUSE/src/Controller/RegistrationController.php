@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Address;
 use App\Data\SearchData;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
 use App\Form\RegistrationFormType;
-use Symfony\Component\Mime\Address;
+// use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +40,7 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
+
         $form->handleRequest($request);
 
         $categories = $categoryRepository->findAll();

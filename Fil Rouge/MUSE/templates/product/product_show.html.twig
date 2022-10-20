@@ -51,11 +51,6 @@
 						{# class="table table-dark border border-light"> #}
 						<tbody>
 							<tr>
-								<th>Prix</th>
-								{% if product.discountRate %}<td class="text-warning"><s>{{ product.price }}</s> <i class="fa-solid fa-arrow-right"></i> <b>{{ product.price * (1 - product.discountRate)}}{% else %}</b><td>{{ product.price }}{% endif %}
-									€</td>
-							</tr>
-							<tr>
 								<th>Marque</th>
 								<td>{{ product.supplier }} <sup>©</sup></td>
 							</tr>
@@ -75,13 +70,18 @@
 							</tr>
 							<tr>
 								<th>Promotion</th>
-								<td>{{ product.discount ? 'Oui' : 'Non' }}{% if product.discountRate %} : <p class="text-warning">-{{ product.discountRate *100}}%</p>{% endif %}</td>
+								{% if product.discount %}<td class="text-warning">-{{ product.discountRate *100}}%</td>{% else %}<td>{{ product.discount ? 'Oui' : 'Non' }}{% endif %}</td>
 							</tr>
-							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 							<tr>
 								<th>TVA</th>
 								<td>{{ app.user.vat * 100}}% {% if is_granted('ROLE_PRO') %}(PRO){% endif %}</td>
 							</tr>
+							<tr>
+								<th>Prix</th>
+								{% if product.discount %}<td class="text-warning"><s>{{ product.price }} €</s> <i class="fa-solid fa-arrow-right"></i> <b>{% else %}<td>{% endif %}{{(product.price) * (1 - ( product.discountRate)) * (1 +  app.user.vat )}}
+									€</b></td>
+							</tr>
+							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 							{% endif %}
 							<tr>
 								<th class="text-success">Achat</th>

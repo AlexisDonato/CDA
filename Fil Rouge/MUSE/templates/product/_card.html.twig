@@ -7,15 +7,15 @@
 		<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}"><h3 class="card-title">{{ product.name }}</h3></a>
 		<div class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem; text-align: right;">
 			{% if product.discount %}
-			<small><s class="text-warning">{{ product.price | number_format(0, ',', '') }}
+			<small><s class="text-warning">{{ product.price * (1 +  app.user.vat )}}
 			€</s></small>
 			{% else %}
-			{{ product.price | number_format(0, ',', '') }}
+			{{ product.price * (1 +  app.user.vat )}}
 			€
 			{% endif %}
 			{% if product.discount %}
 				<h4 class="text text-warning">-{{ product.discountRate * 100 }}% !</h4>
-				<h4 class="text text-warning"><b>{{ (product.price) * ( 1 - ( product.discountRate)) }} €</b></h4>
+				<h4 class="text text-warning"><b>{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}} €</b></h4>
 			{% endif %}
 		</div>
 		<p class="text text-muted">{{ product.description }}</p>

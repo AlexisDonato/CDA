@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\User1Type;
 use App\Data\SearchData;
+use App\Service\Cart\CartService;
 use App\Repository\UserRepository;
+use App\Repository\AddressRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderDetailsRepository;
-use App\Service\Cart\CartService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ClientController extends AbstractController
 {
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
-    public function show(CartService $cartService, User $user, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
+    public function show(AddressRepository $addressRepository, CartService $cartService, User $user, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -27,6 +28,8 @@ class ClientController extends AbstractController
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
+
+        $addresses = $addressRepository->findBy(['user']);
 
         $cartService->setUser($user);
 
@@ -40,13 +43,14 @@ class ClientController extends AbstractController
             return $this->render('client/show.html.twig', [
                 'items'     => $cartService->getFullCart($orderDetails),
                 'count'     => $cartService->getItemCount($orderDetails),
-                'total' => $cartService->getTotal($orderDetails),
-                'user' => $user,
-                'products' => $products,
+                'total'     => $cartService->getTotal($orderDetails),
+                'user'      => $user,
+                'products'  => $products,
                 'products2' => $products2,
                 'categories' => $categories,
-                'discount' => $discount,
+                'discount'  => $discount,
                 'discount2' => $discount2,
+                'addresses' => $addresses,
         ]);
         } else {
             $this->addFlash(

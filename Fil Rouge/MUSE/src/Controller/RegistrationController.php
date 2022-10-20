@@ -65,7 +65,7 @@ class RegistrationController extends AbstractController
             $user->setBirthdate($form->get('birthdate')->getData());
             $user->setRoles(['ROLE_CLIENT','ROLE_USER']);
 
-            if ($user->setPro(true)) {
+            if ($user->isPro(true)) {
                 $user->setRoles(['ROLE_PRO','ROLE_CLIENT','ROLE_USER']);
                 $user->setVat('0.1');
             } 

@@ -83,10 +83,8 @@ class ValidatedOrdersController extends AbstractController
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
         $shipmentDate = $cart->getShipmentDate();
- 
-//  dd($details, $cart, $orderId);
 
-        $total = $details[0]->getCart()->getTotal();
+        $total = $details[0]->Cart->getTotal();
 
         $user = $cart->getUser();
 

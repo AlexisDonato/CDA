@@ -71,20 +71,23 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $image = $form->get('image')->getData();
-            $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
-            $image->move($this->getParameter('images_directory'), $fileName);
-            $product->setImage($fileName);
-
+                if ($image != null){
+                    $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
+                    $image->move($this->getParameter('images_directory'), $fileName);
+                    $product->setImage($fileName);
+                }
             $image1 = $form->get('image1')->getData();
-            $fileName1 = $form->get('name')->getData().'-1.'.$image1->guessExtension();
-            $image1->move($this->getParameter('images_directory'), $fileName1);
-            $product->setImage1($fileName1);
-
-            $image2 = $form->get('image2')->getData();
-            $fileName2 = $form->get('name')->getData().'-2.'.$image2->guessExtension();
-            $image2->move($this->getParameter('images_directory'), $fileName2);
-            $product->setImage2($fileName2);
-
+                if ($image1 != null){
+                    $fileName1 = $form->get('name')->getData().'-1.'.$image1->guessExtension();
+                    $image1->move($this->getParameter('images_directory'), $fileName1);
+                    $product->setImage1($fileName1);
+                }
+                if ($image2 != null){
+                    $image2 = $form->get('image2')->getData();
+                    $fileName2 = $form->get('name')->getData().'-2.'.$image2->guessExtension();
+                    $image2->move($this->getParameter('images_directory'), $fileName2);
+                    $product->setImage2($fileName2);
+                }
             $entityManager->persist($product);
             $entityManager->flush();
  
@@ -159,20 +162,23 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $image = $form->get('image')->getData();
-            $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
-            $image->move($this->getParameter('images_directory'), $fileName);
-            $product->setImage($fileName);
-
+                if ($image != null){
+                    $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
+                    $image->move($this->getParameter('images_directory'), $fileName);
+                    $product->setImage($fileName);
+                }
             $image1 = $form->get('image1')->getData();
-            $fileName1 = $form->get('name')->getData().'-1.'.$image1->guessExtension();
-            $image1->move($this->getParameter('images_directory'), $fileName1);
-            $product->setImage1($fileName1);
-
+                if ($image1 != null){
+                    $fileName1 = $form->get('name')->getData().'-1.'.$image1->guessExtension();
+                    $image1->move($this->getParameter('images_directory'), $fileName1);
+                    $product->setImage1($fileName1);
+                }
             $image2 = $form->get('image2')->getData();
-            $fileName2 = $form->get('name')->getData().'-2.'.$image2->guessExtension();
-            $image2->move($this->getParameter('images_directory'), $fileName2);
-            $product->setImage2($fileName2);
-
+                if ($image2 != null){
+                    $fileName2 = $form->get('name')->getData().'-2.'.$image2->guessExtension();
+                    $image2->move($this->getParameter('images_directory'), $fileName2);
+                    $product->setImage2($fileName2);
+                }
             $entityManager->persist($product);
             $entityManager->flush();
 

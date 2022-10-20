@@ -28,8 +28,8 @@ class Product
     #[ORM\Column(type: 'text')]
     private $content;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $image;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     #[ORM\Column(type: 'boolean')]
     private $discount;
@@ -115,7 +115,7 @@ class Product
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 

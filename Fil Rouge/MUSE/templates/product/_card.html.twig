@@ -4,29 +4,46 @@
 	{# <img src="/img/{{ product.image }}" class="card-img-top thumbnail-image" onerror="this.onerror=null; this.remove();"> #}
 
 	<div class="card-body d-flex flex-column">
-		<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}"><h3 class="card-title">{{ product.name }}</h3></a>
+		<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}">
+			<h3 class="card-title">{{ product.name }}</h3>
+		</a>
 		<div class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem; text-align: right;">
-			{% if product.discount and app.user %}
-			<small><s class="text-warning">{{ product.price * (1 +  app.user.vat )}}
-			€</s></small>
-			{% elseif app.user %}
-			{{ product.price * (1 +  app.user.vat )}}
-			€
+			{% if product.discount %}
+				<small>
+					<s class="text-warning">
+						{% if app.user %}
+							{{ product.price * (1 +  app.user.vat )}}
+						{% else %}
+							{{ product.price * 1.2 }} €
+						{% endif %}
+					</s>
+				</small>
 			{% else %}
-			{{ product.price }}
+				{{ product.price * 1.2 }} €
 			{% endif %}
+
+			{% if product.discount %}
 				<h4 class="text text-warning">-{{ product.discountRate * 100 }}% !</h4>
-			{% if product.discount and app.user %}
-				<h4 class="text text-warning"><b>{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}} €</b></h4>
-			{% else %}
-				<h4 class="text text-warning"><b>{{ product.price * ( 1 - product.discountRate) * 1.2 }} €</b></h4>
+				{% if  app.user %}
+					<h4 class="text text-warning">
+						<b>{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
+							€</b>
+					</h4>
+				{% else %}
+					<h4 class="text text-warning">
+						<b>{{ product.price * ( 1 - product.discountRate) * 1.2 }}
+							€</b>
+					</h4>
+				{% endif %}
 			{% endif %}
 		</div>
 		<p class="text text-muted">{{ product.description }}</p>
 		<div>
 			{% for c in product.categories %}
-				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': c.id}) }}"><em class="text-info text-primary text-italic">#{{ c.name }}</em></a>
-			    {% endfor %}
+				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': c.id}) }}">
+					<em class="text-info text-primary text-italic">#{{ c.name }}</em>
+				</a>
+			{% endfor %}
 		</div>
 		<div class="card-footer mt-auto">
 			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary float-right {% if product.quantity == 0 %} disabled btn-secondary {% endif %}">

@@ -6,7 +6,7 @@
 <p><b>Nom : </b>{{ app.user.userLastName }}</p>
 <p><b>E-mail : </b>{{ app.user.email }}</p>
 <p><b>Date de naissance : </b>{{ user.birthdate ? user.birthdate|date('d-m-Y') : '' }}</p>
-<p><b>Adresse : </b>{{ user.address }}</p>
+{% if user.address %}<p><b>Adresse : </b>{{ user.address }}</p>{% endif %}
 <p><b>N° téléphone : </b>{{ user.phoneNumber }}</p>
 <p></p>
 {% if user.proCompanyName %}

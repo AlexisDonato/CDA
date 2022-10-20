@@ -9,7 +9,7 @@ use App\Data\SearchData;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
 use App\Form\RegistrationFormType;
-// use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Address as E_address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -80,7 +80,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
+                    ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -128,7 +128,7 @@ class RegistrationController extends AbstractController
         $user->setRegisterDate($date);
 
         $email = (new TemplatedEmail())
-        ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
+        ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
         ->to($user->getEmail())
         ->subject('Bienvenue sur Muse!')
         ->htmlTemplate('registration/user_information_email.html.twig')

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
-use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Address as E_address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -116,7 +116,7 @@ class OrderController extends AbstractController
             'app_verify_order_email',
             $user,
             (new TemplatedEmail())
-                ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
+                ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
                 ->to($user->getEmail())
                 ->subject('Votre commande est validée!')
                 ->htmlTemplate('validated_orders/order_validation_email.html.twig')

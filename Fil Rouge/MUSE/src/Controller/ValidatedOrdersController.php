@@ -6,7 +6,7 @@ use App\Entity\Cart;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
-use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Address as E_address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -137,7 +137,7 @@ class ValidatedOrdersController extends AbstractController
         // $cart->setCarrier(uniqid('CARRIER'));
 
         $email = (new TemplatedEmail())
-        ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
+        ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
         ->to($cart->getUser()->getEmail())
         ->subject('Votre commande a bien été expédiée!')
         ->htmlTemplate('validated_orders/order_shipment_email.html.twig')

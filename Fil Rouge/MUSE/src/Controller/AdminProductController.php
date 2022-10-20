@@ -91,6 +91,8 @@ class AdminProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
  
+            $this->addFlash('success', 'Produit ajouté!');
+
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -182,6 +184,8 @@ class AdminProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Produit modifié!');
+
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -214,6 +218,8 @@ class AdminProductController extends AbstractController
             $entityManager->remove($product);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Produit supprimé!');
 
         return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
     }

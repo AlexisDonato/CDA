@@ -29,6 +29,24 @@
 		{{ form_row(registrationForm.adress, {
             label: 'Adresse'
         }) }}
+{# 
+<ul id="email-fields-list"
+        data-prototype="{{ form_widget(registrationForm.adress.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ registrationForm.adress|length }}">
+    {% for adressField in registrationForm.adress %}
+        <li>
+            {{ form_errors(adressField) }}
+            {{ form_widget(adressField) }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#email-fields-list">Add another adress</button> #}
+
+
 		{{ form_row(registrationForm.phoneNumber, {
             label: 'Numéro de téléphone'
         }) }}<span id="wrongPhone"></span>
@@ -55,6 +73,7 @@
 
 
 	<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
-	{{ form_end(registrationForm) }}
+	{{ form_end(registrationForm) }}	
 	</div>
+{# <script src="add-collection-widget.js"></script> #}
 {% endblock %}

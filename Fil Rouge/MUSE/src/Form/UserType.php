@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 // use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
@@ -121,13 +122,21 @@ class UserType extends AbstractType
                     ],
             ])
 
-            ->add('adress', TextType::class, [
-                'label' => 'Adresse',
-                'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
-                ])
+            ->add('adress', CollectionType::class, [
+                // each entry in the array will be an "email" field
+                'entry_type' => TextType::class,
+                // these options are passed to each "email" type
+                'entry_options' => [
+                    'attr' => ['class' => 'col-md-6'],
+                ],
+            ])
+            // , null, [
+            //     'label' => 'Adresse',
+            //     'required' => true,
+            //     'row_attr' => [
+            //         'class' => 'col-md-6 ml-3',
+            //         ],
+            //     ])
 
             ->add('phoneNumber', TextType::class, [
                 'label' => 'N° téléphone',

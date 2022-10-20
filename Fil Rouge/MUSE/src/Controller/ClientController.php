@@ -105,6 +105,9 @@ class ClientController extends AbstractController
                 'error',
                 "Merci de vérifier votre email afin d'accéder à vos informations personnelles"
             );
+
+            $this->addFlash('success', 'Profil modifié!');
+
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
     }

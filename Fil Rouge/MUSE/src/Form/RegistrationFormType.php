@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Adress;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -14,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -55,15 +58,21 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'row_attr' => [
                     'class' => 'col-6 ml-3',
-                    ],
-                ])
+                ],
+            ])
 
-            ->add('adress', TextType::class, [
-                'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
-                ])
+            ->add('adress', EntityType::class, [
+                'mapped' => false,
+                'class' => Adress::class,
+                // each entry in the array will be a "text" field
+                // 'entry_type' => TextType::class,
+                // these options are passed to each "adress" type
+                // 'entry_options' => [
+                //     'attr' => ['class' => 'col-md-6'],
+                // ],
+            ])
+
+
 
             ->add('phoneNumber', TextType::class, [
                 'required' => true,
@@ -73,13 +82,13 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'PhoneField',
                     ],  
-                    'constraints' => [
-                        new Regex([
-                            'pattern' => "/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/", // French phone number
-                            'message' => 'Numéro de téléphone invalide'
-                        ]),
-                    ]
-                ])
+                'constraints' => [
+                    new Regex([
+                        'pattern' => "/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/", // French phone number
+                        'message' => 'Numéro de téléphone invalide'
+                    ]),
+                ]
+            ])
 
             ->add('email', TextType::class, [
                 'required' => true,
@@ -152,6 +161,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 ])
         ;
+
     }
 
 

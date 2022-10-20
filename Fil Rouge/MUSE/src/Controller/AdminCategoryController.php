@@ -65,8 +65,12 @@ class AdminCategoryController extends AbstractController
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $categoryRepository->add($category, true);
+
+            $this->addFlash('success', 'Catégorie ajoutée!');
 
             return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
 
@@ -135,7 +139,10 @@ class AdminCategoryController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $categoryRepository->add($category, true);
+
+            $this->addFlash('success', 'Catégorie modifiée!');
 
             return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -166,6 +173,8 @@ class AdminCategoryController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
         }
+        
+        $this->addFlash('success', 'Catégorie supprimée!');
 
         return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
     }

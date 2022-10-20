@@ -62,6 +62,8 @@ class SupplierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $supplierRepository->save($supplier, true);
 
+            $this->addFlash('success', 'Nouveau fournisseur ajouté!');
+
             return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -120,6 +122,8 @@ class SupplierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $supplierRepository->save($supplier, true);
 
+            $this->addFlash('success', 'Fournisseur modifié!');
+
             return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -142,6 +146,8 @@ class SupplierController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$supplier->getId(), $request->request->get('_token'))) {
             $supplierRepository->remove($supplier, true);
         }
+
+        $this->addFlash('success', 'Fournisseur supprimé!');
 
         return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
     }

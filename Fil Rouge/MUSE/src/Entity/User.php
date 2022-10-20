@@ -40,9 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $birthdate;
 
     #[ORM\Column(type: 'string')]
-    private $adress;
-
-    #[ORM\Column(type: 'string')]
     private $phoneNumber;
 
     #[ORM\Column(type: 'boolean')]
@@ -69,9 +66,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $proJobPosition = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Adress::class)]
+    private Collection $adress;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
+        $this->adress = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,18 +130,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthdate(DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(string $adress): self
-    {
-        $this->adress = $adress;
 
         return $this;
     }
@@ -343,4 +332,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Adress>
+     */
+    public function getAdress(): Collection
+    {
+        return $this->adress;
+    }
+
+    public function addAdress(Adress $adress): self
+    {
+        if (!$this->adress->contains($adress)) {
+            $this->adress->add($adress);
+            $adress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adress $adress): self
+    {
+        if ($this->adress->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getUser() === $this) {
+                $adress->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

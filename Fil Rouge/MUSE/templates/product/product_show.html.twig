@@ -74,11 +74,15 @@
 							</tr>
 							<tr>
 								<th>TVA</th>
+								{% if app.user %}
 								<td>{{ app.user.vat * 100}}% {% if is_granted('ROLE_PRO') %}(PRO){% endif %}</td>
+								{% else %}
+								<td>20 %</td>
+								{% endif %}
 							</tr>
 							<tr>
 								<th>Prix</th>
-								{% if product.discount %}<td class="text-warning"><s>{{ product.price }} €</s> <i class="fa-solid fa-arrow-right"></i> <b>{% else %}<td>{% endif %}{{(product.price) * (1 - ( product.discountRate)) * (1 +  app.user.vat )}}
+								{% if product.discount %}<td class="text-warning"><s>{{ product.price }} €</s> <i class="fa-solid fa-arrow-right"></i> <b>{% else %}<td>{% endif %}{% if app.user %}{{(product.price) * (1 - ( product.discountRate)) * (1 +  app.user.vat )}}{% else %}{{(product.price) * (1 - ( product.discountRate)) * 1.2 }}{% endif %}
 									€</b></td>
 							</tr>
 							{% if is_granted('IS_AUTHENTICATED_FULLY') %}

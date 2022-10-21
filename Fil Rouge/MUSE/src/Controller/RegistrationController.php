@@ -9,7 +9,8 @@ use App\Data\SearchData;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
 use App\Form\RegistrationFormType;
-use Symfony\Component\Mime\Address as E_address;
+use App\Repository\UserRepository;
+use App\Repository\AddressRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address as E_address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,8 +72,6 @@ class RegistrationController extends AbstractController
             $user->setProDuns($form->get('proDuns')->getData());
             $user->setProJobPosition($form->get('proJobPosition')->getData());
 
-
-
             $address->setName($form->get('address_name')->getData());
             $address->setCountry($form->get('address_country')->getData());
             $address->setZipcode($form->get('address_zipcode')->getData());
@@ -79,7 +79,8 @@ class RegistrationController extends AbstractController
             $address->setPathType($form->get('address_path_type')->getData());
             $address->setPathNumber($form->get('address_path_number')->getData());
 
-            // $user->addAddress($adress);
+            // $user->addAddress($adress); 
+            // this equals to :
             $address->setUser($user);
 
             $user->setRoles(['ROLE_CLIENT','ROLE_USER']);
@@ -88,7 +89,6 @@ class RegistrationController extends AbstractController
                 $user->setRoles(['ROLE_PRO','ROLE_CLIENT','ROLE_USER']);
                 $user->setVat('0.1');
             } 
-
 
             $date = new DateTime('@'.strtotime('now'));
             $user->setRegisterDate($date);
@@ -120,13 +120,13 @@ class RegistrationController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
-            'address' => $address,
+            // 'address' => $address,
         ]);
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator, MailerInterface $mailer, ?UserInterface $user): Response
-    {
+    public function verifyUserEmail(AddressRepository $addressRepository, Request $request, TranslatorInterface $translator, MailerInterface $mailer, ?UserInterface $user): Response
+    {       
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -141,9 +141,8 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre adresse mail a bien été vérifiée. Un mail de confirmation vous a été envoyé');
         $user = $this->getUser();
-        $roles = $user->getRoles();
-        array_push($roles, ['ROLE_CLIENT','ROLE_USER']);
-        $user->setRoles($roles);
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        // dd($user, $addresses);
 
         $date = new DateTime('@'.strtotime('now'));
         $user->setRegisterDate($date);
@@ -155,9 +154,11 @@ class RegistrationController extends AbstractController
         ->htmlTemplate('registration/user_information_email.html.twig')
         ->context([
             'user' => $user,
+            'addresses' => $addresses,
         ]);
 
         $mailer->send($email);
+
         return $this->redirectToRoute('app_home');
     }
 

@@ -9,11 +9,19 @@
 {# {% if user.address %}<p><b>Adresse : </b>{{ user.address }}</p>{% endif %} #}
 <p><b>N° téléphone : </b>{{ user.phoneNumber }}</p>
 <p></p>
+
 {% if user.proCompanyName %}
 <p><b>Raison sociale : </b>{{ user.proCompanyName }}</p>
 <p><b>Votre poste : </b>{{ user.proJobPosition }}</p>
 <p><b>DUNS : </b>{{ user.proDuns }}</p>
 {% endif %}
+
+<p><b>Titre adresse : </b>{{ address.name }}</p>
+<p><b>Pays : </b>{{ address.country }}</p>
+<p><b>Code postal : </b>{{ address.zipcode }}</p>
+<p><b>Ville : </b>{{ address.city }}</p>
+<p><b>N° de voie : </b>{{ address.pathNumber }}</p>
+<p><b>Type de voie : </b>{{ address.pathType }}</p>
 
 <br><br>Merci de votre confiance et à bientôt sur Muse!<br><br>L'équipe de Muse</p>
 <img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/logo.png">

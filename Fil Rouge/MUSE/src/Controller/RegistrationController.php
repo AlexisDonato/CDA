@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
                         $form->get('plainPassword')->getData()
                     )
                 );
-            $user->setBirthdate($form->get('phoneNumber')->getData());
+            $user->setBirthdate($form->get('birthdate')->getData());
             $user->setPhoneNumber($form->get('phoneNumber')->getData());
 
             $user->setPro($form->get('pro')->getData());
@@ -120,6 +120,7 @@ class RegistrationController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
+            'address' => $address,
         ]);
     }
 

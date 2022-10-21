@@ -67,7 +67,7 @@ class RegistrationFormType extends AbstractType
                     ]
                 ])
 
-            ->add('userLastname', TextType::class, [
+            ->add('userLastName', TextType::class, [
             'required' => true,
             'attr' => ['class' => 'LastNameField'],
                 'constraints' => [

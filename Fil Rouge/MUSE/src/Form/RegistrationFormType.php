@@ -125,6 +125,7 @@ class RegistrationFormType extends AbstractType
                 ])
 
             ->add('address_name', TextType::class, [
+                'help' => 'ex: Domicile, Adresse de livraison n°1, Adresse de facturation n°3...'
 
             ])
 

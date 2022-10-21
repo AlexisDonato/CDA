@@ -62,13 +62,48 @@
 			}) }}<span id="wrongDuns"></span>
 		</div>
 
-		{{ form_row(registrationForm.agreeTerms, {
+		<h5>
+			<b>Votre Adresse :</b>
+		</h5>
+		<div class="row">
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_name, {
+            label: "Titre de l'adresse"
+        }) }}
+			</div>
+				<div class="form-group col-md-6">
+					{{ form_row(registrationForm.address_country, {
+            label: "Pays"
+        }) }}
+				</div>
+				<div class="form-group col-md-6">
+					{{ form_row(registrationForm.address_zipcode, {
+            label: "Code postal"
+        }) }}
+				</div>
+				<div class="form-group col-md-6">
+					{{ form_row(registrationForm.address_city, {
+            label: "Ville"
+        }) }}
+				</div>
+				<div class="form-group col-md-6">
+					{{ form_row(registrationForm.address_path_number, {
+            label: "Numéro de voie"
+        }) }}
+				</div>
+				<div class="form-group col-md-6">
+					{{ form_row(registrationForm.address_path_type, {
+            label: "Type de voie"
+        }) }}
+				</div>
+			</div>
+
+			{{ form_row(registrationForm.agreeTerms, {
             label: "Accepter nos conditions d'utilisation"
         }) }}
 
+			<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
+			{{ form_end(registrationForm) }}
+		</div>
 
-		<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
-		{{ form_end(registrationForm) }}
-	</div>
-	{# <script src="add-collection-widget.js"></script> #}
-{% endblock %}
+	{% endblock %}

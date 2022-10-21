@@ -25,9 +25,9 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('userName', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
+                // 'row_attr' => [
+                //     'class' => 'col-6 ml-3',
+                //     ],
                 'attr' => ['class' => 'FirstNameField'],
                     'constraints' => [
                         new Regex([
@@ -39,9 +39,6 @@ class RegistrationFormType extends AbstractType
 
             ->add('userLastname', TextType::class, [
             'required' => true,
-            'row_attr' => [
-                'class' => 'col-6 ml-3',
-                ],
             'attr' => ['class' => 'LastNameField'],
                 'constraints' => [
                     new Regex([
@@ -56,17 +53,11 @@ class RegistrationFormType extends AbstractType
                 // this is actually the default format for single_text
                 'format' => 'yyyy-MM-dd',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                ],
             ])
 
             ->add('address', EntityType::class, [
                 'mapped' => false,
                 'class' => Address::class,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
                 // each entry in the array will be a "text" field
                 // 'entry_type' => TextType::class,
                 // these options are passed to each "adress" type
@@ -79,9 +70,6 @@ class RegistrationFormType extends AbstractType
 
             ->add('phoneNumber', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
                 'attr' => [
                     'class' => 'PhoneField',
                     ],  
@@ -95,9 +83,6 @@ class RegistrationFormType extends AbstractType
 
             ->add('email', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
                 'attr' => ['class' => 'EmailField'],
                 'constraints' => [
                     new Regex([
@@ -130,9 +115,6 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-6 ml-3',
-                    ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de renseigner votre mot de passe',

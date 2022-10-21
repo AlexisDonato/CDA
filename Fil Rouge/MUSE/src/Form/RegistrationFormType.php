@@ -23,6 +23,36 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('email', TextType::class, [
+                'required' => true,
+                'attr' => ['class' => 'EmailField'],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+                        'message' => 'Email invalide'
+                    ]),
+                ]
+            ])
+
+            ->add('plainPassword', PasswordType::class, [
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+                'attr' => ['autocomplete' => 'new-password'],
+                'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de renseigner votre mot de passe',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
+            ])
+
             ->add('userName', TextType::class, [
                 'required' => true,
                 // 'row_attr' => [
@@ -55,19 +85,6 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
             ])
 
-            ->add('address', EntityType::class, [
-                'mapped' => false,
-                'class' => Address::class,
-                // each entry in the array will be a "text" field
-                // 'entry_type' => TextType::class,
-                // these options are passed to each "adress" type
-                // 'entry_options' => [
-                //     'attr' => ['class' => 'col-md-6'],
-                // ],
-            ])
-
-
-
             ->add('phoneNumber', TextType::class, [
                 'required' => true,
                 'attr' => [
@@ -81,26 +98,6 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('email', TextType::class, [
-                'required' => true,
-                'attr' => ['class' => 'EmailField'],
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
-                        'message' => 'Email invalide'
-                    ]),
-                ]
-            ])
-
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => "Veuillez accepter nos conditions d'utilisation",
-                    ]),
-                ],
-            ])
-
             ->add('pro', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -109,25 +106,6 @@ class RegistrationFormType extends AbstractType
                 ],
                 ])
 
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de renseigner votre mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
-            
             ->add('proCompanyName', TextType::class, [
                 'required' => false,
                 ])
@@ -145,6 +123,39 @@ class RegistrationFormType extends AbstractType
             ->add('proJobPosition', TextType::class, [
                 'required' => false,
                 ])
+
+            ->add('address_name', TextType::class, [
+
+            ])
+
+            ->add('address_country', TextType::class, [
+
+                ])
+
+            ->add('address_zipcode', TextType::class, [
+
+                ])
+
+            ->add('address_city', TextType::class, [
+
+                ])
+
+            ->add('address_path_type', TextType::class, [
+
+                ])
+
+            ->add('address_path_number', TextType::class, [
+
+                ])
+    
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => "Veuillez accepter nos conditions d'utilisation",
+                    ]),
+                ],
+            ])
         ;
 
     }
@@ -155,7 +166,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            // 'data_class' => User::class,
         ]);
     }
 }

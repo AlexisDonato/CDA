@@ -8,72 +8,49 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-<div class="container">
-	<h1 class="text-info text-center mt-3 mb-3">Inscription</h1>
-	<h4 class="text-center">Un email de confirmation vous sera envoyé à la validation du formulaire</h4>
+	<div class="container">
+		<h1 class="text-info text-center mt-3 mb-3">Inscription</h1>
+		<h4 class="text-center mb-3">Un email de confirmation vous sera envoyé à la validation du formulaire</h4>
 
-	{{ form_start(registrationForm) }}
-    <div class="row">
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.email) }}<span id="wrongEmail"></span>
-        </div>
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.plainPassword, {
+		{{ form_start(registrationForm) }}
+		<div class="row">
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.email) }}<span id="wrongEmail"></span>
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.plainPassword, {
             label: 'Mot de passe'
         }) }}
-        </div>
+			</div>
 
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.userName, {
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.userName, {
             label: 'Prénom'
         }) }}<span id="wrongFirstName"></span>
-        </div>
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.userLastname, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.userLastname, {
             label: 'Nom de famille'
         }) }}<span id="wrongName"></span>
-        </div>
+			</div>
 
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.birthdate, {
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.birthdate, {
             label: 'Date de naissance'
         }) }}
-        </div>
-        <div class="form-group col-md-6">
-		{{ form_row(registrationForm.address, {
-            label: 'Adresse'
-        }) }}
-        </div>
-        </div>
-
-
-{# 
-<ul id="email-fields-list"
-        data-prototype="{{ form_widget(registrationForm.adress.vars.prototype)|e }}"
-        data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter="{{ registrationForm.adress|length }}">
-    {% for adressField in registrationForm.adress %}
-        <li>
-            {{ form_errors(adressField) }}
-            {{ form_widget(adressField) }}
-        </li>
-    {% endfor %}
-    </ul>
-
-    <button type="button"
-        class="add-another-collection-widget"
-        data-list-selector="#email-fields-list">Add another adress</button> #}
-
-        <div class="form-group col-md-4">
-		{{ form_row(registrationForm.phoneNumber, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.phoneNumber, {
             label: 'Numéro de téléphone'
         }) }}<span id="wrongPhone"></span>
-        </div>
+			</div>
+		</div>
+
 		{{ form_row(registrationForm.pro, {
             label: "Etes-vous un professionnel?"
         }) }}
 
-		<div id="proForm" class = 'col-6 ml-5'>
+		<div id="proForm" class='col-6 ml-5'>
 			{{ form_row(registrationForm.proCompanyName, {
 				label: "Raison sociale"
 			}) }}
@@ -90,8 +67,8 @@
         }) }}
 
 
-	<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
-	{{ form_end(registrationForm) }}	
+		<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
+		{{ form_end(registrationForm) }}
 	</div>
-{# <script src="add-collection-widget.js"></script> #}
+	{# <script src="add-collection-widget.js"></script> #}
 {% endblock %}

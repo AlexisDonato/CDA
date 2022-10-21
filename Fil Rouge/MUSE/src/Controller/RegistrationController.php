@@ -39,7 +39,8 @@ class RegistrationController extends AbstractController
     public function register(CartService $cartService, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $address = new Address();
+        $form = $this->createForm(RegistrationFormType::class);
 
         $form->handleRequest($request);
 
@@ -50,19 +51,37 @@ class RegistrationController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $pro = $form->get('pro')->getData();
-            $user->setPro($pro);
-
-
+            // userName
+            $user->setUserName($form->get('userName')->getData());
+            $user->setUserLastName($form->get('userLastName')->getData());
+            $user->setEmail($form->get('email')->getData());
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-            $user->setBirthdate($form->get('birthdate')->getData());
+                $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            $user->setBirthdate($form->get('phoneNumber')->getData());
+            $user->setPhoneNumber($form->get('phoneNumber')->getData());
+
+            $user->setPro($form->get('pro')->getData());
+            $user->setProCompanyName($form->get('proCompanyName')->getData());
+            $user->setProDuns($form->get('proDuns')->getData());
+            $user->setProJobPosition($form->get('proJobPosition')->getData());
+
+
+
+            $address->setName($form->get('address_name')->getData());
+            $address->setCountry($form->get('address_country')->getData());
+            $address->setZipcode($form->get('address_zipcode')->getData());
+            $address->setCity($form->get('address_city')->getData());
+            $address->setPathType($form->get('address_path_type')->getData());
+            $address->setPathNumber($form->get('address_path_number')->getData());
+
+            // $user->addAddress($adress);
+            $address->setUser($user);
+
             $user->setRoles(['ROLE_CLIENT','ROLE_USER']);
 
             if ($user->isPro(true)) {
@@ -75,6 +94,7 @@ class RegistrationController extends AbstractController
             $user->setRegisterDate($date);
 
             $entityManager->persist($user);
+            $entityManager->persist($address);
             $entityManager->flush();
 
             // generate a signed url and email it to the user

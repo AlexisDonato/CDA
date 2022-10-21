@@ -8,13 +8,13 @@
 <p><b>Date de naissance : </b>{{ user.birthdate ? user.birthdate|date('d-m-Y') : '' }}</p>
 {# {% if user.address %}<p><b>Adresse : </b>{{ user.address }}</p>{% endif %} #}
 <p><b>N° téléphone : </b>{{ user.phoneNumber }}</p>
-<p></p>
+<p></p><br>
 
 {% if user.proCompanyName %}
 <p><b>Raison sociale : </b>{{ user.proCompanyName }}</p>
 <p><b>Votre poste : </b>{{ user.proJobPosition }}</p>
 <p><b>DUNS : </b>{{ user.proDuns }}</p>
-<p></p>
+<p></p><br>
 {% endif %}
 
 <h3>Votre adresse :</h3>

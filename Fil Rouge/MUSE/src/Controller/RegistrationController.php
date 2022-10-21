@@ -140,9 +140,10 @@ class RegistrationController extends AbstractController
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Votre adresse mail a bien été vérifiée. Un mail de confirmation vous a été envoyé');
+
         $user = $this->getUser();
+
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
-        // dd($user, $addresses);
 
         $date = new DateTime('@'.strtotime('now'));
         $user->setRegisterDate($date);

@@ -29,8 +29,8 @@
                 <td>{{ address.pathType }}</td>
                 <td>{{ address.pathNumber }}</td>
                 <td>
-                    <button class="btn btn-outline-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_show', {'id': address.id}) }}">Détails</a></button>
-                    <button class="btn btn-outline-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_edit', {'id': address.id}) }}">Modifier</a></button>
+                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_show', {'id': address.id}) }}">Détails</a></button>
+                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_edit', {'id': address.id}) }}">Modifier</a></button>
                 </td>
             </tr>
         {% else %}

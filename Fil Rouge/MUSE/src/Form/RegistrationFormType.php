@@ -167,6 +167,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            // Commenting the following unbinds to the class, and allows to set several classes in the controller
             // 'data_class' => User::class,
         ]);
     }

@@ -17,9 +17,6 @@ class User1Type extends AbstractType
         $builder
         ->add('email', TextType::class, [
             'required' => true,
-            'row_attr' => [
-                'class' => 'col-md-6 ml-3',
-                ],
             'attr' => [
                 'class' => 'EmailField',
                 ],    
@@ -34,9 +31,6 @@ class User1Type extends AbstractType
         ->add('userName', TextType::class, [
             'label' => 'Prénom',
             'required' => true,
-            'row_attr' => [
-                'class' => 'col-md-6 ml-3',
-                ],
             'attr' => [
                 'class' => 'FirstNameField',
                 ],  
@@ -51,9 +45,6 @@ class User1Type extends AbstractType
         ->add('userLastname', TextType::class, [
             'label' => 'Nom',
             'required' => true,
-            'row_attr' => [
-                'class' => 'col-md-6 ml-3',
-                ],
             'attr' => [
                 'class' => 'LastNameField',
                 ],  
@@ -70,26 +61,11 @@ class User1Type extends AbstractType
             'widget' => 'single_text',
             // this is actually the default format for single_text
             'format' => 'yyyy-MM-dd',
-            'row_attr' => [
-                'class' => 'col-md-6 ml-3',
-                ],
-        ])
-
-        ->add('address', CollectionType::class, [
-            // each entry in the array will be an "email" field
-            'entry_type' => TextType::class,
-            // these options are passed to each "email" type
-            'entry_options' => [
-                'attr' => ['class' => 'col-md-6'],
-            ],
         ])
 
         ->add('phoneNumber', TextType::class, [
             'label' => 'N° téléphone',
             'required' => true,
-            'row_attr' => [
-                'class' => 'col-md-6 ml-3',
-                ],
             'attr' => [
                 'class' => 'PhoneField',
                 ],  

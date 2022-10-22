@@ -72,6 +72,7 @@ class RegistrationController extends AbstractController
             $user->setProDuns($form->get('proDuns')->getData());
             $user->setProJobPosition($form->get('proJobPosition')->getData());
 
+            // Commenting 'data_class' => User::class, from $resolver->setDefaults in the formType allows to set several classes in the controller :
             $address->setName($form->get('address_name')->getData());
             $address->setCountry($form->get('address_country')->getData());
             $address->setZipcode($form->get('address_zipcode')->getData());
@@ -82,6 +83,7 @@ class RegistrationController extends AbstractController
             // $user->addAddress($adress); 
             // this equals to :
             $address->setUser($user);
+            // and these bind the two classes
 
             $user->setRoles(['ROLE_CLIENT','ROLE_USER']);
 

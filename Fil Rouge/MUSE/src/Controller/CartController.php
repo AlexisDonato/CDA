@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-// use App\Entity\Cart;
 use App\Data\SearchData;
-// use Doctrine\ORM\EntityManager;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderDetailsRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,9 +38,6 @@ class CartController extends AbstractController
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
-        // $cart = $cart->setTotal($cartService->getTotal($orderDetails));
-        // $entityManager->persist($cart);
-        // $entityManager->flush();
 
         return $this->render('cart/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -56,7 +52,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id}', name: 'app_cart_add')]
-    public function add($id, CartService $cartService, ?UserInterface $user) 
+    public function add($id, CartService $cartService, ?UserInterface $user, Request $request) 
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('info', 'Merci de vous connecter ou de vous inscrire au préalable');
@@ -70,11 +66,13 @@ class CartController extends AbstractController
         $cartService->setUser($user);
         $cartService->addOrRemove($id);
 
-        return $this->redirectToRoute('app_cart_index');
+        // Redirects to the last page :
+        $route = $request->headers->get('referer');
+        return $this->redirect($route);
     }
 
     #[Route('/cart/remove/{id}', name: 'app_cart_remove')]
-    public function remove($id, CartService $cartService, ?UserInterface $user) 
+    public function remove($id, CartService $cartService, ?UserInterface $user, Request $request) 
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -88,7 +86,8 @@ class CartController extends AbstractController
         $cartService->setUser($user);
         $cartService->addOrRemove($id, $remove=true);
 
-        return $this->redirectToRoute('app_cart_index');
+        $route = $request->headers->get('referer');
+        return $this->redirect($route);
     }
 
     #[Route('/cart/deleteAll', name: 'app_cart_deleteAll')]
@@ -110,7 +109,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/delete/{id}', name: 'app_cart_delete')]
-    public function delete($id, CartService $cartService, ?UserInterface $user) 
+    public function delete($id, CartService $cartService, ?UserInterface $user, Request $request) 
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -124,6 +123,7 @@ class CartController extends AbstractController
         $cartService->setUser($user);
         $cartService->delete($id);
 
-        return $this->redirectToRoute("app_cart_index");
+        $route = $request->headers->get('referer');
+        return $this->redirect($route);
     }
 }

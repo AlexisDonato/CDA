@@ -13,6 +13,7 @@
 		<h4 class="text-center mb-3">Un email de confirmation vous sera envoyé à la validation du formulaire</h4>
 
 		{{ form_start(registrationForm) }}
+
 		<div class="row">
 			<div class="form-group col-md-6">
 				{{ form_row(registrationForm.email) }}<span id="wrongEmail"></span>
@@ -70,42 +71,43 @@
 				{{ form_row(registrationForm.address_name, {
             label: "Titre de l'adresse"
         }) }}
-        <small>(ex: Domicile, Adresse de livraison n°1, Adresse de facturation n°3...)</small>
+				<small>(ex: Domicile, Adresse de livraison n°1, Adresse de facturation n°3...)</small>
 			</div>
-				<div class="form-group col-md-6">
-					{{ form_row(registrationForm.address_country, {
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_country, {
             label: "Pays"
         }) }}
-				</div>
-				<div class="form-group col-md-6">
-					{{ form_row(registrationForm.address_zipcode, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_zipcode, {
             label: "Code postal"
         }) }}
-				</div>
-				<div class="form-group col-md-6">
-					{{ form_row(registrationForm.address_city, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_city, {
             label: "Ville"
         }) }}
-				</div>
-				<div class="form-group col-md-6">
-					{{ form_row(registrationForm.address_path_number, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_path_number, {
             label: "Numéro de voie"
         }) }}
-				</div>
-				<div class="form-group col-md-6">
-					{{ form_row(registrationForm.address_path_type, {
+			</div>
+			<div class="form-group col-md-6">
+				{{ form_row(registrationForm.address_path_type, {
             label: "Type de voie"
         }) }}
-        <small>(ex: Rue, Avenue, Impasse...)</small>
-				</div>
+				<small>(ex: Rue, Avenue, Impasse...)</small>
 			</div>
+		</div>
 
-			{{ form_row(registrationForm.agreeTerms, {
+		{{ form_row(registrationForm.agreeTerms, {
             label: "Accepter nos conditions d'utilisation"
         }) }}
 
-			<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
-			{{ form_end(registrationForm) }}
-		</div>
+		<button id="submit" class="btn btn-outline-info mb-3">S'inscrire</button>
 
-	{% endblock %}
+		{{ form_end(registrationForm) }}
+	</div>
+
+{% endblock %}

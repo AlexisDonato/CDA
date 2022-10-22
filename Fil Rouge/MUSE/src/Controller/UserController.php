@@ -96,6 +96,11 @@ class UserController extends AbstractController
         }
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
 
+        // The user cannot access other users infos:
+        if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
+            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        }
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
@@ -103,10 +108,7 @@ class UserController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
-        // The user cannot access other users infos:
-        if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
-        }
+
         return $this->render('user/show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),

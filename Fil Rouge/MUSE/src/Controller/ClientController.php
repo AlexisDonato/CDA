@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Address;
 use App\Form\User1Type;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
@@ -29,7 +30,7 @@ class ClientController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
-        // $addresses = $addressRepository->findBy(['user']);
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
         $cartService->setUser($user);
 
@@ -50,7 +51,7 @@ class ClientController extends AbstractController
                 'categories' => $categories,
                 'discount'  => $discount,
                 'discount2' => $discount2,
-                // 'addresses' => $addresses,
+                'addresses' => $addresses,
         ]);
         } else {
             $this->addFlash(
@@ -72,6 +73,8 @@ class ClientController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        
         $cartService->setUser($user);
 
         if ($this->getUser()->isVerified()) {
@@ -103,6 +106,7 @@ class ClientController extends AbstractController
                 'categories' => $categories,
                 'discount' => $discount,
                 'discount2' => $discount2,
+                'addresses' => $addresses,
         ]);
         } else {
             $this->addFlash(

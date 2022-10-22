@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Address index{% endblock %}
+
+{% block body %}
+    <h1>Address index</h1>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                {% if is_granted('ROLE_ADMIN') %}<th>Id</th>{% endif %}
+                <th>Name</th>
+                <th>Country</th>
+                <th>Zipcode</th>
+                <th>City</th>
+                <th>PathType</th>
+                <th>PathNumber</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for address in addresses %}
+            <tr>
+                {% if is_granted('ROLE_ADMIN') %}<td>{{ address.id }}</td>{% endif %}
+                <td>{{ address.name }}</td>
+                <td>{{ address.country }}</td>
+                <td>{{ address.zipcode }}</td>
+                <td>{{ address.city }}</td>
+                <td>{{ address.pathType }}</td>
+                <td>{{ address.pathNumber }}</td>
+                <td>
+                    <button class="btn btn-outline-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_show', {'id': address.id}) }}">Détails</a></button>
+                    <button class="btn btn-outline-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_edit', {'id': address.id}) }}">Modifier</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-warning ml-5 mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_new') }}">Nouvelle adresse</a></button>
+{% endblock %}

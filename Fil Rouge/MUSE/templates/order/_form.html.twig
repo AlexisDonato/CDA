@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+<div class="row">
+	<div class="form-group col-md-6">
+    {{ form_row(form.name) }}
+    </div>
+    <div class="form-group col-md-6">
+    {{ form_row(form.country) }}
+    </div>
+    <div class="form-group col-md-6">
+    {{ form_row(form.zipcode) }}
+    </div>
+    <div class="form-group col-md-6">
+    {{ form_row(form.city) }}
+    </div>
+    <div class="form-group col-md-6">
+    {{ form_row(form.pathType) }}
+    </div>
+    <div class="form-group col-md-6">
+    {{ form_row(form.pathNumber) }}
+    </div>
+
+<button class="btn btn-warning ml-5" onclick="history.back()">{{ button_label|default('Enregistrer votre nouvelle adresse') }}</button>
+{{ form_end(form) }}

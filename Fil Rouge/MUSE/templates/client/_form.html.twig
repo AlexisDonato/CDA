@@ -19,6 +19,6 @@
 </div>
 </div>
 <div class="d-flex">
-<button id="submit" class="btn btn-warning mr-5 ml-5 mb-3">{{ button_label|default('Enregistrer') }}</button>
+<button id="submit" class="btn btn-warning mr-5 ml-5 mb-3" onclick="history.back()">{{ button_label|default('Enregistrer') }}</button>
 
 {{ form_end(form) }}

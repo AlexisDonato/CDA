@@ -200,6 +200,13 @@ h2:hover {
     -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
+
+/* ORDER */
+
+#newAddressForm1 {
+    display:none;
+}
+
 /* FOOTER */
 
 .col_white_amrc {

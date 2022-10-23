@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Data\SearchData;
+// use App\Form\AddressType;
+use App\Form\OrderAddressType;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
-use Symfony\Component\Mime\Address as E_address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +16,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address as E_address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,7 +55,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order', name: 'app_order')]
-    public function index(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+    public function index(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user, EntityManagerInterface $entityManager): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -62,7 +65,6 @@ class OrderController extends AbstractController
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         }
-
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -71,7 +73,33 @@ class OrderController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+
         $cartService->setUser($user);
+
+        $address = new Address();
+        $form = $this->createForm(OrderAddressType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->addFlash('success','Adresse ajoutée !');
+
+            $address->setName($form->get('name')->getData());
+            $address->setCountry($form->get('country')->getData());
+            $address->setZipcode($form->get('zipcode')->getData());
+            $address->setCity($form->get('city')->getData());
+            $address->setPathType($form->get('pathType')->getData());
+            $address->setPathNumber($form->get('pathNumber')->getData());
+
+            // $user->addAddress($adress); 
+            // this equals to :
+            $address->setUser($user);
+            // and these bind the two classes
+
+            $entityManager->persist($address);
+            $entityManager->flush();
+        }
 
         return $this->render('order/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -82,6 +110,8 @@ class OrderController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
+            'addresses' => $addresses,
+            'form' => $form->createView(),
         ]);
     }
 

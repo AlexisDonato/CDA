@@ -90,7 +90,7 @@ if (document.getElementById("submit")) {
 
 function proSubForm() {
 
-    let pro_cb =document.getElementById("registration_form_pro");
+    let pro_cb = document.getElementById("registration_form_pro");
     let pro_form = document.getElementById("proForm");
     let company_name = document.getElementById("registration_form_proCompanyName");
     let duns = document.getElementById("registration_form_proDuns");
@@ -114,6 +114,46 @@ function proSubForm() {
             job.removeAttribute('required', '');
         }
     }
+
+function newAddress() {
+
+    let newAddress = document.getElementById("newAddress");
+    let newAddressForm1 = document.getElementById("newAddressForm1");
+    let newAddressName = document.getElementById("newAddressName");
+    let newAddressCountry = document.getElementById("newAddressCountry");
+    let newAddressZipcode = document.getElementById("newAddressZipcode");
+    let newAddressCity = document.getElementById("newAddressCity");
+    let newAddressPathType = document.getElementById("newAddressPathType");
+    let newAddressPathNumber = document.getElementById("newAddressPathNumber");
+
+        if (newAddress.checked==true) {
+            newAddressForm1.style.display="block";
+            newAddressName.setAttribute('required', '');
+            newAddressCountry.setAttribute('required', '');
+            newAddressZipcode.setAttribute('required', '');
+            newAddressCity.setAttribute('required', '');
+            newAddressPathType.setAttribute('required', '');
+            newAddressPathNumber.setAttribute('required', '');
+        } else {
+            newAddressForm1.style.display="none";
+            newAddressName.removeAttribute('required', '');
+            newAddressCountry.removeAttribute('required', '');
+            newAddressZipcode.removeAttribute('required', '');
+            newAddressCity.removeAttribute('required', '');
+            newAddressPathType.removeAttribute('required', '');
+            newAddressPathNumber.removeAttribute('required', '');
+        }
+        if (newAddress.checked==false) {
+            newAddressForm1.style.display="none";
+            newAddressName.removeAttribute('required', '');
+            newAddressName.removeAttribute('required', '');
+            newAddressName.removeAttribute('required', '');
+            newAddressName.removeAttribute('required', '');
+            newAddressName.removeAttribute('required', '');
+            newAddressName.removeAttribute('required', '');
+        }
+    }
+
 
 
 // Nouislider

@@ -122,7 +122,6 @@ class RegistrationController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
-            // 'address' => $address,
         ]);
     }
 

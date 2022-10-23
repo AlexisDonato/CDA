@@ -11,9 +11,9 @@
     <a href="{{ path('app_forgot_password_request') }}" class="btn btn-outline-warning ml-5 mb-3">Réinitialiser le mot de passe</a>
     </div>
 
-    <ul><b>Adresses :</b> 
+    <ul class="mt-5"><b>Vos Adresses :</b> 
     {% for address in addresses %}
-            <li class="list-group-item bg-dark text-light">{% for address in addresses %}-{{ address.name }} : <i>{{ address.pathNumber }}, {{ address.pathType }} {{ address.zipcode }} {{ address.city }}, {{ address.country }}</i><br>{% endfor %}</li>
+            <li>{% for address in addresses %}{{ address.name }} : <i>{{ address.pathNumber }}, {{ address.pathType }} {{ address.zipcode }} {{ address.city }}, {{ address.country }}</i><br>{% endfor %}</li>
     {% endfor %}
 </ul>
 

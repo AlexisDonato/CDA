@@ -6,6 +6,7 @@ use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class AddressType extends AbstractType
 {
@@ -18,7 +19,8 @@ class AddressType extends AbstractType
             ->add('city')
             ->add('pathType')
             ->add('pathNumber')
-            ->add('user')
+            ->add('billingAddress', CheckboxType::class)
+            ->add('deliveryAddress', CheckboxType::class)
         ;
     }
 

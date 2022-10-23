@@ -9,6 +9,7 @@ use App\Service\Cart\CartService;
 use App\Repository\AddressRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +61,7 @@ class AddressController extends AbstractController
     }
 
     #[Route('/new', name: 'app_address_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
+    public function new(Request $request, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -84,6 +85,20 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
+
+            // $address->setName($form->get('name')->getData());
+            // $address->setCountry($form->get('country')->getData());
+            // $address->setZipcode($form->get('zipcode')->getData());
+            // $address->setCity($form->get('city')->getData());
+            // $address->setPathType($form->get('pathType')->getData());
+            // $address->setPathNumber($form->get('pathNumber')->getData());
+            // $address->setBillingAddress($form->get('billingAddress')->getData());
+            // $address->setDeliveryAddress($form->get('deliveryAddress')->getData());
+
+            // $address->setUser($user);
+
+            // $entityManager->persist($address);
+            // $entityManager->flush();
 
             return $this->redirectToRoute('app_address_index', [], Response::HTTP_SEE_OTHER);
         }

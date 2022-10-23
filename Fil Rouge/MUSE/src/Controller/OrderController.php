@@ -91,6 +91,8 @@ class OrderController extends AbstractController
             $address->setCity($form->get('city')->getData());
             $address->setPathType($form->get('pathType')->getData());
             $address->setPathNumber($form->get('pathNumber')->getData());
+            $address->setBillingAddress($form->get('billingAddress')->getData());
+            $address->setDeliveryAddress($form->get('deliveryAddress')->getData());
 
             // $user->addAddress($adress); 
             // this equals to :

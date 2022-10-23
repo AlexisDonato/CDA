@@ -34,6 +34,12 @@ class Address
     #[ORM\ManyToOne(inversedBy: 'address')]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $billing_address = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $deliveryAddress = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,5 +132,29 @@ class Address
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function isBillingAddress(): ?bool
+    {
+        return $this->billing_address;
+    }
+
+    public function setBillingAddress(?bool $billing_address): self
+    {
+        $this->billing_address = $billing_address;
+
+        return $this;
+    }
+
+    public function isDeliveryAddress(): ?bool
+    {
+        return $this->deliveryAddress;
+    }
+
+    public function setDeliveryAddress(?bool $deliveryAddress): self
+    {
+        $this->deliveryAddress = $deliveryAddress;
+
+        return $this;
     }
 }

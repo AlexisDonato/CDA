@@ -83,6 +83,8 @@ class AddressController extends AbstractController
 
         $cartService->setUser($user);
 
+        $address->setUser($user);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
 

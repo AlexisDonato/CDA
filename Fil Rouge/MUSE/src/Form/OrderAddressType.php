@@ -19,8 +19,12 @@ class OrderAddressType extends AbstractType
             ->add('city')
             ->add('pathType')
             ->add('pathNumber')
-            ->add('billingAddress', CheckboxType::class)
-            ->add('deliveryAddress', CheckboxType::class)
+            ->add('billingAddress', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('deliveryAddress', CheckboxType::class, [
+                'required' => false,
+            ])
         ;
     }
 

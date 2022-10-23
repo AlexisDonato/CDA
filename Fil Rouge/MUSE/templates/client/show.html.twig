@@ -42,7 +42,7 @@
 							<b>Adresse(s) :</b>
 						</div>
 						<br>
-						{% for address in addresses %}-<b>{{ address.name }}
+						{% for address in addresses %}-<b> {{ address.name }}{% if address.billingAddress %}<b class="text-warning"> (Facturation){% elseif address.deliveryAddress %}<b class="text-warning"> (Livraison){% endif %}</b>
 								:</b>
 							<i>{{ address.pathNumber }},
 								{{ address.pathType }}

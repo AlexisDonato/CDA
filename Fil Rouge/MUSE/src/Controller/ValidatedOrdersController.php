@@ -61,7 +61,7 @@ class ValidatedOrdersController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN')) {
             $clientCarts = $cartRepository->findAllUsers();
         }
-        $validatedOrder =$cartRepository->findAllUsers();
+        $validatedOrder = $cartRepository->findAllUsers();
         return $this->render(
             'validated_orders/index.html.twig',
             $this->getData($cartRepository, $cartService, $user, $orderDetails, $productRepository, $categoryRepository) + [

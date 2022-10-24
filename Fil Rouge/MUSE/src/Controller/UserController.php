@@ -134,7 +134,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, User $user, UserRepository $userRepository, OrderDetailsRepository $orderDetails): Response
+    public function edit(Address $address, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, User $user, UserRepository $userRepository, OrderDetailsRepository $orderDetails): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('error', 'Accès refusé');
@@ -156,6 +156,8 @@ class UserController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
 
         $cartService->setUser($user);
+
+        $address->setUser($user);
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
@@ -182,7 +184,8 @@ class UserController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
-            'addresses' =>$addresses,    
+            'addresses' =>$addresses,
+            'address'   =>$address, 
         ]);
     }
 

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Address;
 use App\Data\SearchData;
 use App\Form\AddressType;
 use App\Service\Cart\CartService;
+use App\Repository\UserRepository;
 use App\Repository\AddressRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -21,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AddressController extends AbstractController
 {
     #[Route('/', name: 'app_address_index', methods: ['GET'])]
-    public function index(AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
+    public function index(UserRepository $userRepository, UserInterface $user, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?OrderDetailsRepository $orderDetails): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -37,10 +39,10 @@ class AddressController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
-        if (!$this->isGranted('ROLE_CLIENT')) {
+        if ($this->isGranted('ROLE_CLIENT')) {
             $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         }
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             $addresses = $addressRepository->findAll();
         }
 

@@ -25,6 +25,7 @@ class AddressType extends AbstractType
             ->add('deliveryAddress', CheckboxType::class, [
                 'required' => false,
             ])
+            ->add('user')
         ;
     }
 

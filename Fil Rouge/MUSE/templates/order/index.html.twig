@@ -158,9 +158,26 @@
 							{% if address.billingAddress %}
 								<b class="text-warning">
 									(Facturation)
-								{% elseif address.deliveryAddress %}
+								{% endif %}
+								:</b>
+							<i>{{ address.pathNumber }},
+								{{ address.pathType }}
+								{{ address.zipcode }}
+								{{ address.city }},
+								{{ address.country }}</i><br>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="mt-3">
+					<h3 class="text-center mt-3">Votre adresse de livraison :</h3>
+					<br>
+					{% for address in addresses %}
+						{% if address.deliveryAddress  %}
+							-<b>{{ address.name }}
+								{% if address.deliveryAddress %}
 									<b class="text-warning">
-										(Livraison)
+										(Facturation)
 									{% endif %}
 									:</b>
 								<i>{{ address.pathNumber }},
@@ -168,66 +185,33 @@
 									{{ address.zipcode }}
 									{{ address.city }},
 									{{ address.country }}</i><br>
-								{# {% else %}
-																						<b>Aucune adresse de facturation enregistrée</b> #}
 							{% endif %}
 						{% endfor %}
 					</div>
 
-					<div class="mt-3">
-						<h3 class="text-center mt-3">Votre adresse de livraison :</h3>
-						<br>
-						{% for address in addresses %}
-							{% if address.deliveryAddress %}
-								-<b>{{ address.name }}
-									{% if address.billingAddress %}
-										<b class="text-warning">
-											(Facturation)
-										{% elseif address.deliveryAddress %}
-											<b class="text-warning">
-												(Livraison)
-											{% endif %}
-											:</b>
-										<i>{{ address.pathNumber }},
-											{{ address.pathType }}
-											{{ address.zipcode }}
-											{{ address.city }},
-											{{ address.country }}</i><br>
-									{# {% else %}
-											<b>Aucune adresse de livraison enregistrée</b> #}
-										{# <div class="form-check">
-											<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
-											<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
-											<small id="newAddressHelp" class="form-text text-muted mb-3">(Domicile, facturation, livraison, ...)
-											</small>
-										</div>
-				
-										<div id="newAddressForm1">
-											{{ include('order/_form.html.twig') }}
-										</div> #}
-									{% endif %}
-								{% endfor %}
-							</div>
-
-							<div class="text-center bg-muted mt-5">
-								<div class="form-check">
-									<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
-									<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
-									<small id="newAddressHelp" class="form-text text-light mb-3">(Domicile, facturation, livraison, ...)
-									</small>
-								</div>
-							</div>
-
-
-							<div id="newAddressForm1">
-								{{ include('order/_form.html.twig') }}
-							</div>
-
-							<div class="text-center">
-								<button class="btn btn-primary btn-lg mt-3 mb-3" title="Validez votre commande">
-									<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
-								</button>
-							</div>
-
+					<div class="text-center bg-muted mt-5">
+						<div class="form-check">
+							<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
+							<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
+							<small id="newAddressHelp" class="form-text text-light mb-3">(Domicile, facturation, livraison, ...)
+							</small>
 						</div>
-					{% endblock %}
+					</div>
+
+
+					<div id="newAddressForm1">
+						{{ include('order/_form.html.twig') }}
+					</div>
+
+{# <div class="text-center">
+<button class="btn btn-info btn-lg mt-3 mb-3 border-white" onclick="window.location.reload();">Actualiser la page</button>
+</div> #}
+
+					<div class="text-center">
+						<button class="btn btn-primary btn-lg mt-3 mb-3" title="Validez votre commande">
+							<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
+						</button>
+					</div>
+
+				</div>
+			{% endblock %}

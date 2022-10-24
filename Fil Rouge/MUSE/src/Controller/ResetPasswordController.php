@@ -80,7 +80,7 @@ class ResetPasswordController extends AbstractController
      * Confirmation page after a user has requested a password reset.
      */
     #[Route('/check-email', name: 'app_check_email')]
-    public function checkEmail(CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    public function checkEmail(OrderDetailsRepository $orderDetails, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -96,8 +96,9 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/check_email.html.twig', [
-            'items' => $cartService->getFullCart(),
-            'total' => $cartService->getTotal(),
+            'items' => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'total' => $cartService->getTotal($orderDetails),
             'resetToken' => $resetToken,
             'products' => $products,
             'products2' => $products2,
@@ -111,7 +112,7 @@ class ResetPasswordController extends AbstractController
      * Validates and process the reset URL that the user clicked in their email.
      */
     #[Route('/reset/{token}', name: 'app_reset_password')]
-    public function reset(CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
+    public function reset(OrderDetailsRepository $orderDetails, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, TranslatorInterface $translator, string $token = null): Response
     {
 
         if ($token) {
@@ -170,8 +171,9 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/reset.html.twig', [
-            'items' => $cartService->getFullCart(),
-            'total' => $cartService->getTotal(),
+            'items' => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'total' => $cartService->getTotal($orderDetails),
             'resetForm' => $form->createView(),
             'products' => $products,
             'products2' => $products2,

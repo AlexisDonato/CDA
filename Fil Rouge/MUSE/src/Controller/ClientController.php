@@ -39,6 +39,8 @@ class ClientController extends AbstractController
 
             // The user cannot access other users infos:
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
+                $this->addFlash('error', 'Accès refusé');
+                return $this->redirectToRoute('login');  
                 $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
             }
             return $this->render('client/show.html.twig', [
@@ -83,6 +85,8 @@ class ClientController extends AbstractController
 
             // The user cannot access other users infos:
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
+                $this->addFlash('error', 'Accès refusé');
+                return $this->redirectToRoute('login');  
                 $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
             }
             $form = $this->createForm(User1Type::class, $user);

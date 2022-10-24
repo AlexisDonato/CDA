@@ -13,7 +13,7 @@ class OrderDetails
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column(unique: true)]
     private ?int $id = null;
 
     #[ORM\Column]

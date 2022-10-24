@@ -18,7 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', unique: true)]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -30,16 +30,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 100)]
     private $userName;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 100)]
     private $userLastname;
 
     #[ORM\Column(type: 'datetime')]
     private $birthdate;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 25)]
     private $phoneNumber;
 
     #[ORM\Column(type: 'boolean')]
@@ -57,13 +57,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $pro = false;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $proCompanyName = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 9, nullable: true)]
     private ?string $proDuns = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $proJobPosition = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]

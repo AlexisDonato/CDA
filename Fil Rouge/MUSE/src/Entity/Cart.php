@@ -15,7 +15,7 @@ class Cart
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', unique: true)]
     private $id = null;
 
     #[ORM\Column]
@@ -40,10 +40,10 @@ class Cart
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $shipmentDate = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $carrier = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $carrierShipmentId = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 2, nullable: true)]

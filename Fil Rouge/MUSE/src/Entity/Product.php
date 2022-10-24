@@ -13,10 +13,10 @@ class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', unique: true)]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 150)]
     private $name;
 
     #[ORM\Column(type: 'integer')]
@@ -28,7 +28,7 @@ class Product
     #[ORM\Column(type: 'text')]
     private $content;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $image = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -40,10 +40,10 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $image1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $image2 = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]

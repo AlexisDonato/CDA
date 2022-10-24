@@ -10,25 +10,25 @@ class Address
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 25, nullable: true)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $pathType = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $pathNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'address')]

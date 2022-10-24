@@ -13,10 +13,10 @@ class Category
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', unique: true)]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 100)]
     private $name;
 
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories')]

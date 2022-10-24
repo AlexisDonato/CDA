@@ -11,13 +11,13 @@ class Contact
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column(unique: true)]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $email = null;
 
 

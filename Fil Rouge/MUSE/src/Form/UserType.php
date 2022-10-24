@@ -122,22 +122,6 @@ class UserType extends AbstractType
                     ],
             ])
 
-            ->add('address', CollectionType::class, [
-                // each entry in the array will be an "email" field
-                'entry_type' => TextType::class,
-                // these options are passed to each "email" type
-                'entry_options' => [
-                    'attr' => ['class' => 'col-md-6'],
-                ],
-            ])
-            // , null, [
-            //     'label' => 'Adresse',
-            //     'required' => true,
-            //     'row_attr' => [
-            //         'class' => 'col-md-6 ml-3',
-            //         ],
-            //     ])
-
             ->add('phoneNumber', TextType::class, [
                 'label' => 'N° téléphone',
                 'required' => true,

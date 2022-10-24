@@ -20,7 +20,7 @@
 
     {{ form_row(form.birthdate) }}
 
-    {{ form_row(form.adress) }}
+    {# {{ form_row(form.adress) }} #}
 
     {{ form_row(form.phoneNumber) }}<span id="wrongPhone"></span>
 
@@ -35,6 +35,6 @@
 
     {{ form_widget(form) }}
 
-    <button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Enregistrer') }}</button>
+    <button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}

@@ -155,6 +155,10 @@ class UserController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $cartService->setUser($user);
+
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             // transforms json column into str
@@ -178,6 +182,7 @@ class UserController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
+            'addresses' =>$addresses,    
         ]);
     }
 

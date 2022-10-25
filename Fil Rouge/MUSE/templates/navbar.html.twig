@@ -11,7 +11,7 @@
 	<div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
 		<ul class="navbar-nav">
 
-			<li class="nav-item text-center mr-5">
+			<li class="nav-item text-center mr-4">
 				<a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}" href="{{ path('app_home') }}">
 					<div>
 						<i class="fa-solid fa-home fa-lg mb-1"></i>
@@ -19,7 +19,7 @@
 					Page d'accueil
 				</a>
 			</li>
-			<li class="nav-item text-center ml-5 mr-5">
+			<li class="nav-item text-center ml-4 mr-4">
 				<a class="nav-link text-decoration-none{% if app.request.attributes.get('_route') == 'app_category' %}active{% endif %}" href="{{ path('app_category') }}">
 					<div>
 						<i class="fa-solid fa-list-ul fa-lg mb-1"></i>
@@ -31,7 +31,7 @@
 				</a>
 			</li>
 
-			<li class="nav-item text-center ml-5 mr-5">
+			<li class="nav-item text-center ml-4 mr-4">
 				<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_product' %}active{% endif %}" href="{{ path('app_product') }}">
 					<div>
 						<i class="fa-solid fa-eye fa-lg mb-1"></i>
@@ -43,7 +43,7 @@
 				</a>
 			</li>
 
-			<li class="nav-item text-center ml-5 mr-5">
+			<li class="nav-item text-center ml-4 mr-4">
 				<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_discount' %}active{% endif %}" href="{{ path('app_discount') }}">
 					<div>
 						<i class="fa-solid fa-hand-holding-dollar fa-lg mb-1"></i>
@@ -57,7 +57,7 @@
 
 			{% if is_granted('ROLE_ADMIN') %}
 			{% else %}
-			<li class="nav-item text-center ml-5 mr-5">
+			<li class="nav-item text-center ml-4 mr-4">
 				<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_cart_index' %}active{% endif %}" href="{{ path('app_cart_index') }}">
 					<div>
 						<i class="fa-solid fa-cart-shopping fa-lg mb-1"></i>
@@ -73,7 +73,7 @@
 			{% endif %}
 
 		{% if is_granted('ROLE_ADMIN') %}
-			<li class="nav-item dropdown ml-5">
+			<li class="nav-item dropdown ml-4">
 				<i class="fa-solid fa-lock-open fa-lg text-danger ml-5"></i>
 				<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<b>Back Office</b>

@@ -1,38 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Edit User
+{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="text-warning mb-3 mt-3">Modifier mes informations personnelles</h1>
+	<div class="container">
+		<h1 class="text-warning mb-3 mt-3">Modifier mes informations personnelles</h1>
 
-    {{ include('client/_form.html.twig') }}<br>
+		{{ include('client/_form.html.twig') }}<br>
 
-    <a href="{{ path('app_forgot_password_request') }}" class="btn btn-outline-warning ml-5 mb-3">Réinitialiser le mot de passe</a>
-    </div>
+		<a href="{{ path('app_forgot_password_request') }}" class="btn btn-outline-warning ml-5 mb-3">Réinitialiser le mot de passe</a>
+	</div>
 
-    <ul class="mt-5 surround"><h3 class="text-center h2">Vos Adresses :</h3> 
-    {% for address in addresses %}
-											<li class="h4"><b>{{ address.name }}
-												{% if address.billingAddress %}
-													<b>
-														(Facturation)
-													{% elseif address.deliveryAddress %}
-														<b>
-															(Livraison)
-														{% endif %}
-													</b>
-													:</b>
-												<i>{{ address.pathNumber }},
-													{{ address.pathType }}
-													{{ address.zipcode }}
-													{{ address.city }},
-													{{ address.country }}</i><br>
-											{% endfor %}</li>
+	<ul class="mt-5 surround">
+		<h3 class="text-center h2">Vos Adresses :</h3>
+		{% for address in addresses %}
+			<div class="navbar">
+				<li class="h4">
+					<b>{{ address.name }}
+						{% if address.billingAddress %}
+							<b>
+								(Facturation)
+							{% elseif address.deliveryAddress %}
+								<b>
+									(Livraison)
+								{% endif %}
+							</b>
+							:</b>
+						<i>{{ address.pathNumber }},
+							{{ address.pathType }}
+							{{ address.zipcode }}
+							{{ address.city }},
+							{{ address.country }}</i><br>
+					{% endfor %}
+				</li>
+			</div>
 
-</ul>
+		</ul>
 
-<a href="{{ path('app_address_index') }}" class="btn btn-outline-warning ml-5 mb-3">Modifier vos adresses</a>
-    </div>
-</div>
-{% endblock %}
+		<a href="{{ path('app_client_address_index') }}" class="btn btn-outline-warning ml-5 mb-3">Modifier vos adresses</a>
+	</div>
+</div>{% endblock %}

@@ -31,8 +31,8 @@
                 <td>{{ address.pathNumber }}</td>
                 <td>{% if address.billingAddress %}Facturation{% elseif address.deliveryAddress %}Livraison{% else %}-{% endif %}</td>
                 <td>
-                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_show', {'id': address.id}) }}">Détails</a></button>
-                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_edit', {'id': address.id}) }}">Modifier</a></button>
+                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_client_address_show', {'id': address.id}) }}">Détails</a></button>
+                    <button class="btn btn-warning mb-3"><a class="text-decoration-none text-white" href="{{ path('app_client_address_edit', {'id': address.id}) }}">Modifier</a></button>
                 </td>
             </tr>
         {% else %}
@@ -43,6 +43,5 @@
         </tbody>
     </table>
 
-    <button class="btn btn-outline-warning ml-5 mb-3"><a class="text-decoration-none text-white" href="{{ path('app_address_new') }}">Nouvelle adresse</a></button>
-    
+    <button class="btn btn-outline-warning ml-5 mb-3"><a class="text-decoration-none text-white" href="{{ path('app_client_address_new') }}">Nouvelle adresse</a></button>
 {% endblock %}

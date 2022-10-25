@@ -7,7 +7,7 @@
         }) }}
 	</div>
     </div>
-    <h3 class="mt-5 h2 navbar">Choisissez une adresse de LIVRAISON :</h3>
+    <h3 class="h2 navbar">Choisissez une adresse de LIVRAISON :</h3>
     <div class="row">
 	<div class="form-group col-md-10">
 		{{ form_row(selectForm.selectDeliveryAddress, {
@@ -16,5 +16,5 @@
 	</div>
     </div>
 </div>
-    <button class="btn btn-info border-light mb-3 ml-5 btn-lg">{{ button_label|default('Définir les adresses') }}</button>
+    <button class="btn btn-info border-light mb-3 ml-5 btn-lg">{{ button_label|default('Enregistrer vos choix') }}</button>
 {{ form_end(selectForm) }}

@@ -39,8 +39,7 @@ class AddressController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
-
-            $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
         if ($this->isGranted('ROLE_ADMIN')) {
             $addresses = $addressRepository->findAll();

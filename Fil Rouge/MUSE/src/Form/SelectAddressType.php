@@ -23,7 +23,6 @@ class SelectAddressType extends AbstractType
                 'class' => Address::class,
                 'choice_label' => 'name',
 
-
                 // 'choices' => $address->getName(),
                 // 'choice_value' => 'name',
                 // 'choice_label' => function (?Address $address) {

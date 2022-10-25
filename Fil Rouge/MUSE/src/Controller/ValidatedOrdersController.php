@@ -137,6 +137,7 @@ class ValidatedOrdersController extends AbstractController
         $email = (new TemplatedEmail())
         ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
         ->to($cart->getUser()->getEmail())
+        ->cc('Shipping@muse.com')
         ->subject('Votre commande a bien été expédiée!')
         ->htmlTemplate('validated_orders/order_shipment_email.html.twig')
         ->context([
@@ -147,8 +148,8 @@ class ValidatedOrdersController extends AbstractController
             'shipmentDate' => $shipmentDate,
             'carrier' =>$carrier,
             'carrierShipmentId' => $carrierShipmentId,
-        ]);
-
+        ])
+        ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
         $mailer->send($email);
 
         $this->addFlash('success', 'La commande a bien été envoyée');

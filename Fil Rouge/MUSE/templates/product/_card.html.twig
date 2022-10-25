@@ -14,18 +14,18 @@
 						{% if app.user %}
 							{{ product.price * (1 +  app.user.vat )}}
 						{% else %}
-							{{ product.price * 1.2 }} €
+							<b class="surround">{{ product.price * 1.2 }} €</b>
 						{% endif %}
 					</s>
 				</small>
 			{% else %}
-				{{ product.price * 1.2 }} €
+				<b class="surround">{{ product.price * 1.2 }} €</b>
 			{% endif %}
 
 			{% if product.discount %}
 				<h4 class="text text-warning">-{{ product.discountRate * 100 }}% !</h4>
 				{% if  app.user %}
-					<h4 class="text text-warning">
+					<h4 class="text text-warning surround">
 						<b>{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
 							€</b>
 					</h4>
@@ -46,7 +46,7 @@
 			{% endfor %}
 		</div>
 		<div class="card-footer mt-auto">
-			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary float-right {% if product.quantity == 0 %} disabled btn-secondary {% endif %}">
+			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary float-right border-light{% if product.quantity == 0 %} disabled btn-secondary {% endif %}">
 				<i class="fa-solid fa-cart-plus"></i>
 			</a>
 

@@ -41,7 +41,7 @@ class ClientAddressController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
-         $cartService->setUser($user);
+        $cartService->setUser($user);
 
         return $this->render('client_address/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),

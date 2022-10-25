@@ -1,0 +1,19 @@
+{{ form_start(selectForm) }}
+<h3 class="mt-5 h2 navbar">Choisissez une adresse de FACTURATION :</h3>
+<div class="row">
+	<div class="form-group col-md-10">
+		{{ form_row(selectForm.selectBillingAddress, {
+            label: " "
+        }) }}
+	</div>
+    </div>
+    <h3 class="mt-5 h2 navbar">Choisissez une adresse de LIVRAISON :</h3>
+    <div class="row">
+	<div class="form-group col-md-10">
+		{{ form_row(selectForm.selectDeliveryAddress, {
+            label: " "
+        }) }}
+	</div>
+    </div>
+</div>
+{{ form_end(selectForm) }}

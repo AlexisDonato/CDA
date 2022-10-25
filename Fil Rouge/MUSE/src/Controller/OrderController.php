@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Data\SearchData;
 // use App\Form\AddressType;
 use App\Form\OrderAddressType;
+use App\Form\SelectAddressType;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
@@ -94,7 +95,7 @@ class OrderController extends AbstractController
             $address->setBillingAddress($form->get('billingAddress')->getData());
             $address->setDeliveryAddress($form->get('deliveryAddress')->getData());
 
-            // $user->addAddress($adress); 
+            // $user->addAddress($address); 
             // this equals to :
             $address->setUser($user);
             // and these bind the two classes
@@ -103,6 +104,20 @@ class OrderController extends AbstractController
             $entityManager->flush();
         }
 
+        $selectForm = $this->createForm(SelectAddressType::class);
+        $selectForm->handleRequest($request);
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        
+        if ($selectForm->isSubmitted() && $form->isValid()) {
+
+            $address->setBillingAddress($selectForm->get('selectBillingAddress')->getData(), true);
+            $address->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData(), true);
+
+            $address->setUser($user);
+
+            $entityManager->persist($address);
+            $entityManager->flush();
+        }
         return $this->render('order/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
@@ -114,6 +129,7 @@ class OrderController extends AbstractController
             'discount2' => $discount2,
             'addresses' => $addresses,
             'form' => $form->createView(),
+            'selectForm' => $selectForm->createView(),
         ]);
     }
 

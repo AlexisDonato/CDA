@@ -1,40 +1,64 @@
 {{ form_start(form) }}
 
-    {{ form_row(form.id) }}
-    
-    {{ form_row(form.email) }}<span id="wrongEmail"></span>
+{{ form_row(form.id) }}
 
-    {% if is_granted('ROLE_ADMIN') %}
-    {{ form_row(form.roles) }}
-     {% else %}
-    {{ form_row(form.roles, {
+{{ form_row(form.email) }}<span id="wrongEmail"></span>
+
+{% if is_granted('ROLE_ADMIN') %}
+	{{ form_row(form.roles) }}
+{% else %}
+	{{ form_row(form.roles, {
         "attr": {"class": "d-none"},
         "label_attr": {'class': "d-none"},
         "help_attr": {'class': "d-none"},
     }) }}
-    {% endif %}
+{% endif %}
 
-    {{ form_row(form.userName) }}<span id="wrongFirstName"></span>
+{{ form_row(form.userName) }}<span id="wrongFirstName"></span>
 
-    {{ form_row(form.userLastname) }}<span id="wrongName"></span>
+{{ form_row(form.userLastname) }}<span id="wrongName"></span>
 
-    {{ form_row(form.birthdate) }}
+{{ form_row(form.birthdate) }}
 
-    {# {{ form_row(form.adress) }} #}
+{# {{ form_row(form.adress) }} #}
 
-    {{ form_row(form.phoneNumber) }}<span id="wrongPhone"></span>
+{{ form_row(form.phoneNumber) }}<span id="wrongPhone"></span>
 
-    {% if is_granted('ROLE_ADMIN') %}
-    {{ form_row(form.isVerified) }}
-    {% else %}
-    {{ form_row(form.isVerified, {
+{% if is_granted('ROLE_ADMIN') %}
+	{{ form_row(form.isVerified) }}
+{% else %}
+	{{ form_row(form.isVerified, {
         "attr": {"class": "d-none"},
         "label_attr": {'class': "d-none"},
     }) }}
-        {% endif %}
+{% endif %}
 
-    {{ form_widget(form) }}
+{{ form_widget(form) }}
 
-    <button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Save') }}</button>
+<button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Save') }}</button>
 
-{{ form_end(form) }}
+<table class="table-dark mt-3 mb-3" border="1">
+	<tbody>
+		<th>Adresse(s)</th>
+		<td>
+			{% for address in addresses %}-<b>
+					{{ address.name }}
+					{% if address.billingAddress %}
+						<b class="text-warning">
+							(Facturation)
+						{% elseif address.deliveryAddress %}
+							<b class="text-warning">
+								(Livraison)
+							{% endif %}
+						</b>
+						:</b>
+					<i>{{ address.pathNumber }},
+						{{ address.pathType }}
+						{{ address.zipcode }}
+						{{ address.city }},
+						{{ address.country }}</i><br>
+				{% endfor %}
+			</td>
+		</td>
+	</tbody>
+</th></tbody></table>{{ form_end(form) }}

@@ -11,10 +11,25 @@
     <a href="{{ path('app_forgot_password_request') }}" class="btn btn-outline-warning ml-5 mb-3">Réinitialiser le mot de passe</a>
     </div>
 
-    <ul class="mt-5"><b>Vos Adresses :</b> 
+    <ul class="mt-5 surround"><h3 class="text-center h2">Vos Adresses :</h3> 
     {% for address in addresses %}
-            <li>{% for address in addresses %}{{ address.name }} : <i>{{ address.pathNumber }}, {{ address.pathType }} {{ address.zipcode }} {{ address.city }}, {{ address.country }}</i><br>{% endfor %}</li>
-    {% endfor %}
+											<li class="h4"><b>{{ address.name }}
+												{% if address.billingAddress %}
+													<b>
+														(Facturation)
+													{% elseif address.deliveryAddress %}
+														<b>
+															(Livraison)
+														{% endif %}
+													</b>
+													:</b>
+												<i>{{ address.pathNumber }},
+													{{ address.pathType }}
+													{{ address.zipcode }}
+													{{ address.city }},
+													{{ address.country }}</i><br>
+											{% endfor %}</li>
+
 </ul>
 
 <a href="{{ path('app_address_index') }}" class="btn btn-outline-warning ml-5 mb-3">Modifier vos adresses</a>

@@ -144,8 +144,11 @@ class UserType extends AbstractType
                     'class' => 'col-md-6 ml-3',
                     ],
                 ])
+
+            // ->add('address')    
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -26,6 +26,10 @@ body {
     text-shadow: 0 0 5px rgb(255, 187, 0);  
 }
 
+.surround {
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+}
+
 h1 {
     font-family: Orbitron;
     font-size: 40px;

@@ -49,6 +49,12 @@ class Cart
     #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 2, nullable: true)]
     private ?string $total = null;
 
+    #[ORM\ManyToOne]
+    private ?Address $billingAdress = null;
+
+    #[ORM\ManyToOne]
+    private ?Address $deliveryAddress = null;
+
 
     public function __construct()
     {
@@ -194,6 +200,30 @@ class Cart
     public function setTotal(?string $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getBillingAdress(): ?Address
+    {
+        return $this->billingAdress;
+    }
+
+    public function setBillingAdress(?Address $billingAdress): self
+    {
+        $this->billingAdress = $billingAdress;
+
+        return $this;
+    }
+
+    public function getDeliveryAddress(): ?Address
+    {
+        return $this->deliveryAddress;
+    }
+
+    public function setDeliveryAddress(?Address $deliveryAddress): self
+    {
+        $this->deliveryAddress = $deliveryAddress;
 
         return $this;
     }

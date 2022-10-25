@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Knp\Snappy\Pdf;
+use Twig\Environment;
 use App\Entity\Address;
 use App\Data\SearchData;
 // use App\Form\AddressType;
@@ -15,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mime\Address as E_address;
@@ -138,7 +141,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/validated', name: 'app_order_validated')]
-    public function validateOrder(?CartService $cartService, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails)
+    public function validateOrder(Environment $twig, Pdf $pdf, ?CartService $cartService, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -164,12 +167,29 @@ class OrderController extends AbstractController
         $details = $orderDetails->findBy(['cart' => $orderId]);
         $orderDate = $cart->getOrderDate();
 
-        $this->emailVerifier->sendEmailConfirmation(
-            'app_verify_order_email',
-            $user,
-            (new TemplatedEmail())
+        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        
+        $this->twig = $twig;
+        $this->pdf = $pdf;
+
+        $html = $this->twig->render('email/order_validation_pdf.html.twig', [
+            'items'     => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
+            'user'      => $user,
+            'addresses' => $addresses,
+            'clientOrderId'   => $clientOrderId,
+            'cart'      => $cart,
+            'details' => $details,
+
+            ]);
+
+            $pdf = $this->pdf->getOutputFromHtml($html);
+
+            $email = (new TemplatedEmail())
                 ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
                 ->to($user->getEmail())
+                ->cc('Shipping@muse.com')
                 ->subject('Votre commande est validée!')
                 ->htmlTemplate('validated_orders/order_validation_email.html.twig')
                 ->context([
@@ -177,8 +197,13 @@ class OrderController extends AbstractController
                     'details' => $details,
                     'orderDate' => $orderDate,
                     'user' => $user,
-                    ]
-        ));
+                    'addresses' => $addresses,
+                    'clientOrderId'   => $clientOrderId,
+                    'cart'      => $cart,
+                    'details' => $details,
+                    ])
+                ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
+            $mailer->send($email);
                     
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');

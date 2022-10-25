@@ -18,6 +18,7 @@ class SelectAddressType extends AbstractType
 
         $builder
             ->add('selectBillingAddress', EntityType::class, [
+                'mapped' => false,
                 'required' => true,
                 'class' => Address::class,
                 'choice_label' => 'name',
@@ -30,6 +31,7 @@ class SelectAddressType extends AbstractType
                 // },
             ])
             ->add('selectDeliveryAddress', EntityType::class, [
+                'mapped' => false,
                 'required' => true,
                 'class' => Address::class,
                 'choice_label' => 'name',

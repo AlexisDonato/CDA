@@ -115,7 +115,11 @@ class OrderController extends AbstractController
 
             $address->setUser($user);
 
+            $cart->setBillingAddress($address);
+            $cart->setDeliveryAddress($address);
+
             $entityManager->persist($address);
+            $entityManager->persist($cart);
             $entityManager->flush();
         }
         return $this->render('order/index.html.twig', [

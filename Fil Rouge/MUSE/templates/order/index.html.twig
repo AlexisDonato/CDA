@@ -84,13 +84,13 @@
 			</tfoot>
 		</table>
 
-		<div class="float-right">
-			<button class="btn btn-success btn-xs pull-right js-show-code-form">
+		<div class="text-center">
+			<button class="btn btn-outline-primary btn-xs pull-right js-show-code-form">
 				Code promo
 			</button>
 		</div>
 
-		<div class="js-code-form" style="display: none;">
+		<div class="js-code-form" style="display:none;">
 			<form action="" method="POST" class="form-inline">
 				<div class="form-group">
 					<div class="input-group">
@@ -99,21 +99,15 @@
 						</span>
 						<input type="text" name="code" autocomplete="off" class="form-control" placeholder="Coupon Code"/>
 					</div>
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary border-light">Add</button>
 				</div>
 			</form>
 		</div>
-		<script>
-			jQuery(document).ready(function () {
-$('.js-show-code-form').on('click', function (e) {
-e.preventDefault();
-$('.js-code-form').show();
-})
-});
-		</script>
 
 
-		<h3 class="text-center  mt-5 mb-3">
+
+
+		<h3 class="text-center mt-5 mb-3">
 			Vos informations personnelles :</h3>
 
 		<div class="d-flex justify-content-center">
@@ -291,19 +285,32 @@ $('.js-code-form').show();
 						</div>
 					</div>
 
+<div class="nav-space-checkout">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                {{ include('order/_payCardForm.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 
-					<div id="newAddressForm1">
+					<div id="newAddressForm1" style="transition: 2s;">
 						{{ include('order/_form.html.twig') }}
 					</div>
+<script>
+     $(function() {
+        $("#newAddressForm1").addClass("load");
+    });
+</script>
 
-					{# <div class="text-center">
-																																											<button class="btn btn-info btn-lg mt-3 mb-3 border-white" onclick="window.location.reload();">Actualiser la page</button>
-																																											</div> #}
+
+{# <button class="btn btn-info btn-lg mt-3 mb-3 border-white" onclick="window.location.reload();">Actualiser la page</button> #}
+
 					<div class="text-center">
 						<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
 							<form action="{{ path("app_order_validated") }}" method="POST">
 								<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/logo.png" data-locale="auto">
-									Paiement par carte
 								</script>
 							</form>
 						</div>
@@ -314,10 +321,14 @@ $('.js-code-form').show();
 					{# <a href="{{ path("app_order_validated") }}"></a> #}
 
 					{# <div class="text-center">
-																					<button class="btn btn-primary btn-lg border-light mt-3 mb-3" title="Validez votre commande">
-																						<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
-																					</button>
-																				</div> #}
+						<button class="btn btn-primary btn-lg border-light mt-3 mb-3" title="Validez votre commande">
+							<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
+						</button>
+					</div> #}
 
 				</div>
-			{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+{% endblock %}
+{% endblock %}

@@ -26,11 +26,11 @@
 				<h4 class="text text-warning">-{{ product.discountRate * 100 }}% !</h4>
 				{% if  app.user %}
 					<h4 class="text text-warning surround">
-						<b>{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
+						<b class="surround">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
 							€</b>
 					</h4>
 				{% else %}
-					<h4 class="text text-warning">
+					<h4 class="text text-warning surround">
 						<b>{{ product.price * ( 1 - product.discountRate) * 1.2 }}
 							€</b>
 					</h4>

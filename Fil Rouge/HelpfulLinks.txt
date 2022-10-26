@@ -1,0 +1,3 @@
+SYMFONY:
+	-Generate Pdfs : https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
+	

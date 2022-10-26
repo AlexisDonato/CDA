@@ -32,9 +32,9 @@
             label: "N° de voie"
         }) }}
 		</div>
-
+</div>
 <div class="row">
-			<div class="col-md-6 ml-3">
+			<div class="col-md-6">
 				{{ form_row(form.billingAddress, {
             label: "Définir comme adresse de FACTURATION"
         }) }}
@@ -47,8 +47,8 @@
         }) }}
 			</div>
 		</div>
-</div>
-		<button class="btn btn-warning mb-3 ml-3">{{ button_label|default('save') }}</button>
+
+		<button class="btn btn-warning mb-3 ml-3 mt-3">{{ button_label|default('save') }}</button>
 	</div>
 </div>
 {{ form_end(form) }}

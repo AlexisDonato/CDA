@@ -24,16 +24,10 @@ class UserType extends AbstractType
         $builder
             ->add('id', IntegerType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ]
                     ])
 
             ->add('email', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'EmailField'],
                 'constraints' => [
                     new Regex([
@@ -77,17 +71,11 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'help' => 'Maintenez Ctrl pour sélectionner plusieurs rôles',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 ])
         
             ->add('userName', TextType::class, [
                 'label' => 'Prénom',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'FirstNameField'],
                     'constraints' => [
                         new Regex([
@@ -100,9 +88,6 @@ class UserType extends AbstractType
             ->add('userLastname', TextType::class, [
                 'label' => 'Nom',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'LastNameField'],
                     'constraints' => [
                         new Regex([
@@ -117,17 +102,11 @@ class UserType extends AbstractType
                 'widget' => 'single_text',
                 // this is actually the default format for single_text
                 'format' => 'yyyy-MM-dd',
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
             ])
 
             ->add('phoneNumber', TextType::class, [
                 'label' => 'N° téléphone',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'PhoneField'],
                     'constraints' => [
                         new Regex([
@@ -140,9 +119,6 @@ class UserType extends AbstractType
             ->add('isVerified', CheckboxType::class, [
                 'label' => 'Compte vérifié',
                 'mapped' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 ])
 
             // ->add('address')    

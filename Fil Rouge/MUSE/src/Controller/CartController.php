@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+// use App\Entity\Cart;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
-use App\Repository\CartRepository;
+// use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderDetailsRepository;
@@ -39,6 +40,10 @@ class CartController extends AbstractController
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
 
+        // $orderId = $request->attributes->get('id');
+        // $cart = $cartRepository->find($orderId);
+        // $cart->setTotal($cartService->getTotal($orderDetails));
+
         return $this->render('cart/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
@@ -48,6 +53,7 @@ class CartController extends AbstractController
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
+            // 'cart' => $cart,
         ]);
     }
 
@@ -65,6 +71,7 @@ class CartController extends AbstractController
 
         $cartService->setUser($user);
         $cartService->addOrRemove($id);
+        // $cart->setTotal($cartService->getTotal($orderDetails));
 
         // Redirects to the last page :
         $route = $request->headers->get('referer');
@@ -85,6 +92,7 @@ class CartController extends AbstractController
 
         $cartService->setUser($user);
         $cartService->addOrRemove($id, $remove=true);
+        // $cart->setTotal($cartService->getTotal($orderDetails));
 
         $route = $request->headers->get('referer');
         return $this->redirect($route);
@@ -104,6 +112,8 @@ class CartController extends AbstractController
 
         $cartService->setUser($user);
         $cartService->deleteALL();
+        // $cart->setTotal($cartService->getTotal($orderDetails));
+
         $this->addFlash('success', 'Votre panier a bien été vidé.');
         return $this->redirectToRoute('app_home');
     }
@@ -122,6 +132,7 @@ class CartController extends AbstractController
 
         $cartService->setUser($user);
         $cartService->delete($id);
+        // $cart->setTotal($cartService->getTotal($orderDetails));
 
         $route = $request->headers->get('referer');
         return $this->redirect($route);

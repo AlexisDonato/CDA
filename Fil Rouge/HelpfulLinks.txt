@@ -1,3 +1,4 @@
 SYMFONY:
 	-Generate Pdfs : https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
-	
+	-Coupons : https://symfonycasts.com/screencast/stripe-level2/coupon-code-form
+	-Stripe (Global system of payment) : https://symfonycasts.com/screencast/stripe/stripe-dashboard

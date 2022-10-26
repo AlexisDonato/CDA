@@ -23,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mime\Address as E_address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -141,7 +142,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/validated', name: 'app_order_validated')]
-    public function validateOrder(Environment $twig, Pdf $pdf, ?CartService $cartService, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function validateOrder(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -151,6 +152,7 @@ class OrderController extends AbstractController
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         }
+
         $cartService->setUser($user);
 
         $cart = $cartService->getClientCart();
@@ -171,6 +173,23 @@ class OrderController extends AbstractController
         
         $this->twig = $twig;
         $this->pdf = $pdf;
+        $this->entrypointLookup = $entrypointLookup;
+
+        $pdf_file_path = '/PDFs';
+
+        $this->pdf->generateFromHtml($this->twig->render(
+            'email/order_validation_pdf.html.twig', // Le template représentant le pdf à générer
+            [
+                'items'     => $cartService->getFullCart($orderDetails),
+                'count'     => $cartService->getItemCount($orderDetails),
+                'total'     => $cartService->getTotal($orderDetails),
+                'user'      => $user,
+                'addresses' => $addresses,
+                'clientOrderId'   => $clientOrderId,
+                'cart'      => $cart,
+                'details' => $details,
+            ]
+        ), $pdf_file_path); // Chemin où extraire le PDF une fois généré
 
         $html = $this->twig->render('email/order_validation_pdf.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -181,8 +200,9 @@ class OrderController extends AbstractController
             'clientOrderId'   => $clientOrderId,
             'cart'      => $cart,
             'details' => $details,
-
             ]);
+
+            $this->entrypointLookup->reset();
 
             $pdf = $this->pdf->getOutputFromHtml($html);
 

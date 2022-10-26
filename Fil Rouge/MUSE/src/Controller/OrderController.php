@@ -3,14 +3,16 @@
 namespace App\Controller;
 
 use Knp\Snappy\Pdf;
+use App\Entity\Cart;
 use Twig\Environment;
 use App\Entity\Address;
-use App\Data\SearchData;
 // use App\Form\AddressType;
+use App\Data\SearchData;
 use App\Form\OrderAddressType;
 use App\Form\SelectAddressType;
 use App\Security\EmailVerifier;
 use App\Service\Cart\CartService;
+use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -70,6 +72,9 @@ class OrderController extends AbstractController
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         }
+        
+        $cart = $cartService->getClientCart();
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -136,13 +141,32 @@ class OrderController extends AbstractController
             'discount' => $discount,
             'discount2' => $discount2,
             'addresses' => $addresses,
+            'cart' => $cart,
             'form' => $form->createView(),
             'selectForm' => $selectForm->createView(),
         ]);
     }
 
+        public function checkoutAction(Request $request)
+        {
+        if ($request->isMethod('POST')) {
+            $token = $request->request->get('stripeToken');
+            \Stripe\Stripe::setApiKey("pk_test_HxZzNHy8LImKK9LDtgMDRBwd");
+            \Stripe\Charge::create(array(
+              "amount" => $this->get('cart')->getTotal() * 100,
+              "currency" => "eur",
+              "source" => $token,
+              "description" => "First test charge!"
+            ));
+
+            $this->getCart()->setValidated(true);
+
+            return $this->redirectToRoute('app_order_validated');
+        }
+    }
+
     #[Route('/order/validated', name: 'app_order_validated')]
-    public function validateOrder(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function validateOrder(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -171,40 +195,40 @@ class OrderController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
-        $this->twig = $twig;
-        $this->pdf = $pdf;
-        $this->entrypointLookup = $entrypointLookup;
+        // $this->twig = $twig;
+        // $this->pdf = $pdf;
+        // $this->entrypointLookup = $entrypointLookup;
 
-        $pdf_file_path = '/PDFs';
+        // $pdf_file_path = '/PDFs';
 
-        $this->pdf->generateFromHtml($this->twig->render(
-            'email/order_validation_pdf.html.twig', // Le template représentant le pdf à générer
-            [
-                'items'     => $cartService->getFullCart($orderDetails),
-                'count'     => $cartService->getItemCount($orderDetails),
-                'total'     => $cartService->getTotal($orderDetails),
-                'user'      => $user,
-                'addresses' => $addresses,
-                'clientOrderId'   => $clientOrderId,
-                'cart'      => $cart,
-                'details' => $details,
-            ]
-        ), $pdf_file_path); // Chemin où extraire le PDF une fois généré
+        // $this->pdf->generateFromHtml($this->twig->render(
+        //     'email/order_validation_pdf.html.twig', // Le template représentant le pdf à générer
+        //     [
+        //         'items'     => $cartService->getFullCart($orderDetails),
+        //         'count'     => $cartService->getItemCount($orderDetails),
+        //         'total'     => $cartService->getTotal($orderDetails),
+        //         'user'      => $user,
+        //         'addresses' => $addresses,
+        //         'clientOrderId'   => $clientOrderId,
+        //         'cart'      => $cart,
+        //         'details' => $details,
+        //     ]
+        // ), $pdf_file_path); // Chemin où extraire le PDF une fois généré
 
-        $html = $this->twig->render('email/order_validation_pdf.html.twig', [
-            'items'     => $cartService->getFullCart($orderDetails),
-            'count'     => $cartService->getItemCount($orderDetails),
-            'total'     => $cartService->getTotal($orderDetails),
-            'user'      => $user,
-            'addresses' => $addresses,
-            'clientOrderId'   => $clientOrderId,
-            'cart'      => $cart,
-            'details' => $details,
-            ]);
+        // $html = $this->twig->render('email/order_validation_pdf.html.twig', [
+        //     'items'     => $cartService->getFullCart($orderDetails),
+        //     'count'     => $cartService->getItemCount($orderDetails),
+        //     'total'     => $cartService->getTotal($orderDetails),
+        //     'user'      => $user,
+        //     'addresses' => $addresses,
+        //     'clientOrderId'   => $clientOrderId,
+        //     'cart'      => $cart,
+        //     'details' => $details,
+        //     ]);
 
-            $this->entrypointLookup->reset();
+        //     $this->entrypointLookup->reset();
 
-            $pdf = $this->pdf->getOutputFromHtml($html);
+        //     $pdf = $this->pdf->getOutputFromHtml($html);
 
             $email = (new TemplatedEmail())
                 ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
@@ -221,10 +245,26 @@ class OrderController extends AbstractController
                     'clientOrderId'   => $clientOrderId,
                     'cart'      => $cart,
                     'details' => $details,
-                    ])
-                ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
+                ]);
+                // ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
             $mailer->send($email);
+        
+            if ($this->isGranted('ROLE_CLIENT')) {
+                $clientCart = $cartRepository->findOneByUser($user->getId());
+    
+                if (!isset($clientCart)) {
+                    $clientCart = new Cart();
                     
+                    $clientCart->setUser($user);
+                    $clientCart->setClientOrderId(strtoupper(uniqid('MUSE::')));
+                    $entityManager->persist($clientCart);
+                    $entityManager->flush();
+                }
+    
+                $cartService->setCart($clientCart);
+                $cartService->setUser($user);
+            }
+
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');
     }

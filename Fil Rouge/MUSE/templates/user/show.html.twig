@@ -91,7 +91,7 @@
 				<a class="text-decoration-none text-light" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
 			</button>
 			{% if is_granted('ROLE_ADMIN') %}
-				<button class="btn btn-outline-danger border-light mr-3 mb-1">
+				<button class="btn btn-danger border-light mr-3 mb-1">
 					<a class="text-decoration-none text-light" href="{{ path('app_user_index') }}">Retour à la liste</a>
 				</button>
 			{% endif %}

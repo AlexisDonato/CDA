@@ -12,10 +12,10 @@
 	{{ include('user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
 <div class="row">
-		<button class="btn btn-warning border-light mb-1 ml-5"><a href="
+		<button class="btn btn-warning border-light mb-3 ml-5"><a href="
 		{# {{ path('app_address_by_user_index', { 'id' : address.user }) }} #}
 		{{ path('app_address_index') }}
-		" class="text-decoration-none text-light">Modifier les adresses</a>
+		" class="text-decoration-none text-dark">Modifier les adresses</a>
 </div>
 		<button class="btn btn-danger border-light mb-1" id="submit">
 			<a class="text-decoration-none text-light" href="{{ path('app_user_index') }}">Retour à la liste</a>

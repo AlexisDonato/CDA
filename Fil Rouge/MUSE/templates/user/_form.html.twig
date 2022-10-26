@@ -37,9 +37,9 @@
 
 <button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Save') }}</button>
 
-<table class="table-dark mt-3 mb-3" border="1">
+<table class="navbar mt-3 mb-3" border="3">
 	<tbody>
-		<th>Adresse(s)</th>
+		<th class="h2 ml-2 mr-2">Adresse(s)</th>
 		<td>
 			{% for address in addresses %}-<b>
 					{{ address.name }}

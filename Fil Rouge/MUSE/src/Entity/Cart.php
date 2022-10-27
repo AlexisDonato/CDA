@@ -50,7 +50,7 @@ class Cart
     private ?string $total = null;
 
     #[ORM\ManyToOne]
-    private ?Address $billingAdress = null;
+    private ?Address $billingAddress = null;
 
     #[ORM\ManyToOne]
     private ?Address $deliveryAddress = null;
@@ -204,14 +204,14 @@ class Cart
         return $this;
     }
 
-    public function getBillingAdress(): ?Address
+    public function getBillingAddress(): ?Address
     {
-        return $this->billingAdress;
+        return $this->billingAddress;
     }
 
-    public function setBillingAdress(?Address $billingAdress): self
+    public function setBillingAddress(?Address $billingAddress): self
     {
-        $this->billingAdress = $billingAdress;
+        $this->billingAddress = $billingAddress;
 
         return $this;
     }

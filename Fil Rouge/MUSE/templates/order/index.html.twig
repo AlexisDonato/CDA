@@ -85,168 +85,97 @@
 		</table>
 
 		<div class="text-center">
-			<button class="btn btn-outline-primary btn-xs pull-right js-show-code-form">
+			<button id="couponButton" class="btn btn-outline-primary btn-xs" onclick="addCoupon()">
 				Code promo
 			</button>
 		</div>
 
-		<div class="js-code-form" style="display:none;">
+		<div id="couponInput">
+		<div class="d-flex justify-content-center mt-2">
 			<form action="" method="POST" class="form-inline">
 				<div class="form-group">
 					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="fa fa-terminal"></i>
-						</span>
-						<input type="text" name="code" autocomplete="off" class="form-control" placeholder="Coupon Code"/>
+						<i class="fa-solid fa-gift fa-lg mt-2 mr-1 surround"></i>
+						<input type="text" name="code" autocomplete="off" class="form-control" placeholder="Code promo?"/>
 					</div>
-					<button type="submit" class="btn btn-primary border-light">Add</button>
+					<button type="submit" class="btn btn-primary border-light">Ajouter</button>
+					</div>
+				</form>
 				</div>
-			</form>
-		</div>
+			</div>
 
 
+			<h3 class="text-center mt-5 mb-3">
+				Vos informations personnelles :</h3>
 
+			<div class="d-flex justify-content-center">
+				<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
+					<i class="fa-solid fa-address-card fa-lg text-center mt-3"></i>
+					<div class="card-body">
+						<h5 class="card-title text-info text-center">{{ app.user.email }}</h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item bg-dark text-light">
+							<b>Prénom :</b>
+							{{ app.user.userName }}</li>
+						<li class="list-group-item bg-dark text-light">
+							<b>Nom :</b>
+							{{ app.user.userLastname }}</li>
+						<li class="list-group-item bg-dark text-light">
+							<b>Date de naissance :</b>
+							{{ app.user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
 
-		<h3 class="text-center mt-5 mb-3">
-			Vos informations personnelles :</h3>
-
-		<div class="d-flex justify-content-center">
-			<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
-				<i class="fa-solid fa-address-card fa-lg text-center mt-3"></i>
-				<div class="card-body">
-					<h5 class="card-title text-info text-center">{{ app.user.email }}</h5>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item bg-dark text-light">
-						<b>Prénom :</b>
-						{{ app.user.userName }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b>Nom :</b>
-						{{ app.user.userLastname }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b>Date de naissance :</b>
-						{{ app.user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
-
-					<li class="list-group-item bg-dark text-light">
-						<b>N° téléphone :</b>
-						{{ app.user.phoneNumber }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b>Votre compte est vérifié :</b>
-						{{ app.user.isVerified ? 'Oui' : 'Non' }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<div class='text-center'>
-							<b>Adresse(s) :</b>
-						</div>
-						<br>
-						{% for address in addresses %}-<b>
-								{{ address.name }}
-								{% if address.billingAddress %}
-									<b class="text-warning">
-										(Facturation)
-									{% elseif address.deliveryAddress %}
-										<b class="text-warning">
-											(Livraison)
-										{% endif %}
-									</b>
-									:</b>
-								<i>{{ address.pathNumber }},
-									{{ address.pathType }}
-									{{ address.zipcode }}
-									{{ address.city }},
-									{{ address.country }}</i><br>
-							{% endfor %}
+						<li class="list-group-item bg-dark text-light">
+							<b>N° téléphone :</b>
+							{{ app.user.phoneNumber }}</li>
+						<li class="list-group-item bg-dark text-light">
+							<b>Votre compte est vérifié :</b>
+							{{ app.user.isVerified ? 'Oui' : 'Non' }}</li>
+						<li class="list-group-item bg-dark text-light">
 							<div class='text-center'>
-								<a href="{{ path('app_address_index') }}" class="mt-2 mb-1 btn-sm">
-									<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1" title="Modifier vos adresses"></i>
-								</a>
+								<b>Adresse(s) :</b>
 							</div>
+							<br>
+							{% for address in addresses %}-<b>
+									{{ address.name }}
+									{% if address.billingAddress %}
+										<b class="text-warning">
+											(Facturation)
+										{% elseif address.deliveryAddress %}
+											<b class="text-warning">
+												(Livraison)
+											{% endif %}
+										</b>
+										:</b>
+									<i>{{ address.pathNumber }},
+										{{ address.pathType }}
+										{{ address.zipcode }}
+										{{ address.city }},
+										{{ address.country }}</i><br>
+								{% endfor %}
+								<div class='text-center'>
+									<a href="{{ path('app_address_index') }}" class="mt-2 mb-1 btn-sm">
+										<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1" title="Modifier vos adresses"></i>
+									</a>
+								</div>
+							</li>
 						</li>
-					</li>
-				</ul>
-				<div class="card-body text-center">
-					<a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': app.user.id}) }}">
-						<i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier votre profil"></i>
-					</a>
+					</ul>
+					<div class="card-body text-center">
+						<a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': app.user.id}) }}">
+							<i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier votre profil"></i>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div
-			class="container">
-			{# <div class="mt-3">
-			<h3 class="text-center mt-3">Votre adresse de facturation actuelle :</h3>
-			<br>
-			{% for address in addresses %}
-			{% if address.billingAddress %}
-			-<b>{{ address.name }}
-				{% if address.billingAddress %}
-					<b class="text-warning">
-						(Facturation)
-					{% endif %}
-					:</b>
-				<i>{{ address.pathNumber }},
-					{{ address.pathType }}
-					{{ address.zipcode }}
-					{{ address.city }},
-					{{ address.country }}</i><br>
-			{% endif %}
-			{% endfor %}
-			</div>
-			
-			<div class="mt-3">
-			<h3 class="text-center mt-3">Votre adresse de livraison actuelle :</h3>
-			<br>
-			{% for address in addresses %}
-			{% if address.deliveryAddress  %}
-				-<b>{{ address.name }}
-					{% if address.deliveryAddress %}
-						<b class="text-warning">
-							(Livraison)
-						{% endif %}
-						:</b>
-					<i>{{ address.pathNumber }},
-						{{ address.pathType }}
-						{{ address.zipcode }}
-						{{ address.city }},
-						{{ address.country }}</i><br>
-				{% endif %}
-			{% endfor %}
-			</div> #}
-
-			<div class="row">
-				<div class="col-md-6">
-					<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de FACTURATION :</p>
-					<form>
-						<div class="form-group">
-							<select class="form-control" id="selectBillingAddress">
-								{% for address in addresses %}
-									<option>
-										<b>{{ address.name }}
-											{% if address.billingAddress %}
-												<b>
-													(Facturation)
-												{% elseif address.deliveryAddress %}
-													<b class="text-warning">
-														(Livraison)
-													{% endif %}
-												</b>
-												:</b>
-											<i>{{ address.pathNumber }},
-												{{ address.pathType }}
-												{{ address.zipcode }}
-												{{ address.city }},
-												{{ address.country }}</i><br>
-										{% endfor %}
-									</option>
-								</select>
-							</div>
-						</form>
-					</div>
+			<div class="container">
+				<div class="row">
 					<div class="col-md-6">
-						<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de LIVRAISON :</p>
+						<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de FACTURATION :</p>
 						<form>
 							<div class="form-group">
-								<select class="form-control" id="selectDeliveryAddress">
+								<select class="form-control" id="selectBillingAddress">
 									{% for address in addresses %}
 										<option>
 											<b>{{ address.name }}
@@ -254,7 +183,7 @@
 													<b>
 														(Facturation)
 													{% elseif address.deliveryAddress %}
-														<b>
+														<b class="text-warning">
 															(Livraison)
 														{% endif %}
 													</b>
@@ -269,66 +198,89 @@
 									</select>
 								</div>
 							</form>
-						</div>sy
-					</div>
-
-					<div id="audioFont" class="text-center">
-						{{ include('order/_selectForm.html.twig') }}
-					</div>
-
-					<div class="text-center bg-muted mt-5">
-						<div class="form-check">
-							<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
-							<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
-							<small id="newAddressHelp" class="form-text text-light mb-3">(Domicile, facturation, livraison, ...)
-							</small>
 						</div>
-					</div>
-
-<div class="nav-space-checkout">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                {{ include('order/_payCardForm.html.twig') }}
-            </div>
-        </div>
-    </div>
-</div>
-
-					<div id="newAddressForm1" style="transition: 2s;">
-						{{ include('order/_form.html.twig') }}
-					</div>
-<script>
-     $(function() {
-        $("#newAddressForm1").addClass("load");
-    });
-</script>
-
-
-{# <button class="btn btn-info btn-lg mt-3 mb-3 border-white" onclick="window.location.reload();">Actualiser la page</button> #}
-
-					<div class="text-center">
-						<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
-							<form action="{{ path("app_order_validated") }}" method="POST">
-								<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/logo.png" data-locale="auto">
-								</script>
-							</form>
+						<div class="col-md-6">
+							<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de LIVRAISON :</p>
+							<form>
+								<div class="form-group">
+									<select class="form-control" id="selectDeliveryAddress">
+										{% for address in addresses %}
+											<option>
+												<b>{{ address.name }}
+													{% if address.billingAddress %}
+														<b>
+															(Facturation)
+														{% elseif address.deliveryAddress %}
+															<b>
+																(Livraison)
+															{% endif %}
+														</b>
+														:</b>
+													<i>{{ address.pathNumber }},
+														{{ address.pathType }}
+														{{ address.zipcode }}
+														{{ address.city }},
+														{{ address.country }}</i><br>
+												{% endfor %}
+											</option>
+										</select>
+									</div>
+								</form>
+							</div>
 						</div>
-					</div>
-					<div class="text-center">
-						<small class="text-info">(Card number: 4242 4242 4242 4242 + any CVC/valid future expiration)</small>
-					</div>
-					{# <a href="{{ path("app_order_validated") }}"></a> #}
 
-					{# <div class="text-center">
-						<button class="btn btn-primary btn-lg border-light mt-3 mb-3" title="Validez votre commande">
-							<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
-						</button>
-					</div> #}
+						<div id="audioFont" class="text-center">
+							{{ include('order/_selectForm.html.twig') }}
+						</div>
 
-				</div>
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-{% endblock %}
-{% endblock %}
+						<div class="text-center bg-muted mt-5">
+							<div class="form-check">
+								<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
+								<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
+								<small id="newAddressHelp" class="form-text text-light mb-3">(Domicile, facturation, livraison, ...)
+								</small>
+							</div>
+						</div>
+
+						<div id="newAddressForm1">
+							{{ include('order/_form.html.twig') }}
+						</div>
+
+
+						{# <button class="btn btn-info btn-lg mt-3 mb-3 border-white" onclick="window.location.reload();">Actualiser la page</button> #}
+
+						<div class="text-center">
+							<button class="btn btn-primary border-light btn-lg text-center" id="payCardButton" onclick="payCard()">Paiement par carte</button>
+						</div>
+
+						<div id="payCardForm">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										{{ include('order/_payCardForm.html.twig') }}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="text-center">
+							<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
+								<form action="{{ path("app_order_validated") }}" method="POST">
+									<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/logo.png" data-locale="auto"></script>
+								</form>
+							</div>
+						</div>
+						<div class="text-center">
+							<small class="text-info">(Card number: 4242 4242 4242 4242 + any CVC/valid future expiration)</small>
+						</div>
+						{# <a href="{{ path("app_order_validated") }}"></a> #}
+
+						{# <div class="text-center">
+																						<button class="btn btn-primary btn-lg border-light mt-3 mb-3" title="Validez votre commande">
+																							<a class="text-decoration-none text-light" href="{{ path("app_order_validated") }}">Validez votre commande</a>
+																						</button>
+																					</div> #}
+
+					</div>
+
+				{% endblock %}

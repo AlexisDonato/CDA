@@ -154,6 +154,24 @@ function newAddress() {
         }
     }
 
+function payCard() {
+    let payCardForm = document.getElementById("payCardForm");
+            payCardForm.style.display="block";
+    }
+
+    if (document.getElementById("payCardButton")) {
+        document.getElementById("payCardButton").addEventListener("click", payCard);
+    }
+
+    function addCoupon() {
+        let couponInput = document.getElementById("couponInput");
+            couponInput.style.display="block";
+        }
+    
+        if (document.getElementById("couponButton")) {
+            document.getElementById("couponButton").addEventListener("click", addCoupon);
+        }
+
 
 
 // Nouislider

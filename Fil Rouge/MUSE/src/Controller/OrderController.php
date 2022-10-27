@@ -122,7 +122,7 @@ class OrderController extends AbstractController
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
         if ($selectForm->isSubmitted() && $selectForm->isValid()) {
-            
+
             $cart = $cartService->getClientCart();
 
             $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getData());
@@ -133,7 +133,6 @@ class OrderController extends AbstractController
             // $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getId());
             // $cart->setDeliveryAddress($selectForm->get('selectBillingAddress')->getId());
 
-            $entityManager->persist($address);
             $entityManager->persist($cart);
             $entityManager->flush();
         }

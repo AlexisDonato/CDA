@@ -3,18 +3,20 @@
 namespace App\Form;
 
 use App\Entity\Address;
+use App\Service\Cart\CartService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-// use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+// use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SelectAddressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        // $cartService->setUser($user);
 
         $builder
             ->add('selectBillingAddress', EntityType::class, [

@@ -109,11 +109,10 @@ class OrderController extends AbstractController
             $address->setUser($user);
             // and these bind the two classes
 
-            // $cart->setBillingAddress($address);
-            // $cart->setDeliveryAddress($address);
+            $cart = $cartService->getClientCart();
 
             $entityManager->persist($address);
-            // $entityManager->persist($cart);
+            $entityManager->persist($cart);
             $entityManager->flush();
         }
 
@@ -123,15 +122,14 @@ class OrderController extends AbstractController
         
         if ($selectForm->isSubmitted() && $selectForm->isValid()) {
 
+            $this->addFlash('success','Adresses dédiées définies!');
+
             $cart = $cartService->getClientCart();
 
             $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getData());
             $cart->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData());
 
             $address->setUser($user);
-
-            // $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getId());
-            // $cart->setDeliveryAddress($selectForm->get('selectBillingAddress')->getId());
 
             $entityManager->persist($cart);
             $entityManager->flush();

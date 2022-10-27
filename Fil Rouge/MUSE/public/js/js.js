@@ -118,7 +118,7 @@ function proSubForm() {
 function newAddress() {
 
     let newAddress = document.getElementById("newAddress");
-    let newAddressForm1 = document.getElementById("newAddressForm1");
+    let newAddressForm = document.getElementById("newAddressForm");
     let newAddressName = document.getElementById("newAddressName");
     let newAddressCountry = document.getElementById("newAddressCountry");
     let newAddressZipcode = document.getElementById("newAddressZipcode");
@@ -127,7 +127,7 @@ function newAddress() {
     let newAddressPathNumber = document.getElementById("newAddressPathNumber");
 
         if (newAddress.checked==true) {
-            newAddressForm1.style.display="block";
+            newAddressForm.style.display="block";
             newAddressName.setAttribute('required', '');
             newAddressCountry.setAttribute('required', '');
             newAddressZipcode.setAttribute('required', '');
@@ -135,7 +135,7 @@ function newAddress() {
             newAddressPathType.setAttribute('required', '');
             newAddressPathNumber.setAttribute('required', '');
         } else {
-            newAddressForm1.style.display="none";
+            newAddressForm.style.display="none";
             newAddressName.removeAttribute('required', '');
             newAddressCountry.removeAttribute('required', '');
             newAddressZipcode.removeAttribute('required', '');
@@ -144,7 +144,7 @@ function newAddress() {
             newAddressPathNumber.removeAttribute('required', '');
         }
         if (newAddress.checked==false) {
-            newAddressForm1.style.display="none";
+            newAddressForm.style.display="none";
             newAddressName.removeAttribute('required', '');
             newAddressName.removeAttribute('required', '');
             newAddressName.removeAttribute('required', '');

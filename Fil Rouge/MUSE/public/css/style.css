@@ -52,7 +52,20 @@ h3 {
     text-shadow: 0 0 5px rgb(0, 204, 255);
     color: rgb(0, 153, 255);
     transition: 0.5s;
+    animation-duration: 1.5s;
+    animation-name: slidein;
 }
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
 
 .hometitle:hover {
     color: rgb(160, 68, 96);
@@ -97,6 +110,21 @@ h3 {
 
 
 /* CATEGORIES */
+
+#category {
+    animation-duration: 0.5s;
+    animation-name: catslidein;
+}
+@keyframes catslidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+    to {
+      margin-left: 0%;
+      width: 75%;
+    }
+  }
 
 h2 {
     font-family: Orbitron;
@@ -184,6 +212,50 @@ h2:hover {
 
 #proForm {
     display:none;
+    transition: 2s;
+    -webkit-animation: fadeInDown 500ms ease-in-out;
+    animation: fadeInDown 500ms ease-in-out;
+}
+
+#newAddressForm {
+    display:none;
+    transition: 2s;
+    -webkit-animation: fadeInDown 500ms ease-in-out;
+    animation: fadeInDown 500ms ease-in-out;
+}
+
+#payCardForm {
+    display:none;
+    transition: 2s;
+    -webkit-animation: fadeInDown 500ms ease-in-out;
+    animation: fadeInDown 500ms ease-in-out;
+}
+
+#couponInput{
+    display:none;
+    transition: 2s;
+    -webkit-animation: fadeInDown 500ms ease-in-out;
+    animation: fadeInUp 500ms ease-in-out;
+}
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
 }
 
 

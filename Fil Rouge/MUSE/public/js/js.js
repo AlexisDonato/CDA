@@ -34,7 +34,7 @@ function checkForm(event) {
         wrongName.style.color = "orange";
         wrongName.textContent = "Nom invalide (numéros non autorisés)";
         name.focus();
-    } else wrongName.textContent = ""
+    } else wrongName.textContent = "";
 
     if (firstName.validity.valueMissing) {
         event.preventDefault();
@@ -47,7 +47,7 @@ function checkForm(event) {
         wrongFirstName.style.color = "orange";
         wrongFirstName.textContent = "Prénom invalide (numéros non autorisés)";
         firstName.focus();
-    } else wrongFirstName.textContent = ""
+    } else wrongFirstName.textContent = "";
 
     if (email.validity.valueMissing) {
         event.preventDefault();
@@ -60,7 +60,7 @@ function checkForm(event) {
         wrongEmail.style.color = "orange";
         wrongEmail.textContent = "Email invalide (ex: info_noreply@muse.com)";
         email.focus();
-    } else wrongEmail.textContent = ""
+    } else wrongEmail.textContent = "";
 
     if (phone.validity.valueMissing) {
         event.preventDefault();
@@ -73,14 +73,14 @@ function checkForm(event) {
         wrongPhone.style.color = "orange";
         wrongPhone.textContent = "Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
         phone.focus();
-    } else wrongPhone.textContent = ""
+    } else wrongPhone.textContent = "";
     if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {
         event.preventDefault();
         wrongDuns.style.color = "orange";
         wrongDuns.textContent = 'Numéro invalide : entrée à 9 chiffres (ex: "123456789")';
         pro_form.style.display="block";
         duns.focus();
-    } else wrongDuns.textContent = ""
+    } else wrongDuns.textContent = "";
 }
 
 if (document.getElementById("submit")) {
@@ -156,18 +156,37 @@ function newAddress() {
 
 function payCard() {
     let payCardForm = document.getElementById("payCardForm");
-            payCardForm.style.display="block";
-    }
+    let payCardButton = document.getElementById("payCardButton");
+    if(getComputedStyle(payCardForm).display != "none"){
+        payCardForm.style.display = "none";
+      } else {
+        payCardForm.style.display = "block";
+       }
+    };
+    payCardButton.onclick = payCard();
 
-    if (document.getElementById("payCardButton")) {
-        document.getElementById("payCardButton").addEventListener("click", payCard);
-    }
+if (document.getElementById("payCardButton")) {
+    document.getElementById("payCardButton").addEventListener("click", payCard);
+}
+    //     if (payCardForm.style.display="none") {
+    //         payCardForm.style.display="block";
+    //     } 
+        
+    //     else if (payCardForm.style.display="block") {
+    //         payCardForm.style.display="none";
+    //     };
+
 
     function addCoupon() {
         let couponInput = document.getElementById("couponInput");
-            couponInput.style.display="block";
-        }
-    
+        let couponButton = document.getElementById("couponButton");
+        if(getComputedStyle(couponInput).display != "none"){
+            couponInput.style.display = "none";
+          } else {
+            couponInput.style.display = "block";
+           }
+        };
+        couponButton.onclick = payCard();
         if (document.getElementById("couponButton")) {
             document.getElementById("couponButton").addEventListener("click", addCoupon);
         }

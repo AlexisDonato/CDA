@@ -88,28 +88,32 @@ class OrderController extends AbstractController
         $cartService->setUser($user);
 
         $address = new Address();
-        $form = $this->createForm(OrderAddressType::class);
-        $form->handleRequest($request);
+        $newAddressForm = $this->createForm(OrderAddressType::class);
+        $newAddressForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($newAddressForm->isSubmitted() && $newAddressForm->isValid()) {
 
             $this->addFlash('success','Adresse ajoutée !');
 
-            $address->setName($form->get('name')->getData());
-            $address->setCountry($form->get('country')->getData());
-            $address->setZipcode($form->get('zipcode')->getData());
-            $address->setCity($form->get('city')->getData());
-            $address->setPathType($form->get('pathType')->getData());
-            $address->setPathNumber($form->get('pathNumber')->getData());
-            $address->setBillingAddress($form->get('billingAddress')->getData());
-            $address->setDeliveryAddress($form->get('deliveryAddress')->getData());
+            $address->setName($newAddressForm->get('name')->getData());
+            $address->setCountry($newAddressForm->get('country')->getData());
+            $address->setZipcode($newAddressForm->get('zipcode')->getData());
+            $address->setCity($newAddressForm->get('city')->getData());
+            $address->setPathType($newAddressForm->get('pathType')->getData());
+            $address->setPathNumber($newAddressForm->get('pathNumber')->getData());
+            $address->setBillingAddress($newAddressForm->get('billingAddress')->getData());
+            $address->setDeliveryAddress($newAddressForm->get('deliveryAddress')->getData());
 
             // $user->addAddress($address); 
             // this equals to :
             $address->setUser($user);
             // and these bind the two classes
 
+            // $cart->setBillingAddress($address);
+            // $cart->setDeliveryAddress($address);
+
             $entityManager->persist($address);
+            // $entityManager->persist($cart);
             $entityManager->flush();
         }
 
@@ -117,15 +121,17 @@ class OrderController extends AbstractController
         $selectForm->handleRequest($request);
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
-        if ($selectForm->isSubmitted() && $form->isValid()) {
+        if ($selectForm->isSubmitted() && $selectForm->isValid()) {
+            
+            $cart = $cartService->getClientCart();
 
-            $address->setBillingAddress($selectForm->get('selectBillingAddress')->getData(), true);
-            $address->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData(), true);
+            $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getData());
+            $cart->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData());
 
             $address->setUser($user);
 
-            $cart->setBillingAddress($address);
-            $cart->setDeliveryAddress($address);
+            // $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getId());
+            // $cart->setDeliveryAddress($selectForm->get('selectBillingAddress')->getId());
 
             $entityManager->persist($address);
             $entityManager->persist($cart);
@@ -142,7 +148,7 @@ class OrderController extends AbstractController
             'discount2' => $discount2,
             'addresses' => $addresses,
             'cart' => $cart,
-            'form' => $form->createView(),
+            'newAddressForm' => $newAddressForm->createView(),
             'selectForm' => $selectForm->createView(),
         ]);
     }

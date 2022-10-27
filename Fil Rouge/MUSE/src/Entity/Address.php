@@ -35,7 +35,7 @@ class Address
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $billing_address = null;
+    private ?bool $billingAddress = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $deliveryAddress = null;
@@ -136,12 +136,12 @@ class Address
 
     public function isBillingAddress(): ?bool
     {
-        return $this->billing_address;
+        return $this->billingAddress;
     }
 
-    public function setBillingAddress(?bool $billing_address): self
+    public function setBillingAddress(?bool $billingAddress): self
     {
-        $this->billing_address = $billing_address;
+        $this->billingAddress = $billingAddress;
 
         return $this;
     }

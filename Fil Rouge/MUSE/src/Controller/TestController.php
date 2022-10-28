@@ -19,17 +19,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TestController extends AbstractController
 {
-    #[Route('/test', name: 'app_test')]
-    public function pdfAction(Pdf $knpSnappyPdf, Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    private $twig;
+    private $pdf;
+    public function __construct(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
+        $this->twig = $twig;
+        $this->pdf = $pdf;
+
+        $this->entrypointLookup = $entrypointLookup;
+    }
+
+
+    #[Route('/test', name: 'app_test')]
+    public function pdfAction(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    {
+        $pdf_file_path = '/PDFs';
 
         $html = $this->renderView('email/test.html.twig', array(
 
         ));
 
         return new PdfResponse(
-            $knpSnappyPdf->getOutputFromHtml($html),
+            $pdf->getOutputFromHtml($html),
             'file.pdf'
+        
+            $this->entrypointLookup->reset();
         );
     }
 }

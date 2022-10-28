@@ -159,7 +159,7 @@ function newAddress() {
         if (document.getElementById("newAddressButton")) {
             document.getElementById("newAddressButton").addEventListener("click", newAddress);
     }
-
+}
     console.log(newAddress());
 
 function payCard() {

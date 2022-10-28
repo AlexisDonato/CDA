@@ -118,7 +118,7 @@ function proSubForm() {
 
 function newAddress() {
 
-    let newAddress = document.getElementById("newAddress");
+    let newAddressButton = document.getElementById("newAddressButton");
     let newAddressForm = document.getElementById("newAddressForm");
     let newAddressName = document.getElementById("newAddressName");
     let newAddressCountry = document.getElementById("newAddressCountry");
@@ -154,9 +154,13 @@ function newAddress() {
         //     newAddressPathType.removeAttribute('required', '');
         //     newAddressPathNumber.removeAttribute('required', '');
         // }
+        newAddressButton.onclick = newAddress();
+
+        if (document.getElementById("newAddressButton")) {
+            document.getElementById("newAddressButton").addEventListener("click", newAddress);
     }
 
-
+    console.log(newAddress());
 
 function payCard() {
     let payCardButton = document.getElementById("payCardButton");

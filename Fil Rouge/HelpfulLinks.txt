@@ -1,5 +1,15 @@
 SYMFONY:
-	-Generate Pdfs : https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
+	-Generate Pdfs : * https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
+			 * https://github.com/KnpLabs/KnpSnappyBundle
+			 
 	-Coupons : https://symfonycasts.com/screencast/stripe-level2/coupon-code-form
+	
 	-Stripe (Global system of payment) : https://symfonycasts.com/screencast/stripe/stripe-dashboard
+	
 	-Coupons : https://symfonycasts.com/screencast/stripe-level2/coupon-code-form
+	
+	-zipcode : 
+	(créer table vide dans symfony avec les champs du csv; puis importer les données dans heidisql "importer fichier csv")
+		   * https://www.data.gouv.fr/fr/datasets/api-codes-postaux/
+		   * https://raw.githubusercontent.com/Rudloff/french-postal-codes-api/master/insee.csv
+		   * https://jsfiddle.net/jeremykenedy/nfnc5ogh/

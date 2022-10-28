@@ -98,7 +98,7 @@ function proSubForm() {
 
         if (pro_cb.checked==true) {
             pro_form.style.display="block";
-            pro_cb.scrollIntoView();;
+            pro_cb.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});;
             company_name.setAttribute('required', '');
             duns.setAttribute('required', '');
             job.setAttribute('required', '');
@@ -128,8 +128,7 @@ function newAddress() {
     let newAddressPathNumber = document.getElementById("newAddressPathNumber");
 
         if (getComputedStyle(newAddressForm).display != "none") {
-            newAddressForm.style.display="block";
-            newAddressForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
+            newAddressForm.style.display="none";
             newAddressName.setAttribute('required', '');
             newAddressCountry.setAttribute('required', '');
             newAddressZipcode.setAttribute('required', '');
@@ -137,7 +136,8 @@ function newAddress() {
             newAddressPathType.setAttribute('required', '');
             newAddressPathNumber.setAttribute('required', '');
         } else {
-            newAddressForm.style.display="none";
+            newAddressForm.style.display="block";
+            newAddressForm.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
             newAddressName.removeAttribute('required', '');
             newAddressCountry.removeAttribute('required', '');
             newAddressZipcode.removeAttribute('required', '');

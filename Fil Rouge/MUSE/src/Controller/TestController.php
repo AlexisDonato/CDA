@@ -43,7 +43,8 @@ class TestController extends AbstractController
             $pdf->getOutputFromHtml($html),
             'file.pdf'
         
-            $this->entrypointLookup->reset();
+
         );
+        $this->entrypointLookup->reset();
     }
 }

@@ -111,18 +111,25 @@ class OrderController extends AbstractController
 
             $cart = $cartService->getClientCart();
 
+
+            $cart->setBillingAddress($address);
+
             $entityManager->persist($address);
             $entityManager->persist($cart);
             $entityManager->flush();
+
+            return $this->redirectToRoute("app_order");
         }
 
         $selectForm = $this->createForm(SelectAddressType::class);
         $selectForm->handleRequest($request);
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
+
+        
         if ($selectForm->isSubmitted() && $selectForm->isValid()) {
 
-            $this->addFlash('success','Adresses dédiées définies!');
+            $this->addFlash('success','Adresses de FACTURATION et LIVRAISON définies!');
 
             $cart = $cartService->getClientCart();
 
@@ -248,8 +255,8 @@ class OrderController extends AbstractController
                     'clientOrderId'   => $clientOrderId,
                     'cart'      => $cart,
                     'details' => $details,
-                ]);
-                // ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
+                ])
+                ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
             $mailer->send($email);
         
             if ($this->isGranted('ROLE_CLIENT')) {

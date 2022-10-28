@@ -171,120 +171,57 @@
 			</div>
 		</div>
 
-		{# *** USER ORDER ADDRESSES SELECTION FORM *** #}
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de FACTURATION :</p>
-					<form>
-						<div class="form-group">
-							<select class="form-control" id="selectBillingAddress">
-								{% for address in addresses %}
-									<option>
-										<b>{{ address.name }}
-											{% if address.billingAddress %}
-												<b>
-													(Facturation)
-												{% elseif address.deliveryAddress %}
-													<b class="text-warning">
-														(Livraison)
-													{% endif %}
-												</b>
-												:</b>
-											<i>{{ address.pathNumber }},
-												{{ address.pathType }}
-												{{ address.zipcode }}
-												{{ address.city }},
-												{{ address.country }}</i><br>
-										{% endfor %}
-									</option>
-								</select>
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6">
-						<p id="audioFont" class="mt-3 h5 surround text-info">Choisissez une adresse de LIVRAISON :</p>
-						<form>
-							<div class="form-group">
-								<select class="form-control" id="selectDeliveryAddress">
-									{% for address in addresses %}
-										<option>
-											<b>{{ address.name }}
-												{% if address.billingAddress %}
-													<b>
-														(Facturation)
-													{% elseif address.deliveryAddress %}
-														<b>
-															(Livraison)
-														{% endif %}
-													</b>
-													:</b>
-												<i>{{ address.pathNumber }},
-													{{ address.pathType }}
-													{{ address.zipcode }}
-													{{ address.city }},
-													{{ address.country }}</i><br>
-											{% endfor %}
-										</option>
-									</select>
+		{# *** USER ADDRESS SELECTION FORM *** #}
+		<div id="audioFont" class="text-center">
+			{{ include('order/_selectForm.html.twig') }}
+		</div>
+
+		{# *** NEW ADDRESS FORM *** #}
+		<div class="text-center mb-5">
+			<button class="btn btn-primary border-light btn-md text-center mt-3" id="newAddress" onclick="newAddress()">Ajouter une adresse ?</button>
+			<br><small class="text-light">(Domicile, facturation, livraison, ...)
+			</small>
+		</div>
+		{# <div class="text-center bg-muted mt-1">
+								<div class="form-check">
+									<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
+									<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
+									<small id="newAddressHelp" class="form-text text-light mb-5">(Domicile, facturation, livraison, ...)
+									</small>
 								</div>
-							</form>
-						</div>
-					</div>
+							</div> #}
+		<div id="newAddressForm">
+			{{ include('order/_newAddressForm.html.twig') }}
+		</div>
 
-					{# *** USER ADDRESS SELECTION FORM *** #}
-					<div id="audioFont" class="text-center">
-						{{ include('order/_selectForm.html.twig') }}
-					</div>
+		{# *** PAYMENT CARD FORM *** #}
+		<div class="text-center">
+			<button class="btn btn-primary border-light btn-lg text-center" id="payCardButton" onclick="payCard()">Paiement par carte</button>
+		</div>
 
-					{# *** NEW ADDRESS FORM *** #}
-					<div class="text-center bg-muted mt-1">
-						<div class="form-check">
-							<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
-							<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
-							<small id="newAddressHelp" class="form-text text-light mb-5">(Domicile, facturation, livraison, ...)
-							</small>
-						</div>
+		<div id="payCardForm">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						{{ include('order/_payCardForm.html.twig') }}
 					</div>
-					<div id="newAddressForm">
-						{{ include('order/_newAddressForm.html.twig') }}
-					</div>
-
-					{# *** PAYMENT CARD FORM *** #}
-					<div class="text-center">
-						<button class="btn btn-primary border-light btn-lg text-center" id="payCardButton" onclick="payCard()">Paiement par carte</button>
-					</div>
-
-					<div id="payCardForm">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									{{ include('order/_payCardForm.html.twig') }}
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					{# *** STRIPE PAYMENT CARD FORM *** #}
-					<div class="text-center">
-						<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
-							<form action="{{ path("app_order_validated") }}" method="POST">
-								<script src="https://checkout.stripe.com/checkout.js" 
-								class="stripe-button" 
-								data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" 
-								data-amount="{{ total * 100 }}" 
-								data-name="Muse check-out" 
-								data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" 
-								data-image="/img/logo.png" 
-								data-locale="auto"></script>
-							</form>
-						</div>
-					</div>
-					<div class="text-center">
-						<small class="text-info">(Card number: 4242 4242 4242 4242 + any CVC/valid future expiration)</small>
-					</div>
-
 				</div>
+			</div>
+		</div>
 
-			{% endblock %}
+
+		{# *** STRIPE PAYMENT CARD FORM *** #}
+		<div class="text-center">
+			<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
+				<form action="{{ path("app_order_validated") }}" method="POST">
+					<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/logo.png" data-locale="auto"></script>
+				</form>
+			</div>
+		</div>
+		<div class="text-center">
+			<small class="text-info">(Card number: 4242 4242 4242 4242 + any CVC/valid future expiration)</small>
+		</div>
+
+	</div>
+
+{% endblock %}

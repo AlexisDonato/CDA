@@ -131,7 +131,7 @@ class Address
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name . " " . $this->pathNumber;
     }
 
     public function isBillingAddress(): ?bool
@@ -156,5 +156,9 @@ class Address
         $this->deliveryAddress = $deliveryAddress;
 
         return $this;
+    }
+
+    public function getFullName() {
+        return $this->name . " : " . $this->pathNumber . " " . $this->pathType . " " . $this->zipcode . " " . $this->city;
     }
 }

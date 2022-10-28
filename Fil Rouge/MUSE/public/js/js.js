@@ -98,6 +98,7 @@ function proSubForm() {
 
         if (pro_cb.checked==true) {
             pro_form.style.display="block";
+            pro_cb.scrollIntoView();;
             company_name.setAttribute('required', '');
             duns.setAttribute('required', '');
             job.setAttribute('required', '');
@@ -126,8 +127,9 @@ function newAddress() {
     let newAddressPathType = document.getElementById("newAddressPathType");
     let newAddressPathNumber = document.getElementById("newAddressPathNumber");
 
-        if (newAddress.checked==true) {
+        if (getComputedStyle(newAddressForm).display != "none") {
             newAddressForm.style.display="block";
+            newAddressForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
             newAddressName.setAttribute('required', '');
             newAddressCountry.setAttribute('required', '');
             newAddressZipcode.setAttribute('required', '');
@@ -143,24 +145,27 @@ function newAddress() {
             newAddressPathType.removeAttribute('required', '');
             newAddressPathNumber.removeAttribute('required', '');
         }
-        if (newAddress.checked==false) {
-            newAddressForm.style.display="none";
-            newAddressName.removeAttribute('required', '');
-            newAddressName.removeAttribute('required', '');
-            newAddressName.removeAttribute('required', '');
-            newAddressName.removeAttribute('required', '');
-            newAddressName.removeAttribute('required', '');
-            newAddressName.removeAttribute('required', '');
-        }
+        // if (newAddress.checked==false) {
+        //     newAddressForm.style.display="none";
+        //     newAddressName.removeAttribute('required', '');
+        //     newAddressCountry.removeAttribute('required', '');
+        //     newAddressZipcode.removeAttribute('required', '');
+        //     newAddressCity.removeAttribute('required', '');
+        //     newAddressPathType.removeAttribute('required', '');
+        //     newAddressPathNumber.removeAttribute('required', '');
+        // }
     }
 
+
+
 function payCard() {
-    let payCardForm = document.getElementById("payCardForm");
     let payCardButton = document.getElementById("payCardButton");
+    let payCardForm = document.getElementById("payCardForm");
     if(getComputedStyle(payCardForm).display != "none"){
         payCardForm.style.display = "none";
       } else {
         payCardForm.style.display = "block";
+        payCardForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
        }
     };
     payCardButton.onclick = payCard();

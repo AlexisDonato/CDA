@@ -1,0 +1,68 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {% for path in encore_entry_css_files('app') %}
+		<link rel="stylesheet" href="{{ absolute_url(path) }}">
+		{% endfor %}
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+
+					<h1>Validation de votre commande</h1>
+
+
+					<p>Votre commande n°<b></b>
+						a bien été validée en date du
+						. Voici le récapitulatif :</p>
+
+					<table border="1">
+						<thead>
+							<tr>
+
+								<th>Produit</th>
+								<th>Prix</th>
+								<th>Promotion</th>
+								<th>TVA</th>
+								<th>Quantité</th>
+								<th>Sous-total</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							
+							
+								<tr>
+									<td>1</td>
+									<td style="text-align:right;">2
+										€</td>
+									<td style="text-align:right;">3
+									</td>
+									<td style="text-align:right;">4</td>
+									<td style="text-align:right;">5</td>
+									<td style="text-align:right;">6
+										€</td>
+								</tr>
+								
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5" style="text-align:right;">
+									<b>Total :</b>
+								</td>
+								<td style="text-align:right;">7
+									€</td>
+							</tr>
+						</tfoot>
+					</table>
+					<img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/logo.png">
+
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

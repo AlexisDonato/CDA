@@ -3,44 +3,45 @@
 namespace App\Form;
 
 use App\Entity\Address;
-use App\Service\Cart\CartService;
+use App\Repository\AddressRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-// use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Core\Security;
 
 class SelectAddressType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security) {
+        $this->security = $security;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // $cartService->setUser($user);
-
         $builder
             ->add('selectBillingAddress', EntityType::class, [
                 'mapped' => false,
                 'required' => true,
                 'class' => Address::class,
-                'choice_label' => 'name',
-
-                // 'choices' => $address->getName(),
-                // 'choice_value' => 'name',
-                // 'choice_label' => function (?Address $address) {
-                //     return $address ? strtoupper($address->getName()) : '';
-                // },
+                'query_builder' => function (AddressRepository $addressRepository) {
+                    return $addressRepository->createQueryBuilder('a')
+                        ->join("a.user", "u")
+                        ->where('u.id=' . $this->security->getUser()->getId());
+                },
+                'choice_label' => 'fullName',
             ])
             ->add('selectDeliveryAddress', EntityType::class, [
                 'mapped' => false,
                 'required' => true,
                 'class' => Address::class,
-                'choice_label' => 'name',
-
-            //     'choice_value' => 'name',
-                // 'choice_label' => function (?Address $address) {
-                //     return $address ? strtoupper($address->getName()) : '';
-                // },
+                'query_builder' => function (AddressRepository $addressRepository) {
+                    return $addressRepository->createQueryBuilder('a')
+                        ->join("a.user", "u")
+                        ->where('u.id=' . $this->security->getUser()->getId());
+                },
+                'choice_label' => 'fullName',
             ])
         ;
     }
@@ -48,7 +49,7 @@ class SelectAddressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Address::class,
+            // 'data_class' => Address::class,
         ]);
     }
 }

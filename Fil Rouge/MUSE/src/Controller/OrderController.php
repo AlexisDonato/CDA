@@ -206,7 +206,7 @@ class OrderController extends AbstractController
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
         // $this->twig = $twig;
-        // $this->pdf = $pdf;
+        $this->pdf = $pdf;
         // $this->entrypointLookup = $entrypointLookup;
 
         // $pdf_file_path = '/PDFs';
@@ -256,7 +256,7 @@ class OrderController extends AbstractController
                     'cart'      => $cart,
                     'details' => $details,
                 ])
-                ->attach($pdf, sprintf('email/order_validation_%s.pdf', date('d-m-Y')));
+                ->attach($pdf, sprintf('order_validation_%s.pdf', date('d-m-Y')));
             $mailer->send($email);
         
             if ($this->isGranted('ROLE_CLIENT')) {

@@ -52,20 +52,8 @@ h3 {
     text-shadow: 0 0 5px rgb(0, 204, 255);
     color: rgb(0, 153, 255);
     transition: 0.5s;
-    animation-duration: 1.5s;
-    animation-name: slidein;
 }
-@keyframes slidein {
-    from {
-      margin-left: 100%;
-      width: 300%;
-    }
 
-    to {
-      margin-left: 0%;
-      width: 100%;
-    }
-  }
 
 .hometitle:hover {
     color: rgb(160, 68, 96);
@@ -81,6 +69,26 @@ h3 {
     text-shadow: 0 0 5px rgb(58, 218, 191);  
     color: rgb(118, 183, 243);
 }
+
+
+/* ANIMATIONS */
+
+.slideIn {
+animation-duration: 1.5s;
+animation-name: slidein;
+}
+@keyframes slidein {
+from {
+  margin-left: 100%;
+  width: 300%;
+}
+
+to {
+  margin-left: 0%;
+  width: 100%;
+}
+}
+
 
 /* NAVBAR */
 
@@ -234,7 +242,7 @@ h2:hover {
 #couponInput{
     display:none;
     transition: 2s;
-    -webkit-animation: fadeInDown 500ms ease-in-out;
+    -webkit-animation: fadeInuP 500ms ease-in-out;
     animation: fadeInUp 500ms ease-in-out;
 }
 @-webkit-keyframes fadeInDown {

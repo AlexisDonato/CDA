@@ -15,12 +15,12 @@
 		<table class="table table-dark border border-info">
 			<thead>
 				<tr class="text-primary">
-					<th id="audioFont">Produit</th>
-					<th id="audioFont">Prix</th>
-					<th id="audioFont">Promotion</th>
-					<th id="audioFont">TVA</th>
-					<th id="audioFont">Quantité</th>
-					<th id="audioFont">Sous-total</th>
+					<th id="audioFont" class="surround">Produit</th>
+					<th id="audioFont" class="surround">Prix</th>
+					<th id="audioFont" class="surround">Promotion</th>
+					<th id="audioFont" class="surround">TVA</th>
+					<th id="audioFont" class="surround">Quantité</th>
+					<th id="audioFont" class="surround">Sous-total</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -63,7 +63,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3" class="text-right">
+					<td colspan="3" class="text-right surround">
 						<b id="audioFont">Total :</b>
 					</td>
 					<td>{{ total }}
@@ -118,24 +118,24 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont">Prénom :</b>
+						<b id="audioFont" class="surround">Prénom :</b>
 						{{ app.user.userName }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont">Nom :</b>
+						<b id="audioFont" class="surround">Nom :</b>
 						{{ app.user.userLastname }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont">Date de naissance :</b>
+						<b id="audioFont" class="surround">Date de naissance :</b>
 						{{ app.user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
 
 					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont">N° téléphone :</b>
+						<b id="audioFont" class="surround">N° téléphone :</b>
 						{{ app.user.phoneNumber }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont">Votre compte est vérifié :</b>
+						<b id="audioFont" class="surround">Votre compte est vérifié :</b>
 						{{ app.user.isVerified ? 'Oui' : 'Non' }}</li>
 					<li class="list-group-item bg-dark text-light">
 						<div class='text-center'>
-							<b id="audioFont">Adresse(s) :</b>
+							<b id="audioFont" class="surround">Adresse(s) :</b>
 						</div>
 						<br>
 						{% for address in addresses %}-<b>

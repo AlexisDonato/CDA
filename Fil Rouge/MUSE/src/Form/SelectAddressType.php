@@ -24,6 +24,7 @@ class SelectAddressType extends AbstractType
             ->add('selectBillingAddress', EntityType::class, [
                 'mapped' => false,
                 'required' => true,
+                'multiple' => false,
                 'class' => Address::class,
                 'query_builder' => function (AddressRepository $addressRepository) {
                     return $addressRepository->createQueryBuilder('a')
@@ -35,6 +36,7 @@ class SelectAddressType extends AbstractType
             ->add('selectDeliveryAddress', EntityType::class, [
                 'mapped' => false,
                 'required' => true,
+                'multiple' => false,
                 'class' => Address::class,
                 'query_builder' => function (AddressRepository $addressRepository) {
                     return $addressRepository->createQueryBuilder('a')

@@ -159,6 +159,19 @@ class Address
     }
 
     public function getFullName() {
-        return $this->name . " : " . $this->pathNumber . " " . $this->pathType . " " . $this->zipcode . " " . $this->city;
+
+        if($this->isDeliveryAddress(true)){
+            $deliveryAddress = '(Livraison)';
+        } else {
+            $deliveryAddress = '';
+        }
+        if ($this->isBillingAddress(true)){
+            $billingAddress = '(Facturation)';
+        }else {
+            $billingAddress = '';
+        }
+        
+        return $this->name . $deliveryAddress . $billingAddress . " : " . $this->pathNumber . " " . $this->pathType . " " . $this->zipcode . " " . $this->city;
     }
 }
+// $this->billingAddress . '' . $this->deliveryAddress = true . 

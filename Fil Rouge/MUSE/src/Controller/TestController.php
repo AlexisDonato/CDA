@@ -82,7 +82,7 @@ class TestController extends AbstractController
     {
         $pdf_file_path = '/PDFs';
 
-        $html = $this->renderView('order/index.html.twig', array(
+        $html = $this->renderView('email/test.html.twig', array(
 
         ));
 

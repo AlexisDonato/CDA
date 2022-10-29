@@ -56,8 +56,8 @@
 				</tfoot>
 			</table>
 
-		<div class="text-center mt-2">
-			<button class="btn btn-primary border-light btn-lg text-center"><a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a></button>
+		<div class="text-center mt-2 mb-2">
+			<button class="btn btn-primary border-light btn-lg text-center"><a class="text-decoration-none text-light" href="{{ path('app_test_download') }}">Pdf Test</a></button>
 		</div>
 
 {% if (shipped == 0) and (is_granted('ROLE_ADMIN')) %}<div class="d-flex justify-content-center">

@@ -81,10 +81,20 @@ class ClientAddressController extends AbstractController
 
         $cartService->setUser($user);
 
+        $cart = $cartService->getClientCart();
+
         $address->setUser($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
+            if ($form->get('billingAddress')->getData(true)) {
+                $cart->setBillingAddress($address);
+            }
+            if ($form->get('deliveryAddress')->getData(true)) {
+                $cart->setDeliveryAddress($address);
+            }
+            $entityManager->persist($cart);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_client_address_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -146,7 +156,7 @@ class ClientAddressController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_client_address_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Address $address, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
+    public function edit(Request $request, Address $address, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -167,9 +177,19 @@ class ClientAddressController extends AbstractController
 
         $cartService->setUser($user);
 
+        $cart = $cartService->getClientCart();
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
-
+            if ($form->get('billingAddress')->getData(true)) {
+                $cart->setBillingAddress($address);
+            }
+            if ($form->get('deliveryAddress')->getData(true)) {
+                $cart->setDeliveryAddress($address);
+            }
+            $entityManager->persist($cart);
+            $entityManager->flush();
 
             return $this->redirectToRoute('app_client_address_index', [], Response::HTTP_SEE_OTHER);
         }

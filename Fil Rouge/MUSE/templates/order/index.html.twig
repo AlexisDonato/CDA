@@ -27,7 +27,11 @@
 			<tbody>
 				{% for item in items %}
 					<tr>
-						<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.Product.name}}</p></a></td>
+						<td>
+							<a class="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}">
+								<p class="productHl">{{item.Product.name}}</p>
+							</a>
+						</td>
 						<td>{{item.Product.price}}
 						</td>
 						{% if item.product.discount %}
@@ -60,6 +64,7 @@
 							</td>
 						</tr>
 					{% endfor %}
+				</tbody>
 			</tbody>
 			<tfoot>
 				<tr>
@@ -108,73 +113,74 @@
 		<h3 class="text-center mt-5 mb-3">
 			Vos informations personnelles :</h3>
 
-<div class="row d-flex">
-<div class="col-md-6">
-		<div class="d-flex justify-content-center">
-			<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
-				<i class="fa-solid fa-address-card fa-lg text-center mt-3"></i>
-				<div class="card-body">
-					<h5 class="card-title text-info text-center">{{ app.user.email }}</h5>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont" class="surround">Prénom :</b>
-						{{ app.user.userName }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont" class="surround">Nom :</b>
-						{{ app.user.userLastname }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont" class="surround">Date de naissance :</b>
-						{{ app.user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
-
-					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont" class="surround">N° téléphone :</b>
-						{{ app.user.phoneNumber }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<b id="audioFont" class="surround">Votre compte est vérifié :</b>
-						{{ app.user.isVerified ? 'Oui' : 'Non' }}</li>
-					<li class="list-group-item bg-dark text-light">
-						<div class='text-center'>
-							<b id="audioFont" class="surround">Adresse(s) :</b>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="d-flex justify-content-center">
+					<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
+						<i class="fa-solid fa-address-card fa-lg text-center mt-3"></i>
+						<div class="card-body">
+							<h5 class="card-title text-info text-center">{{ app.user.email }}</h5>
 						</div>
-						<br>
-						{% for address in addresses %}-<b>
-								{{ address.name }}
-								{% if address.billingAddress %}
-									<b class="text-warning">
-										(Facturation)
-									{% elseif address.deliveryAddress %}
-										<b class="text-warning">
-											(Livraison)
-										{% endif %}
-									</b>
-									:</b>
-								<i>{{ address.pathNumber }},
-									{{ address.pathType }}
-									{{ address.zipcode }}
-									{{ address.city }},
-									{{ address.country }}</i><br>
-							{% endfor %}
-							<div class='text-center'>
-								<a href="{{ path('app_client_address_index') }}" class="mt-2 mb-1 btn-sm">
-									<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1" title="Modifier vos adresses"></i>
-								</a>
-							</div>
-					</li>
-				</ul>
-				<div class="card-body text-center">
-					<a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': app.user.id}) }}">
-						<i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier votre profil"></i>
-					</a>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">Prénom :</b>
+								{{ app.user.userName }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">Nom :</b>
+								{{ app.user.userLastname }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">Date de naissance :</b>
+								{{ app.user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
+
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">N° téléphone :</b>
+								{{ app.user.phoneNumber }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">Votre compte est vérifié :</b>
+								{{ app.user.isVerified ? 'Oui' : 'Non' }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<div class='text-center'>
+									<b id="audioFont" class="surround">Adresse(s) :</b>
+								</div>
+								<br>
+								{% for address in addresses %}-<b>
+										{{ address.name }}
+										{% if address.billingAddress %}
+											<b class="text-warning">
+												(Facturation)
+											{% elseif address.deliveryAddress %}
+												<b class="text-warning">
+													(Livraison)
+												{% endif %}
+											</b>
+											:</b>
+										<i>{{ address.pathNumber }},
+											{{ address.pathType }}
+											{{ address.zipcode }}
+											{{ address.city }},
+											{{ address.country }}</i><br>
+									{% endfor %}
+									<div class='text-center'>
+										<a href="{{ path('app_client_address_index') }}" class="mt-2 mb-1 btn-sm">
+											<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1" title="Modifier vos adresses"></i>
+										</a>
+									</div>
+								</li>
+							</li>
+						</ul>
+						<div class="card-body text-center">
+							<a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': app.user.id}) }}">
+								<i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier votre profil"></i>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
+			{# *** USER ADDRESS SELECTION FORM *** #}
+			<div class="text-center col-md-6 mt-5 d-flex align-items-center">
+				{{ include('order/_selectForm.html.twig') }}
+			</div>
 		</div>
-</div>
-		{# *** USER ADDRESS SELECTION FORM *** #}
-		<div class="text-center col-md-6 mt-5 d-flex align-items-center">
-			{{ include('order/_selectForm.html.twig') }}
-		</div>
-</div>
 
 		{# *** NEW ADDRESS FORM *** #}
 		<div class="text-center mb-5">
@@ -183,13 +189,13 @@
 			</small>
 		</div>
 		{# <div class="text-center bg-muted mt-1">
-								<div class="form-check">
-									<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
-									<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
-									<small id="newAddressHelp" class="form-text text-light mb-5">(Domicile, facturation, livraison, ...)
-									</small>
-								</div>
-							</div> #}
+										<div class="form-check">
+											<input type="checkbox" id="newAddress" class="form-check-input" value="1" onclick="newAddress()">
+											<label class="form-check-label" for="newAddress">Ajouter une adresse ?</label>
+											<small id="newAddressHelp" class="form-text text-light mb-5">(Domicile, facturation, livraison, ...)
+											</small>
+										</div>
+									</div> #}
 		<div id="newAddressForm">
 			{{ include('order/_newAddressForm.html.twig') }}
 		</div>
@@ -209,8 +215,10 @@
 			</div>
 		</div>
 
-				<div class="text-center mt-2">
-			<button class="btn btn-primary border-light btn-lg text-center"><a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a></button>
+		<div class="text-center mt-2">
+			<button class="btn btn-primary border-light btn-lg text-center">
+				<a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a>
+			</button>
 		</div>
 
 

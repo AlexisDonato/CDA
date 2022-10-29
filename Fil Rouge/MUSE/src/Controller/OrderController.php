@@ -73,8 +73,6 @@ class OrderController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         }
         
-        $cart = $cartService->getClientCart();
-
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -86,6 +84,8 @@ class OrderController extends AbstractController
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
         $cartService->setUser($user);
+
+        $cart = $cartService->getClientCart();
 
         $address = new Address();
         $newAddressForm = $this->createForm(OrderAddressType::class);
@@ -101,23 +101,28 @@ class OrderController extends AbstractController
             $address->setCity($newAddressForm->get('city')->getData());
             $address->setPathType($newAddressForm->get('pathType')->getData());
             $address->setPathNumber($newAddressForm->get('pathNumber')->getData());
+
             $address->setBillingAddress($newAddressForm->get('billingAddress')->getData());
             $address->setDeliveryAddress($newAddressForm->get('deliveryAddress')->getData());
+
 
             // $user->addAddress($address); 
             // this equals to :
             $address->setUser($user);
             // and these bind the two classes
 
-            $cart = $cartService->getClientCart();
-
-
-            $cart->setBillingAddress($address);
-
             $entityManager->persist($address);
-            $entityManager->persist($cart);
             $entityManager->flush();
 
+            if ($newAddressForm->get('billingAddress')->getData(true)) {
+                $cart->setBillingAddress($address);
+            }
+            if ($newAddressForm->get('deliveryAddress')->getData(true)) {
+                $cart->setDeliveryAddress($address);
+            }
+            $entityManager->persist($cart);
+            $entityManager->flush();
+            
             return $this->redirectToRoute("app_order");
         }
 

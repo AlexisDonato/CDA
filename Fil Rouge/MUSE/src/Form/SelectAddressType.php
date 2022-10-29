@@ -32,6 +32,7 @@ class SelectAddressType extends AbstractType
                         ->where('u.id=' . $this->security->getUser()->getId());
                 },
                 'choice_label' => 'fullName',
+                
             ])
             ->add('selectDeliveryAddress', EntityType::class, [
                 'mapped' => false,

@@ -161,16 +161,16 @@ class Address
     public function getFullName() {
 
         if($this->isDeliveryAddress(true)){
-            $deliveryAddress = '(Livraison)';
+            $deliveryAddress = ' (Livraison)';
         } else {
             $deliveryAddress = '';
         }
         if ($this->isBillingAddress(true)){
-            $billingAddress = '(Facturation)';
+            $billingAddress = ' (Facturation)';
         }else {
             $billingAddress = '';
         }
-        
+
         return $this->name . $deliveryAddress . $billingAddress . " : " . $this->pathNumber . " " . $this->pathType . " " . $this->zipcode . " " . $this->city;
     }
 }

@@ -102,7 +102,7 @@ to {
 .breadcrumb {
     padding: 0px 15px !important;
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(47,47,47,0.8183648459383753) 49%, rgba(0,0,1,0.4514180672268907) 100%);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(39, 39, 39, 0.818) 49%, rgba(0,0,1,0.4514180672268907) 100%);
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

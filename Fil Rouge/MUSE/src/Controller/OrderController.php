@@ -166,7 +166,7 @@ class OrderController extends AbstractController
               "amount" => $this->get('cart')->getTotal() * 100,
               "currency" => "eur",
               "source" => $token,
-              "description" => "First test charge!"
+              "description" => "Test charge!"
             ));
 
             $this->getCart()->setValidated(true);

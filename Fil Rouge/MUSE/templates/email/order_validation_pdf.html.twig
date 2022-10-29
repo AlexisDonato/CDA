@@ -19,9 +19,9 @@
 						{{ app.user.userLastName }}<br>
 						{{ app.user.email }}
 
-					<p>Votre commande n°<b>{{ cart.clientOrderId }}</b>
+					<p>Votre commande n°<b>{{ order.clientOrderId }}</b>
 						a bien été validée en date du
-						{{ cart.orderDate|format_datetime('short', 'none', locale='fr') }}. Voici le récapitulatif :</p>
+						{{ order.orderDate|format_datetime('short', 'none', locale='fr') }}. Voici le récapitulatif :</p>
 
 					<table border="1">
 						<thead>

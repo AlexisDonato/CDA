@@ -94,7 +94,7 @@ class ValidatedOrdersController extends AbstractController
         $carrierShipmentId= $cart->getCarrierShipmentId();
         $shipmentDate = $cart->getShipmentDate();
 
-        $total = $details[0]->Cart->getTotal();
+        $total = $cart->getTotal();
 
         $user = $cart->getUser();
 

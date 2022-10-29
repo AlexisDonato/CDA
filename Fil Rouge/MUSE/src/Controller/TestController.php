@@ -65,7 +65,6 @@ class TestController extends AbstractController
                 'total' => $total,
         ));
 
-// $html = $this->generateUrl('app_home', array(), true); // use absolute path!
 
         return new PdfResponse(
             $pdf->getOutputFromHtml($html),
@@ -86,10 +85,11 @@ class TestController extends AbstractController
 
         ));
 
-// $html = $this->generateUrl('app_home', array(), true); // use absolute path!
+// $html = $this->generateUrl('app_home', array(), true); // use absolute path! -> Render a pdf document with a relative url inside like css files
 
         return new PdfResponse(
             $pdf->getOutputFromHtml($html),
+            // $pdf->getOutput($pageUrl), // To render a pdf document with a relative url inside like css files
             'file.pdf'
         
 

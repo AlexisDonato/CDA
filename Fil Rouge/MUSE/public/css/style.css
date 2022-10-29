@@ -226,7 +226,7 @@ h2:hover {
 }
 
 #newAddressForm {
-    display:block;
+    display:none;
     transition: 2s;
     -webkit-animation: fadeInDown 500ms ease-in-out;
     animation: fadeInDown 500ms ease-in-out;

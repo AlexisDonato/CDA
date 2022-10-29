@@ -116,10 +116,25 @@ function proSubForm() {
         }
     }
 
+
+function addCoupon() {
+
+    let couponButton = document.getElementById("couponButton");
+    let couponInput = document.getElementById("couponInput");
+
+        if (getComputedStyle(couponInput).display != "none") {
+            couponInput.style.display = "none";
+        } else {
+            couponInput.style.display = "block";
+        }
+}
+
+
 function newAddress() {
 
     let newAddressButton = document.getElementById("newAddressButton");
     let newAddressForm = document.getElementById("newAddressForm");
+
     let newAddressName = document.getElementById("newAddressName");
     let newAddressCountry = document.getElementById("newAddressCountry");
     let newAddressZipcode = document.getElementById("newAddressZipcode");
@@ -128,78 +143,49 @@ function newAddress() {
     let newAddressPathNumber = document.getElementById("newAddressPathNumber");
 
         if (getComputedStyle(newAddressForm).display != "none") {
+
             newAddressForm.style.display="none";
-            newAddressName.setAttribute('required', '');
-            newAddressCountry.setAttribute('required', '');
-            newAddressZipcode.setAttribute('required', '');
-            newAddressCity.setAttribute('required', '');
-            newAddressPathType.setAttribute('required', '');
-            newAddressPathNumber.setAttribute('required', '');
-        } else {
-            newAddressForm.style.display="block";
-            newAddressForm.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
+
             newAddressName.removeAttribute('required', '');
             newAddressCountry.removeAttribute('required', '');
             newAddressZipcode.removeAttribute('required', '');
             newAddressCity.removeAttribute('required', '');
             newAddressPathType.removeAttribute('required', '');
             newAddressPathNumber.removeAttribute('required', '');
+
+        } else {
+
+            newAddressForm.style.display="block";
+            newAddressForm.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
+
+            newAddressName.setAttribute('required', '');
+            newAddressCountry.setAttribute('required', '');
+            newAddressZipcode.setAttribute('required', '');
+            newAddressCity.setAttribute('required', '');
+            newAddressPathType.setAttribute('required', '');
+            newAddressPathNumber.setAttribute('required', '');
         }
-        // if (newAddress.checked==false) {
-        //     newAddressForm.style.display="none";
-        //     newAddressName.removeAttribute('required', '');
-        //     newAddressCountry.removeAttribute('required', '');
-        //     newAddressZipcode.removeAttribute('required', '');
-        //     newAddressCity.removeAttribute('required', '');
-        //     newAddressPathType.removeAttribute('required', '');
-        //     newAddressPathNumber.removeAttribute('required', '');
-        // }
+
         newAddressButton.onclick = newAddress();
 
         if (document.getElementById("newAddressButton")) {
             document.getElementById("newAddressButton").addEventListener("click", newAddress);
     }
 }
-    console.log(newAddress());
+
 
 function payCard() {
+
     let payCardButton = document.getElementById("payCardButton");
     let payCardForm = document.getElementById("payCardForm");
-    if(getComputedStyle(payCardForm).display != "none"){
-        payCardForm.style.display = "none";
-      } else {
-        payCardForm.style.display = "block";
-        payCardForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
-       }
-    };
-    payCardButton.onclick = payCard();
 
-if (document.getElementById("payCardButton")) {
-    document.getElementById("payCardButton").addEventListener("click", payCard);
-}
-    //     if (payCardForm.style.display="none") {
-    //         payCardForm.style.display="block";
-    //     } 
-        
-    //     else if (payCardForm.style.display="block") {
-    //         payCardForm.style.display="none";
-    //     };
-
-
-    function addCoupon() {
-        let couponInput = document.getElementById("couponInput");
-        let couponButton = document.getElementById("couponButton");
-        if(getComputedStyle(couponInput).display != "none"){
-            couponInput.style.display = "none";
-          } else {
-            couponInput.style.display = "block";
-           }
-        };
-        couponButton.onclick = payCard();
-        if (document.getElementById("couponButton")) {
-            document.getElementById("couponButton").addEventListener("click", addCoupon);
+        if (getComputedStyle(payCardForm).display != "none") {
+            payCardForm.style.display = "none";
+        } else {
+            payCardForm.style.display = "block";
+            payCardForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
         }
-
+}
 
 
 // Nouislider

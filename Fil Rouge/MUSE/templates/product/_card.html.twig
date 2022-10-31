@@ -19,7 +19,7 @@
 					</s>
 				</small>
 			{% else %}
-				<b class="digital">{{ product.price * 1.2 }} €</b>
+				<b class="digital">{{ (product.price * 1.2)|number_format(2, '.', '') }} €</b>
 			{% endif %}
 
 			{% if product.discount %}

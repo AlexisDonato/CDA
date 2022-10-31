@@ -47,6 +47,7 @@
 										{% if detail.Product.discount %}-{{ detail.Product.discountRate * 100 }}%{% else %}-
 										{% endif %}
 									</td>
+									
 									<td style="text-align:right;">{{app.user.vat * 100}}%</td>
 									<td style="text-align:right;">{{detail.Quantity}}</td>
 									<td style="text-align:right;">{{(detail.Product.price * detail.Quantity) * (1 - (detail.Product.discountRate)) * (1 +  app.user.vat)}}

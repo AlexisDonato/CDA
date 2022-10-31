@@ -1,12 +1,5 @@
-.brand {
-    border-radius: 10%;
-    width: 150px;
-    height: auto;
-}
 
-.brand:hover {
-    box-shadow: 0 0 2px 1px rgba(241, 242, 243, 0.5);
-}
+/* BACKGROUND PICTURE */
 
 body {
     background: url('/img/BGHome.jpg') no-repeat;
@@ -19,6 +12,11 @@ body {
 #audioFont {
     font-family: "Audiowide", sans-serif;
   }
+
+
+.orbitron {
+    font-family: Orbitron;
+}  
 
 .surround {
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
@@ -46,7 +44,29 @@ h3 {
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
-.hometitle {
+h2 {
+    font-family: Orbitron;
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    color: rgb(162, 209, 236);
+    line-height: 20px;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+    cursor: pointer;
+    transition: 0.5s;
+}
+h2:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
+}
+
+  
+/* .hometitle {
     font-family: "Audiowide", sans-serif;
     -webkit-text-stroke: 1px rgb(0, 0, 0);
     text-shadow: 0 0 5px rgb(0, 204, 255);
@@ -62,7 +82,7 @@ h3 {
               0 0 50px #ff0000,
               0 0 100px #ff0000;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-}
+} */
 
 .hometitle2 {
     -webkit-text-stroke: 1px rgb(0, 0, 0);
@@ -94,6 +114,19 @@ to {
 
 .navbar {
     backdrop-filter: blur(5px);
+}
+
+
+/* NAVBAR LOGO */
+
+.brand {
+    border-radius: 10%;
+    width: 150px;
+    height: auto;
+}
+
+.brand:hover {
+    box-shadow: 0 0 2px 1px rgba(241, 242, 243, 0.5);
 }
 
 
@@ -134,29 +167,7 @@ to {
     }
   }
 
-h2 {
-    font-family: Orbitron;
-    font-size: 30px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 700;
-    color: rgb(162, 209, 236);
-    line-height: 20px;
-    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-    cursor: pointer;
-    transition: 0.5s;
-}
 
-h2:hover {
-    color: #fff;
-    text-shadow: 0 0 5px #03e9f4,
-              0 0 25px #03e9f4,
-              0 0 50px #03e9f4,
-              0 0 100px #03e9f4;
-    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
-}
-
-  
 /* SEARCH FILTER */
 
 .grid {

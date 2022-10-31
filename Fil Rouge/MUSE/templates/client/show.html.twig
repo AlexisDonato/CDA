@@ -4,9 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container text-center">
+	<div class="container">
 
-		<h1 class="text-info mt-3">Informations personnelles</h1>
+		<h1 class="text-info text-center mt-3">Informations personnelles</h1>
 
 		<div class="d-flex justify-content-center">
 			<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
@@ -19,27 +19,27 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item bg-dark text-light">
-						<b>Prénom :</b>
+						<b id="audioFont" class="surround">Prénom :</b>
 						{{ user.userName }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b>Nom :</b>
+						<b id="audioFont" class="surround">Nom :</b>
 						{{ user.userLastname }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b>Date de naissance :</b>
+						<b id="audioFont" class="surround">Date de naissance :</b>
 						{{ user.birthdate ? user.birthdate|date('d-m-Y') : '' }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b>N° téléphone :</b>
+						<b id="audioFont" class="surround">N° téléphone :</b>
 						{{ user.phoneNumber }}</li>
 
 					<li class="list-group-item bg-dark text-light">
-						<b>Votre compte est vérifié :</b>
+						<b id="audioFont" class="surround">Votre compte est vérifié :</b>
 						{{ user.isVerified ? 'Oui' : 'Non' }}</li>
 					<li class="list-group-item bg-dark text-light">
-						<b>Date d'enregistrement :</b>
+						<b id="audioFont" class="surround">Date d'enregistrement :</b>
 						{{ user.registerDate ? user.registerDate|date('d-m-Y') : '' }}</li>
 					<li class="list-group-item bg-dark text-light">
 						<div class="text-center">
-							<b>Adresse(s) :</b>
+							<b id="audioFont" class="surround">Adresse(s) :</b>
 						</div>
 						<br>
 						{% for address in addresses %}-<b> {{ address.name }}{% if address.billingAddress %}<b class="text-warning"> (Facturation){% elseif address.deliveryAddress %}<b class="text-warning"> (Livraison){% endif %}</b>

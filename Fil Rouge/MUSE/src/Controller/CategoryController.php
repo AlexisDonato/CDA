@@ -31,6 +31,7 @@ class CategoryController extends AbstractController
 
         $cartService->setUser($user);
 
+
         return $this->render('category/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),

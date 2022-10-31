@@ -25,10 +25,10 @@
 							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.Product.name}}</p></a></td>
 							<td>{{item.Product.price}}</td>
 							{% if item.product.discount %}<td class="text text-warning"><div class="d-flex justify-content-start">
-				<h4 class="text-warning digital">-{{ item.product.discountRate * 100 }}</h4><h5 class="text-warning">%</h5></div>{% else %}<td>-{% endif %}</td>
+				<h4 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h4><h5 class="text-warning">%</h5></div>{% else %}<td>-{% endif %}</td>
 							<td>{{ app.user.vat * 100}}%</td>
 							<td>{{item.Quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td class="digital h4{% if item.product.discount %} text-warning{% endif %}">{{ ((item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
+							<td class="roboto h5{% if item.product.discount %} text-warning{% endif %}">{{ ((item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 								€</h4></td>
 							<td>
 								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
@@ -46,9 +46,9 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" class="text-right surround h4"><b id="audioFont">Total :</b>
+						<td colspan="3" class="text-right surround h4"><b class="roboto">Total :</b>
 						</td>
-						<td class="digital h3">{{ total|number_format(2, '.', '') }}
+						<td class="roboto h4">{{ total|number_format(2, '.', '') }}
 							€</td>
 						<td colspan="5">
 							<a href="{{ path("app_cart_deleteAll") }}" class="btn btn-danger" title="Supprimer le panier">

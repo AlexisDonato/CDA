@@ -22,6 +22,9 @@ class Category
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories')]
     private $products;
 
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    private ?self $parentCategory = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -74,5 +77,17 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getParentCategory(): ?self
+    {
+        return $this->parentCategory;
+    }
+
+    public function setParentCategory(?self $parentCategory): self
+    {
+        $this->parentCategory = $parentCategory;
+
+        return $this;
     }
 }

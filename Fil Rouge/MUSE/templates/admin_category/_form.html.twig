@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+<div class="row">
+	<div class="col-md-6">
+		{{ form_row(form.name)}}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.parentCategory)}}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.products)}}
+	</div>
+</div>
+{{ form_widget(form) }}
 <button class="btn btn-warning text-primary mb-1">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

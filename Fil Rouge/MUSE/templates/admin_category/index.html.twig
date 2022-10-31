@@ -11,6 +11,7 @@
             <tr class="text-warning">
                 <th>Id</th>
                 <th>Nom</th>
+                <th>Catégorie parente</th>
                 <th></th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
+                <td>{% if category.parentCategory %}{{ category.parentCategory }}{% else %}-{% endif %}</td>
                 <td>
                     <button class="btn btn-warning text-warning"><a class="text-decoration-none" <a href="{{ path('app_admin_category_show', {'id': category.id}) }}">Détails</a></button>
                     <button class="btn btn-warning text-warning"><a class="text-decoration-none" <a href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a></button> 

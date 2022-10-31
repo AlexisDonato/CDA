@@ -25,12 +25,23 @@
 						<div class="col">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
+
 									<li class="breadcrumb-item">
 										<a class="text-info" href="{{path('app_home')}}">Accueil</a>
 									</li>
+
 									<li class="breadcrumb-item">
 										<a class="text-info" href="{{path('app_category')}}">Catégories</a>
 									</li>
+
+									{% for category in categories %}
+									{% if category.parentCategory %}
+									<li class="breadcrumb-item">
+										<a class="text-info" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">{{category.parentCategory}}</a>
+									</li>
+									{% endif %}
+									{% endfor %}
+
 									<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
 								</ol>
 							</nav>

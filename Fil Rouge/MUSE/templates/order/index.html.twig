@@ -35,7 +35,7 @@
 						<td>{{item.Product.price}}
 						</td>
 						{% if item.product.discount %}<td class="text text-warning"><div class="d-flex justify-content-start">
-				<h4 class="text-warning digital">-{{ item.product.discountRate * 100 }}</h4><h5 class="text-warning">%</h5></div>{% else %}<td>-{% endif %}</td>
+				<h4 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h4><h5 class="text-warning">%</h5></div>{% else %}<td>-{% endif %}</td>
 							<td>{{ app.user.vat * 100}}%
 							</td>
 							<td>{{item.Quantity}}
@@ -44,7 +44,7 @@
 									left in stock)
 								{% endif %}
 							</td>
-							<td class="digital h4{% if item.product.discount %} text-warning{% endif %}">{{ ((item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
+							<td class="roboto h4{% if item.product.discount %} text-warning{% endif %}">{{ ((item.Product.price * item.Quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 								€
 							</td>
 							<td>
@@ -65,9 +65,9 @@
 			<tfoot>
 				<tr>
 					<td colspan="3" class="text-right surround h3">
-						<b id="audioFont">Total :</b>
+						<b class="roboto">Total :</b>
 					</td>
-					<td class="digital h3">{{ total|number_format(2, '.', '') }}
+					<td class="roboto h3">{{ total|number_format(2, '.', '') }}
 						€
 					</td>
 					<td colspan="5">
@@ -77,7 +77,7 @@
 					</td>
 				</tr>
 				<tr class="text-center">
-					<td id="audioFont" colspan="8">Date de la commande :
+					<td class="roboto" colspan="8">Date de la commande :
 						<b>{{ "now" | date('d-m-Y') }}</b>
 					</td>
 				</tr>

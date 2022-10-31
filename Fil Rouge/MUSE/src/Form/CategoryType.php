@@ -15,17 +15,14 @@ class CategoryType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom de la catégorie',
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 ])
             ->add('products', null, [
                 'label' => 'Produits concernés',
                 'help' => 'Pas obligatoire ici. Vous pouvez en sélectionner plusieurs en maintenant la touche `Ctrl` enfoncée',
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
             ])
+            ->add('parentCategory', null, [
+                'label' => 'Catégorie parente',
+            ])    
         ;
     }
 

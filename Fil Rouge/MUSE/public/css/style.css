@@ -306,7 +306,6 @@ to {
     transition: transform .2s; /* Animation */
     margin: 0 auto;
 }
-
 .zoom:hover {
     transform: scale(1.5);
 }
@@ -326,8 +325,20 @@ to {
     cursor: pointer;
     transition: 0.5s;
 }
-
 .productHl:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
+}
+
+.Hl {
+    cursor: pointer;
+    transition: 0.5s;
+}
+.Hl:hover {
     color: #fff;
     text-shadow: 0 0 5px #03e9f4,
               0 0 25px #03e9f4,

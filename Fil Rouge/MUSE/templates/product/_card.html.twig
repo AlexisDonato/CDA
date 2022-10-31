@@ -7,30 +7,32 @@
 		<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}">
 			<h3 class="card-title">{{ product.name }}</h3>
 		</a>
-		<div class="card-text text-primary" style="font-weight: bold; font-size: 1.5rem; text-align: right;">
+		<div class="card-text text-primary" style="font-weight: bold; font-size: 2rem; text-align: right;">
 			{% if product.discount %}
 				<small>
-					<s class="text-warning">
+					<s class="text-warning digital">
 						{% if app.user %}
-							{{ product.price * (1 +  app.user.vat )}}
+							{{ product.price * (1 +  app.user.vat )}} €
 						{% else %}
-							<b class="surround">{{ product.price * 1.2 }} €</b>
+							<b class="digital">{{ product.price * 1.2 }} €</b>
 						{% endif %}
 					</s>
 				</small>
 			{% else %}
-				<b class="surround">{{ product.price * 1.2 }} €</b>
+				<b class="digital">{{ product.price * 1.2 }} €</b>
 			{% endif %}
 
 			{% if product.discount %}
-				<h4 class="text text-warning">-{{ product.discountRate * 100 }}% !</h4>
+			<div class="d-flex justify-content-end">
+				<h4 class="text-warning digital">-{{ product.discountRate * 100 }}</h4><h5 class="text-warning">% !</h5>
+				</div>
 				{% if  app.user %}
-					<h4 class="text text-warning surround">
-						<b class="surround">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
+					<h4 class="text text-warning">
+						<b class="digital h4">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
 							€</b>
 					</h4>
 				{% else %}
-					<h4 class="text text-warning surround">
+					<h4 class="text-warning digital">
 						<b>{{ product.price * ( 1 - product.discountRate) * 1.2 }}
 							€</b>
 					</h4>

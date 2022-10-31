@@ -82,7 +82,7 @@
 							</tr>
 							<tr>
 								<th>Prix</th>
-								{% if product.discount %}<td class="text-warning"><s>{{ product.price }} €</s> <i class="fa-solid fa-arrow-right"></i> <b>{% else %}<td>{% endif %}{% if app.user %}{{(product.price) * (1 - ( product.discountRate)) * (1 +  app.user.vat )}}{% else %}{{(product.price) * (1 - ( product.discountRate)) * 1.2 }}{% endif %}
+								{% if product.discount %}<td class="text-warning digital"><s>{{ product.price }} €</s> <i class="fa-solid fa-arrow-right"></i> <b>{% else %}<td class="digital h5">{% endif %}{% if app.user %}{{(product.price) * (1 - ( product.discountRate)) * (1 +  app.user.vat )}}{% else %}{{(product.price) * (1 - ( product.discountRate)) * 1.2 }}{% endif %}
 									€</b></td>
 							</tr>
 							{% if is_granted('IS_AUTHENTICATED_FULLY') %}

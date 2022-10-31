@@ -18,6 +18,10 @@ body {
     font-family: Orbitron;
 }  
 
+.digital {
+    font-family: 'Segment7Standard';
+}
+
 .surround {
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }

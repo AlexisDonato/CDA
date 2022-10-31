@@ -26,9 +26,9 @@
 			<div class="d-flex justify-content-end">
 				<h4 class="text-warning digital">-{{ product.discountRate * 100 }}</h4><h5 class="text-warning">% !</h5>
 				</div>
-				{% if  app.user %}
+				{% if app.user %}
 					<h4 class="text text-warning">
-						<b class="digital h4">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
+						<b class="digital h2">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
 							€</b>
 					</h4>
 				{% else %}

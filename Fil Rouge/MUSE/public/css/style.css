@@ -123,6 +123,7 @@ to {
 @keyframes float {
     0% {
       transform: translatey(400px);
+      transform: translatex(-1000px);
     }
     50% {
       transform: translatey(0px);
@@ -131,7 +132,7 @@ to {
       transform: translatey(0px);
     }
     100% {
-      transform: translatey(400px);
+      transform: translatey(800px);
     }
   }
 

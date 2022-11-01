@@ -379,6 +379,13 @@ to {
 footer {
     width: 100%;
     background-color: #303c42;
+    background: url('/img/Muse_trans.png') no-repeat, #303c42;
+    background-position : center;
+    background-size: 70%;
+    opacity : 95%;
+    /* filter: blur(2px);
+    -webkit-filter: blur(2px); */
+    z-index: 0;
     /* background-color: #263238; */
     min-height: 250px;
     padding: 10px 0px 25px 0px;

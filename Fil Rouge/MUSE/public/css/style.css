@@ -118,20 +118,20 @@ to {
 
 .floating {
     transform: translatey(0px);
-    animation: float 8s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
 }
 @keyframes float {
     0% {
-      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-      transform: translatey(-5px);
+      transform: translatey(400px);
     }
     50% {
-      box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
-      transform: translatey(+5px);
+      transform: translatey(0px);
+    }
+    90% {
+      transform: translatey(0px);
     }
     100% {
-      box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-      transform: translatey(-5px);
+      transform: translatey(400px);
     }
   }
 
@@ -145,8 +145,8 @@ to {
 /* NAVBAR LOGO */
 
 .brand {
-    border-radius: 10%;
-    width: 150px;
+    border-radius: 15%;
+    width: 320px;
     height: auto;
 }
 

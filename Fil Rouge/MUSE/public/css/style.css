@@ -2,7 +2,7 @@
 /* BACKGROUND PICTURE */
 
 body {
-    background: url('/img/BGHome.jpg') no-repeat;
+    background: url('/img/BGHome2.jpg') no-repeat;
     background-size: 80rem 90rem;
     background-repeat: repeat;
 }
@@ -117,11 +117,11 @@ to {
 }
 }
 
-.floating {
+.cartoon {
     transform: translatey(0px);
-    animation: float 6s ease-in-out infinite;
+    animation: cartoon 6s ease-in-out infinite;
 }
-@keyframes float {
+@keyframes cartoon {
     0% {
         transform: translatey(400px);
         transform: translatex(-1000px);
@@ -193,11 +193,17 @@ to {
     border-radius: 3%;
     width: 320px;
     height: auto;
+    transition: 0.3s;
 }
 
 .brand:hover {
-    box-shadow: 0 0 2px 1px rgba(59, 242, 255, 0.5);
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 10px #03e9f4,
+    0 0 20px #03e9f4,
+    0 0 30px #03e9f4;
+-webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
+
 
 
 /* BREADCRUMBS */
@@ -277,6 +283,15 @@ to {
   background-size: 100%, 100%;
   background-image: none;
   -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+  transition: 0.2s;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon:hover {
+    text-shadow: 0 0 5px #03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
 .carousel-control-next-icon:after

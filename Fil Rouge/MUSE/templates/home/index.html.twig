@@ -7,7 +7,7 @@
 {% block body %}
 	<div class="container">
 	<div class="text-center">
-	<img id="homeLogo" src ="/img/Muse_rect_trans.png" style="width: 250px; height: 100px;" class="floating mb-1" >
+	<img id="homeLogo" src ="/img/Muse_rect_trans.png" style="width: 250px; height: 100px;" class="cartoon mb-1" >
 	</div>
 		{# <h1 class="text-center mt-1 hometitle slideIn">Muse...</h1>
 		<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				{% if products|length > 0 %}
-					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="2000">
+					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="4000">
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -25,7 +25,7 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="img-thumbnail border border-danger" style="width: 25rem;" src="/img/BGHome.jpg" alt="...">
+								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome.jpg" alt="...">
 								<div class="carousel-caption d-none d-md-block">
 									<h1 id="audioFont" class="text-danger">MUSE</h1>
 									<i class="fa-solid fa-guitar text-secondary"></i>
@@ -33,7 +33,7 @@
 							</div>
 							{% for product in products|slice(5,5) %}
 								<div class="carousel-item">
-									<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{product.image}}" alt="Slide n°{{product.id}}"></a>
+									<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{product.image}}" alt="Slide n°{{product.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
 										<h1 class="text-light mb-3">{{product.name}}</h1>
 										<h3 class="text-white">

@@ -118,16 +118,20 @@ to {
 
 .floating {
     transform: translatey(0px);
-    animation: float 8s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
 }
 @keyframes float {
     0% {
         transform: translatey(400px);
         transform: translatex(-1000px);
     }
-    50% {
+    49%{
         transform: translatey(0px);
         width:15%;
+    }
+    50% {
+        transform: translatey(0px);
+        width:25%;
     }
     51% {
         transform: translatex(-5px);
@@ -153,13 +157,25 @@ to {
     90% {
         transform: translatex(0px);
     }
-    95% {
-        transform: translatex(-30px);
+    94% {
+        transform: translatex(0px);
         width: 25%;
+    }
+    96% {
+        transform: translatex(-30px);
+        width: 40%;
+    }
+    96% {
+        transform: translatex(-30px);
+        width: 40%;
+    }
+    97% {
+        transform: translatex(0px);
+        width:15%;
     }
     100% {
         transform: translatex(+800px);
-        width:50%;
+        width:15%;
     }
   }
 

@@ -95,7 +95,7 @@ class UserController extends AbstractController
     // }
  
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(CartService $cartService, User $user, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
+    public function show(UserRepository $userRepository, CartService $cartService, User $user, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
             $this->addFlash('error', 'Accès refusé');

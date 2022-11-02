@@ -25,7 +25,7 @@
 			</thead>
 			<tbody>
 				{% for address in addresses %}
-					<tr>
+					<tr class="text-break">
 						{% if is_granted('ROLE_ADMIN') %}
 							<td>{{ address.user }}</td>
 						{% endif %}

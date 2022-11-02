@@ -3,7 +3,8 @@
 
 body {
     background: url('/img/BGHome.jpg') no-repeat;
-    background-size: cover;
+    background-size: 80rem 90rem;
+    background-repeat: repeat;
 }
 
 

@@ -12,9 +12,9 @@
 				<small>
 					<s class="text-warning digital">
 						{% if app.user %}
-							{{ product.price * (1 +  app.user.vat )}} €
+							{{ (product.price * (1 +  app.user.vat))|number_format(2, '.', '') }} €
 						{% else %}
-							<b class="digital">{{ product.price * 1.2 }} €</b>
+							<b class="digital">{{ (product.price * 1.2)|number_format(2, '.', '') }} €</b>
 						{% endif %}
 					</s>
 				</small>
@@ -28,12 +28,12 @@
 				</div>
 				{% if app.user %}
 					<h4 class="text text-warning">
-						<b class="digital h2">{{ product.price * ( 1 - product.discountRate) * (1 +  app.user.vat )}}
+						<b class="digital h2">{{ (product.price * ( 1 - product.discountRate) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 							€</b>
 					</h4>
 				{% else %}
 					<h4 class="text-warning digital">
-						<b>{{ product.price * ( 1 - product.discountRate) * 1.2 }}
+						<b>{{ (product.price * ( 1 - product.discountRate) * 1.2)|number_format(2, '.', '') }}
 							€</b>
 					</h4>
 				{% endif %}

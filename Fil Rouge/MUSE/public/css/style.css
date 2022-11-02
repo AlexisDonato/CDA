@@ -173,13 +173,13 @@ to {
 /* NAVBAR LOGO */
 
 .brand {
-    border-radius: 15%;
+    border-radius: 3%;
     width: 320px;
     height: auto;
 }
 
 .brand:hover {
-    box-shadow: 0 0 2px 1px rgba(241, 242, 243, 0.5);
+    box-shadow: 0 0 2px 1px rgba(59, 242, 255, 0.5);
 }
 
 
@@ -409,14 +409,8 @@ to {
 footer {
     width: 100%;
     background: url('/img/Muse_trans.png') no-repeat, linear-gradient(90deg, rgb(8, 14, 19) 0%, rgb(13, 32, 41) 49%, rgb(7, 15, 19)100%);
-    /* background: linear-gradient(90deg, rgba(33,65,82,1) 0%, rgba(38,37,37,0.7371323529411764) 49%, rgba(33,65,82,1) 100%); */
     background-position : center;
     background-size: 60%;
-    /* opacity : 200%; */
-    /* filter: blur(2px);
-    -webkit-filter: blur(2px); */
-    z-index: 0;
-    /* background-color: #263238; */
     min-height: 250px;
     padding: 10px 0px 25px 0px;
 }

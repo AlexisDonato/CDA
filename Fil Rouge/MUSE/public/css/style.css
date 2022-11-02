@@ -190,6 +190,10 @@ to {
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(39, 39, 39, 0.818) 49%, rgba(0,0,1,0.4514180672268907) 100%);
 }
+.breadcrumb:hover {
+    background: rgb(22, 25, 46);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(24, 88, 99, 0.818) 49%, rgba(0,0,1,0.4514180672268907) 100%);
+}
 
 .breadcrumb-item + .breadcrumb-item::before {
     -webkit-text-stroke: 1px rgb(0, 0, 0);

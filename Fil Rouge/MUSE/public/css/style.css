@@ -126,33 +126,33 @@ to {
         transform: translatey(400px);
         transform: translatex(-1000px);
     }
-    49%{
+    19%{
         transform: translatey(0px);
         width:15%;
     }
-    50% {
+    20% {
         transform: translatey(0px);
         width:25%;
     }
-    51% {
+    21% {
         transform: translatex(-5px);
       }
-    52% {
+    22% {
         transform: translatex(+5px);
     }
-    53% {
+    23% {
         transform: translatex(-5px);
     }
-    54% {
+    24% {
         transform: translatex(+5px);
     }
-    55% {
+    25% {
         transform: translatex(-5px);
     }
-    56% {
+    26% {
         transform: translatex(+5px);
     }
-    57% {
+    27% {
         transform: translatex(-5px);
     }
     90% {

@@ -190,7 +190,8 @@ to {
 /* NAVBAR LOGO */
 
 .brand {
-    border-radius: 3%;
+    border: solid 2px #1f4d50;
+    border-radius: 10px 40px;
     width: 320px;
     height: auto;
     transition: 0.3s;

@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ConnectHolland\CookieConsentBundle\CHCookieConsentBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -21,10 +22,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, ?UserInterface $user, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartRepository $cartRepository, OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
-        // $route = $request->attributes->get('_route');
-        // dd($route);
 
-        // dd($request);
         if ($this->isGranted('ROLE_CLIENT')) {
             $clientCart = $cartRepository->findOneByUser($user->getId());
 
@@ -48,7 +46,6 @@ class HomeController extends AbstractController
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
-
 
         return $this->render('home/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),

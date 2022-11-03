@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TermsAndAgreementsController extends AbstractController
 {
-    #[Route('/terms/and/agreements', name: 'app_terms_and_agreements')]
+    #[Route('/terms', name: 'app_terms_and_agreements')]
     public function index(CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
         $categories = $categoryRepository->findAll();
@@ -30,7 +30,7 @@ class TermsAndAgreementsController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
 
         $cartService->setUser($user);
-        return $this->render('terms_and_agreements/index.html.twig', [
+        return $this->render('terms_and_agreements/terms.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),
@@ -71,6 +71,7 @@ class TermsAndAgreementsController extends AbstractController
         ]);
     }
 
+
     #[Route('/withdrawal', name: 'app_withdrawal')]
     public function index3(CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
@@ -86,6 +87,34 @@ class TermsAndAgreementsController extends AbstractController
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/withdrawal.html.twig', [
+            'items'     => $cartService->getFullCart($orderDetails),
+            'count'     => $cartService->getItemCount($orderDetails),
+            'total' => $cartService->getTotal($orderDetails),
+            'products' => $products,
+            'products2' => $products2,
+            'categories' => $categories,
+            'discount' => $discount,
+            'discount2' => $discount2,
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    #[Route('/shipping_options', name: 'app_shipping_options')]
+    public function index4(CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
+    {
+        $categories = $categoryRepository->findAll();
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $products = $productRepository->findSearch($data);
+        $products2 =$productRepository->findAll();
+        $discount = $productRepository->findDiscount($data);
+        $discount2 =$productRepository->findBy(['discount' => true]);
+
+        $cartService->setUser($user);
+        return $this->render('terms_and_agreements/shipping_options.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),

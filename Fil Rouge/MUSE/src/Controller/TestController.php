@@ -23,12 +23,14 @@ class TestController extends AbstractController
 {
     private $twig;
     private $pdf;
-    public function __construct(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function __construct(?Request $request, Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         $this->twig = $twig;
         $this->pdf = $pdf;
 
         $this->entrypointLookup = $entrypointLookup;
+
+        // $orderId = $this->request->attributes->get('id');
     }
 
 
@@ -36,15 +38,15 @@ class TestController extends AbstractController
     public function pdfAction(Environment $twig, Pdf $pdf, Request $request, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         $pdf_file_path = '/PDFs';
-        dd($request->attributes);
-        $orderId = $request->attributes->get('id');
-        $details = $orderDetails->findBy(['cart' => $orderId]);
 
+        $orderId = $request->attributes->get('id');
+                
+        $details = $orderDetails->findBy(['cart' => $orderId]);
+//  dd($details);
         // $orderDate = $details[0]->getCart()->getOrderDate();
+
         $cartService->setUser($user);
         $clientOrderId = $cart->getClientOrderId();
-
-        $orderDate = $details[0]->getCart()->getOrderDate();
         
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
@@ -54,7 +56,7 @@ class TestController extends AbstractController
     
         $user = $cart->getUser();
 
-        $html = $this->renderView('order/index.html.twig', array(
+        $html = $this->renderView('validated_orders/order_validation_email.html.twig', array(
                 'order_id' => $clientOrderId,
                 'cart_id' => $orderId,
                 'details' => $details,

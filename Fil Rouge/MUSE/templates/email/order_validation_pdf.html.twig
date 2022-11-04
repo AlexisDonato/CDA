@@ -4,9 +4,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-        {% for path in encore_entry_css_files('app') %}
-		<link rel="stylesheet" href="{{ absolute_url(path) }}">
-		{% endfor %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://localhost:8000/css/style.css">
 		<title>Document</title>
 	</head>
 	<body>
@@ -19,9 +18,9 @@
 						{{ app.user.userLastName }}<br>
 						{{ app.user.email }}
 
-					<p>Votre commande n°<b>{{ order.clientOrderId }}</b>
+					<p>Votre commande n°<b>{{ detail.clientOrderId }}</b>
 						a bien été validée en date du
-						{{ order.orderDate|format_datetime('short', 'none', locale='fr') }}. Voici le récapitulatif :</p>
+						{{ detail.orderDate|format_datetime('short', 'none', locale='fr') }}. Voici le récapitulatif :</p>
 
 					<table border="1">
 						<thead>

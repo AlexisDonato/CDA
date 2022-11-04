@@ -86,7 +86,7 @@ class TestController extends AbstractController
     {
         $pdf_file_path = '/PDFs';
 
-        $pt->generateOrder(27);
+        // $pt->generateOrder($orderId);
 
         $html = $this->renderView('email/test.html.twig', array(
         ));
@@ -97,7 +97,7 @@ class TestController extends AbstractController
             $pdf->getOutputFromHtml($html),
             // $pdf->getOutput($pageUrl), // To render a pdf document with a relative url inside like css files
             // $pdf->getOutput('email/test.html.twig',array('ignore-load-errors'=>true)),
-            'file.pdf'
+            'M_O-'.date('Y-m-d').'.pdf'
         );
         $this->entrypointLookup->reset();
     }

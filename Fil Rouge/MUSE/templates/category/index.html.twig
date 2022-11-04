@@ -17,7 +17,7 @@
 					<div class="col-4">
 						{% if category.parentCategory %}
 							<div class="dropdown">
-								<button data-toggle="dropdown" id="category" class="btn btn-dark border border-secondary text-decoration-none d-flex mt-1 mb-1 position-relative align-items-center">
+								<button data-toggle="dropdown" id="category" class="btn btn-warning darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
 									<i class="fa-solid fa-guitar text-secondary"></i>
 									<h2>
 										<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">
@@ -41,7 +41,7 @@
 								</div>
 							</div>
 						{% else %}
-							<button id="category" class="btn btn-dark border border-secondary text-decoration-none d-flex mt-1 mb-1 position-relative align-items-center">
+							<button id="category" class="btn btn-dark darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
 								<i class="fa-solid fa-guitar text-secondary"></i>
 								<h2>
 									<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">

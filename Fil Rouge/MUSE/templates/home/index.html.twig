@@ -36,7 +36,7 @@
 								<div class="carousel-item">
 									<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{product.image}}" alt="Slide n°{{product.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
-										<h1 class="text-light mb-3">{{ product.name }}</h1>
+										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}"><h1 class="text-light mb-3">{{ product.name }}</h1></a>
 										<h3 class="text-white">
 											<i>{{ product.price }}
 												€</i>

@@ -1,23 +1,25 @@
-
 /* BACKGROUND PICTURE */
 
 body {
-    background: url('/img/BGHome2.jpg') no-repeat;
-    background-size: 80rem 90rem;
-    background-repeat: repeat;
+    background: url('/img/BGHome2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 
 
 /* FONTS */
 
 #audioFont {
     font-family: "Audiowide", sans-serif;
-  }
+}
 
 
 .orbitron {
     font-family: Orbitron;
-}  
+}
 
 .digital {
     font-family: 'Segment7Standard';
@@ -26,6 +28,7 @@ body {
 .roboto {
     font-family: 'Roboto', sans-serif;
 }
+
 .surround {
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
@@ -64,16 +67,17 @@ h2 {
     cursor: pointer;
     transition: 0.5s;
 }
+
 h2:hover {
     color: #fff;
     text-shadow: 0 0 5px #03e9f4,
-              0 0 25px #03e9f4,
-              0 0 50px #03e9f4,
-              0 0 100px #03e9f4;
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
     -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
-  
+
 /* .hometitle {
     font-family: "Audiowide", sans-serif;
     -webkit-text-stroke: 1px rgb(0, 0, 0);
@@ -94,8 +98,16 @@ h2:hover {
 
 .hometitle2 {
     -webkit-text-stroke: 1px rgb(0, 0, 0);
-    text-shadow: 0 0 5px rgb(58, 218, 191);  
+    text-shadow: 0 0 5px rgb(58, 218, 191);
     color: rgb(118, 183, 243);
+}
+
+
+/* BACKGROUNDS */
+
+.darker {
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(50,50,61,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 
@@ -105,80 +117,97 @@ h2:hover {
     animation-duration: 1.5s;
     animation-name: slidein;
 }
-@keyframes slidein {
-from {
-  margin-left: 100%;
-  width: 300%;
-}
 
-to {
-  margin-left: 0%;
-  width: 100%;
-}
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
 }
 
 .cartoon {
     transform: translatey(0px);
     animation: cartoon 6s ease-in-out infinite;
 }
+
 @keyframes cartoon {
     0% {
         transform: translatey(400px);
         transform: translatex(-1000px);
     }
-    5%{
+
+    5% {
         transform: translatey(0px);
-        width:15%;
+        width: 15%;
     }
+
     6% {
         transform: translatey(0px);
-        width:25%;
+        width: 25%;
     }
+
     7% {
         transform: translatex(-5px);
-      }
+    }
+
     8% {
         transform: translatex(+5px);
     }
+
     9% {
         transform: translatex(-5px);
     }
+
     10% {
         transform: translatex(+5px);
     }
+
     11% {
         transform: translatex(-5px);
     }
+
     12% {
         transform: translatex(+5px);
     }
+
     13% {
         transform: translatex(-5px);
     }
+
     90% {
         transform: translatex(0px);
     }
+
     94% {
         transform: translatex(0px);
         width: 25%;
     }
+
     96% {
         transform: translatex(-30px);
         width: 40%;
     }
+
     96% {
         transform: translatex(-30px);
         width: 40%;
     }
+
     97% {
         transform: translatex(0px);
-        width:15%;
+        width: 15%;
     }
+
     100% {
         transform: translatex(+800px);
-        width:15%;
+        width: 15%;
     }
-  }
+}
 
 /* NAVBAR */
 
@@ -199,10 +228,10 @@ to {
 
 .brand:hover {
     box-shadow: 0 0 5px #03e9f4,
-    0 0 10px #03e9f4,
-    0 0 20px #03e9f4,
-    0 0 30px #03e9f4;
--webkit-text-stroke: 0.5px rgb(51, 134, 139);
+        0 0 10px #03e9f4,
+        0 0 20px #03e9f4,
+        0 0 30px #03e9f4;
+    -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
 
@@ -211,15 +240,16 @@ to {
 
 .breadcrumb {
     padding: 0px 15px !important;
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(39, 39, 39, 0.818) 49%, rgba(0,0,1,0.4514180672268907) 100%);
-}
-.breadcrumb:hover {
-    background: rgb(22, 25, 46);
-    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(24, 88, 99, 0.818) 49%, rgba(0,0,1,0.4514180672268907) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(39, 39, 39, 0.818) 49%, rgba(0, 0, 1, 0.4514180672268907) 100%);
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb:hover {
+    background: rgb(22, 25, 46);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(24, 88, 99, 0.818) 49%, rgba(0, 0, 1, 0.4514180672268907) 100%);
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
     -webkit-text-stroke: 1px rgb(0, 0, 0);
     text-shadow: 0 0 6px rgb(0, 233, 250);
     color: rgb(51, 85, 85);
@@ -239,16 +269,18 @@ to {
     animation-duration: 0.5s;
     animation-name: catslidein;
 }
+
 @keyframes catslidein {
     from {
-      margin-left: 100%;
-      width: 300%;
+        margin-left: 100%;
+        width: 300%;
     }
+
     to {
-      margin-left: 0%;
-      width: 75%;
+        margin-left: 0%;
+        width: 75%;
     }
-  }
+}
 
 
 /* SEARCH FILTER */
@@ -263,14 +295,14 @@ to {
     display: block;
     position: sticky;
     top: 153px;
-    scale: 0,8;
+    scale: 0, 8;
 }
 
 .filterCat {
     max-height: 100px;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 
@@ -278,36 +310,36 @@ to {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  height: 100px;
-  width: 100px;
-  outline: black;
-  background-size: 100%, 100%;
-  background-image: none;
-  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
-  transition: 0.2s;
+    height: 100px;
+    width: 100px;
+    outline: black;
+    background-size: 100%, 100%;
+    background-image: none;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+    transition: 0.2s;
 }
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon:hover {
     text-shadow: 0 0 5px #03e9f4,
-    0 0 25px #03e9f4,
-    0 0 50px #03e9f4,
-    0 0 100px #03e9f4;
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
     -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
-.carousel-control-next-icon:after
-{
-  content: '}';
-  font-size: 55px;
-  color: rgb(15, 186, 209);
-  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+.carousel-control-next-icon:after {
+    content: '}';
+    font-size: 55px;
+    color: rgb(15, 186, 209);
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .carousel-control-prev-icon:after {
-  content: '{';
-  font-size: 55px;
-  color: rgb(15, 186, 209);
-  -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+    content: '{';
+    font-size: 55px;
+    color: rgb(15, 186, 209);
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
 .carousel .carousel-indicators li {
@@ -322,47 +354,51 @@ to {
 /* SUBFORMS */
 
 #proForm {
-    display:none;
+    display: none;
     transition: 2s;
     -webkit-animation: fadeInDown 500ms ease-in-out;
     animation: fadeInDown 500ms ease-in-out;
 }
 
 #newAddressForm {
-    display:none;
+    display: none;
     transition: 2s;
     -webkit-animation: fadeInDown 500ms ease-in-out;
     animation: fadeInDown 500ms ease-in-out;
 }
 
 #payCardForm {
-    display:none;
+    display: none;
     transition: 2s;
     -webkit-animation: fadeInDown 500ms ease-in-out;
     animation: fadeInDown 500ms ease-in-out;
 }
 
-#couponInput{
-    display:none;
+#couponInput {
+    display: none;
     transition: 2s;
     -webkit-animation: fadeInuP 500ms ease-in-out;
     animation: fadeInUp 500ms ease-in-out;
 }
+
 @-webkit-keyframes fadeInDown {
     0% {
         opacity: 0;
         -webkit-transform: translateY(-40px);
     }
+
     100% {
         opacity: 1;
         -webkit-transform: translateY(0);
     }
 }
+
 @-webkit-keyframes fadeInUp {
     0% {
         opacity: 0;
         -webkit-transform: translateY(40px);
     }
+
     100% {
         opacity: 1;
         -webkit-transform: translateY(0);
@@ -373,9 +409,11 @@ to {
 /* ZOOM */
 
 .zoom {
-    transition: transform .2s; /* Animation */
+    transition: transform .2s;
+    /* Animation */
     margin: 0 auto;
 }
+
 .zoom:hover {
     transform: scale(1.5);
 }
@@ -395,12 +433,13 @@ to {
     cursor: pointer;
     transition: 0.5s;
 }
+
 .productHl:hover {
     color: #fff;
     text-shadow: 0 0 5px #03e9f4,
-              0 0 25px #03e9f4,
-              0 0 50px #03e9f4,
-              0 0 100px #03e9f4;
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
     -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
@@ -408,12 +447,13 @@ to {
     cursor: pointer;
     transition: 0.5s;
 }
+
 .Hl:hover {
     color: #fff;
     text-shadow: 0 0 5px #03e9f4,
-              0 0 25px #03e9f4,
-              0 0 50px #03e9f4,
-              0 0 100px #03e9f4;
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 100px #03e9f4;
     -webkit-text-stroke: 0.5px rgb(51, 134, 139);
 }
 
@@ -421,15 +461,15 @@ to {
 /* ORDER */
 
 #couponInput {
-    display:none;
+    display: none;
 }
 
 #newAddressForm1 {
-    display:none;
+    display: none;
 }
 
 #payCardForm {
-    display:none;
+    display: none;
 }
 
 
@@ -442,7 +482,7 @@ to {
 footer {
     width: 100%;
     background: url('/img/Muse_trans.png') no-repeat, linear-gradient(90deg, rgb(8, 14, 19) 0%, rgb(13, 32, 41) 49%, rgb(7, 15, 19)100%);
-    background-position : center;
+    background-position: center;
     background-size: 60%;
     min-height: 250px;
     padding: 10px 0px 25px 0px;

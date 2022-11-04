@@ -6,16 +6,19 @@
 {% block body %}
 	<style>
 		body {
-			background: url('/img/BG62.jpg') no-repeat;
-			background-size: 80rem 60rem;
-			background-repeat: repeat;
+			background: url('/img/BG62.jpg') no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
 		}
+
 	</style>
 
 	<div class="container">
 		<h1 class="text-center text-primary mt-3 mb-5">Votre Panier :</h1>
 		{% if count > 0 %}
-			<table class="table table-dark border border-info">
+			<table class="table table-dark darker border border-info">
 				<thead>
 					<tr class="text-primary">
 						<th id="audioFont" class="surround">Produit</th>

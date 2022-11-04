@@ -6,6 +6,7 @@ use DateTime;
 use Knp\Snappy\Pdf;
 use App\Entity\Cart;
 use Twig\Environment;
+use App\Service\PdfTools;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -81,9 +82,11 @@ class TestController extends AbstractController
 
 
     #[Route('/test/download', name: 'app_test_download')]
-    public function DlPdfAction(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function DlPdfAction(PdfTools $pt, Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         $pdf_file_path = '/PDFs';
+
+        $pt->generateOrder(27);
 
         $html = $this->renderView('email/test.html.twig', array(
         ));

@@ -44,6 +44,8 @@ class TestController extends AbstractController
         $cartService->setUser($user);
         $clientOrderId = $cart->getClientOrderId();
 
+        $orderDate = $details[0]->getCart()->getOrderDate();
+        
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
         $shipmentDate = $cart->getShipmentDate();

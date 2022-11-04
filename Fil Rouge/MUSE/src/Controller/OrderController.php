@@ -260,8 +260,8 @@ class OrderController extends AbstractController
                     'clientOrderId'   => $clientOrderId,
                     'cart'      => $cart,
                     'details' => $details,
-                ])
-                ->attach($pdf, sprintf('order_validation_%s.pdf', date('d-m-Y')));
+                ]);
+                // ->attach($pdf, sprintf('order_validation_%s.pdf', date('d-m-Y')));
             $mailer->send($email);
         
             if ($this->isGranted('ROLE_CLIENT')) {

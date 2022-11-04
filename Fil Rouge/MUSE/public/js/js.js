@@ -145,6 +145,7 @@ function newAddress() {
         if (getComputedStyle(newAddressForm).display != "none") {
 
             newAddressForm.style.display="none";
+            newAddressButton.scrollIntoView({behavior: "smooth", block: "nearest", inline: "nearest"});
 
             newAddressName.removeAttribute('required', '');
             newAddressCountry.removeAttribute('required', '');
@@ -181,6 +182,7 @@ function payCard() {
 
         if (getComputedStyle(payCardForm).display != "none") {
             payCardForm.style.display = "none";
+            payCardButton.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
         } else {
             payCardForm.style.display = "block";
             payCardForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});

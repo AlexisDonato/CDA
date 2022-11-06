@@ -62,7 +62,7 @@ class CartService
         $orderDetails = $this->orderDetailsRepository->createQueryBuilder('o')
         ->join(Cart::class, 'c', 'WITH', 'o.cart = c.id')
         ->where('o.cart = :cart_id')
-        ->andWhere('o.Product = :product_id')
+        ->andWhere('o.product = :product_id')
         ->setParameter('cart_id', $clientCart->getId())
         ->setParameter('product_id', $productId)
         ->getQuery()
@@ -169,7 +169,7 @@ class CartService
         $clientCart = $this->getClientCart();
         if ($clientCart != null) {
             $count = $orderDetails->createQueryBuilder('c')
-            ->select('sum(c.Quantity)')
+            ->select('sum(c.quantity)')
             ->where('c.cart = :val')
             ->setParameter('val', $clientCart->getId())
             ->getQuery()
@@ -187,7 +187,7 @@ class CartService
         $clientCart = $this->getClientCart();
         if ($clientCart != null) {
                 $rs = $orderDetails->createQueryBuilder('o')
-                ->join(Product::class, 'p', 'WITH', 'o.Product = p.id')
+                ->join(Product::class, 'p', 'WITH', 'o.product = p.id')
                 ->where('o.cart = :val')
                 ->setParameter('val', $clientCart->getId())
                 ->getQuery()
@@ -203,8 +203,8 @@ class CartService
 
         if ($clientCart != null) {
             $total = $orderDetails->createQueryBuilder('o')
-            ->select('sum((p.price * o.Quantity) * (1-COALESCE(p.discountRate,0)) * (1+u.vat))')
-            ->join(Product::class, 'p', 'WITH', 'o.Product = p.id')
+            ->select('sum((p.price * o.quantity) * (1-(COALESCE(p.discountRate,0))-(COALESCE(c.additionalDiscountRate,0))) * (1+u.vat))')
+            ->join(Product::class, 'p', 'WITH', 'o.product = p.id')
             ->join(Cart::class, 'c', 'WITH', 'o.cart = c.id')
             ->join(User::class, 'u', 'WITH', 'c.user = u.id')
             ->where('o.cart = :val')

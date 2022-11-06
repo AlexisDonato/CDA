@@ -25,12 +25,12 @@ class AddressController extends AbstractController
     #[Route('/', name: 'app_address_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, UserInterface $user, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -41,7 +41,7 @@ class AddressController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_SALES')) {
             $addresses = $addressRepository->findAll();
         }
 
@@ -64,12 +64,12 @@ class AddressController extends AbstractController
     // #[Route('/by_user_index', name: 'app_address_by_user_index', methods: ['GET'])]
     // public function index2(UserRepository $userRepository, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?OrderDetailsRepository $orderDetails): Response
     // {
-    //     if (!$this->isGranted('ROLE_ADMIN')) {
+    //     if (!$this->isGranted('ROLE_SALES')) {
     //         $this->addFlash('error', 'Accès refusé');
     //         return $this->redirectToRoute('login');  
     //     }
 
-    //     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+    //     $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
     //     $categories = $categoryRepository->findAll();
     //     $data = new SearchData();
@@ -100,12 +100,12 @@ class AddressController extends AbstractController
     #[Route('/new', name: 'app_address_new', methods: ['GET', 'POST'])]
     public function new(Request $request, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);
@@ -170,19 +170,19 @@ class AddressController extends AbstractController
     #[Route('/{id}', name: 'app_address_show', methods: ['GET'])]
     public function show(Address $address, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         // The user cannot access other users infos:
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             if ($this->getUser()->getUserIdentifier() != $address->getUser()->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+                $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
             }
         }
 
@@ -212,12 +212,12 @@ class AddressController extends AbstractController
     #[Route('/{id}/edit', name: 'app_address_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Address $address, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
@@ -266,12 +266,12 @@ class AddressController extends AbstractController
     #[Route('/{id}', name: 'app_address_delete', methods: ['POST'])]
     public function delete(Request $request, Address $address, AddressRepository $addressRepository, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, ?UserInterface $user, ?OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
             $addressRepository->remove($address, true);

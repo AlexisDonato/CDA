@@ -23,11 +23,11 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(CartService $cartService, UserRepository $userRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -57,7 +57,7 @@ class UserController extends AbstractController
     // #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     // public function new(Request $request, UserRepository $userRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     // {
-    //     $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+    //     $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
     //     $user = new User();
     //     $form = $this->createForm(UserType::class, $user);
@@ -97,15 +97,15 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(UserRepository $userRepository, CartService $cartService, User $user, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         // The user cannot access other users infos:
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
 
         $categories = $categoryRepository->findAll();
@@ -136,14 +136,14 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Address $address, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, User $user, UserRepository $userRepository, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -192,7 +192,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }

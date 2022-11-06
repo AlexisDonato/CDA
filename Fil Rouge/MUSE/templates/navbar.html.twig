@@ -74,13 +74,14 @@
 			</li>
 			{% endif %}
 
-			{% if is_granted('ROLE_ADMIN') %}
+			{% if is_granted('ROLE_SHIP') %}
 			<li class="nav-item dropdown ml-4">
 				<i class="fa-solid fa-lock-open fa-lg text-danger ml-5"></i>
 				<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<b>Back Office</b>
 				</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+					{% if is_granted('ROLE_SALES') %}
 					<a class="dropdown-item text-danger" href="{{ path('app_user_index') }}">
 						<b>Index des utilisateurs</b>
 					</a>
@@ -106,9 +107,13 @@
 						<i>Nouveau fournisseur</i>
 					</a>
 					<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-warning" href="{{ path('app_validated_orders') }}">
-							<b>Commandes Clients</b>
-						</a>
+					<a class="dropdown-item text-warning" href="{{ path('app_admin_cart_index') }}">
+						<i><strong>Paniers/commandes Clients</strong></i>
+					</a>
+					{% endif %}
+					<a class="dropdown-item text-warning" href="{{ path('app_validated_orders') }}">
+						<b>Commandes Clients</b>
+					</a>
 				</div>
 			</li>
 			{% elseif app.user %}

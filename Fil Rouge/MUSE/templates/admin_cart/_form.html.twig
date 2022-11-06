@@ -1,0 +1,58 @@
+{{ form_start(form) }}
+<div class="row d-flex align-items-center">
+
+	<div class="col-md-6">
+    {{ form_row(form.user) }}
+    </div>
+	<div class="col-md-6">
+		{{ form_row(form.clientOrderId, {
+            label: "N° de commande"
+        }) }}
+	</div>
+
+<div class="col-md-6">
+		{{ form_row(form.billingAddress, {
+            label: "Adresse de facturation"
+        }) }}
+	</div>
+    <div class="col-md-6">
+		{{ form_row(form.deliveryAddress, {
+            label: "Adresse de livraison"
+        }) }}
+	</div>
+
+
+	<div class="col-md-6">
+		{{ form_row(form.validated) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.orderDate) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.shipped) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.shipmentDate) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.carrier) }}
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.carrierShipmentId) }}
+	</div>
+    </div>
+    <div class="row mb-5">
+	<div class="col-md-6">
+		{{ form_row(form.additionalDiscountRate) }}
+            <small>Ex: Entrez 0.20 pour 20%</small>
+	</div>
+	<div class="col-md-6">
+		{{ form_row(form.total) }}
+        <small> </small>
+	</div>
+</div>
+
+
+{{ form_widget(form) }}
+<button class="btn btn-primary mb-3 ml-3">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

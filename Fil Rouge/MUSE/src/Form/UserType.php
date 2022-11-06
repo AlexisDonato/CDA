@@ -63,6 +63,7 @@ class UserType extends AbstractType
                 'choices' => (array)[
                     'ROLE_ADMIN' => 'ROLE_ADMIN',
                     'ROLE_SALES' => 'ROLE_SALES',
+                    'ROLE_SHIP' => 'ROLE_SHIP',
                     'ROLE_PRO' => 'ROLE_PRO',
                     'ROLE_CLIENT' => 'ROLE_CLIENT',
                     'ROLE_USER' => 'ROLE_USER',

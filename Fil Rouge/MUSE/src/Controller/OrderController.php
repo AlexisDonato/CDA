@@ -70,7 +70,7 @@ class OrderController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
         
         $categories = $categoryRepository->findAll();
@@ -189,7 +189,7 @@ class OrderController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
 
         $cartService->setUser($user);

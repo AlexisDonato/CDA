@@ -17,10 +17,10 @@ class OrderDetails
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $ProductId = null;
+    private ?int $productId = null;
 
     #[ORM\Column]
-    private ?int $Quantity = null;
+    private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails')]
     #[ORM\JoinColumn(nullable: false)]
@@ -28,14 +28,14 @@ class OrderDetails
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Product $Product = null;
+    private ?Product $product = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $subTotal = null;
 
     public function __construct()
     {
-        $this->OrderProductId = new ArrayCollection();
+        $this->orderProductId = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,36 +45,36 @@ class OrderDetails
 
     public function getProductId(): ?int
     {
-        return $this->ProductId;
+        return $this->productId;
     }
 
-    public function setProductId(int $ProductId): self
+    public function setProductId(int $productId): self
     {
-        $this->ProductId = $ProductId;
+        $this->productId = $productId;
 
         return $this;
     }
 
     public function getQuantity(): ?int
     {
-        return $this->Quantity;
+        return $this->quantity;
     }
 
-    public function setQuantity(int $Quantity): self
+    public function setQuantity(int $quantity): self
     {
-        $this->Quantity = $Quantity;
+        $this->quantity = $quantity;
 
         return $this;
     }
 
     public function getCartId(): ?Cart
     {
-        return $this->CartId;
+        return $this->cartId;
     }
 
-    public function setCartId(?Cart $CartId): self
+    public function setCartId(?Cart $cartId): self
     {
-        $this->CartId = $CartId;
+        $this->cartId = $cartId;
 
         return $this;
     }
@@ -93,12 +93,12 @@ class OrderDetails
 
     public function getProduct(): ?Product
     {
-        return $this->Product;
+        return $this->product;
     }
 
-    public function setProduct(?Product $Product): self
+    public function setProduct(?Product $product): self
     {
-        $this->Product = $Product;
+        $this->product = $product;
 
         return $this;
     }

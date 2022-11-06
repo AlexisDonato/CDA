@@ -58,7 +58,7 @@ class ContactController extends AbstractController
             $email = (new TemplatedEmail())
             ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
             ->to($contact->getEmail())
-            ->subject('Votre commande a bien été expédiée!')
+            ->subject('Votre demande a bien été envoyée')
             ->htmlTemplate('contact/contact_confirmation_email.html.twig')
             ->context([
                 'name' => $name,

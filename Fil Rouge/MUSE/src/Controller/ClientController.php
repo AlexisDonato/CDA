@@ -41,7 +41,7 @@ class ClientController extends AbstractController
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+                $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
             }
             return $this->render('client/show.html.twig', [
                 'items'     => $cartService->getFullCart($orderDetails),
@@ -87,7 +87,7 @@ class ClientController extends AbstractController
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+                $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
             }
             $form = $this->createForm(User1Type::class, $user);
             $form->handleRequest($request);

@@ -19,13 +19,13 @@ class Cart
     private $id = null;
 
     #[ORM\Column]
-    private ?string $ClientOrderId = null;
+    private ?string $clientOrderId = null;
 
     #[ORM\Column]
-    private ?bool $Validated = false;
+    private ?bool $validated = false;
 
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: OrderDetails::class, orphanRemoval: true)]
-    private Collection $OrderDetails;
+    private Collection $orderDetails;
 
     #[ORM\ManyToOne(inversedBy: 'carts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -55,10 +55,13 @@ class Cart
     #[ORM\ManyToOne]
     private ?Address $deliveryAddress = null;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
+    private ?string $additionalDiscountRate = '0';
+
 
     public function __construct()
     {
-        $this->OrderDetails = new ArrayCollection();
+        $this->orderDetails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,24 +71,24 @@ class Cart
 
     public function setClientOrderId(string $clientOrderId): self
     {
-        $this->ClientOrderId = $clientOrderId;
+        $this->clientOrderId = $clientOrderId;
 
         return $this;
     }
     
     public function getClientOrderId(): ?string
     {
-        return $this->ClientOrderId;
+        return $this->clientOrderId;
     }
 
     public function isValidated(): ?bool
     {
-        return $this->Validated;
+        return $this->validated;
     }
 
-    public function setValidated(bool $Validated): self
+    public function setValidated(bool $validated): self
     {
-        $this->Validated = $Validated;
+        $this->validated = $validated;
 
         return $this;
     }
@@ -95,13 +98,13 @@ class Cart
      */
     public function getOrderDetails(): Collection
     {
-        return $this->OrderDetails;
+        return $this->orderDetails;
     }
 
     public function addOrderDetail(OrderDetails $orderDetail): self
     {
-        if (!$this->OrderDetails->contains($orderDetail)) {
-            $this->OrderDetails[] = $orderDetail;
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
             $orderDetail->setCart($this);
         }
 
@@ -110,7 +113,7 @@ class Cart
 
     public function removeOrderDetail(OrderDetails $orderDetail): self
     {
-        if ($this->OrderDetails->removeElement($orderDetail)) {
+        if ($this->orderDetails->removeElement($orderDetail)) {
             // set the owning side to null (unless already changed)
             if ($orderDetail->getCart() === $this) {
                 $orderDetail->setCart(null);
@@ -224,6 +227,20 @@ class Cart
     public function setDeliveryAddress(?Address $deliveryAddress): self
     {
         $this->deliveryAddress = $deliveryAddress;
+
+        return $this;
+    }
+
+    public function getAdditionalDiscountRate(): ?string
+    {
+        $additionalDiscountRate = $this->additionalDiscountRate;
+        $additionalDiscountRate = '0';
+        return $this->additionalDiscountRate;
+    }
+
+    public function setAdditionalDiscountRate(?string $additionalDiscountRate): self
+    {
+        $this->additionalDiscountRate = $additionalDiscountRate;
 
         return $this;
     }

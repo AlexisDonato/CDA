@@ -20,12 +20,12 @@ class AdminCategoryController extends AbstractController
     #[Route('/', name: 'app_admin_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -49,11 +49,11 @@ class AdminCategoryController extends AbstractController
     #[Route('/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
     public function new(CategoryRepository $categoryRepository, Request $request,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -93,11 +93,11 @@ class AdminCategoryController extends AbstractController
     #[Route('/{id}', name: 'app_admin_category_show', methods: ['GET'])]
     public function show(Category $category, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -122,11 +122,11 @@ class AdminCategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -164,11 +164,11 @@ class AdminCategoryController extends AbstractController
     #[Route('/{id}', name: 'app_admin_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);

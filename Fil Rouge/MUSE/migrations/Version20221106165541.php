@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221104072609 extends AbstractMigration
+final class Version20221106165541 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20221104072609 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE address (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, name VARCHAR(100) DEFAULT NULL, country VARCHAR(50) DEFAULT NULL, zipcode VARCHAR(25) DEFAULT NULL, city VARCHAR(100) DEFAULT NULL, path_type VARCHAR(150) DEFAULT NULL, path_number VARCHAR(10) DEFAULT NULL, billing_address TINYINT(1) DEFAULT NULL, delivery_address TINYINT(1) DEFAULT NULL, INDEX IDX_D4E6F81A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE cart (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, billing_address_id INT DEFAULT NULL, delivery_address_id INT DEFAULT NULL, client_order_id VARCHAR(255) NOT NULL, validated TINYINT(1) NOT NULL, order_date DATETIME DEFAULT NULL, shipped TINYINT(1) NOT NULL, shipment_date DATETIME DEFAULT NULL, carrier VARCHAR(25) DEFAULT NULL, carrier_shipment_id VARCHAR(25) DEFAULT NULL, total NUMERIC(12, 2) DEFAULT NULL, INDEX IDX_BA388B7A76ED395 (user_id), INDEX IDX_BA388B779D0C0E4 (billing_address_id), INDEX IDX_BA388B7EBF23851 (delivery_address_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE cart (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, billing_address_id INT DEFAULT NULL, delivery_address_id INT DEFAULT NULL, client_order_id VARCHAR(255) NOT NULL, validated TINYINT(1) NOT NULL, order_date DATETIME DEFAULT NULL, shipped TINYINT(1) NOT NULL, shipment_date DATETIME DEFAULT NULL, carrier VARCHAR(25) DEFAULT NULL, carrier_shipment_id VARCHAR(25) DEFAULT NULL, total NUMERIC(12, 2) DEFAULT NULL, additional_discount_rate NUMERIC(3, 2) NOT NULL, INDEX IDX_BA388B7A76ED395 (user_id), INDEX IDX_BA388B779D0C0E4 (billing_address_id), INDEX IDX_BA388B7EBF23851 (delivery_address_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, parent_category_id INT DEFAULT NULL, name VARCHAR(100) NOT NULL, INDEX IDX_64C19C1796A8F92 (parent_category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE contact (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, name VARCHAR(100) DEFAULT NULL, email VARCHAR(100) DEFAULT NULL, message VARCHAR(255) DEFAULT NULL, subject LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\', enquiry_date DATETIME DEFAULT NULL, INDEX IDX_4C62E638A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE order_details (id INT AUTO_INCREMENT NOT NULL, product_id INT NOT NULL, cart_id INT NOT NULL, quantity INT NOT NULL, sub_total DOUBLE PRECISION DEFAULT NULL, INDEX IDX_845CA2C11AD5CDBF (cart_id), INDEX IDX_845CA2C14584665A (product_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

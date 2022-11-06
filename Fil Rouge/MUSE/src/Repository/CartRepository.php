@@ -60,7 +60,7 @@ class CartRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
         ->where('c.user = :val')
-        ->andWhere('c.Validated = 0')
+        ->andWhere('c.validated = 0')
         ->setParameter('val', $client_id)
         ->getQuery()
         ->getOneOrNullResult();
@@ -70,7 +70,7 @@ class CartRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
         ->where('c.user = :val')
-        ->andWhere('c.Validated = 1')
+        ->andWhere('c.validated = 1')
         ->setParameter('val', $client_id)
         ->getQuery()
         ->getResult();
@@ -80,7 +80,7 @@ class CartRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
         ->join(User::class, 'u', 'WITH', 'c.user = u.id')
-        ->where('c.Validated = 1')
+        ->where('c.validated = 1')
         ->getQuery()
         ->getResult();
     }

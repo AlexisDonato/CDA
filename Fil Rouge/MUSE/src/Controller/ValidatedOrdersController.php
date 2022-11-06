@@ -63,12 +63,12 @@ class ValidatedOrdersController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
         if ($this->isGranted('ROLE_CLIENT')) {
             $clientCarts = $cartRepository->findAllByUser($user->getId(), true);
         }
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_SALES')) {
             $clientCarts = $cartRepository->findAllUsers();
         }
         $validatedOrder = $cartRepository->findAllUsers();
@@ -118,7 +118,7 @@ class ValidatedOrdersController extends AbstractController
     #[Route('validated/orders/{id}/shipped', name: 'app_shipped_order')]
     public function shippedOrder(Request $request, CartRepository $cartRepository, EntityManagerInterface $entityManager, MailerInterface $mailer, ?UserInterface $user, OrderDetailsRepository $orderDetails)
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }

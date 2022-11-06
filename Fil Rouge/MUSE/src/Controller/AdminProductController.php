@@ -21,12 +21,12 @@ class AdminProductController extends AbstractController
     #[Route('/admin/product/', name: 'app_admin_product_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository,ProductRepository $productRepository, CartService $cartService, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -50,12 +50,12 @@ class AdminProductController extends AbstractController
     #[Route('/admin/product/new', name: 'app_admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductRepository $productRepository, CategoryRepository $categoryRepository,EntityManagerInterface $entityManager, CartService $cartService, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -114,12 +114,12 @@ class AdminProductController extends AbstractController
     #[Route('/admin/product/{id}', name: 'app_admin_product_show', methods: ['GET'])]
     public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -144,12 +144,12 @@ class AdminProductController extends AbstractController
     #[Route('/admin/product/{id}/edit', name: 'app_admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, CartService $cartService, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -207,12 +207,12 @@ class AdminProductController extends AbstractController
     #[Route('/admin/product/{id}', name: 'app_admin_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
         
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);

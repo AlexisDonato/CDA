@@ -114,7 +114,9 @@ class ProductController extends AbstractController
         }
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
+
         $data->discount = $disc;
+        
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);

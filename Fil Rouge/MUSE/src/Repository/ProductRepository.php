@@ -60,7 +60,7 @@ class ProductRepository extends ServiceEntityRepository
 
         if (!empty($search->discount)) {
             $query = $query
-                ->andWhere('p.discount = 1');
+                ->andWhere('p.discountRate != 0');
         }
 
         if (!empty($search->categories)) {

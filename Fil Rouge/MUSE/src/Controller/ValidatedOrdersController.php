@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use Knp\Snappy\Pdf;
-use Twig\Environment;
 use App\Entity\Cart;
+use Twig\Environment;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
-use Symfony\Component\Mime\Address as E_address;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,8 +17,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address as E_address;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\mailer;
 
 class ValidatedOrdersController extends AbstractController
 {
@@ -141,7 +142,7 @@ class ValidatedOrdersController extends AbstractController
         $carrier = $cart->getCarrier();
         $carrierShipmentId= $cart->getCarrierShipmentId();
         
-        $pdf = $this->pdf->getOutputFromHtml($html);
+        // $pdf = $this->pdf->getOutputFromHtml($html);
 
         $email = (new TemplatedEmail())
         ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
@@ -157,8 +158,8 @@ class ValidatedOrdersController extends AbstractController
             'shipmentDate' => $shipmentDate,
             'carrier' =>$carrier,
             'carrierShipmentId' => $carrierShipmentId,
-        ])
-        ->attach($pdf, sprintf('email/order_shipment_%s.pdf', date('d-m-Y')));
+        ]);
+        // ->attach($pdf, sprintf('email/order_shipment_%s.pdf', date('d-m-Y')));
         $mailer->send($email);
 
         $this->addFlash('success', 'La commande a bien été envoyée');

@@ -2,7 +2,9 @@
 <div class="row d-flex align-items-center">
 
 	<div class="col-md-6">
-    {{ form_row(form.user) }}
+    {{ form_row(form.user, {
+            label: "Client"
+        }) }}
     </div>
 	<div class="col-md-6">
 		{{ form_row(form.clientOrderId, {
@@ -23,27 +25,41 @@
 
 
 	<div class="col-md-6">
-		{{ form_row(form.validated) }}
+		{{ form_row(form.validated, {
+            label: "Validée?"
+        }) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.orderDate) }}
+		{{ form_row(form.orderDate, {
+            label: "Date de commande"
+        }) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.shipped) }}
+		{{ form_row(form.shipped, {
+            label: "Expédiée?"
+        }) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.shipmentDate) }}
+		{{ form_row(form.shipmentDate, {
+            label: "Date d'expédition"
+        }) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.carrier) }}
+		{{ form_row(form.carrier, {
+            label: "Transporteur"
+        }) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.carrierShipmentId) }}
+		{{ form_row(form.carrierShipmentId, {
+            label: "N° de livraison"
+        }) }}
 	</div>
     </div>
     <div class="row mb-5">
 	<div class="col-md-6">
-		{{ form_row(form.additionalDiscountRate) }}
+		{{ form_row(form.additionalDiscountRate, {
+            label: "Remise additionnelle"
+        }) }}
             <small>Ex: Entrez 0.20 pour 20%</small>
 	</div>
 	<div class="col-md-6">

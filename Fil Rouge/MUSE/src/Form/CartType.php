@@ -33,15 +33,12 @@ class CartType extends AbstractType
             ->add('total')
             ->add('additionalDiscountRate')
             ->add('user')
-            ->add('billingAddress')
-            // , EntityType::class, [
-            //     'mapped' => false,
-            //     'required' => true,
-            //     'multiple' => false,
-            //     'class' => Address::class,
-            //     'choice_label' => 'fullName',   
-            // ])
-            ->add('deliveryAddress')
+            ->add('billingAddress', null, [
+                'choice_label' => 'fullName',
+                ])
+            ->add('deliveryAddress', null, [
+                'choice_label' => 'fullName',
+                ])
         ;
     }
 

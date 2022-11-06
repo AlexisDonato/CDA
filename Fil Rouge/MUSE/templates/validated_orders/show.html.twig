@@ -24,7 +24,11 @@
 				<th>Produit</th>
 				<th>Prix</th>
 				<th>Promotion</th>
-				{% for detail in details %}{% if detail.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+				{% for detail in details %}
+					{% if detail.cart.additionalDiscountRate != 0 %}
+						<th class="text-success">Remise</th>
+					{% endif %}
+				{% endfor %}
 				<th>TVA</th>
 				<th>Quantité</th>
 				<th>Sous-total</th>
@@ -41,7 +45,8 @@
 					<td>{{detail.product.price}}</td>
 					{% if detail.product.discountRate != 0 %}
 						<td class="text text-warning">
-								<h4 class="text-warning roboto">-{{ detail.product.discountRate * 100 }} %</h4>
+							<h4 class="text-warning roboto">-{{ detail.product.discountRate * 100 }}
+								%</h4>
 						{% else %}
 							<td>-
 							{% endif %}
@@ -58,50 +63,85 @@
 						</td>
 						<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
 						</td>
+					</tr>
 				</tr>
+			</tbody>
 		</tbody>
-<tfoot>
-<tr>
-	<td colspan="3" class="text-right roboto h5">
-		<b>Total :</b>
-	</td>
-	<td class="roboto h4">{{ detail.cart.total }} €
-	</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	</tfoot>
-</table>
+		<tfoot>
+			<tr>
+				<td colspan="3" class="text-right roboto h5">
+					<b>Total :</b>
+				</td>
+				<td class="roboto h4">{{ detail.cart.total }}
+					€
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
 
-<div class="text-center mt-2 mb-2">
-<button class="btn btn-primary border-light btn-lg text-center"><a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a></button></div>{% if (shipped == 0) and (is_granted('ROLE_ADMIN')) %}<div class="d-flex justify-content-center"><div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;"><i class="fa-solid fa-address-card fa-lg text-center mt-3"></i><div class="card-body">
-<h5 class="card-title text-info text-center">{{ user.email }}</h5>
-<p class="card-text text-secondary text-center">
-	<i>Informations personnelles du client</i>
-</p></div><ul class="list-group list-group-flush">
-<li class="list-group-detail bg-dark text-light">
-	<b>Prénom :</b>
-	{{ user.userName }}</li>
-<li class="list-group-detail bg-dark text-light">
-	<b>NomLast name :</b>
-	{{ user.userLastname }}</li>
-<li class="list-group-detail bg-dark text-light">
-	<b>Date de naissance :</b>
-	{{ user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
-<li class="list-group-detail bg-dark text-light">
-	<b>Adresse de facturation :</b>
-	{{ detail.cart.billingAddress.fullName }}</li>
-	<li class="list-group-detail bg-dark text-light">
-	<b>Adresse de livraison :</b>
-	{{ detail.cart.deliveryAddress.fullName}}</li>
-<li class="list-group-detail bg-dark text-light">
-	<b>N° téléphone :</b>
-	{{ user.phoneNumber }}</li>
-<li class="list-group-detail bg-dark text-light">
-	<b>Votre compte est vérifié :</b>
-	{{ user.isVerified ? 'Oui' : 'Non' }}</li></ul></div></div></div><div class="text-center">
-	<button class="btn btn-lg btn-warning mb-3"><a class="text-decoration-none text-dark" href="{{ path('app_shipped_order', {'id': cart_id}) }}">Commande expédiée</a></button>
-	</div>{% endif %}{% endfor %}
+	<div class="text-center mt-2 mb-2">
+		<button class="btn btn-primary border-light btn-lg text-center">
+			<a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a>
+		</button>
+	</div>
+	{% if (shipped == 0) and (is_granted('ROLE_SHIP')) %}
+		<div class="d-flex justify-content-center">
+			<div class="card border-secondary bg-dark text-light mb-5 mt-3 rounded" style="width: 30rem;">
+				<i class="fa-solid fa-address-card fa-lg text-center mt-3"></i>
+				<div class="card-body">
+					<h5 class="card-title text-info text-center">{{ user.email }}</h5>
+					<p class="card-text text-secondary text-center">
+						<i>Informations personnelles du client</i>
+					</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					{% if user.pro %}
+						<li class="list-group-detail bg-dark text-light">
+							<b>Raison sociale :</b>
+							{{ user.proCompanyName }}</li>
+					{% endif %}
+					<li class="list-group-detail bg-dark text-light">
+						<b>Prénom :</b>
+						{{ user.userName }}</li>
+					<li class="list-group-detail bg-dark text-light">
+						<b>NomLast name :</b>
+						{{ user.userLastname }}</li>
+					<li class="list-group-detail bg-dark text-light">
+						<b>Date de naissance :</b>
+						{{ user.birthdate ? app.user.birthdate|date('d-m-Y') : '' }}</li>
+
+					{% if detail.cart.billingAddress %}
+						<li class="list-group-detail bg-dark text-light">
+							<b>Adresse de facturation :</b>
+							{{ detail.cart.billingAddress.fullName }}</li>
+						{% if detail.cart.billingAddress %}
+							<li class="list-group-detail bg-dark text-light">
+								<b>Adresse de livraison :</b>
+								{{ detail.cart.deliveryAddress.fullName}}</li>
+						{% endif %}
+					{% else %}
+						<li class="list-group-detail bg-dark text-danger h4 text-center">
+							<b>Adresses de facturation et livraison non définies.</b>
+						</li>
+					{% endif %}
+
+					<li class="list-group-detail bg-dark text-light">
+						<b>N° téléphone :</b>
+						{{ user.phoneNumber }}</li>
+					<li class="list-group-detail bg-dark text-light">
+						<b>Votre compte est vérifié :</b>
+						{{ user.isVerified ? 'Oui' : 'Non' }}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<div class="text-center">
-	<button class="btn btn-primary border-light mb-1" onclick="history.back()">Retour</button>
-	</div></div>{% endblock %}
+		<button class="btn btn-lg btn-warning mb-3">
+			<a class="text-decoration-none text-dark" href="{{ path('app_shipped_order', {'id': cart_id}) }}">Commande expédiée</a>
+		</button>
+	</div>
+{% endif %}{% endfor %}<div class="text-center">
+<button class="btn btn-primary border-light mb-1" onclick="history.back()">Retour</button></div></div>{% endblock %}

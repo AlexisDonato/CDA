@@ -69,7 +69,7 @@ class ValidatedOrdersController extends AbstractController
         if ($this->isGranted('ROLE_CLIENT')) {
             $clientCarts = $cartRepository->findAllByUser($user->getId(), true);
         }
-        if ($this->isGranted('ROLE_SALES')) {
+        if ($this->isGranted('ROLE_SHIP')) {
             $clientCarts = $cartRepository->findAllUsers();
         }
         $validatedOrder = $cartRepository->findAllUsers();
@@ -119,7 +119,7 @@ class ValidatedOrdersController extends AbstractController
     #[Route('validated/orders/{id}/shipped', name: 'app_shipped_order')]
     public function shippedOrder(Request $request, CartRepository $cartRepository, EntityManagerInterface $entityManager, MailerInterface $mailer, ?UserInterface $user, OrderDetailsRepository $orderDetails)
     {
-        if (!$this->isGranted('ROLE_SALES')) {
+        if (!$this->isGranted('ROLE_SHIP')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }

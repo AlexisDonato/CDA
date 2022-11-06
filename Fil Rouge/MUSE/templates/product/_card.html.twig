@@ -8,7 +8,7 @@
 			<h3 class="card-title Hl">{{ product.name }}</h3>
 		</a>
 		<div class="card-text text-primary" style="font-weight: bold; font-size: 2rem; text-align: right;">
-			{% if product.discount %}
+			{% if product.discountRate != 0 %}
 				<small>
 					<s class="text-warning digital">
 						{% if app.user %}
@@ -22,7 +22,7 @@
 				<b class="digital">{{ (product.price * 1.2)|number_format(2, '.', '') }} €</b>
 			{% endif %}
 
-			{% if product.discount %}
+			{% if product.discountRate != 0 %}
 			<div class="d-flex justify-content-end">
 				<h4 class="text-warning digital">-{{ product.discountRate * 100 }}</h4><h5 class="text-warning">% !</h5>
 				</div>

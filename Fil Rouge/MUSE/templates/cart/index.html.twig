@@ -20,13 +20,14 @@
 		{% if count > 0 %}
 			<table class="table table-dark darker border border-info">
 				<thead>
-					<tr class="text-primary">
-						<th id="audioFont" class="surround">Produit</th>
-						<th id="audioFont" class="surround">Prix</th>
-						<th id="audioFont" class="surround">Promotion</th>
-						<th id="audioFont" class="surround">TVA</th>
-						<th id="audioFont" class="surround">Quantité</th>
-						<th id="audioFont" class="surround">Sous-total</th>
+					<tr id="audioFont" class="text-primary surround">
+						<th>Produit</th>
+						<th>Prix</th>
+						<th>Promotion</th>
+						{% for item in items %}{% if item.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+						<th>TVA</th>
+						<th>Quantité</th>
+						<th>Sous-total</th>
 						<th</th>
 					</tr>
 				</thead>
@@ -35,13 +36,14 @@
 						<tr>
 							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.product.name}}</p></a></td>
 							<td>{{item.product.price}}</td>
-							{% if item.product.discount %}<td class="text text-warning"><div class="d-flex justify-content-start">
+							{% if item.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h4 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h4><h5 class="text-warning">%</h5></div>
 							{% else %}<td>-
 							{% endif %}</td>
+							{% if item.cart.additionalDiscountRate != 0 %}<td class="text-success">-{{item.cart.additionalDiscountRate * 100}}%</td>{% endif %}
 							<td>{{ app.user.vat * 100}}%</td>
 							<td>{{item.quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td class="roboto h5{% if item.product.discount %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
+							<td class="roboto h5{% if item.product.discountRate != 0 %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate + item.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 								€</h4></td>
 							<td>
 								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">

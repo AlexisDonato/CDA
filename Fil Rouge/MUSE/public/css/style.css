@@ -410,12 +410,13 @@ h2:hover {
 
 .zoom {
     transition: transform .2s;
-    /* Animation */
     margin: 0 auto;
+    position: relative;
 }
 
 .zoom:hover {
     transform: scale(1.5);
+    z-index:100
 }
 
 

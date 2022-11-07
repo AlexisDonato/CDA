@@ -82,6 +82,7 @@ class AdminProductController extends AbstractController
                     $image1->move($this->getParameter('images_directory'), $fileName1);
                     $product->setImage1($fileName1);
                 }
+            $image2 = $form->get('image2')->getData();
                 if ($image2 != null){
                     $image2 = $form->get('image2')->getData();
                     $fileName2 = $form->get('name')->getData().'-2.'.$image2->guessExtension();

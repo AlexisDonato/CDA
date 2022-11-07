@@ -56,8 +56,9 @@ class ContactController extends AbstractController
 
             $id = $contact->getId();
             $email = (new TemplatedEmail())
-            ->from(new Address('info_noreply@mye-business.com', 'My E-Business MailBot'))
+            ->from(new Address('info_noreply@muse.com', 'Muse MailBot'))
             ->to($contact->getEmail())
+            ->cc('info@muse.com')
             ->subject('Votre demande a bien été envoyée')
             ->htmlTemplate('contact/contact_confirmation_email.html.twig')
             ->context([

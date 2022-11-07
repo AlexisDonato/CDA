@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<body id="orderBody">
+
 		<style>
 			body {
 				background: url('/img/BG22.png') no-repeat center center fixed;
@@ -71,24 +71,20 @@
 								</td>
 								<td class="roboto h5{% if item.product.discountRate != 0 %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate + item.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
 								</td>
-							</h4>
+							<td>
+								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
+									<i class="bi bi-cart-plus"></i>
+								</a>
+								<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
+									<i class="bi bi-cart-dash"></i>
+									<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
+										<i class="fas fa-trash"></i>
+									</a>
+							</td>
 						</tr>
-					</td>
-					<td>
-						<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
-							<i class="bi bi-cart-plus"></i>
-						</a>
-						<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
-							<i class="bi bi-cart-dash"></i>
-							<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
-								<i class="fas fa-trash"></i>
-							</a>
-						</td>
-					</td>
 				</tbody>
-			</tr>
 		{% endfor %}
-	</body>
+
 </tbody>
 <tfoot>
 	<tr>
@@ -139,7 +135,7 @@ Vos informations personnelles :</h3><div class="row">
 				<h5 class="card-title text-info text-center">{{ app.user.email }}</h5>
 			</div>
 			<ul class="list-group list-group-flush">
-				{% if user.pro %}
+				{% if app.user.pro %}
 					<li class="list-group-detail bg-dark text-light">
 						<b>Raison sociale :</b>
 						{{ user.proCompanyName }}</li>
@@ -227,16 +223,14 @@ Vos informations personnelles :</h3><div class="row">
 			{{ include('order/_payCardForm.html.twig') }}
 		</div>
 	</div>
-</div></div><div class="text-center mt-2">
-<button class="btn btn-primary border-light btn-lg text-center">
-	<a class="text-decoration-none text-light" href="{{ path('app_test') }}">Pdf Test</a>
-</button></div>
+</div></div>
+
 
 {# *** STRIPE PAYMENT CARD FORM *** #}
 <div class="text-center">
 <div class="btn btn-primary btn-lg border-light mt-3 mb-3">
 	<form action="{{ path("app_order_validated") }}" method="POST">
-		<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/logo.png" data-locale="auto"></script>
+		<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/Muse_fav.png" data-locale="auto"></script>
 	</form>
 </div></div><div class="text-center">
 <small class="text-info">(Card number: 4242 4242 4242 4242 + any CVC/valid future expiration)</small></div></div></body>{% endblock %}

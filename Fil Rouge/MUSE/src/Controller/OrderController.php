@@ -202,7 +202,9 @@ class OrderController extends AbstractController
         $date = new \DateTime('@'.strtotime('now'));
         $cart->setOrderDate($date);
 
-        $cart->setInvoice('Invoice-'. $orderId .'.pdf');
+        $orderId = $cart->getId();
+        $clientOrderId = $cart->getClientOrderId();
+        $cart->setInvoice('Invoice-'. $clientOrderId .'.pdf');
 
         $entityManager->persist($cart);
         $entityManager->flush();
@@ -214,7 +216,7 @@ class OrderController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
-        $pdf->generateInvoice();
+        $pdf->generateInvoice($clientOrderId);
 
             $email = (new TemplatedEmail())
                 ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))

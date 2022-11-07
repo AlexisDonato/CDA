@@ -38,13 +38,9 @@ class TestController extends AbstractController
     #[Route('/test', name: 'app_test')]
     public function pdfAction(Environment $twig, Pdf $pdf, Request $request, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
-        $pdf_file_path = '/PDFs';
-
         $orderId = $request->attributes->get('id');
                 
         $details = $orderDetails->findBy(['cart' => $orderId]);
-//  dd($details);
-        // $orderDate = $details[0]->getCart()->getOrderDate();
 
         $cartService->setUser($user);
         $clientOrderId = $cart->getClientOrderId();

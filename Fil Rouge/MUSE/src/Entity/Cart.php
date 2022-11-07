@@ -55,7 +55,7 @@ class Cart
     #[ORM\ManyToOne]
     private ?Address $deliveryAddress = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]
     private ?string $additionalDiscountRate = '0';
 
     #[ORM\Column(length: 150, nullable: true)]

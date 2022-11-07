@@ -4,7 +4,7 @@
 namespace App\Service;
 
 use Knp\Snappy\Pdf;
-use App\Entity\Cart;
+// use App\Entity\Cart;
 // use App\Entity\OrderDetails;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
@@ -21,26 +21,36 @@ class PdfTools {
     private $cart;
     private $orderId;
 
-    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, Cart $cart) 
+    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService) 
     {
         $this->pdf = $pdf;
         $this->cartRepository = $cartRepository;
         // $this->request = $request;
         // $this->orderDetails = $orderDetails;
         $this->cartService = $cartService;
-        $this->cart = $cart;
+        // $this->cart = $cart;
         // $this->cart->getId() = $orderId;
+    }
+
+    public function getClientCart() {
+        if (isset($this->user)) {
+            return $this->cartRepository->findOneByUser($this->user->getId());
+        } else {
+            return null;
+        }
     }
 
     public function generateInvoice($orderId) {
 
-        $order = $cartRepository->find($orderId);
+        $order = $this->cartRepository->find($orderId);
 
-        $orderId = $cart->getId();
+
+        $clientCart = $this->getClientCart();
+
                 
-        $details = $orderDetails->findBy(['cart' => $orderId]);
+        // $details = $this->orderDetails->findBy(['cart' => $orderId]);
 
-        $cartService->setUser($user);
+        // $cartService->setUser($user);
         
         $html = $this->renderView('email/test.html.twig', array(
             "order" => $order,

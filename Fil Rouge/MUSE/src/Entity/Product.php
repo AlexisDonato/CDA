@@ -46,7 +46,7 @@ class Product
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $image2 = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]
     private ?string $discountRate = '0';
 
     #[ORM\ManyToOne]

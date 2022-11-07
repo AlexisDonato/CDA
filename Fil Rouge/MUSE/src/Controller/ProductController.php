@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Product;
 use App\Data\SearchData;
 use App\Entity\Category;
 use App\Form\SearchType;
 use App\Service\Cart\CartService;
+use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,8 +23,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'app_product')]
-    public function index(CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
+    public function index(CartRepository $cartRepository, CartService $cartService, ?UserInterface $user, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails, ?EntityManagerInterface $entityManager): Response
     {
+        if ($this->isGranted('ROLE_CLIENT')) {
+            $clientCart = $cartRepository->findOneByUser($user->getId());
+
+            if (!isset($clientCart)) {
+                $clientCart = new Cart();
+                
+                $clientCart->setUser($user);
+                $clientCart->setClientOrderId(strtoupper(uniqid('MUSE::')));
+                $entityManager->persist($clientCart);
+                $entityManager->flush();
+            }
+
+            $cartService->setCart($clientCart);
+            $cartService->setUser($user);
+        }
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);

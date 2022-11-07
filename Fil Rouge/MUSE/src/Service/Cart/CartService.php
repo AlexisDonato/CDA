@@ -99,6 +99,7 @@ class CartService
         $vat = $clientCart->getUser()->getVat();
 
         $discountRate = $product->getDiscountRate();
+        $additionalDiscountRate = $clientCart->getAdditionalDiscountRate();
 
         if ($remove) {
             $product->setQuantity($productQuantity + 1);
@@ -114,7 +115,7 @@ class CartService
         }
 
         $orderDetails->setQuantity($quantity); 
-        $orderDetails->setSubTotal($product->getPrice() * $quantity * (1 - $discountRate) * (1 + $vat));
+        $orderDetails->setSubTotal($product->getPrice() * $quantity * (1 - ($discountRate + $additionalDiscountRate)) * (1 + $vat));
 
         $this->entityManager->persist($orderDetails);
         $this->entityManager->persist($product);

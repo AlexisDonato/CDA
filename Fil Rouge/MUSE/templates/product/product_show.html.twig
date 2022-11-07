@@ -64,7 +64,7 @@
 							</tr>
 							<tr>
 								<th>En stock</th>
-									{% if product.quantity > 0 %}<td>Oui{% else %}<td class="text-danger">Non
+									{% if product.quantity > 0 %}<td>Oui ({{ product.quantity }}){% else %}<td class="text-danger">Non
 									{% endif %}
 								</td>
 							</tr>

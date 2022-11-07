@@ -24,7 +24,7 @@
 				<th>Produit</th>
 				<th>Prix</th>
 				<th>Promotion</th>
-				{% for detail in details %}
+				{% for detail in details|slice(0, 1) %}
 					{% if detail.cart.additionalDiscountRate != 0 %}
 						<th class="text-success">Remise</th>
 					{% endif %}

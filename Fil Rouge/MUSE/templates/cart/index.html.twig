@@ -24,7 +24,7 @@
 						<th>Produit</th>
 						<th>Prix</th>
 						<th>Promotion</th>
-						{% for item in items %}{% if item.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+						{% for item in items|slice(0, 1) %}{% if item.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
 						<th>TVA</th>
 						<th>Quantité</th>
 						<th>Sous-total</th>

@@ -76,9 +76,9 @@
 						</a>
 						<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
 							<i class="bi bi-cart-dash"></i>
-							<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
-								<i class="fas fa-trash"></i>
-							</a>
+						<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
+							<i class="fas fa-trash"></i>
+						</a>
 					</td>
 				</tr>
 			{% endfor %}

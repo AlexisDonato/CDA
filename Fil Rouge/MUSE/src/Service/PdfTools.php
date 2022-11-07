@@ -32,20 +32,20 @@ class PdfTools {
         // $this->cart->getId() = $orderId;
     }
 
-    public function getClientCart() {
-        if (isset($this->user)) {
-            return $this->cartRepository->findOneByUser($this->user->getId());
-        } else {
-            return null;
-        }
-    }
+    // public function getClientCart() {
+    //     if (isset($this->user)) {
+    //         return $this->cartRepository->findOneByUser($this->user->getId());
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     public function generateInvoice($orderId) {
 
         $order = $this->cartRepository->find($orderId);
 
 
-        $clientCart = $this->getClientCart();
+        // $clientCart = $this->getClientCart();
 
                 
         // $details = $this->orderDetails->findBy(['cart' => $orderId]);
@@ -66,7 +66,7 @@ class PdfTools {
             'total' => $cart->getTotal(),
         ));
 
-        $this->pdf->generateFromHtml($html, getenv('INVOICE_DIRECTORY') . 'Invoice-'. $orderId .'.pdf');
+        $this->pdf->generateFromHtml($html, getenv('INVOICE_DIRECTORY'), 'Invoice-'. $orderId .'.pdf');
     // $html = $this->generateUrl('app_home', array(), true); // use absolute path! -> Render a pdf document with a relative url inside like css files
 
         // return new PdfResponse(

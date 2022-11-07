@@ -196,6 +196,15 @@ class OrderController extends AbstractController
         $cartService->setUser($user);
 
         $cart = $cartService->getClientCart();
+// dd($cart);
+        if ($this->cart->getBillingAddress('null') && $this->getDeliveryAddress('null')) {
+
+            $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
+            $route = $request->headers->get('referer');
+            return $this->redirect($route);
+
+        } else {
+
         $cart->setValidated(true);
         $cart->setShipped(false);
         $cart->setTotal($cartService->getTotal($orderDetails));
@@ -225,7 +234,7 @@ class OrderController extends AbstractController
                 ->subject('Votre commande est validée!')
                 ->htmlTemplate('validated_orders/order_validation_email.html.twig')
                 ->context([
-                    'order_id' => $clientOrderId,
+                    'clientOrderId' => $clientOrderId,
                     'details' => $details,
                     'orderDate' => $orderDate,
                     'user' => $user,
@@ -255,6 +264,8 @@ class OrderController extends AbstractController
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');
+        }
+        
     }
 
     #[Route('/verify/order_email', name: 'app_verify_order_email')]

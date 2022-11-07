@@ -1,6 +1,19 @@
 ```mermaid
 classDiagram
 
+class Address{
+PK - id
+name
+country
+zipcode
+city
+pathType
+pathNumber
+user
+billingAddress
+deliveryAddress
+}
+
 class Cart{
 PK - id
 clientOrderId
@@ -16,6 +29,7 @@ total
 billingAddress
 deliveryAddress
 additionalDiscountRate
+invoice
 }
 
 Cart -- OrderDetails
@@ -28,19 +42,6 @@ parentCategory
 
 Category -- Product
 Category -- self
-class Address{
-PK - id
-name
-country
-zipcode
-city
-pathType
-pathNumber
-user
-billingAddress
-deliveryAddress
-}
-
 class Contact{
 PK - id
 name
@@ -77,6 +78,17 @@ supplier
 }
 
 Product -- Category
+class ResetPasswordRequest{
+PK - id
+user
+}
+
+ResetPasswordRequest -- User
+class Supplier{
+PK - id
+name
+}
+
 class User{
 PK - id
 email
@@ -99,16 +111,5 @@ address
 
 User -- Cart
 User -- Address
-class ResetPasswordRequest{
-PK - id
-user
-}
-
-ResetPasswordRequest -- User
-class Supplier{
-PK - id
-name
-}
-
 
 ```

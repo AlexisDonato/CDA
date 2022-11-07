@@ -58,6 +58,9 @@ class Cart
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
     private ?string $additionalDiscountRate = '0';
 
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $invoice = null;
+
 
     public function __construct()
     {
@@ -241,6 +244,18 @@ class Cart
     public function setAdditionalDiscountRate(?string $additionalDiscountRate): self
     {
         $this->additionalDiscountRate = $additionalDiscountRate;
+
+        return $this;
+    }
+
+    public function getInvoice(): ?string
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(?string $invoice): self
+    {
+        $this->invoice = $invoice;
 
         return $this;
     }

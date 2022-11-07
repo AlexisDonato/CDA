@@ -131,6 +131,9 @@ class ValidatedOrdersController extends AbstractController
         $cart->setShipmentDate($date);
         $cart->setCarrierShipmentId(uniqid('SHIP::'));
         $cart->setCarrier(uniqid('CARRIER::'));
+
+        // $cart->setInvoice('Invoice-'. $orderId .'.pdf');
+
         $entityManager->persist($cart);
         $entityManager->flush();
 

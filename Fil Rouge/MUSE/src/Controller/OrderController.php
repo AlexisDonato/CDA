@@ -8,6 +8,7 @@ use Twig\Environment;
 use App\Entity\Address;
 // use App\Form\AddressType;
 use App\Data\SearchData;
+use App\Service\PdfTools;
 use App\Form\OrderAddressType;
 use App\Form\SelectAddressType;
 use App\Security\EmailVerifier;
@@ -181,7 +182,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/validated', name: 'app_order_validated')]
-    public function validateOrder(Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function validateOrder(PdfTools $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -200,6 +201,9 @@ class OrderController extends AbstractController
         $cart->setTotal($cartService->getTotal($orderDetails));
         $date = new \DateTime('@'.strtotime('now'));
         $cart->setOrderDate($date);
+
+        $cart->setInvoice('Invoice-'. $orderId .'.pdf');
+
         $entityManager->persist($cart);
         $entityManager->flush();
 
@@ -210,40 +214,7 @@ class OrderController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
-        // $this->twig = $twig;
-        $this->pdf = $pdf;
-        // $this->entrypointLookup = $entrypointLookup;
-
-        // $pdf_file_path = '/PDFs';
-
-        // $this->pdf->generateFromHtml($this->twig->render(
-        //     'email/order_validation_pdf.html.twig', // Le template représentant le pdf à générer
-        //     [
-        //         'items'     => $cartService->getFullCart($orderDetails),
-        //         'count'     => $cartService->getItemCount($orderDetails),
-        //         'total'     => $cartService->getTotal($orderDetails),
-        //         'user'      => $user,
-        //         'addresses' => $addresses,
-        //         'clientOrderId'   => $clientOrderId,
-        //         'cart'      => $cart,
-        //         'details' => $details,
-        //     ]
-        // ), $pdf_file_path); // Chemin où extraire le PDF une fois généré
-
-        // $html = $this->twig->render('email/order_validation_pdf.html.twig', [
-        //     'items'     => $cartService->getFullCart($orderDetails),
-        //     'count'     => $cartService->getItemCount($orderDetails),
-        //     'total'     => $cartService->getTotal($orderDetails),
-        //     'user'      => $user,
-        //     'addresses' => $addresses,
-        //     'clientOrderId'   => $clientOrderId,
-        //     'cart'      => $cart,
-        //     'details' => $details,
-        //     ]);
-
-        //     $this->entrypointLookup->reset();
-
-        //     $pdf = $this->pdf->getOutputFromHtml($html);
+        $pdf->generateInvoice();
 
             $email = (new TemplatedEmail())
                 ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))

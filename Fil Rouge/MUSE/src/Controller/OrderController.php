@@ -196,8 +196,8 @@ class OrderController extends AbstractController
         $cartService->setUser($user);
 
         $cart = $cartService->getClientCart();
-// dd($cart);
-        if ($this->cart->getBillingAddress('null') && $this->getDeliveryAddress('null')) {
+dd($cart);
+        if ($cart->billingAddress!=null && $this->deliveryAddress!=null) {
 
             $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
             $route = $request->headers->get('referer');
@@ -245,22 +245,6 @@ class OrderController extends AbstractController
                 ]);
                 // ->attach($pdf, sprintf('order_validation_%s.pdf', date('d-m-Y')));
             $mailer->send($email);
-        
-            if ($this->isGranted('ROLE_CLIENT')) {
-                $clientCart = $cartRepository->findOneByUser($user->getId());
-    
-                if (!isset($clientCart)) {
-                    $clientCart = new Cart();
-                    
-                    $clientCart->setUser($user);
-                    $clientCart->setClientOrderId(strtoupper(uniqid('MUSE::')));
-                    $entityManager->persist($clientCart);
-                    $entityManager->flush();
-                }
-    
-                $cartService->setCart($clientCart);
-                $cartService->setUser($user);
-            }
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');

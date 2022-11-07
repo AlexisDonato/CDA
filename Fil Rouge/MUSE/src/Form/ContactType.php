@@ -18,9 +18,6 @@ class ContactType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'FirstNameField'],
                     'constraints' => [
                         new Regex([
@@ -32,9 +29,6 @@ class ContactType extends AbstractType
 
             ->add('email', TextType::class, [
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 'attr' => ['class' => 'EmailField'],
                 'constraints' => [
                     new Regex([
@@ -57,9 +51,6 @@ class ContactType extends AbstractType
                 'multiple' => true,
                 'help' => 'Maintenez Ctrl enfoncé pour un choix multiple',
                 'required' => true,
-                'row_attr' => [
-                    'class' => 'col-md-6 ml-3',
-                    ],
                 ])
 
             ->add('message', TextareaType::class, [
@@ -67,7 +58,6 @@ class ContactType extends AbstractType
                     'placeholder' => "Merci de préciser les références des produits, commandes ou références de dossier dans le cas d'un suivi",
                     'class' => 'font-italic',
                 ],
-                'help' => "Merci de préciser les références des produits, commandes ou références de dossier dans le cas d'un suivi",
             ]);
         ;
     }

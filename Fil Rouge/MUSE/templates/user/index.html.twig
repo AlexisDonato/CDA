@@ -26,7 +26,7 @@
         {% for user in users %}
             <tr class="text-break">
                 <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
+                <td class="text-success">{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.userName }}</td>

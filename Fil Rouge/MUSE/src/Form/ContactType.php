@@ -49,7 +49,6 @@ class ContactType extends AbstractType
                 ],
                 'mapped' => true,
                 'multiple' => true,
-                'help' => 'Maintenez Ctrl enfoncé pour un choix multiple',
                 'required' => true,
                 ])
 

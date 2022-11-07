@@ -75,7 +75,7 @@
 							<tr>
 								<th>TVA</th>
 								{% if app.user %}
-								<td>{{ app.user.vat * 100}}% {% if is_granted('ROLE_PRO') %}(PRO){% endif %}</td>
+								<td>{{ app.user.vat * 100}}%{% if is_granted('ROLE_PRO') %} (PRO){% endif %}</td>
 								{% else %}
 								<td>20 %</td>
 								{% endif %}

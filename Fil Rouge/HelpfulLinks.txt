@@ -1,4 +1,6 @@
 SYMFONY:
+	-EasyAdmin Dashboard: https://symfonycasts.com/screencast/easyadminbundle/install
+	
 	-Generate Pdfs : * https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
 			 * https://github.com/KnpLabs/KnpSnappyBundle
 			 
@@ -17,3 +19,10 @@ SYMFONY:
 
 LOGOS:
 	-https://www.experte.com/fr/logo-maker#/
+	
+YARN, NODE, NPM:
+	-https://codex.so/how-to-install-the-latest-node-js-npm-and-yarn
+	
+CHARTS:
+	-https://www.chartjs.org/
+	-https://symfony.com/bundles/ux-chartjs/current/index.html

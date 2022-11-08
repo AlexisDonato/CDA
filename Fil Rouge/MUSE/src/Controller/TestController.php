@@ -53,7 +53,7 @@ class TestController extends AbstractController
     
         $user = $cart->getUser();
 
-        $html = $this->renderView('validated_orders/order_validation_email.html.twig', array(
+        $html = $this->renderView('email/invoice.html.twig', array(
                 'order_id' => $clientOrderId,
                 'cart_id' => $orderId,
                 'details' => $details,

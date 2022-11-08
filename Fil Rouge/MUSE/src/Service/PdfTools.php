@@ -9,6 +9,7 @@ use Knp\Snappy\Pdf;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
 // use Symfony\Component\HttpFoundation\Request;
+use App\Repository\OrderDetailsRepository;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class PdfTools {
@@ -21,49 +22,47 @@ class PdfTools {
     private $cart;
     private $orderId;
 
-    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService) 
+    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, OrderDetailsRepository $orderDetails) 
     {
         $this->pdf = $pdf;
         $this->cartRepository = $cartRepository;
         // $this->request = $request;
-        // $this->orderDetails = $orderDetails;
+        $this->orderDetails = $orderDetails;
         $this->cartService = $cartService;
         // $this->cart = $cart;
         // $this->cart->getId() = $orderId;
     }
 
-    // public function getClientCart() {
-    //     if (isset($this->user)) {
-    //         return $this->cartRepository->findOneByUser($this->user->getId());
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
     public function generateInvoice($orderId) {
 
         $order = $this->cartRepository->find($orderId);
+        dd($order);
+
+        // $user = $cart->getUser();
+        // $cart = $this->cartService->getClientCart();
+        // $details = $orderDetails->findBy(['cart' => $orderId]);
 
 
         // $clientCart = $this->getClientCart();
 
-                
         // $details = $this->orderDetails->findBy(['cart' => $orderId]);
 
         // $cartService->setUser($user);
         
         $html = $this->renderView('email/test.html.twig', array(
             "order" => $order,
-            'order_id' => $cart->getClientOrderId(),
-            'cart_id' => $orderId,
-            'details' => $details,
-            'orderDate' => $orderDate,
-            'shipped' => $cart->isShipped(),
-            'shipmentDate' => $cart->getShipmentDate(),
-            'carrier' => $cart->getCarrier(),
-            'carrierShipmentId' => $cart->getCarrierShipmentId(),
-            'user' => $cart->getUser(),
-            'total' => $cart->getTotal(),
+            // 'details' => $details,
+            // 'user' => $user,
+
+            // 'clientOrderId' => $cart->getClientOrderId(),
+            // 'cart_id' => $orderId,
+            // 'orderDate' => $orderDate,
+            // 'shipped' => $cart->isShipped(),
+            // 'shipmentDate' => $cart->getShipmentDate(),
+            // 'carrier' => $cart->getCarrier(),
+            // 'carrierShipmentId' => $cart->getCarrierShipmentId(),
+            // 'user' => $cart->getUser(),
+            // 'total' => $cart->getTotal(),
         ));
 
         $this->pdf->generateFromHtml($html, getenv('INVOICE_DIRECTORY'), 'Invoice-'. $orderId .'.pdf');

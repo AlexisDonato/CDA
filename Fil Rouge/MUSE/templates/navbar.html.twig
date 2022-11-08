@@ -81,10 +81,10 @@
 					<b>Back Office</b>
 				</a>
 				<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-					{% if is_granted('ROLE_SALES') %}
 					<a class="dropdown-item text-danger" href="{{ path('app_user_index') }}">
 						<b>Index des utilisateurs</b>
 					</a>
+					{% if is_granted('ROLE_SALES') %}
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item text-danger" href="{{ path('app_admin_product_index') }}">
 						<b>Index des produits</b>

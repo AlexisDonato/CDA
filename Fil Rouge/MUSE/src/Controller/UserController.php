@@ -23,11 +23,11 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(CartService $cartService, UserRepository $userRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-        if (!$this->isGranted('ROLE_SALES')) {
+        if (!$this->isGranted('ROLE_SHIP')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
 
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -97,15 +97,15 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(UserRepository $userRepository, CartService $cartService, User $user, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
-        if (!$this->isGranted('ROLE_SALES')) {
+        if (!$this->isGranted('ROLE_SHIP')) {
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
 
         // The user cannot access other users infos:
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
         }
 
         $categories = $categoryRepository->findAll();

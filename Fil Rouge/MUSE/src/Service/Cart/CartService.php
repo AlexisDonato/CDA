@@ -126,24 +126,22 @@ class CartService
     #[IsGranted('ROLE_CLIENT')]
     public function delete(int $id)
     {
-        
         $clientCart = $this->getClientCart();
         $orderDetails = $this->getOrderDetails($clientCart, $id);
         $quantity = $orderDetails->getQuantity();
         $product = $this->productRepository->find($id);
         $productQuantity = $product->getQuantity();
         $product->setQuantity($productQuantity + $quantity);
+
         $this->entityManager->remove($orderDetails);
         $this->entityManager->persist($product);
         $this->entityManager->flush();
-
     }
 
     #[IsGranted('ROLE_CLIENT')]
     public function deleteAll()
     {
         $clientCart = $this->getClientCart();
-        $em = $this->entityManager;
         $orderDetails = $this->orderDetailsRepository->createQueryBuilder('o')
         ->join(Cart::class, 'c', 'WITH', 'o.cart = c.id')
         ->where('o.cart = :cart_id')
@@ -151,16 +149,18 @@ class CartService
         ->getQuery()
         ->getResult();
 
-        foreach($orderDetails as $orderDetail) {
+        foreach($orderDetails as $orderDetail) 
+        {
             $productId = $orderDetail->getProductId();
             $quantity = $orderDetail->getQuantity();
             $product = $this->productRepository->find($productId);
             $productQuantity = $product->getQuantity();
             $product->setQuantity($productQuantity + $quantity);
-            $em->persist($product);
+
+            $this->entityManager->persist($product);
         }
-        $em->remove($clientCart);
-        $em->flush();
+        $this->entityManager->remove($clientCart);
+        $this->entityManager->flush();
     }
 
     #[IsGranted('ROLE_CLIENT')]
@@ -233,7 +233,6 @@ class CartService
         return $this->session;
     }
 
-
     /**
      * Set the value of user
      */
@@ -244,7 +243,6 @@ class CartService
         return $this;
     }
 
-
     /**
      * Get the value of user
      */
@@ -252,6 +250,7 @@ class CartService
     {
         return $this->user;
     }
+
 
     public function getCart() {
         return $this->clientCart;

@@ -1,5 +1,6 @@
 SYMFONY:
 	-EasyAdmin Dashboard: https://symfonycasts.com/screencast/easyadminbundle/install
+	-https://symfony.com/bundles/EasyAdminBundle/1.x/book/installation.html#installation-without-symfony-flex
 	
 	-Generate Pdfs : * https://symfonycasts.com/screencast/mailer/snappy-wkhtmltopdf#play
 			 * https://github.com/KnpLabs/KnpSnappyBundle

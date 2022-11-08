@@ -197,7 +197,7 @@ class OrderController extends AbstractController
 
         $cart = $cartService->getClientCart();
 
-        // if ($cart->billingAddress == null && $cart->deliveryAddress == null) {
+        // if ($this->cart->isBillingAddress(null) && $this->cart->isDeliveryAddress(null)) {
 
         //     $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
         //     $route = $request->headers->get('referer');

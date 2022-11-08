@@ -131,7 +131,18 @@ class Address
 
     public function __toString()
     {
-        return $this->name . " " . $this->pathNumber;
+        if($this->isDeliveryAddress(true)){
+            $deliveryAddress = ' (Livraison)';
+        } else {
+            $deliveryAddress = '';
+        }
+        if ($this->isBillingAddress(true)){
+            $billingAddress = ' (Facturation)';
+        }else {
+            $billingAddress = '';
+        }
+
+        return $this->name . $deliveryAddress . $billingAddress . " : " . $this->pathNumber . " " . $this->pathType . " " . $this->zipcode . " " . $this->city;
     }
 
     public function isBillingAddress(): ?bool

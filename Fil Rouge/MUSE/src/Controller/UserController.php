@@ -118,7 +118,7 @@ class UserController extends AbstractController
         $cartService->setUser($user);
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
-        dd($addresses);
+
         return $this->render('user/show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),

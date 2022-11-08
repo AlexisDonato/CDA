@@ -338,13 +338,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getAddress(): Collection
     {
-        return $this->Address;
+        return $this->address;
     }
 
     public function addAddress(Address $address): self
     {
-        if (!$this->Address->contains($address)) {
-            $this->Address->add($address);
+        if (!$this->address->contains($address)) {
+            $this->address->add($address);
             $address->setUser($this);
         }
 
@@ -353,7 +353,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeAddress(Address $address): self
     {
-        if ($this->Address->removeElement($address)) {
+        if ($this->address->removeElement($address)) {
             // set the owning side to null (unless already changed)
             if ($address->getUser() === $this) {
                 $address->setUser(null);

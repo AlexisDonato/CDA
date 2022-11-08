@@ -1,0 +1,36 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+{% block main %}
+    <div class="row">
+
+        <div class="col-12">
+            {{ render_chart(chart) }}
+        </div>
+
+        <div class="col-6">
+            <h3>Users</h3>
+            <ol>
+                {% for user in users %}
+                    <li>
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}">{{ user.email }}</a>
+                        <br>- {{ user.id }}
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="col-6">
+            <h3>Adresses</h3>
+            <ol>
+                {% for address in addresses %}
+                    <li>
+                        <a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a> 
+                        <br>- ({{ address.fullName }})
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endblock %}

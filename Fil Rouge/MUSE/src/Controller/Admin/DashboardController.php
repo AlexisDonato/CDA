@@ -9,9 +9,14 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\Supplier;
 use App\Entity\OrderDetails;
+use App\Repository\CartRepository;
 use App\Repository\UserRepository;
 use Symfony\UX\Chartjs\Model\Chart;
 use App\Repository\AddressRepository;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\SupplierRepository;
+use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -20,6 +25,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\Security\Core\Security as SecurityCore;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -30,12 +36,22 @@ class DashboardController extends AbstractDashboardController
 {
     private UserRepository $userRepository;
     private AddressRepository $addressRepository;
+    private SupplierRepository $supplierRepository;
+    private CategoryRepository $categoryRepository;
+    private ProductRepository $productRepository;
+    private OrderDetailsRepository $orderDetails;
+    private CartRepository $cartRepository;
     private ChartBuilderInterface $chartBuilder;
 
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository, ChartBuilderInterface $chartBuilder)
+    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository, SupplierRepository $supplierRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartRepository $cartRepository, ChartBuilderInterface $chartBuilder)
     {
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
+        $this->supplierRepository = $supplierRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
+        $this->orderDetails = $orderDetails;
+        $this->cartRepository = $cartRepository;
         $this->chartBuilder = $chartBuilder;
     }
 
@@ -55,6 +71,16 @@ class DashboardController extends AbstractDashboardController
 
         $addresses = $this->addressRepository->findAll();
 
+        $suppliers = $this->supplierRepository->findAll();
+
+        $categories = $this->categoryRepository->findAll();
+
+        $products = $this->productRepository->findAll();
+
+        $orderDetails = $this->orderDetails->findAll();
+
+        $carts = $this->cartRepository->findAll();
+
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -72,6 +98,11 @@ class DashboardController extends AbstractDashboardController
         return $this->render('dashboard/dashboard.html.twig', [
             'users' => $users,
             'addresses' => $addresses,
+            'suppliers' => $suppliers,
+            'categories' => $categories,
+            'products' => $products,
+            'orderDetails' => $orderDetails,
+            'carts' => $carts,
             'chart' => $this->createChart(),
         ]);
     }

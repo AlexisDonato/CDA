@@ -18,7 +18,7 @@
 					<strong class="text-warning">{{ sumVal / users|length }}</strong>
 				</li>
 				<li>Moyenne des dépenses par utilisateur :
-					<strong class="text-warning">{{ sumTotal / users|length }}</strong>
+					<strong class="text-warning">{{ (sumTotal / users|length)|number_format(2, '.', '') }} €</strong>
 				</li>
 			</ul>
 		</div>
@@ -124,7 +124,7 @@
 					<strong class="text-warning">{{ sumVal }}</strong>
 				</li>
 
-                <li>Nombre de commandes en cours de livraion :
+                <li>Nombre de commandes en cours de livraison :
 					<strong class="text-warning">{{ sumVal - sumShip }}</strong>
 				</li>
 
@@ -132,7 +132,7 @@
 					<strong class="text-warning">{{ sumVal / users|length }}</strong>
 				</li>
 				<li>Moyenne des dépenses par commande :
-					<strong class="text-warning">{{ sumTotal / sumVal }}</strong>
+					<strong class="text-warning">{{ (sumTotal / sumVal)|number_format(2, '.', '') }} €</strong>
 				</li>
 			</ul>
 		</div>

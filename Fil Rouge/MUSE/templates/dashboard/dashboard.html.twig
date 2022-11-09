@@ -5,12 +5,14 @@
 {% endblock %}
 {% block main %}
 	{# <div class="text-center mt-0">
-			<img src='/img/Muse_rect_trans.png' style="width: 10rem; height:auto;">
+			<img src='/img/Muse_rect_trans.png' style="width: 10rem; height:auto; position: relative;">
 		</div> #}
 
 	<div class="row">
+        <h1 class="text-info text-center mb-3">Statistiques du site</h1>
 
 		{% include '/dashboard/pie_bar_chart1.html.twig' %}
+
 		<div class="row d-flex justify-content-center">
 			<table class="columns">
 				<tr>
@@ -30,134 +32,62 @@
         {{ render_chart(chart) }}
     </div> #}
 
-	<div class="row mt-3 d-flex justify-content-around">
-		<div class="col-md-3">
-			<h3 class="text-info">Inscrits :
-				{{ users|length }}
-			</h3>
-			<ul>{% set sumVal = 0 %}
-				{% for cart in carts %}
-					{% set sumVal = sumVal + cart.validated %}
-				{% endfor %}
-				<li>Nombre de paniers sans commande :
-					<strong class="text-warning">{{ carts|length - sumVal }}</strong>
-				</li>
-				<li>Moyenne de commandes par utilisateur :
-					<strong class="text-warning">{{ sumVal / users|length }}</strong>
-				</li>
-				<li>Moyenne des dépenses par utilisateur :
-					{% set sum = 0 %}
-					{% for cart in carts %}
-						{% set sum = sum + cart.total %}
-					{% endfor %}
-					<strong class="text-warning">{{ sum / users|length }}</strong>
-				</li>
-			</ul>
-		</div>
+{% include '/dashboard/global_figures.html.twig' %}
 
-		<div class="col-md-3">
-			<h3 class="text-info">Adresses :
-				{{ addresses|length }}</h3>
-			<ul>
-				<li>
-					Moyenne d'adresses par utilisateur:
-					<strong class="text-warning">{{ addresses|length / users|length }}</strong>
-				</li>
-				{# {% for address in addresses|slice(0,3) %}
-                    <li>
-                        <a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a>
-                        <br>- ({{ address.fullName }})
-                    </li>
-                {% endfor %} #}
-			</ul>
-		</div>
+{# Chiffre d'affaires mois par mois pour une année sélectionnée
+Chiffre d'affaires généré pour un fournisseur
+TOP 10 des produits les plus commandés pour une année sélectionnée (référence et nom du produit, quantité commandée, fournisseur)
+TOP 10 des produits les plus rémunérateurs pour une année sélectionnée (référence et nom du produit, marge, fournisseur)
+Top 10 des clients en nombre de commandes ou chiffre d'affaires
+Répartition du chiffre d'affaires par type de client
+Nombre de commandes en cours de livraison. #}
 
-		<div class="col-md-3">
-			<h3 class="text-info">Fournisseurs :
-				{{ suppliers|length }}
-			</h3>
-			<ul>
-				<li>
-					Moyenne de produits par fournisseur:
-					<strong class="text-warning">{{ products|length / suppliers|length }}</strong>
-				</li>
-			</ul>
-		</div>
 
-		<div class="col-md-3">
-			<h3 class="text-info">Catégories :
-				{{ categories|length }}
-			</h3>
-			<ul>
-				<li>
-					Moyenne de produits par catégorie:
-					<strong class="text-warning">{{ products|length / categories|length }}</strong>
-				</li>
-			</ul>
-		</div>
+<table class="table table-dark darker table-striped">
 
-		<div class="col-md-3">
-			<h3 class="text-info">Produits :
-				{{ products|length }}
-			</h3>
-			<ul>{% set sumQuant = 0 %}
-				{% for product in products %}
-					{% set sumQuant = sumQuant + product.quantity %}
-				{% endfor %}
-				<li>Moyenne des quantités en stock par produit :
-					<strong class="text-warning">{{ sumQuant / products|length}}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Détails des paniers / commandes:
-				{{ orderDetails|length }}
-			</h3>
-			<ul>
-				{% set sumProd = 0 %}
-				{% for detail in orderDetails %}
-					{% set sumProd = sumProd + detail.quantity %}
-				{% endfor %}
+				{% set sumTotal = 0 %}
 				{% set sumVal = 0 %}
+                {% set sumShip = 0 %}
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
-				{% endfor %}
-				<li>
-					Moyenne de produits par panier:
-					<strong class="text-warning">{{ sumProd / carts|length }}</strong>
-				</li>
-				<li>
-					Moyenne de produits par commande:
-					<strong class="text-warning">{{ sumProd / sumVal }}</strong>
-				</li>
-			</ul>
-		</div>
+                    {% set sumShip = sumShip + cart.shipped %}
+                        {% if cart.validated == true %}
+                            {% set sumTotal = sumTotal + cart.total %}
+                        {% endif %}
+                {% endfor %}
 
-		<div class="col-md-3">
-			<h3 class="text-info">Paniers / commandes :
-			</h3>
-			<ul>
-				{% set sum = 0 %}
-				{% set sumVal = 0 %}
-				{% for cart in carts %}
-					{% set sum = sum + cart.total %}
-					{% set sumVal = sumVal + cart.validated %}
-				{% endfor %}
-				<li>Nombre de paniers :
-					<strong class="text-warning">{{ carts|length }}</strong>
-				</li>
-				<li>Nombre de commandes :
-					<strong class="text-warning">{{ sumVal }}</strong>
-				</li>
-				<li>Moyenne des commandes par utilisateur :
-					<strong class="text-warning">{{ sumVal / users|length }}</strong>
-				</li>
-				<li>Moyenne des dépenses par commande :
-					<strong class="text-warning">{{ sum / sumVal }}</strong>
-				</li>
-			</ul>
-		</div>
+        <thead>
+            <tr class="text-warning">
+                <th>Nombre de commandes en cours de livraison</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th> </th>
+                <th></th>
+                <th></th>
+                <th> </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ sumVal - sumShip }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-break"></td>
+                <td class="text-break"></td>
+                <td class="text-break"></td>
+                <td></td>
+                <td></td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 	</div>
 	{% block javascripts %}

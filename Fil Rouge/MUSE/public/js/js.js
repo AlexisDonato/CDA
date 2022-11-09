@@ -124,8 +124,10 @@ function addCoupon() {
 
         if (getComputedStyle(couponInput).display != "none") {
             couponInput.style.display = "none";
+            CouponButton.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
         } else {
             couponInput.style.display = "block";
+            couponInput.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
         }
 }
 

@@ -52,28 +52,19 @@ subject
 enquiryDate
 }
 
-class OrderDetails{
-PK - id
-productId
-quantity
-cart
-product
-subTotal
-}
-
 class Product{
 PK - id
 name
 price
 description
 content
-image
 discount
+discountRate
 categories
 quantity
+image
 image1
 image2
-discountRate
 supplier
 }
 
@@ -111,5 +102,14 @@ address
 
 User -- Cart
 User -- Address
+class OrderDetails{
+PK - id
+productId
+quantity
+cart
+product
+subTotal
+}
+
 
 ```

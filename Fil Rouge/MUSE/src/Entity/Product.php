@@ -28,11 +28,11 @@ class Product
     #[ORM\Column(type: 'text')]
     private $content;
 
-    #[ORM\Column(length: 200, nullable: true)]
-    private ?string $image = null;
-
     #[ORM\Column(type: 'boolean')]
     private $discount;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]
+    private ?string $discountRate = '0';
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private $categories;
@@ -41,13 +41,13 @@ class Product
     private ?int $quantity = null;
 
     #[ORM\Column(length: 200, nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $image1 = null;
 
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $image2 = null;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]
-    private ?string $discountRate = '0';
 
     #[ORM\ManyToOne]
     private ?Supplier $supplier = null;

@@ -14,59 +14,66 @@
 		</div>
 
 		{# <canvas id="myChart" width="400" height="100"></canvas>
-		<script>
-		const ctx = document.getElementById('myChart').getContext('2d');
-		const myChart = new Chart(ctx, {
-		    type: 'bar',
-		    data: {
-		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-		        datasets: [{
-		            label: '# of Votes',
-		            data: [12, 19, 3, 5, 2, 3],
-		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.2)',
-		                'rgba(54, 162, 235, 0.2)',
-		                'rgba(255, 206, 86, 0.2)',
-		                'rgba(75, 192, 192, 0.2)',
-		                'rgba(153, 102, 255, 0.2)',
-		                'rgba(255, 159, 64, 0.2)'
-		            ],
-		            borderColor: [
-		                'rgba(255, 99, 132, 1)',
-		                'rgba(54, 162, 235, 1)',
-		                'rgba(255, 206, 86, 1)',
-		                'rgba(75, 192, 192, 1)',
-		                'rgba(153, 102, 255, 1)',
-		                'rgba(255, 159, 64, 1)'
-		            ],
-		            borderWidth: 1
-		        }]
-		    },
-		    options: {
-		        scales: {
-		            y: {
-		                beginAtZero: true
-		            }
-		        }
-		    }
-		});
-		</script> #}
+				<script>
+				const ctx = document.getElementById('myChart').getContext('2d');
+				const myChart = new Chart(ctx, {
+				    type: 'bar',
+				    data: {
+				        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+				        datasets: [{
+				            label: '# of Votes',
+				            data: [12, 19, 3, 5, 2, 3],
+				            backgroundColor: [
+				                'rgba(255, 99, 132, 0.2)',
+				                'rgba(54, 162, 235, 0.2)',
+				                'rgba(255, 206, 86, 0.2)',
+				                'rgba(75, 192, 192, 0.2)',
+				                'rgba(153, 102, 255, 0.2)',
+				                'rgba(255, 159, 64, 0.2)'
+				            ],
+				            borderColor: [
+				                'rgba(255, 99, 132, 1)',
+				                'rgba(54, 162, 235, 1)',
+				                'rgba(255, 206, 86, 1)',
+				                'rgba(75, 192, 192, 1)',
+				                'rgba(153, 102, 255, 1)',
+				                'rgba(255, 159, 64, 1)'
+				            ],
+				            borderWidth: 1
+				        }]
+				    },
+				    options: {
+				        scales: {
+				            y: {
+				                beginAtZero: true
+				            }
+				        }
+				    }
+				});
+				</script> #}
 
 
 		<div class="col-md-3">
-			<h3>Inscrits : {{ users|length }}
-				</h3>
-			<ul>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <strong>{{ addresses|length / users|length }}</strong></li>
-                    <li>Moyenne de paniers par utilisateur: 
-                    <strong>{{ carts|length / users|length }}</strong></li>
-                    <li>Moyenne des dépenses par utilisateur: 
-                    {% set sum = 0 %} 
-                    {% for cart in carts %}
-                        {% set sum = sum + cart.total %} 
-                    {% endfor %}
-                    <strong>{{ sum / users|length }}</strong></li>
+			<h3>Inscrits :
+				{{ users|length }}
+			</h3>
+			<ul>{% set sumVal = 0 %}
+				{% for cart in carts %}
+					{% set sumVal = sumVal + cart.validated %}
+				{% endfor %}
+                <li>Nombre de paniers sans commande :
+					<strong>{{ carts|length - sumVal }}</strong>
+				</li>
+				<li>Moyenne de commandes par utilisateur :
+					<strong>{{ sumVal / users|length }}</strong>
+				</li>
+				<li>Moyenne des dépenses par utilisateur :
+					{% set sum = 0 %}
+					{% for cart in carts %}
+						{% set sum = sum + cart.total %}
+					{% endfor %}
+					<strong>{{ sum / users|length }}</strong>
+				</li>
 			</ul>
 		</div>
 
@@ -74,67 +81,105 @@
 			<h3>Adresses :
 				{{ addresses|length }}</h3>
 			<ul>
-				{% for address in addresses|slice(0,3) %}
-					<li>
-						<a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a>
-						<br>- ({{ address.fullName }})
-					</li>
-				{% endfor %}
+				<li>
+					Moyenne d'adresses par utilisateur:
+					<strong>{{ addresses|length / users|length }}</strong>
+				</li>
+				{# {% for address in addresses|slice(0,3) %}
+									<li>
+										<a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a>
+										<br>- ({{ address.fullName }})
+									</li>
+								{% endfor %} #}
 			</ul>
 		</div>
 
 		<div class="col-md-3">
-			<h3>Fournisseurs : {{ suppliers|length }}
-				</h3>
+			<h3>Fournisseurs :
+				{{ suppliers|length }}
+			</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ addresses|length / users|length }}</strong></h5></li>
+				<li>
+					Moyenne de produits par fournisseur:
+					<h5 class="text-primary">
+						<strong>{{ products|length / suppliers|length }}</strong>
+					</h5>
+				</li>
 			</ul>
 		</div>
 
-        <div class="col-md-3">
-			<h3>Catégories : {{ categories|length }}
-				</h3>
+		<div class="col-md-3">
+			<h3>Catégories :
+				{{ categories|length }}
+			</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ users|length / addresses|length}}</strong></h5></li>
+				<li>
+					Moyenne de produits par catégorie:
+					<h5 class="text-primary">
+						<strong>{{ products|length / categories|length }}</strong>
+					</h5>
+				</li>
 			</ul>
 		</div>
 
-        <div class="col-md-3">
-			<h3>Produits : {{ products|length }}
-				</h3>
+		<div class="col-md-3">
+			<h3>Produits :
+				{{ products|length }}
+			</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ users|length / addresses|length}}</strong></h5></li>
+				<li>Nombre d'adresses:
+					{{ addresses|length  }}</li>
+				<li>Nombre d'utilisateurs:
+					{{ users|length }}</li>
+				<li>
+					Moyenne d'adresses par utilisateur:
+					<h5 class="text-primary">
+						<strong>{{ users|length / addresses|length }}</strong>
+					</h5>
+				</li>
 			</ul>
 		</div>
 
-        <div class="col-md-3">
-			<h3>Détails de commande : {{ orderDetails|length }}
-				</h3>
+		<div class="col-md-3">
+			<h3>Détails de commande :
+				{{ orderDetails|length }}
+			</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ users|length / addresses|length}}</strong></h5></li>
+				{% set sum = 0 %}
+				{% for detail in orderDetails %}
+					{% set sum = sum + detail.quantity %}
+				{% endfor %}
+				<li>
+					Moyenne de produits par panier:
+					<h5 class="text-primary">
+						<strong>{{ sum / carts|length }}</strong>
+					</h5>
+				</li>
 			</ul>
 		</div>
 
-        <div class="col-md-3">
-			<h3>Paniers : {{ carts|length }}
-				</h3>
+		<div class="col-md-3">
+			<h3>Paniers / commandes :
+			</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
-                   <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ users|length / addresses|length}}</strong></h5></li>
+				{% set sum = 0 %}
+				{% set sumVal = 0 %}
+				{% for cart in carts %}
+					{% set sum = sum + cart.total %}
+					{% set sumVal = sumVal + cart.validated %}
+				{% endfor %}
+				<li>Nombre de paniers :
+					<strong>{{ carts|length }}</strong>
+				</li>
+				<li>Nombre de commandes :
+					<strong>{{ sumVal|length }}</strong>
+				</li>
+				<li>Moyenne des commandes par utilisateur :
+					<strong>{{ sumVal / users|length }}</strong>
+				</li>
+				<li>Moyenne des dépenses par commande :
+					<strong>{{ sum / sumVal }}</strong>
+				</li>
 			</ul>
 		</div>
 

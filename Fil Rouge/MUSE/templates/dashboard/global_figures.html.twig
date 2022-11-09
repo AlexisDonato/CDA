@@ -13,6 +13,8 @@
 
 				{% set sumShip = 0 %}
 
+				{% set sumPrice = 0 %}
+
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
 					{% set sumShip = sumShip + cart.shipped %}
@@ -26,6 +28,7 @@
 
 				{% for product in products %}
 					{% set sumQuant = sumQuant + product.quantity %}
+					{% set sumPrice = sumPrice + product.price %}
 				{% endfor %}
 
 				{% for detail in orderDetails %}
@@ -94,6 +97,9 @@
 			<ul>
 				<li>Moyenne des quantités en stock par produit :
 					<strong class="text-warning">{{ (sumQuant / products|length)|number_format(2, '.', '') }}</strong>
+				</li>
+				<li>Prix moyen des produits :
+					<strong class="text-warning">{{ (sumPrice / products|length)|number_format(2, '.', '') }} €</strong>
 				</li>
 			</ul>
 		</div>

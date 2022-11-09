@@ -51,21 +51,45 @@ Nombre de commandes en cours de livraison. #}
 <table class="table table-dark darker table-striped">
 
 				{% set sumTotal = 0 %}
-				{% set sumVal = 0 %}
-                {% set sumShip = 0 %}
+                {% set sumVal = 0 %}
+				{% set pro = 0 %}
+				{% set sumPro = 0 %}
+                {% set sumClient = 0 %}
+
+				{% set sumQuant = 0 %}
+
+				{% set sumProd = 0 %}
+
+				{% set sumShip = 0 %}
+
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
-                    {% set sumShip = sumShip + cart.shipped %}
-                        {% if cart.validated == true %}
+					{% set sumShip = sumShip + cart.shipped %}
+                    {% if cart.validated == true %}
                             {% set sumTotal = sumTotal + cart.total %}
-                        {% endif %}
-                {% endfor %}
+                    {% endif %}
+					{% if cart.user.pro == true %}
+                            {% set pro = pro + 1 %}
+                            {% set sumPro = sumPro + cart.total %}
+                    {% else %}
+                        {% set sumClient = sumClient + cart.total %}
+                    {% endif %}
+
+				{% endfor %}
+
+				{% for product in products %}
+					{% set sumQuant = sumQuant + product.quantity %}
+				{% endfor %}
+
+				{% for detail in orderDetails %}
+					{% set sumProd = sumProd + detail.quantity %}
+				{% endfor %}
 
         <thead>
             <tr class="text-info">
                 <th>Nombre de commandes en cours de livraison</th>
-                <th></th>
-                <th></th>
+                <th>C.A. Pro</th>
+                <th>C.A. Particuliers </th>
                 <th></th>
                 <th></th>
                 <th> </th>
@@ -79,8 +103,8 @@ Nombre de commandes en cours de livraison. #}
         <tbody>
             <tr>
                 <td class="text-warning">{{ sumVal - sumShip }}</td>
-                <td></td>
-                <td></td>
+                <td class="text-warning">{{sumPro}} €</td>
+                <td class="text-warning">{{sumClient}} €</td>
                 <td></td>
                 <td></td>
                 <td class="text-break"></td>

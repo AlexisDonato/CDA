@@ -44,7 +44,7 @@
 					<strong class="text-warning">{{ carts|length - sumVal }}</strong>
 				</li>
 				<li>Moyenne de commandes par utilisateur :
-					<strong class="text-warning">{{ sumVal / users|length }}</strong>
+					<strong class="text-warning">{{ (sumVal / users|length)|number_format(2, '.', '') }}</strong>
 				</li>
 				<li>Moyenne des dépenses par utilisateur :
 					<strong class="text-warning">{{ (sumTotal / users|length)|number_format(2, '.', '') }} €</strong>
@@ -82,7 +82,7 @@
 			<ul>
 				<li>
 					Moyenne de produits par catégorie:
-					<strong class="text-warning">{{ products|length / categories|length }}</strong>
+					<strong class="text-warning">{{ (products|length / categories|length)|number_format(2, '.', '') }}</strong>
 				</li>
 			</ul>
 		</div>
@@ -93,7 +93,7 @@
 			</h3>
 			<ul>
 				<li>Moyenne des quantités en stock par produit :
-					<strong class="text-warning">{{ sumQuant / products|length}}</strong>
+					<strong class="text-warning">{{ (sumQuant / products|length)|number_format(2, '.', '') }}</strong>
 				</li>
 			</ul>
 		</div>
@@ -105,11 +105,11 @@
 			<ul>
 				<li>
 					Moyenne de produits par panier:
-					<strong class="text-warning">{{ sumProd / carts|length }}</strong>
+					<strong class="text-warning">{{ (sumProd / carts|length)|number_format(3, '.', '') }}</strong>
 				</li>
 				<li>
 					Moyenne de produits par commande:
-					<strong class="text-warning">{{ sumProd / sumVal }}</strong>
+					<strong class="text-warning">{{ (sumProd / sumVal)|number_format(3, '.', '') }}</strong>
 				</li>
 			</ul>
 		</div>
@@ -130,7 +130,7 @@
 				</li>
 
 				<li>Moyenne des commandes par utilisateur :
-					<strong class="text-warning">{{ sumVal / users|length }}</strong>
+					<strong class="text-warning">{{ (sumVal / users|length)|number_format(3, '.', '') }}</strong>
 				</li>
 				<li>Moyenne des dépenses par commande :
 					<strong class="text-warning">{{ (sumTotal / sumVal)|number_format(2, '.', '') }} €</strong>

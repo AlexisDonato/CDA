@@ -218,10 +218,8 @@ class OrderController extends AbstractController
         $entityManager->persist($cart);
         $entityManager->flush();
 
-        $orderId = $cart->getId();
         $clientOrderId = $cart->getClientOrderId();
         $details = $orderDetails->findBy(['cart' => $orderId]);
-        $orderDate = $cart->getOrderDate();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
@@ -232,14 +230,11 @@ class OrderController extends AbstractController
                 ->to($user->getEmail())
                 ->cc('Shipping@muse.com')
                 ->subject('Votre commande est validée!')
-                ->htmlTemplate('validated_orders/order_validation_email.html.twig')
+                ->htmlTemplate('email/order_validation_email.html.twig')
                 ->context([
-                    'clientOrderId' => $clientOrderId,
                     'details' => $details,
-                    'orderDate' => $orderDate,
                     'user' => $user,
                     'addresses' => $addresses,
-                    'clientOrderId'   => $clientOrderId,
                     'cart'      => $cart,
                     'details' => $details,
                 ]);

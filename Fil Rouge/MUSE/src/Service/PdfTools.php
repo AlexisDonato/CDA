@@ -36,7 +36,6 @@ class PdfTools {
     public function generateInvoice($orderId) {
 
         $order = $this->cartRepository->find($orderId);
-        dd($order);
 
         // $user = $cart->getUser();
         // $cart = $this->cartService->getClientCart();

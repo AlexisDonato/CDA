@@ -138,12 +138,7 @@ class ValidatedOrdersController extends AbstractController
         $entityManager->flush();
 
         $orderId = $cart->getId();
-        $clientOrderId = $cart->getClientOrderId();
         $details = $orderDetails->findBy(['cart' => $orderId]);
-        $orderDate = $cart->getOrderDate();
-        $shipmentDate = $cart->getShipmentDate();
-        $carrier = $cart->getCarrier();
-        $carrierShipmentId= $cart->getCarrierShipmentId();
         
         // $pdf = $this->pdf->getOutputFromHtml($html);
 
@@ -152,15 +147,11 @@ class ValidatedOrdersController extends AbstractController
         ->to($cart->getUser()->getEmail())
         ->cc('Shipping@muse.com')
         ->subject('Votre commande a bien été expédiée!')
-        ->htmlTemplate('validated_orders/order_shipment_email.html.twig')
+        ->htmlTemplate('email/order_shipment_email.html.twig')
         ->context([
-            'order_id' => $clientOrderId,
             'details' => $details,
-            'orderDate' => $orderDate,
             'user' => $user,
-            'shipmentDate' => $shipmentDate,
-            'carrier' =>$carrier,
-            'carrierShipmentId' => $carrierShipmentId,
+            'cart' => $cart,
         ]);
         // ->attach($pdf, sprintf('email/order_shipment_%s.pdf', date('d-m-Y')));
         $mailer->send($email);

@@ -1,0 +1,53 @@
+<h1>{{ app.user.userName }}
+	{{ app.user.userLastName }},</h1>
+
+<p>Votre commande n°<b>{{cart.clientOrderId}}</b>
+	a bien été validée en date du
+	{{ cart.orderDate|format_datetime('short', 'none', locale='fr') }}. Voici le récapitulatif :</p>
+
+<table border="1">
+	<thead>
+		<tr>
+
+			<th>Produit</th>
+			<th>Prix</th>
+			<th>Promotion</th>
+			<th>TVA</th>
+			<th>Quantité</th>
+			<th>Sous-total</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		{# {% set total = 0 %} #}
+		{% for detail in details %}
+			<tr>
+				<td>{{detail.Product.name}}</td>
+				<td style="text-align:right;">{{detail.Product.price}}
+					€</td>
+				<td style="text-align:right;">
+					{% if detail.Product.discount %}-{{ detail.Product.discountRate * 100 }}%{% else %}-
+					{% endif %}
+				</td>
+				<td style="text-align:right;">{{app.user.vat * 100}}%</td>
+				<td style="text-align:right;">{{detail.Quantity}}</td>
+				<td style="text-align:right;">{{(detail.Product.price * detail.Quantity) * (1 - (detail.Product.discountRate)) * (1 +  app.user.vat)}}
+					€</td>
+			</tr>
+			{# {% set total = total + (detail.Product.price * detail.Quantity) * (1 - (detail.Product.discountRate)) * (1 +  app.user.vat) %} #}
+		{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="5" style="text-align:right;">
+				<b>Total :</b>
+			</td>
+			<td style="text-align:right;">
+			{# {{ total }} #}
+			{{cart.total}} €</td>
+		</tr>
+	</tfoot>
+</table>
+<p>Vous recevrez sous peu l'email confirmant l'expédition de votre commande.<br>Merci de votre achat et à bientôt!<br><br>L'équipe de Muse</p>
+<img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/Muse_rect_no.jpg">
+

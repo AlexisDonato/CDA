@@ -5,12 +5,23 @@
 			</h3>
             <ul>{% set sumTotal = 0 %}
                 {% set sumVal = 0 %}
+				{% set pro = 0 %}
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
                     {% if cart.validated == true %}
                             {% set sumTotal = sumTotal + cart.total %}
                     {% endif %}
+					{% if cart.user.pro == true %}
+                            {% set pro = pro + 1 %}
+                    {% endif %}
 				{% endfor %}
+
+				<li>Nombre de clients professionnels :
+					<strong class="text-warning">{{ pro }}</strong>
+				</li>
+				<li>Nombre de clients particuliers :
+					<strong class="text-warning">{{ users|length - pro }}</strong>
+				</li>
 				<li>Nombre de paniers sans commande :
 					<strong class="text-warning">{{ carts|length - sumVal }}</strong>
 				</li>

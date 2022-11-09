@@ -57,10 +57,16 @@
 			<h3>Inscrits : {{ users|length }}
 				</h3>
 			<ul>
-				<li>Nombre d'adresses: {{  addresses|length  }}</li>
-                    <li>Nombre d'utilisateurs: {{  users|length }}</li>
                    <li> Moyenne d'adresses par utilisateur:
-                    <h5 class="text-primary"><strong>{{ addresses|length / users|length }}</strong></h5></li>
+                    <strong>{{ addresses|length / users|length }}</strong></li>
+                    <li>Moyenne de paniers par utilisateur: 
+                    <strong>{{ carts|length / users|length }}</strong></li>
+                    <li>Moyenne des dépenses par utilisateur: 
+                    {% set sum = 0 %} 
+                    {% for cart in carts %}
+                        {% set sum = sum + cart.total %} 
+                    {% endfor %}
+                    <strong>{{ sum / users|length }}</strong></li>
 			</ul>
 		</div>
 

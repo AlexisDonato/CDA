@@ -5,13 +5,13 @@
       google.charts.load('current', {'packages':['corechart']});
 
       // Draw the pie chart and bar chart when Charts is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawPieBarChart);
 
-      function drawChart() {
+      function drawPieBarChart() {
 
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'quantity');
-        data.addColumn('number', 'slices');
+        data.addColumn('number', 'quantités en stock');
         data.addRows([
           ['Produit 1', 5],
           ['Produit 2', 1],
@@ -20,16 +20,21 @@
           ['Produit 5', 10]
         ]);
 
-        var piechart_options = {title:'Produits en stock',
+        var piechart_options = {
+                       title:'Produits en stock',
                        width:400,
-                       height:300};
+                       height:300,
+                       is3D: true,
+                       };
         var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
         piechart.draw(data, piechart_options);
 
-        var barchart_options = {title:'Produits en stock',
+        var barchart_options = {
+                       title:'Produits en stock',
                        width:400,
                        height:300,
-                       legend: 'none'};
+                       legend: 'none'
+                       };
         var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
         barchart.draw(data, barchart_options);
       }

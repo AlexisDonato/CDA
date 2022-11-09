@@ -68,7 +68,8 @@
 			<h3 class="text-info">Produits :
 				{{ products|length }}
 			</h3>
-			<ul>{% set sumQuant = 0 %}
+			<ul>
+                {% set sumQuant = 0 %}
 				{% for product in products %}
 					{% set sumQuant = sumQuant + product.quantity %}
 				{% endfor %}

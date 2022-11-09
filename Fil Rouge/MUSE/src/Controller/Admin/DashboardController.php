@@ -21,10 +21,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\Security\Core\Security as SecurityCore;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -103,7 +106,7 @@ class DashboardController extends AbstractDashboardController
             'products' => $products,
             'orderDetails' => $orderDetails,
             'carts' => $carts,
-            'chart' => $this->createChart(),
+            // 'chart' => $this->createChart(),
         ]);
     }
 
@@ -112,8 +115,18 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('MUSE')
             ->renderContentMaximized();
+            
         
     }
+
+public function configureUserMenu(UserInterface $user): UserMenu
+{
+    if (!$user instanceof User) {
+        throw new \Exception('Wrong User');
+    }
+    return parent::configureUserMenu($user);
+        // ->setAvatarUrl($user->getAvatarUri());
+}
 
     public function configureMenuItems(): iterable
     {
@@ -137,28 +150,36 @@ class DashboardController extends AbstractDashboardController
         
     }
 
-    private function createChart(): Chart
+    public function configureAssets(): Assets 
     {
-        $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
-        $chart->setData([
-            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            'datasets' => [
-                [
-                    'label' => 'My First dataset',
-                    'backgroundColor' => 'rgb(255, 99, 132)',
-                    'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => [0, 10, 5, 2, 20, 30, 45],
-                ],
-            ],
-        ]);
-        $chart->setOptions([
-            'scales' => [
-                'y' => [
-                   'suggestedMin' => 0,
-                   'suggestedMax' => 100,
-                ],
-            ],
-        ]);
-        return $chart;
+        return parent::configureAssets();
+            // ->addWebpackEncoreEntry('style');
+        
     }
+    // Chart.js...
+
+    // private function createChart(): Chart
+    // {
+    //     $chart = $this->chartBuilder->createChart(Chart::TYPE_LINE);
+    //     $chart->setData([
+    //         'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    //         'datasets' => [
+    //             [
+    //                 'label' => 'My First dataset',
+    //                 'backgroundColor' => 'rgb(255, 99, 132)',
+    //                 'borderColor' => 'rgb(255, 99, 132)',
+    //                 'data' => [0, 10, 5, 2, 20, 30, 45],
+    //             ],
+    //         ],
+    //     ]);
+    //     $chart->setOptions([
+    //         'scales' => [
+    //             'y' => [
+    //                'suggestedMin' => 0,
+    //                'suggestedMax' => 100,
+    //             ],
+    //         ],
+    //     ]);
+    //     return $chart;
+    // }
 }

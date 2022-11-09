@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -43,8 +44,12 @@ class UserCrudController extends AbstractCrudController
         yield Field::new('proJobPosition');
 
         yield Field::new('proDuns');
-                
-        yield ArrayField::new('roles')
+        
+        $roles = ['ROLE__ADMIN', 'ROLE_SALES', 'ROLE_SHIP', 'ROLE_PRO', 'ROLE_USER'];
+        yield ChoiceField::new('roles')
+            ->setChoices(array_combine($roles, $roles))
+            ->allowMultipleChoices()
+            ->renderExpanded()
             ->setHelp('ROLE__ADMIN, ROLE_SALES, ROLE_SHIP, ROLE_PRO, ROLE_USER');
 
         yield Field::new('vat');

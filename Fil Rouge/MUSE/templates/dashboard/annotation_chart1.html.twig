@@ -7,25 +7,25 @@
       function drawChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Date');
-        data.addColumn('number', 'Kepler-22b mission');
-        data.addColumn('string', 'Kepler title');
-        data.addColumn('string', 'Kepler text');
-        data.addColumn('number', 'Gliese 163 mission');
-        data.addColumn('string', 'Gliese title');
-        data.addColumn('string', 'Gliese text');
+        data.addColumn('number', 'C.A.');
+        data.addColumn('string', 'C.A. title');
+        data.addColumn('string', 'C.A. text');
+        data.addColumn('number', 'Nbr Inscrits');
+        data.addColumn('string', 'Nbr Inscrits title');
+        data.addColumn('string', 'Nbr Inscrits text');
         data.addRows([
-          [new Date(2314, 2, 15), 12400, undefined, undefined,
+          [new Date(2022, 2, 15), 12400, undefined, undefined,
                                   10645, undefined, undefined],
-          [new Date(2314, 2, 16), 24045, 'Lalibertines', 'First encounter',
-                                  12374, undefined, undefined],
-          [new Date(2314, 2, 17), 35022, 'Lalibertines', 'They are very tall',
-                                  15766, 'Gallantors', 'First Encounter'],
-          [new Date(2314, 2, 18), 12284, 'Lalibertines', 'Attack on our crew!',
-                                  34334, 'Gallantors', 'Statement of shared principles'],
-          [new Date(2314, 2, 19), 8476, 'Lalibertines', 'Heavy casualties',
-                                  66467, 'Gallantors', 'Mysteries revealed'],
-          [new Date(2314, 2, 20), 0, 'Lalibertines', 'All crew lost',
-                                  79463, 'Gallantors', 'Omniscience achieved']
+          [new Date(2022, 2, 16), 24045, 'C.A.', '24045 €',
+                                  12374, 'Nbr Inscrits', '12374'],
+          [new Date(2022, 2, 17), 35022, 'C.A.', '35022 €',
+                                  15766, 'Nbr Inscrits', '15766'],
+          [new Date(2022, 2, 18), 12284, 'C.A.', '12284 €',
+                                  34334, 'Nbr Inscrits', '34334'],
+          [new Date(2022, 2, 19), 8476, 'C.A.', '8476 €',
+                                  66467, 'Nbr Inscrits', '66467'],
+          [new Date(2022, 2, 20), 0, 'C.A.', '0 €',
+                                  79463, 'Nbr Inscrits', '79463']
         ]);
 
         var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));

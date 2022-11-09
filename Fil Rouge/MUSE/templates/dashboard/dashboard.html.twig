@@ -42,11 +42,11 @@ Top 10 des clients en nombre de commandes ou chiffre d'affaires
 Répartition du chiffre d'affaires par type de client
 Nombre de commandes en cours de livraison. #}
 
-{% include '/dashboard/calendar_chart1.html.twig' %}
-<div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+{% include '/dashboard/area_chart1.html.twig' %}
+<div id="area_chart_div" style="width: 500px; height: 350px;"></div>
 
-{# {% include '/dashboard/area_chart1.html.twig' %}
-<div id="area_chart_div" style="width: 500px; height: 350px;"></div> #}
+{% include '/dashboard/annotation_chart1.html.twig' %}
+<div id='chart_div' style='width: 900px; height: 600px;'></div>
 
 <table class="table table-dark darker table-striped">
 
@@ -118,6 +118,10 @@ Nombre de commandes en cours de livraison. #}
         </tbody>
     </table>
 
+<div>
+{% include '/dashboard/calendar_chart1.html.twig' %}
+<div id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+</div>
 	</div>
 	{% block javascripts %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

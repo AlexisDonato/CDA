@@ -10,14 +10,14 @@
       function drawChart() {
 
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'quantity');
+        data.addColumn('number', 'slices');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ['Produit 1', 5],
+          ['Produit 2', 1],
+          ['Produit 3', 2],
+          ['Produit 4', 1],
+          ['Produit 5', 10]
         ]);
 
         var piechart_options = {title:'Produits en stock',

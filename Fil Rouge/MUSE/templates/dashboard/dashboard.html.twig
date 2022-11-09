@@ -4,53 +4,31 @@
 	Dashboard
 {% endblock %}
 {% block main %}
-	<div class="text-center">
+	{# <div class="text-center mt-0">
 		<img src='/img/Muse_rect_trans.png' style="width: 10rem; height:auto;">
-	</div>
+	</div> #}
+
 	<div class="row">
 
-		<div class="col-12">
-			{{ render_chart(chart) }}
+		{% include '/dashboard/bar_chart1.html.twig' %}
+		<div class="row d-flex justify-content-center">
+			<table class="columns">
+				<tr>
+					<td>
+						<div id="piechart_div" style=""></div>
+					</td>
+					<td>
+						<div id="barchart_div" style=""></div>
+					</td>
+				</tr>
+			</table>
 		</div>
 
-		{# <canvas id="myChart" width="400" height="100"></canvas>
-				<script>
-				const ctx = document.getElementById('myChart').getContext('2d');
-				const myChart = new Chart(ctx, {
-				    type: 'bar',
-				    data: {
-				        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-				        datasets: [{
-				            label: '# of Votes',
-				            data: [12, 19, 3, 5, 2, 3],
-				            backgroundColor: [
-				                'rgba(255, 99, 132, 0.2)',
-				                'rgba(54, 162, 235, 0.2)',
-				                'rgba(255, 206, 86, 0.2)',
-				                'rgba(75, 192, 192, 0.2)',
-				                'rgba(153, 102, 255, 0.2)',
-				                'rgba(255, 159, 64, 0.2)'
-				            ],
-				            borderColor: [
-				                'rgba(255, 99, 132, 1)',
-				                'rgba(54, 162, 235, 1)',
-				                'rgba(255, 206, 86, 1)',
-				                'rgba(75, 192, 192, 1)',
-				                'rgba(153, 102, 255, 1)',
-				                'rgba(255, 159, 64, 1)'
-				            ],
-				            borderWidth: 1
-				        }]
-				    },
-				    options: {
-				        scales: {
-				            y: {
-				                beginAtZero: true
-				            }
-				        }
-				    }
-				});
-				</script> #}
+		{# *** Charts.js *** #}
+
+		{# <div class="col-12">
+					{{ render_chart(chart) }}
+				</div> #}
 
 
 		<div class="col-md-3">
@@ -61,7 +39,7 @@
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
 				{% endfor %}
-                <li>Nombre de paniers sans commande :
+				<li>Nombre de paniers sans commande :
 					<strong>{{ carts|length - sumVal }}</strong>
 				</li>
 				<li>Moyenne de commandes par utilisateur :
@@ -86,11 +64,11 @@
 					<strong>{{ addresses|length / users|length }}</strong>
 				</li>
 				{# {% for address in addresses|slice(0,3) %}
-									<li>
-										<a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a>
-										<br>- ({{ address.fullName }})
-									</li>
-								{% endfor %} #}
+													<li>
+														<a href="{{ path('app_address_show', {'id': address.id}) }}">{{ address.name }}</a>
+														<br>- ({{ address.fullName }})
+													</li>
+												{% endfor %} #}
 			</ul>
 		</div>
 

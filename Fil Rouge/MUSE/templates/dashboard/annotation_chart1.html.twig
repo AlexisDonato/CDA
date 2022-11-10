@@ -14,18 +14,21 @@
         data.addColumn('string', 'Nbr Inscrits title');
         data.addColumn('string', 'Nbr Inscrits text');
         data.addRows([
-          [new Date(2022, 2, 15), 12400, undefined, undefined,
-                                  10645, undefined, undefined],
-          [new Date(2022, 2, 16), 24045, 'C.A.', '24045 €',
-                                  12374, 'Nbr Inscrits', '12374'],
-          [new Date(2022, 2, 17), 35022, 'C.A.', '35022 €',
-                                  15766, 'Nbr Inscrits', '15766'],
-          [new Date(2022, 2, 18), 12284, 'C.A.', '12284 €',
-                                  34334, 'Nbr Inscrits', '34334'],
-          [new Date(2022, 2, 19), 8476, 'C.A.', '8476 €',
-                                  66467, 'Nbr Inscrits', '66467'],
-          [new Date(2022, 2, 20), 0, 'C.A.', '0 €',
-                                  79463, 'Nbr Inscrits', '79463']
+
+        {% set tot = 0 %}
+        {% for cart in carts %}
+          {% if cart.validated %}
+            {% set tot = tot + cart.total %}
+                      {% endif %}
+        {% endfor %}
+          [new Date(2022, 1, 1), 0, undefined, undefined,
+                                  0, undefined, undefined],
+          {% for cart in carts %}
+          [new Date({{cart.orderDate|date('Y')}}, ({{cart.orderDate|date('m')}} - 1), {{cart.orderDate|date('d')}}), {{tot}}, 'C.A.', '{{tot}} €',
+                                  {{users|length}}, 'Nbr Inscrits', '{{users|length}}'],
+                                  {% endfor %}
+          [new Date(2022, 12, 30), 0, undefined, undefined,
+                                  0, undefined, undefined]
         ]);
 
         var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));

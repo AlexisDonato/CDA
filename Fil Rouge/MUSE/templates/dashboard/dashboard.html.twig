@@ -8,7 +8,7 @@
 			<img src='/img/Muse_rect_trans.png' style="width: 10rem; height:auto; position: relative;">
 		</div> #}
 
-<div class="container">
+    <div class="container">
         <h1 class="text-info text-center mb-3">Statistiques du site</h1>
 
 		{% include '/dashboard/pie_bar_chart1.html.twig' %}
@@ -25,7 +25,7 @@
 				</tr>
 			</table>
 		</div>
-	</div>
+
 	{# *** Charts.js *** #}
 
 	{# <div class="col-12">
@@ -48,11 +48,11 @@ Nombre de commandes en cours de livraison. #}
 {% include '/dashboard/annotation_chart1.html.twig' %}
 <div class="mb-3" id='chart_div' style='width: 900px; height: 600px;'></div>
 
-<div>
+<h2>Calendrier C.A.</h2>
+<div class="col-12">
 {% include '/dashboard/calendar_chart1.html.twig' %}
-<div class="mb-3" id="calendar_basic" style="width: 1000px; height: 350px;"></div>
+<div class="mb-3" id="calendar_basic" style="width: 100%; height: auto;"></div>
 </div>
-
 
 {#*** Twig calculations for the following table ***#}
     {% set sumTotal = 0 %}
@@ -89,7 +89,8 @@ Nombre de commandes en cours de livraison. #}
     {% for detail in orderDetails %}
         {% set sumProd = sumProd + detail.quantity %}
     {% endfor %}
-
+<div class="row mt-5">
+<div class="col-12">
     <table class="table table-dark darker table-striped">
         <thead>
             <tr class="text-info">
@@ -123,6 +124,10 @@ Nombre de commandes en cours de livraison. #}
             </tr>
         </tbody>
     </table>
+</div>
+</div>
+
+
 
 
 </div>

@@ -26,10 +26,17 @@ class TestController extends AbstractController
 {
     private $twig;
     private $pdf;
+    private $cartRepository;
+    private $cartService;
+    private $orderDetails;
+
     public function __construct(?Request $request, Environment $twig, Pdf $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         $this->twig = $twig;
         $this->pdf = $pdf;
+        $this->cartRepository = $cartRepository;
+        $this->cartService = $cartService;
+        $this->orderDetails = $orderDetails;
 
         $this->entrypointLookup = $entrypointLookup;
 
@@ -105,7 +112,7 @@ class TestController extends AbstractController
     {
         $pdf_file_path = '/PDFs';
         // $clientOrderId = $cart->getClientOrderId();
-        $pt->generateInvoice(1);
+        $pt->generateInvoice(94);
 
         // $email = (new TemplatedEmail())
         //         ->from(new \Symfony\Component\Mime\Address('info_noreply@muse.com', 'Muse MailBot'))
@@ -132,6 +139,28 @@ class TestController extends AbstractController
 
             
         return new Response("ok");
+    }
+
+    #[Route('/test3/{orderId}', name: 'app_test3')]
+    public function test3($orderId)
+    {
+        $order = $this->cartRepository->find($orderId);
+
+        $user = $this->cartService->getUser($orderId);
+
+        $details = $this->orderDetails->findBy(['cart' => $orderId]);
+
+
+        // $clientOrderId = $this->cartRepository->getClientOrderId($orderId);
+
+        return $this->render('email/invoice.html.twig', array(
+            "order" => $order,
+            'details' => $details,
+            'user' => $user,
+        ));
+
+
+
     }
 
 }

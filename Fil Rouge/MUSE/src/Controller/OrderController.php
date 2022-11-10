@@ -237,7 +237,7 @@ class OrderController extends AbstractController
                     'addresses' => $addresses,
                     'cart'      => $cart,
                 ])
-                ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/doc/Invoice-'.$orderId.'.pdf');
+                ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/doc/Invoice-'.$cart->getClientOrderId() .'.pdf');
             $mailer->send($email);
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');

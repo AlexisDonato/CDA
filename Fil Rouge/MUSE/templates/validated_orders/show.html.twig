@@ -64,8 +64,6 @@
 						<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
 						</td>
 					</tr>
-				</tr>
-			</tbody>
 		</tbody>
 		<tfoot>
 			<tr>

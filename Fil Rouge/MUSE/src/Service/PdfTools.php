@@ -46,7 +46,7 @@ class PdfTools {
             'user' => $user,
         ));
 
-        $this->pdf->generateFromHtml($html, '../doc/Invoice-'. $orderId .'.pdf', [], true);
+        $this->pdf->generateFromHtml($html, '../doc/Invoice-'. $order->getClientOrderId() .'.pdf', [], true);
 
     }
  

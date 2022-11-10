@@ -1,112 +1,99 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://localhost:8000/css/style.css">
-		<title>Document</title>
+		<title>Invoice</title>
+
+		<style>
+		body{
+		    background: url('');
+		}
+			#div1 {
+				position: absolute;
+				top: 20cm;
+				left: 10cm;
+				width: 5cm;
+				border: 1px solid #AAAAAA;
+			}
+
+			#div2 {
+				position: absolute;
+				top: 15cm;
+				left: 2cm;
+				width: 5cm;
+				border: 1px solid #AAAAAA;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="container text-light">
-			<div class="row">
-				<div class="col-12">
-					<h1 class="text-center">Votre facture</h1>
-						<div class="float-left">
-						{{ app.user.userName }}, {{ app.user.userLastName }}<br>
-						Email : {{ app.user.email }}
-						N° de téléphone : {{app.user.phoneNumber}}
-						</div>
-				</div>
-			</div>
-			<div class="row">
-					<h1>Votre facture</h1>
-						<h4>votre commande n° {{ order.clientOrderId }} a bien été validée en date du
-						{{ order.orderDate|format_datetime('short', 'none', locale='fr') }}.</h4>
-			</div>
-			<div class="row">
-						<h4>Récapitulatif de votre commande :</h4>
-						<table class="table table-dark darker">
-							<thead>
-								<tr class="text-primary">
-									<th>Produit</th>
-									<th>Prix</th>
-									<th>Promotion</th>
-									{% for detail in details|slice(0, 1) %}
-										{% if detail.cart.additionalDiscountRate != 0 %}
-											<th class="text-success">Remise</th>
-										{% endif %}
-									{% endfor %}
-									<th>TVA</th>
-									<th>Quantité</th>
-									<th>Sous-total</th>
-								</tr>
-							</thead>
-							<tbody>
-								{% for detail in details %}
-									<tr>
-										<td>
-											<a class="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}">
-												<p class="productHl">{{detail.product.name}}</p>
-											</a>
-										</td>
-										<td>{{detail.product.price}}</td>
-										{% if detail.product.discountRate != 0 %}
-											<td class="text text-warning">
-												<h4 class="text-warning roboto">-{{ detail.product.discountRate * 100 }}
-													%</h4>
-											{% else %}
-												<td>-
-												{% endif %}
-											</td>
-											{% if detail.cart.additionalDiscountRate != 0 %}
-												<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>
-											{% endif %}
-											<td>{{ app.user.vat * 100}}%</td>
-											<td>{{detail.quantity}}
-												{% if detail.product.quantity == 0 %}
-													({{detail.product.quantity}}
-													left in stock)
-												{% endif %}
-											</td>
-											<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
-											</td>
-									</tr>
-							</tbody>
-
-							<tfoot>
-								<tr>
-									<td colspan="3" class="text-right roboto h5">
-										<b>Total :</b>
-									</td>
-									<td class="roboto h4">{{ detail.cart.total }}
-										€
-									</td>
-									{% if detail.product.discountRate != 0 %}
-										<td colspan="3"></td>
-									{% else %}
-										<td colspan="2"></td>
-									{% endif %}
-								</tr>
-							</tfoot>
-						</table>
-				{% endfor %}
-				</div>
-
-				<div class="row fixed-bottom">
-				<img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/Muse_rect_no.jpg">
-				<h5 class="text-light">L'entreprise individuelle "Muse"<br>
-					Située : 123 Bis Avenue du Voyage, 80000 Amiens<br>
-					immatriculée au RCS d'Amiens 89870953601032<br>
-					n° de téléphone : +33-987654321<br>
-					adresse mail : info@Muse.com</h5>
-				</div>
-
+		<div id="div1">
+			texte<br>
+			texte<br>
+			texte<br>
+			texte<br>
 		</div>
-</div>
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+		<div id="div2">
+			texte<br>
+			texte<br>
+			texte<br>
+			texte<br>
+		</div>
+
+		<h1 class="text-center text-primary mt-5 pt-5 mb-5">Votre Panier :</h1>
+			<table class="table table-dark darker border border-info">
+				<thead>
+					<tr class="text-primary surround">
+						<th>Produit</th>
+						<th>Prix</th>
+						<th>Promotion</th>
+						{% for detail in details|slice(0, 1) %}{% if detail.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+						<th>TVA</th>
+						<th>Quantité</th>
+						<th>Sous-total</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for detail in details %}
+						<tr>
+							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p class="productHl">{{detail.product.name}}</p></a></td>
+							<td>{{detail.product.price}}</td>
+							{% if detail.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
+								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
+							{% else %}<td>-
+							{% endif %}</td>
+							{% if detail.cart.additionalDiscountRate != 0 %}<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>{% endif %}
+							<td>{{ app.user.vat * 100}}%</td>
+							<td>{{detail.quantity}} {% if detail.product.quantity == 0 %} ({{detail.product.quantity}} left in stock) {% endif %}</td>
+							<td class="h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
+								€</h4></td>
+							<td>
+								</td>
+							</td>
+						</tr>
+											{% endfor %}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3" class="text-right surround h4"><b class="">Total :</b>
+						</td>
+						<td class="roboto h4">{{ order.total|number_format(2, '.', '') }}
+							€</td>{% for detail in details|slice(0, 1) %}
+							{% if detail.product.discountRate != 0 %}
+							<td colspan="6">
+							{% else %}
+							<td colspan="5">
+							{% endif %}
+							{% endfor %}
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+
 	</body>
 </html>

@@ -6,10 +6,12 @@ namespace App\Service;
 use Knp\Snappy\Pdf;
 // use App\Entity\Cart;
 // use App\Entity\OrderDetails;
+use Twig\Environment;
 use App\Service\Cart\CartService;
-use App\Repository\CartRepository;
 // use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CartRepository;
 use App\Repository\OrderDetailsRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class PdfTools {
@@ -21,8 +23,10 @@ class PdfTools {
     private $cartService;
     private $cart;
     private $orderId;
+    private $templating;
+    private $user;
 
-    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, OrderDetailsRepository $orderDetails) 
+    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user,  Environment $templating) 
     {
         $this->pdf = $pdf;
         $this->cartRepository = $cartRepository;
@@ -31,48 +35,29 @@ class PdfTools {
         $this->cartService = $cartService;
         // $this->cart = $cart;
         // $this->cart->getId() = $orderId;
+        $this->user = $user;
+        $this->templating = $templating;
     }
 
     public function generateInvoice($orderId) {
+        // $orderId = $this->cart->getId();
 
         $order = $this->cartRepository->find($orderId);
 
-        // $user = $cart->getUser();
+        $user = $this->cartService->getUser($orderId);
+
+        $details = $this->orderDetails->findBy(['cart' => $orderId]);
         // $cart = $this->cartService->getClientCart();
-        // $details = $orderDetails->findBy(['cart' => $orderId]);
+        // $clientOrderId = $this->cartRepository->getClientOrderId($orderId);
 
-
-        // $clientCart = $this->getClientCart();
-
-        // $details = $this->orderDetails->findBy(['cart' => $orderId]);
-
-        // $cartService->setUser($user);
-        
-        $html = $this->renderView('email/test.html.twig', array(
+        $html = $this->templating->render('email/invoice.html.twig', array(
             "order" => $order,
-            // 'details' => $details,
-            // 'user' => $user,
-
-            // 'clientOrderId' => $cart->getClientOrderId(),
-            // 'cart_id' => $orderId,
-            // 'orderDate' => $orderDate,
-            // 'shipped' => $cart->isShipped(),
-            // 'shipmentDate' => $cart->getShipmentDate(),
-            // 'carrier' => $cart->getCarrier(),
-            // 'carrierShipmentId' => $cart->getCarrierShipmentId(),
-            // 'user' => $cart->getUser(),
-            // 'total' => $cart->getTotal(),
+            'details' => $details,
+            'user' => $user,
         ));
 
-        $this->pdf->generateFromHtml($html, getenv('INVOICE_DIRECTORY'), 'Invoice-'. $orderId .'.pdf');
-    // $html = $this->generateUrl('app_home', array(), true); // use absolute path! -> Render a pdf document with a relative url inside like css files
+        $this->pdf->generateFromHtml($html, '../doc/Invoice-'. $orderId .'.pdf', [], true);
 
-        // return new PdfResponse(
-        //     $pdf->getOutputFromHtml($html),
-        //     // $pdf->getOutput($pageUrl), // To render a pdf document with a relative url inside like css files
-        //     // $pdf->getOutput('email/test.html.twig',array('ignore-load-errors'=>true)),
-        //     'M_O::'.date('Y-m-d').'.pdf'
-        // );
     }
  
 }

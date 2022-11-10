@@ -8,7 +8,7 @@
 			<img src='/img/Muse_rect_trans.png' style="width: 10rem; height:auto; position: relative;">
 		</div> #}
 
-	<div class="row">
+<div class="container">
         <h1 class="text-info text-center mb-3">Statistiques du site</h1>
 
 		{% include '/dashboard/pie_bar_chart1.html.twig' %}
@@ -53,43 +53,44 @@ Nombre de commandes en cours de livraison. #}
 <div class="mb-3" id="calendar_basic" style="width: 1000px; height: 350px;"></div>
 </div>
 
-<table class="table table-dark darker table-striped">
 
-				{% set sumTotal = 0 %}
-                {% set sumVal = 0 %}
-				{% set pro = 0 %}
-				{% set sumPro = 0 %}
-                {% set sumClient = 0 %}
+{#*** Twig calculations for the following table ***#}
+    {% set sumTotal = 0 %}
+    {% set sumVal = 0 %}
+    {% set pro = 0 %}
+    {% set sumPro = 0 %}
+    {% set sumClient = 0 %}
 
-				{% set sumQuant = 0 %}
+    {% set sumQuant = 0 %}
 
-				{% set sumProd = 0 %}
+    {% set sumProd = 0 %}
 
-				{% set sumShip = 0 %}
+    {% set sumShip = 0 %}
 
-				{% for cart in carts %}
-					{% set sumVal = sumVal + cart.validated %}
-					{% set sumShip = sumShip + cart.shipped %}
-                    {% if cart.validated == true %}
-                            {% set sumTotal = sumTotal + cart.total %}
-                    {% endif %}
-					{% if cart.user.pro == true %}
-                            {% set pro = pro + 1 %}
-                            {% set sumPro = sumPro + cart.total %}
-                    {% else %}
-                        {% set sumClient = sumClient + cart.total %}
-                    {% endif %}
+    {% for cart in carts %}
+        {% set sumVal = sumVal + cart.validated %}
+        {% set sumShip = sumShip + cart.shipped %}
+        {% if cart.validated == true %}
+                {% set sumTotal = sumTotal + cart.total %}
+        {% endif %}
+        {% if cart.user.pro == true %}
+                {% set pro = pro + 1 %}
+                {% set sumPro = sumPro + cart.total %}
+        {% else %}
+            {% set sumClient = sumClient + cart.total %}
+        {% endif %}
 
-				{% endfor %}
+    {% endfor %}
 
-				{% for product in products %}
-					{% set sumQuant = sumQuant + product.quantity %}
-				{% endfor %}
+    {% for product in products %}
+        {% set sumQuant = sumQuant + product.quantity %}
+    {% endfor %}
 
-				{% for detail in orderDetails %}
-					{% set sumProd = sumProd + detail.quantity %}
-				{% endfor %}
+    {% for detail in orderDetails %}
+        {% set sumProd = sumProd + detail.quantity %}
+    {% endfor %}
 
+    <table class="table table-dark darker table-striped">
         <thead>
             <tr class="text-info">
                 <th>Nombre de commandes en cours de livraison</th>
@@ -107,7 +108,7 @@ Nombre de commandes en cours de livraison. #}
         </thead>
         <tbody>
             <tr>
-                <td class="text-warning">{{ sumVal - sumShip }}</td>
+                <td class="text-warning">{% if sumShip != 0 %}{{ sumVal - sumShip }}{% endif %}</td>
                 <td class="text-warning">{{sumPro}} €</td>
                 <td class="text-warning">{{sumClient}} €</td>
                 <td></td>
@@ -124,7 +125,7 @@ Nombre de commandes en cours de livraison. #}
     </table>
 
 
-	</div>
+</div>
 	{% block javascripts %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	{% endblock %}

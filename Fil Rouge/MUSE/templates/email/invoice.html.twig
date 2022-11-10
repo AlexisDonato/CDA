@@ -9,70 +9,92 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-light">
 			<div class="row">
 				<div class="col-sm-12">
 
-					<h1>Validation de votre commande</h1>
-						{{ app.user.userName }}
-						{{ app.user.userLastName }}<br>
-						{{ app.user.email }}
-
+					<h1 class="text-center">Votre facture</h1>
+						<div class="float-left">
+						{{ app.user.userName }}, {{ app.user.userLastName }}<br>
+						Email : {{ app.user.email }}
+						N° de téléphone : {{app.user.phoneNumber}}
+						</div>
 					<p>Votre commande n°<b>{{ order.clientOrderId }}</b>
 						a bien été validée en date du
-						{{ order.orderDate|format_datetime('short', 'none', locale='fr') }}{% endfor %}. Voici le récapitulatif :</p>
+						{{ order.orderDate|format_datetime('short', 'none', locale='fr') }}
+					. Voici le récapitulatif :</p>
 
-					<table border="1">
-						<thead>
+
+				<table class="table table-dark darker">
+					<thead>
+						<tr class="text-primary">
+							<th>Produit</th>
+							<th>Prix</th>
+							<th>Promotion</th>
+							{% for detail in details|slice(0, 1) %}
+								{% if detail.cart.additionalDiscountRate != 0 %}
+									<th class="text-success">Remise</th>
+								{% endif %}
+							{% endfor %}
+							<th>TVA</th>
+							<th>Quantité</th>
+							<th>Sous-total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for detail in details %}
 							<tr>
-
-								<th>Produit</th>
-								<th>Prix</th>
-								<th>Promotion</th>
-								<th>TVA</th>
-								<th>Quantité</th>
-								<th>Sous-total</th>
-
-							</tr>
-						</thead>
-						<tbody>
-							{% set total = 0 %}
-							{% for detail in details %}
-								<tr>
-									<td>{{detail.Product.name}}</td>
-									<td style="text-align:right;">{{detail.Product.price}}
-										€</td>
-									<td style="text-align:right;">
-										{% if detail.Product.discount %}-{{ detail.Product.discountRate * 100 }}%{% else %}-
+								<td>
+									<a class="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}">
+										<p class="productHl">{{detail.product.name}}</p>
+									</a>
+								</td>
+								<td>{{detail.product.price}}</td>
+								{% if detail.product.discountRate != 0 %}
+									<td class="text text-warning">
+										<h4 class="text-warning roboto">-{{ detail.product.discountRate * 100 }}
+											%</h4>
+									{% else %}
+										<td>-
 										{% endif %}
 									</td>
-									<td style="text-align:right;">{{app.user.vat * 100}}%</td>
-									<td style="text-align:right;">{{detail.Quantity}}</td>
-									<td style="text-align:right;">{{(detail.Product.price * detail.Quantity) * (1 - (detail.Product.discountRate)) * (1 +  app.user.vat)}}
-										€</td>
+									{% if detail.cart.additionalDiscountRate != 0 %}
+										<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>
+									{% endif %}
+									<td>{{ app.user.vat * 100}}%</td>
+									<td>{{detail.quantity}}
+										{% if detail.product.quantity == 0 %}
+											({{detail.product.quantity}}
+											left in stock)
+										{% endif %}
+									</td>
+									<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
+									</td>
 								</tr>
-								{% set total = total + (detail.Product.price * detail.Quantity) * (1 - (detail.Product.discountRate)) * (1 +  app.user.vat) %}
-							{% endfor %}
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="5" style="text-align:right;">
-									<b>Total :</b>
-								</td>
-								<td style="text-align:right;">{{ total }}
-									€</td>
 							</tr>
-						</tfoot>
-					</table>
-					<img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/Muse_rect_no.jpg">
+					</tbody>
 
-				</div>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-right roboto h5">
+								<b>Total :</b>
+							</td>
+							<td class="roboto h4">{{ detail.cart.total }}
+								€
+							</td>
+							{% if detail.product.discountRate != 0 %}
+								<td colspan="3"></td>
+							{% else %}
+								<td colspan="2"></td>
+							{% endif %}
+						</tr>
+					</tfoot>
+				</table>
+				{% endfor %}
+
+				<img style="width: 200px; border-radius: 10px;" src="http://localhost:8000/img/Muse_rect_no.jpg">
+
 			</div>
 		</div>
-
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
 	</body>
-</html>
+</html></div><script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script></body></html>

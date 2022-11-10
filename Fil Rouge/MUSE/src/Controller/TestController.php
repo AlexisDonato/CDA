@@ -8,9 +8,11 @@ use App\Entity\Cart;
 use Twig\Environment;
 use App\Service\PdfTools;
 use App\Service\Cart\CartService;
+use Symfony\Component\Mime\Email;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -96,6 +98,40 @@ class TestController extends AbstractController
             'M_O-'.date('Y-m-d').'.pdf'
         );
         $this->entrypointLookup->reset();
+    }
+
+    #[Route('/test2', name: 'app_test2')]
+    public function test2(PdfTools $pt, CartRepository $cart,  MailerInterface $mailer)
+    {
+        $pdf_file_path = '/PDFs';
+        // $clientOrderId = $cart->getClientOrderId();
+        $pt->generateInvoice(1);
+
+        // $email = (new TemplatedEmail())
+        //         ->from(new \Symfony\Component\Mime\Address('info_noreply@muse.com', 'Muse MailBot'))
+        //         ->to("toto@gmail.com")
+        //         ->cc('Shipping@muse.com')
+        //         ->subject('Votre commande est validée!')
+        //         ->htmlTemplate('email/test2.html.twig')
+        //         ->context([
+        //         ])
+        //         ->attachFromPath("/home/alex/AFPA/CDA/Fil Rouge/MUSE/doc/Invoice-1.pdf");
+
+        // $email = (new Email())
+        //     ->from('hello@example.com')
+        //     ->to('you@example.com')
+        //     //->cc('cc@example.com')
+        //     //->bcc('bcc@example.com')
+        //     //->replyTo('fabien@example.com')
+        //     //->priority(Email::PRIORITY_HIGH)
+        //     ->subject('Time for Symfony Mailer!')
+        //     ->text('Sending emails is fun again!')
+        //     ->html('<p>See Twig integration for better HTML integration!</p>')
+        //     ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/doc/Invoice-'.$clientOrderId.'.pdf');
+        //     $mailer->send($email);
+
+            
+        return new Response("ok");
     }
 
 }

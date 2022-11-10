@@ -3,7 +3,8 @@
 			<h3 class="text-info">Inscrits :
 				{{ users|length }}
 			</h3>
-            <ul>{% set sumTotal = 0 %}
+            <ul>
+			{% set sumTotal = 0 %}
                 {% set sumVal = 0 %}
 				{% set pro = 0 %}
 
@@ -14,6 +15,8 @@
 				{% set sumShip = 0 %}
 
 				{% set sumPrice = 0 %}
+
+				{% set sumDisc = 0 %}
 
 				{% for cart in carts %}
 					{% set sumVal = sumVal + cart.validated %}
@@ -29,6 +32,9 @@
 				{% for product in products %}
 					{% set sumQuant = sumQuant + product.quantity %}
 					{% set sumPrice = sumPrice + product.price %}
+						{% if product.discountRate != 0 %}
+							{% set sumDisc = sumDisc + 1 %}
+						{% endif %}
 				{% endfor %}
 
 				{% for detail in orderDetails %}
@@ -41,7 +47,7 @@
 					<strong class="text-warning">{{ pro }}</strong>
 				</li>
 				<li>Clients <i>particuliers</i> :
-					<strong class="text-warning">{{ users|length - pro }}</strong>
+					<strong class="text-warning">{% if pro != 0 %}{{ users|length - pro }}{% endif %}</strong>
 				</li>
 				<li>Paniers sans commande :
 					<strong class="text-warning">{{ carts|length - sumVal }}</strong>
@@ -73,7 +79,7 @@
 			<ul>
 				<li>
 					Moyenne de produits par fournisseur:
-					<strong class="text-warning">{{ products|length / suppliers|length }}</strong>
+					<strong class="text-warning">{% if suppliers|length != 0 %}{{ products|length / suppliers|length }}{% endif %}</strong>
 				</li>
 			</ul>
 		</div>
@@ -101,6 +107,9 @@
 				<li>Prix moyen des produits :
 					<strong class="text-warning">{{ (sumPrice / products|length)|number_format(2, '.', '') }} €</strong>
 				</li>
+				<li>Produits en promotion :
+					<strong class="text-warning">{{ sumDisc }}</strong>
+				</li>
 			</ul>
 		</div>
 
@@ -115,13 +124,14 @@
 				</li>
 				<li>
 					Moyenne de produits par commande:
-					<strong class="text-warning">{{ (sumProd / sumVal)|number_format(3, '.', '') }}</strong>
+					<strong class="text-warning">{% if sumVal != 0 %}{{ (sumProd / sumVal)|number_format(3, '.', '') }}{% endif %}</strong>
 				</li>
 			</ul>
 		</div>
 
 		<div class="col-md-3">
 			<h3 class="text-info">Paniers / commandes :
+				{{ carts|length }}
 			</h3>
 			<ul>
 				<li>Paniers :
@@ -139,7 +149,7 @@
 					<strong class="text-warning">{{ (sumVal / users|length)|number_format(3, '.', '') }}</strong>
 				</li>
 				<li>Moyenne des dépenses par commande :
-					<strong class="text-warning">{{ (sumTotal / sumVal)|number_format(2, '.', '') }} €</strong>
+					<strong class="text-warning">{% if sumVal != 0 %}{{ (sumTotal / sumVal)|number_format(2, '.', '') }} €{% endif %}</strong>
 				</li>
 			</ul>
 		</div>

@@ -223,7 +223,7 @@ class OrderController extends AbstractController
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
-        $pdf->generateInvoice($clientOrderId);
+        $pdf->generateInvoice($orderId);
 
             $email = (new TemplatedEmail())
                 ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
@@ -236,9 +236,8 @@ class OrderController extends AbstractController
                     'user' => $user,
                     'addresses' => $addresses,
                     'cart'      => $cart,
-                    'details' => $details,
-                ]);
-                // ->attach($pdf, sprintf('order_validation_%s.pdf', date('d-m-Y')));
+                ])
+                ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/doc/Invoice-'.$orderId.'.pdf');
             $mailer->send($email);
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');

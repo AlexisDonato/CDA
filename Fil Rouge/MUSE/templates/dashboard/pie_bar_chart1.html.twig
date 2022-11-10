@@ -13,11 +13,14 @@
         data.addColumn('string', 'quantity');
         data.addColumn('number', 'quantités en stock');
         data.addRows([
-          ['Produit 1', 5],
-          ['Produit 2', 1],
-          ['Produit 3', 2],
-          ['Produit 4', 1],
-          ['Produit 5', 10]
+          {% for product in products %}
+          ['{{product.name}}', {{product.quantity}}],
+          {% endfor %}
+          // ['Produit 1', 5],
+          // ['Produit 2', 1],
+          // ['Produit 3', 2],
+          // ['Produit 4', 1],
+           ['Produit 5', 10]
         ]);
 
         var piechart_options = {

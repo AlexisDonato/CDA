@@ -75,9 +75,11 @@
 				<td class="roboto h4">{{ detail.cart.total }}
 					€
 				</td>
-				<td></td>
-				<td></td>
-				<td></td>
+				{% if detail.product.discountRate != 0 %}
+				<td colspan="3"></td>
+				{% else %}
+				<td colspan="2"></td>
+				{% endif %}
 			</tr>
 		</tfoot>
 	</table>

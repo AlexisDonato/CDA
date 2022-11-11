@@ -12,8 +12,8 @@
         {% set tot = 0 %}
         {% for cart in carts %}
           {% if cart.validated %}
-            {% set tot = tot + cart.total %}
-                      {% endif %}
+              {% set tot = tot + cart.total %}
+          {% endif %}
         {% endfor %}
 
         // here, months are -1... (indexes)

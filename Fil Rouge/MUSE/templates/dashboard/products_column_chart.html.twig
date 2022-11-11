@@ -1,13 +1,53 @@
 {% block javascripts %}
+
+    {% set sumTotal = 0 %}
+    {% set sumVal = 0 %}
+    {% set pro = 0 %}
+    {% set sumPro = 0 %}
+    {% set sumClient = 0 %}
+    {% set orders = 0 %}
+    {% set sumOut = 0 %}
+
+    {% set sumQuant = 0 %}
+
+    {% set sumProd = 0 %}
+
+    {% set sumShip = 0 %}
+
+    {% for cart in carts %}
+        {% set sumVal = sumVal + cart.validated %}
+        {% set sumShip = sumShip + cart.shipped %}
+            {% if cart.validated == true %}
+                {% set sumTotal = sumTotal + cart.total %}
+                {% set orders = orders + 1 %}
+            {% endif %}
+            {% if cart.user.pro == true %}
+                {% set pro = pro + 1 %}
+                    {% if cart.validated == true %}
+                        {% set sumPro = sumPro + cart.total %}
+                    {% endif %}    
+            {% else %}
+                {% if cart.validated == true %}
+                    {% set sumClient = sumClient + cart.total %}
+                {% endif %}
+            {% endif %}
+    {% endfor %}
+
+    {% for product in products %}
+        {% if product.quantity == 0 %}
+            {% set sumOut = sumOut + 1 %}
+        {% endif %}
+    {% endfor %}
+
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ["Particuliers", "Professionnels", "Commandes", "Commandes en cours de livraison", "C.A.- K€", "Produits en rupture"],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'Volume',
+        data: [{{(users|length) - pro}}, {{pro}}, {{orders}}, {{sumVal - sumShip}}, {{(sumPro + sumClient) / 1000}}, {{sumOut}}],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -39,54 +79,4 @@ var ctx = document.getElementById("myChart").getContext('2d');
   });
 </script>
 
-//         <script>
-// var ctx = document.getElementById("myChart").getContext('2d');
-//   var myChart = new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-//       labels: [{% for product in products %}"{{product.name}}", {% endfor %}, "0"]
-//     //   ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], 
-//       datasets: [{
-//         label: '# of Votes',
-//         data: [{% for product in products %}{{product.quantity}}, {% endfor %}, 0],
-//         // [12, 19, 3, 5, 2, 3],          
-//         backgroundColor: [
-//             {% set color = 255 %}
-//             {% for product in products %}
-//           'rgba({{color}}, 99, 132, 0.2)',
-//           {% set color = color + 1 %}
-//             {% endfor %}
-//         //   'rgba(54, 162, 235, 0.2)',
-//         //   'rgba(255, 206, 86, 0.2)',
-//         //   'rgba(75, 192, 192, 0.2)',
-//         //   'rgba(153, 102, 255, 0.2)',
-//           'rgba(255, 159, 64, 0.2)'
-//         ],
-//         borderColor: [
-//             {% set color = 255 %}
-//             {% for product in products %}
-//           'rgba({{color}}, 99, 132, 1)',
-//           {% set color = color + 1 %}
-//             {% endfor %}
-//         //   'rgba(255,99,132,)',
-//         //   'rgba(54, 162, 235, 1)',
-//         //   'rgba(255, 206, 86, 1)',
-//         //   'rgba(75, 192, 192, 1)',
-//         //   'rgba(153, 102, 255, 1)',
-//           'rgba(255, 159, 64, 1)'
-//         ],
-//         borderWidth: 1
-//       }]
-//     },
-//     options: {
-//       scales: {
-//         yAxes: [{
-//           ticks: {
-//             beginAtZero: true
-//           }
-//         }]
-//       }
-//     }
-//   });
-// </script>
 {% endblock %}

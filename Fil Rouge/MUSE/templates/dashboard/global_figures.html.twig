@@ -1,16 +1,13 @@
 {% set sumTotal = 0 %}
 {% set sumVal = 0 %}
 {% set pro = 0 %}
-
-{% set sumQuant = 0 %}
-
-{% set sumProd = 0 %}
-
 {% set sumShip = 0 %}
 
+{% set sumQuant = 0 %}
+{% set sumProd = 0 %}
 {% set sumPrice = 0 %}
-
 {% set sumDisc = 0 %}
+{% set sumOut = 0 %}
 
 {% for cart in carts %}
 	{% set sumVal = sumVal + cart.validated %}
@@ -28,6 +25,9 @@
 	{% set sumPrice = sumPrice + product.price %}
 	{% if product.discountRate != 0 %}
 		{% set sumDisc = sumDisc + 1 %}
+	{% endif %}
+	{% if product.quantity == 0 %}
+		{% set sumOut = sumOut + 1 %}
 	{% endif %}
 {% endfor %}
 
@@ -76,14 +76,14 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-6 col-xl-9 mb-2">
+		<div class="col-sm-6 col-xl-9 mb-2 bg-dark rounded border border-secondary">
 		<canvas id="myChart"></canvas>
 		 </div>
 	</div>
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
@@ -105,7 +105,7 @@
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
@@ -132,7 +132,7 @@
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
@@ -155,7 +155,7 @@
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
@@ -176,15 +176,21 @@
 						<li>Produits en promotion :
 							<strong class="text-warning">{{ sumDisc }}</strong>
 						</li>
+						<li>
+							Produits en rupture de stock :
+							<strong class="text-danger">{{ sumOut }}</strong>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+		{% include '/dashboard/pie_chart.html.twig' %}
+<div id="piechart_div" class="col-sm-6 col-xl-6 mb-2 bg-dark rounded border border-secondary d-flex justify-content-center"></div>
 	</div>
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
@@ -215,9 +221,9 @@
 
 <hr>
 
-	<div class="row d-flex justify-content-around">
+	<div class="row d-flex justify-content-around align-items-center">
 		<div class="col-sm-6 col-xl-3">
-			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary mb-3">
 				<div class="text-light">
 					<div class="col text-center">
 						<i class="fa fa-cart-shopping fa-2x text-info mt-2 mb-2"></i>
@@ -252,6 +258,10 @@
 				</div>
 			</div>
 		</div>
-
+		{% include '/dashboard/area_chart.html.twig' %}
+		<div class="mb-3 col-6 bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary" id="area_chart_div" style="width: 500px; height: 350px;"></div>
 	</div>
+
+	<hr>
+	<hr>
 </div>

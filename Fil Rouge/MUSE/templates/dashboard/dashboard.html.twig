@@ -54,7 +54,7 @@
 
 
 
-<!-- Sale & Revenue Start -->
+<!-- Highlighted figures Start -->
             <div class="container-fluid pt-4 px-4 mb-1">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
@@ -111,26 +111,20 @@
 
 </div>
 
+    {# Global Figures #}
         {% include '/dashboard/global_figures.html.twig' %}
-		<div id="users_pie_chart_div" style=""></div>
+
+<h2 class="text-center text-info">Evolution de la société</h2>
+
+{% include '/dashboard/annotation_chart1.html.twig' %}
+<div class="mb-3 rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary" id='chart_div' style='width: 900px; height: 600px;'></div>
 
 
 
-
-{% include '/dashboard/pie_bar_chart1.html.twig' %}
-
-<div class="bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary">
-			<table class="columns">
-				<tr>
-					<td>
-						<div id="piechart_div" style=""></div>
-					</td>
-					<td>
-						<div id="barchart_div" style=""></div>
-					</td>
-				</tr>
-			</table>
-		</div>
+<div class="col-12">
+{% include '/dashboard/calendar_chart1.html.twig' %}
+<div class="mb-3 rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary" id="calendar_basic" style="width: 100%; height: auto;"></div>
+</div>
 
 	{# *** Charts.js *** #}
 
@@ -146,17 +140,6 @@ Top 10 des clients en nombre de commandes ou chiffre d'affaires
 Répartition du chiffre d'affaires par type de client
 Nombre de commandes en cours de livraison. #}
 
-{% include '/dashboard/area_chart1.html.twig' %}
-<div class="mb-3" id="area_chart_div" style="width: 500px; height: 350px;"></div>
-
-{% include '/dashboard/annotation_chart1.html.twig' %}
-<div class="mb-3" id='chart_div' style='width: 900px; height: 600px;'></div>
-
-<h2>Calendrier C.A.</h2>
-<div class="col-12">
-{% include '/dashboard/calendar_chart1.html.twig' %}
-<div class="mb-3" id="calendar_basic" style="width: 100%; height: auto;"></div>
-</div>
 
 {# *** Fil Rouge table *** #}
 

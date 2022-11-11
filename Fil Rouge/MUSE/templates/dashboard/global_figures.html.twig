@@ -1,155 +1,257 @@
-	<div class="row mt-3 d-flex justify-content-around">
-		<div class="col-md-3">
-			<h3 class="text-info">Inscrits :
-				{{ users|length }}
-			</h3>
-            <ul>
-			{% set sumTotal = 0 %}
-                {% set sumVal = 0 %}
-				{% set pro = 0 %}
+{% set sumTotal = 0 %}
+{% set sumVal = 0 %}
+{% set pro = 0 %}
 
-				{% set sumQuant = 0 %}
+{% set sumQuant = 0 %}
 
-				{% set sumProd = 0 %}
+{% set sumProd = 0 %}
 
-				{% set sumShip = 0 %}
+{% set sumShip = 0 %}
 
-				{% set sumPrice = 0 %}
+{% set sumPrice = 0 %}
 
-				{% set sumDisc = 0 %}
+{% set sumDisc = 0 %}
 
-				{% for cart in carts %}
-					{% set sumVal = sumVal + cart.validated %}
-					{% set sumShip = sumShip + cart.shipped %}
-                    {% if cart.validated == true %}
-                            {% set sumTotal = sumTotal + cart.total %}
-                    {% endif %}
-					{% if cart.user.pro == true %}
-                            {% set pro = pro + 1 %}
-                    {% endif %}
-				{% endfor %}
+{% for cart in carts %}
+	{% set sumVal = sumVal + cart.validated %}
+	{% set sumShip = sumShip + cart.shipped %}
+	{% if cart.validated == true %}
+		{% set sumTotal = sumTotal + cart.total %}
+	{% endif %}
+	{% if cart.user.pro == true %}
+		{% set pro = pro + 1 %}
+	{% endif %}
+{% endfor %}
 
-				{% for product in products %}
-					{% set sumQuant = sumQuant + product.quantity %}
-					{% set sumPrice = sumPrice + product.price %}
-						{% if product.discountRate != 0 %}
-							{% set sumDisc = sumDisc + 1 %}
-						{% endif %}
-				{% endfor %}
+{% for product in products %}
+	{% set sumQuant = sumQuant + product.quantity %}
+	{% set sumPrice = sumPrice + product.price %}
+	{% if product.discountRate != 0 %}
+		{% set sumDisc = sumDisc + 1 %}
+	{% endif %}
+{% endfor %}
 
-				{% for detail in orderDetails %}
-					{% set sumProd = sumProd + detail.quantity %}
-				{% endfor %}
+{% for detail in orderDetails %}
+	{% set sumProd = sumProd + detail.quantity %}
+{% endfor %}
 
-                    
+<div class="container-fluid mt-2 mb-2">
+	<div class="row d-flex justify-content-around align-items-center">
+		<div class="col-sm-6 col-xl-3 mb-2">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fas fa-users fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Inscrits :
+						{{ users|length }}
+					</h3>
+					<ul>
+						<li>Clients
+							<i>professionnels</i>
+							:
+							<strong class="text-warning">{{ pro }}</strong>
+						</li>
+						<li>Clients
+							<i>particuliers</i>
+							:
+							<strong class="text-warning">
+								{% if pro != 0 %}
+									{{ users|length - pro }}
+								{% endif %}
+							</strong>
+						</li>
+						<li>Paniers sans commande :
+							<strong class="text-warning">{{ carts|length - sumVal }}</strong>
+						</li>
+						<li>Moyenne de commandes par utilisateur :
+							<strong class="text-warning">{{ (sumVal / users|length)|number_format(2, '.', '') }}</strong>
+						</li>
+						<li>Moyenne des dépenses par utilisateur :
+							<strong class="text-warning">{{ (sumTotal / users|length)|number_format(2, '.', '') }}
+								€</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-6 col-xl-9 mb-2">
+		<canvas id="myChart"></canvas>
+		 </div>
+	</div>
 
-				<li>Clients <i>professionnels</i> :
-					<strong class="text-warning">{{ pro }}</strong>
-				</li>
-				<li>Clients <i>particuliers</i> :
-					<strong class="text-warning">{% if pro != 0 %}{{ users|length - pro }}{% endif %}</strong>
-				</li>
-				<li>Paniers sans commande :
-					<strong class="text-warning">{{ carts|length - sumVal }}</strong>
-				</li>
-				<li>Moyenne de commandes par utilisateur :
-					<strong class="text-warning">{{ (sumVal / users|length)|number_format(2, '.', '') }}</strong>
-				</li>
-				<li>Moyenne des dépenses par utilisateur :
-					<strong class="text-warning">{{ (sumTotal / users|length)|number_format(2, '.', '') }} €</strong>
-				</li>
-			</ul>
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-location-dot fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Adresses :
+						{{ addresses|length }}</h3>
+					<ul>
+						<li>
+							Moyenne d'adresses par utilisateur:
+							<strong class="text-warning">{{ addresses|length / users|length }}</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-warehouse fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Fournisseurs :
+						{{ suppliers|length }}
+					</h3>
+					<ul>
+						<li>
+							Moyenne de produits par fournisseur:
+							<strong class="text-warning">
+								{% if suppliers|length != 0 %}
+									{{ products|length / suppliers|length }}
+								{% endif %}
+							</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-list-ul fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Catégories :
+						{{ categories|length }}
+					</h3>
+					<ul>
+						<li>
+							Moyenne de produits par catégorie:
+							<strong class="text-warning">{{ (products|length / categories|length)|number_format(2, '.', '') }}</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-guitar fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Produits :
+						{{ products|length }}
+					</h3>
+					<ul>
+						<li>Moyenne des quantités en stock par produit :
+							<strong class="text-warning">{{ (sumQuant / products|length)|number_format(2, '.', '') }}</strong>
+						</li>
+						<li>Prix moyen des produits :
+							<strong class="text-warning">{{ (sumPrice / products|length)|number_format(2, '.', '') }}
+								€</strong>
+						</li>
+						<li>Produits en promotion :
+							<strong class="text-warning">{{ sumDisc }}</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-folder-tree fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Détails des paniers / commandes:
+						{{ orderDetails|length }}
+					</h3>
+					<ul>
+						<li>
+							Moyenne de produits par panier:
+							<strong class="text-warning">{{ (sumProd / carts|length)|number_format(3, '.', '') }}</strong>
+						</li>
+						<li>
+							Moyenne de produits par commande:
+							<strong class="text-warning">
+								{% if sumVal != 0 %}
+									{{ (sumProd / sumVal)|number_format(3, '.', '') }}
+								{% endif %}
+							</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row d-flex justify-content-around">
+		<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-cart-shopping fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Paniers / commandes :
+						{{ carts|length }}
+					</h3>
+					<ul>
+						<li>Paniers :
+							<strong class="text-warning">{{ carts|length }}</strong>
+						</li>
+						<li>Commandes :
+							<strong class="text-warning">{{ sumVal }}</strong>
+						</li>
+
+						<li>Commandes en cours de livraison :
+							<strong class="text-warning">{{ sumVal - sumShip }}</strong>
+						</li>
+
+						<li>Moyenne des commandes par utilisateur :
+							<strong class="text-warning">{{ (sumVal / users|length)|number_format(3, '.', '') }}</strong>
+						</li>
+						<li>Moyenne des dépenses par commande :
+							<strong class="text-warning">
+								{% if sumVal != 0 %}
+									{{ (sumTotal / sumVal)|number_format(2, '.', '') }}
+									€
+								{% endif %}
+							</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 
-		<div class="col-md-3">
-			<h3 class="text-info">Adresses :
-				{{ addresses|length }}</h3>
-			<ul>
-				<li>
-					Moyenne d'adresses par utilisateur:
-					<strong class="text-warning">{{ addresses|length / users|length }}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Fournisseurs :
-				{{ suppliers|length }}
-			</h3>
-			<ul>
-				<li>
-					Moyenne de produits par fournisseur:
-					<strong class="text-warning">{% if suppliers|length != 0 %}{{ products|length / suppliers|length }}{% endif %}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Catégories :
-				{{ categories|length }}
-			</h3>
-			<ul>
-				<li>
-					Moyenne de produits par catégorie:
-					<strong class="text-warning">{{ (products|length / categories|length)|number_format(2, '.', '') }}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Produits :
-				{{ products|length }}
-			</h3>
-			<ul>
-				<li>Moyenne des quantités en stock par produit :
-					<strong class="text-warning">{{ (sumQuant / products|length)|number_format(2, '.', '') }}</strong>
-				</li>
-				<li>Prix moyen des produits :
-					<strong class="text-warning">{{ (sumPrice / products|length)|number_format(2, '.', '') }} €</strong>
-				</li>
-				<li>Produits en promotion :
-					<strong class="text-warning">{{ sumDisc }}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Détails des paniers / commandes:
-				{{ orderDetails|length }}
-			</h3>
-			<ul>
-				<li>
-					Moyenne de produits par panier:
-					<strong class="text-warning">{{ (sumProd / carts|length)|number_format(3, '.', '') }}</strong>
-				</li>
-				<li>
-					Moyenne de produits par commande:
-					<strong class="text-warning">{% if sumVal != 0 %}{{ (sumProd / sumVal)|number_format(3, '.', '') }}{% endif %}</strong>
-				</li>
-			</ul>
-		</div>
-
-		<div class="col-md-3">
-			<h3 class="text-info">Paniers / commandes :
-				{{ carts|length }}
-			</h3>
-			<ul>
-				<li>Paniers :
-					<strong class="text-warning">{{ carts|length }}</strong>
-				</li>
-				<li>Commandes :
-					<strong class="text-warning">{{ sumVal }}</strong>
-				</li>
-
-                <li>Commandes en cours de livraison :
-					<strong class="text-warning">{{ sumVal - sumShip }}</strong>
-				</li>
-
-				<li>Moyenne des commandes par utilisateur :
-					<strong class="text-warning">{{ (sumVal / users|length)|number_format(3, '.', '') }}</strong>
-				</li>
-				<li>Moyenne des dépenses par commande :
-					<strong class="text-warning">{% if sumVal != 0 %}{{ (sumTotal / sumVal)|number_format(2, '.', '') }} €{% endif %}</strong>
-				</li>
-			</ul>
-		</div>
+	</div>
+</div>

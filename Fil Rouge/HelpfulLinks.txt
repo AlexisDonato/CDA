@@ -27,3 +27,4 @@ YARN, NODE, NPM:
 CHARTS:
 	-https://www.chartjs.org/
 	-https://symfony.com/bundles/ux-chartjs/current/index.html
+	-FREE TEMPLATES : https://themewagon.com/theme-category/admin-dashboard/

@@ -115,7 +115,7 @@
     {# Global Figures #}
         {% include '/dashboard/global_figures.html.twig' %}
 
-<h2 class="text-center text-info">Evolution de la société</h2>
+<h2 class="text-center text-info bg-dark rounded">Evolution de la société</h2>
 
 {% include '/dashboard/annotation_chart1.html.twig' %}
 <div class="mb-3 rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary" id='chart_div' style='width: 900px; height: 600px;'></div>
@@ -186,12 +186,9 @@ Nombre de commandes en cours de livraison. #}
             {{odb.orderDate|date('d-m-Y')}}, {{odb.Total}} €<br>
         {% endfor %}
 
-
-
 </div>
 	{% block javascripts %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{% include '/dashboard/products_column_chart.html.twig' %} 
-{% include '/dashboard/users_pie_chart.html.twig' %}
+    {% include '/dashboard/products_column_chart.html.twig' %} 
 	{% endblock %}
 {% endblock %}

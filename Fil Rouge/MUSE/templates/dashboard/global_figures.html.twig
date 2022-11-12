@@ -83,28 +83,6 @@
 
 	<div class="row d-flex justify-content-around align-items-center rounded bg-dark">
 		<div class="col-sm-6 col-xl-3">
-			<div class="rounded d-flex justify-content-center bg-dark border border-secondary mt-2 mb-2">
-				<div class="text-light">
-					<div class="col text-center">
-						<i class="fa fa-location-dot fa-2x text-info mt-2 mb-2"></i>
-					</div>
-					<h3 class="text-info text-center">Adresses :
-						{{ addresses|length }}</h3>
-					<ul>
-						<li>
-							Moyenne d'adresses par utilisateur:
-							<strong class="text-warning">{{ addresses|length / users|length }}</strong>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<hr>
-
-	<div class="row d-flex justify-content-around align-items-center rounded bg-dark">
-		<div class="col-sm-6 col-xl-3">
 			<div class="rounded d-flex justify-content-center bg-dark border border-secondary">
 				<div class="text-light">
 					<div class="col text-center mr-2">
@@ -168,29 +146,6 @@
 				</table>
 			</div> #}
 
-
-<hr>
-
-<div class="row d-flex justify-content-around align-items-center rounded bg-dark">
-	<div class="col-sm-6 col-xl-3">
-		<div class="rounded d-flex justify-content-center bg-dark border border-secondary mt-2 mb-2">
-			<div class="text-light">
-				<div class="col text-center">
-					<i class="fa fa-list-ul fa-2x text-info mt-2 mb-2"></i>
-				</div>
-				<h3 class="text-info text-center">Catégories :
-					{{ categories|length }}
-				</h3>
-				<ul>
-					<li>
-						Moyenne de produits par catégorie:
-						<strong class="text-warning">{{ (products|length / categories|length)|number_format(2, '.', '') }}</strong>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
 
 <hr>
 
@@ -298,6 +253,48 @@
 	{% include '/dashboard/area_chart.html.twig' %}
 	<div class="mb-3 col-6 bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary mt-2 mb-2" id="area_chart_div" style="width: 500px; height: 350px;"></div>
 </div>
+
+<hr>
+
+<div class="row d-flex justify-content-around align-items-center rounded bg-dark">
+	<div class="col-sm-6 col-xl-3">
+		<div class="rounded d-flex justify-content-center bg-dark border border-secondary mt-2 mb-2">
+			<div class="text-light">
+				<div class="col text-center">
+					<i class="fa fa-list-ul fa-2x text-info mt-2 mb-2"></i>
+				</div>
+				<h3 class="text-info text-center">Catégories :
+					{{ categories|length }}
+				</h3>
+				<ul>
+					<li>
+						Moyenne de produits par catégorie:
+						<strong class="text-warning">{{ (products|length / categories|length)|number_format(2, '.', '') }}</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+			<div class="col-sm-6 col-xl-3">
+			<div class="rounded d-flex justify-content-center bg-dark border border-secondary mt-2 mb-2">
+				<div class="text-light">
+					<div class="col text-center">
+						<i class="fa fa-location-dot fa-2x text-info mt-2 mb-2"></i>
+					</div>
+					<h3 class="text-info text-center">Adresses :
+						{{ addresses|length }}</h3>
+					<ul>
+						<li>
+							Moyenne d'adresses par utilisateur:
+							<strong class="text-warning">{{ addresses|length / users|length }}</strong>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+</div>
+
+
 
 <hr>
 <hr></div>

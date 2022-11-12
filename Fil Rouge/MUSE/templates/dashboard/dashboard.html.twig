@@ -19,6 +19,7 @@
     {% set pro = 0 %}
     {% set sumPro = 0 %}
     {% set sumClient = 0 %}
+    {% set todate = "now"|date() %}
 
     {% set sumQuant = 0 %}
 
@@ -58,17 +59,17 @@
             <div class="container-fluid pt-4 px-4 mb-1">
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-2 bg-dark border border-secondary">
                             <i class="fa fa-chart-line fa-3x text-info"></i>
                             <div class="ms-3 text-light">
                                 <p class="mb-2">Ventes d'aujourd'hui :</p>
                                 <h6 class="mb-0 text-light">
                                 {% set todaySales = 0 %}
                                 {% for cart in carts %}
-                                    {# {% if cart.orderDate == "now"|date() %} #}
+                                    {% if cart.orderDate|date('d-m-Y') == todate|date('d-m-Y') %}
                                         {% if cart.validated == true %}
                                             {% set todaySales = todaySales + cart.total %}
-                                        {# {% endif %} #}
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                                 {{ todaySales }} €</h6>
@@ -76,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-2 bg-dark border border-secondary">
                             <i class="fa fa-chart-bar fa-3x text-info"></i>
                             <div class="ms-3 text-light">
                                 <p class="mb-2">Total des ventes :</p>
@@ -85,7 +86,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-2 bg-dark border border-secondary">
                             <i class="fa fa-chart-area fa-3x text-info"></i>
                             <div class="ms-3 text-light">
                                 <p class="mb-2">C.A. Professionels :</p>
@@ -94,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4 bg-dark border border-secondary">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-2 bg-dark border border-secondary">
                             <i class="fa fa-chart-pie fa-3x text-info"></i>
                             <div class="ms-3 text-light">
                                 <p class="mb-2">C.A. Particuliers :</p>
@@ -123,7 +124,7 @@
 
 <div class="col-12">
 {% include '/dashboard/calendar_chart1.html.twig' %}
-<div class="mb-3 rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary" id="calendar_basic" style="width: 100%; height: auto;"></div>
+<div class="mb-3 rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary" id="calendar_basic" style="width: 1000px; height: auto;"></div>
 </div>
 
 	{# *** Charts.js *** #}

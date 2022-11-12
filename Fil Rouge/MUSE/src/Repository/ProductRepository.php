@@ -35,14 +35,16 @@ class ProductRepository extends ServiceEntityRepository
     {
         $query = $this
         ->createQueryBuilder('p')
-        ->select('c', 'p')
-        ->join('p.categories', 'c');
+        ->select('c', 'p', 's')
+        ->join('p.categories', 'c')
+        ->join('p.supplier', 's');
 
         if (!empty($search->q)) {
             $query = $query
                 ->andWhere('p.name LIKE :q')
                 ->orWhere('p.description LIKE :q')
                 ->orWhere('c.name LIKE :q')
+                ->orWhere('s.name LIKE :q')
                 ->setParameter('q', "%{$search->q}%");
         }
 

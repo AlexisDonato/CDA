@@ -84,6 +84,10 @@ class DashboardController extends AbstractDashboardController
 
         $carts = $this->cartRepository->findAll();
 
+        $ordersByDate = $this->cartRepository->findOrdersByDate();
+
+        $salesBySupplier = $this->cartRepository->findSalesBySupplier();
+
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -106,6 +110,8 @@ class DashboardController extends AbstractDashboardController
             'products' => $products,
             'orderDetails' => $orderDetails,
             'carts' => $carts,
+            'ordersByDate' => $ordersByDate,
+            'salesBySupplier' => $salesBySupplier,
             // 'chart' => $this->createChart(),
         ]);
     }

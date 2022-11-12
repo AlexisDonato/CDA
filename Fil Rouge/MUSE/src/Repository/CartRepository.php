@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Cart;
 use App\Entity\User;
+use App\Entity\OrderDetails;
+use App\Entity\Product;
+use App\Entity\Supplier;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -81,6 +84,31 @@ class CartRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->join(User::class, 'u', 'WITH', 'c.user = u.id')
         ->where('c.validated = 1')
+        ->getQuery()
+        ->getResult();
+    }
+
+    // Revenues by date
+    public function findOrdersByDate(): ?array
+    {
+        return $this->createQueryBuilder('c')
+        ->select('c.orderDate, SUM(c.total) AS Total')
+        ->where('c.validated = 1')
+        ->groupBy('c.orderDate')
+        ->getQuery()
+        ->getResult();
+    }
+
+    // Sales by supplier
+    public function findSalesBySupplier()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('s.name, SUM(c.total) AS Total')
+        ->join(OrderDetails::class, 'o', 'WITH', 'o.cart = c.id')
+        ->join(Product::class, 'p', 'WITH', 'p.id = o.product')
+        ->join(Supplier::class, 's', 'WITH', 'p.supplier = s.id')
+        ->where('c.validated = 1')
+        ->groupBy('s.name')
         ->getQuery()
         ->getResult();
     }

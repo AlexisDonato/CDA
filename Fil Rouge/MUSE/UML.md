@@ -52,6 +52,15 @@ subject
 enquiryDate
 }
 
+class OrderDetails{
+PK - id
+productId
+quantity
+cart
+product
+subTotal
+}
+
 class Product{
 PK - id
 name
@@ -102,14 +111,5 @@ address
 
 User -- Cart
 User -- Address
-class OrderDetails{
-PK - id
-productId
-quantity
-cart
-product
-subTotal
-}
-
 
 ```

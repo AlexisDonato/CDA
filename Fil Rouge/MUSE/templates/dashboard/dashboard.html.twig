@@ -65,10 +65,10 @@
                                 <h6 class="mb-0 text-light">
                                 {% set todaySales = 0 %}
                                 {% for cart in carts %}
-                                    {% if cart.orderDate == "now"|date() %}
+                                    {# {% if cart.orderDate == "now"|date() %} #}
                                         {% if cart.validated == true %}
                                             {% set todaySales = todaySales + cart.total %}
-                                        {% endif %}
+                                        {# {% endif %} #}
                                     {% endif %}
                                 {% endfor %}
                                 {{ todaySales }} €</h6>
@@ -181,9 +181,9 @@ Nombre de commandes en cours de livraison. #}
 </div>
 </div>
 
-{% for odb in ordersByDate %}
-          {{odb.orderDate|date('d-m-Y')}}, {{odb.Total}} €<br>
-          {% endfor %}
+        {% for odb in ordersByDate %}
+            {{odb.orderDate|date('d-m-Y')}}, {{odb.Total}} €<br>
+        {% endfor %}
 
 
 

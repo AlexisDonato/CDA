@@ -89,7 +89,7 @@ class CartRepository extends ServiceEntityRepository
     }
 
     // Revenues by date
-    public function findOrdersByDate(): ?array
+    public function findOrdersByDate()
     {
         return $this->createQueryBuilder('c')
         ->select('c.orderDate, SUM(c.total) AS Total')

@@ -181,7 +181,9 @@ Nombre de commandes en cours de livraison. #}
 </div>
 </div>
 
-
+{% for odb in ordersByDate %}
+          {{odb.orderDate|date('d-m-Y')}}, {{odb.Total}} €<br>
+          {% endfor %}
 
 
 

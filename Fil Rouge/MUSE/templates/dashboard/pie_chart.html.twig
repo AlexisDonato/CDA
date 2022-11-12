@@ -10,12 +10,12 @@
       function drawPieChart() {
 
         var piechart_data = new google.visualization.DataTable();
-        piechart_data.addColumn('string', 'quantity');
-        piechart_data.addColumn('number', 'quantités en stock');
+        piechart_data.addColumn('string', 'Fournisseur');
+        piechart_data.addColumn('number', 'Revenus');
         piechart_data.addRows([
-          {% for product in products %}
-          ['{{product.name}}', {{product.quantity}}],
-          {% endfor %}
+          {% for sbs in salesBySupplier %}
+          ['{{sbs.name}}', {{sbs.Total}}],
+		    	{% endfor %}
           // ['Produit 1', 5],
           // ['Produit 2', 1],
           // ['Produit 3', 2],
@@ -24,7 +24,7 @@
         ]);
 
         var piechart_options = {
-                       title:'Produits en stock',
+                       title:'Revenus par fournisseur',
                        width:400,
                        height:300,
                        is3D: true,

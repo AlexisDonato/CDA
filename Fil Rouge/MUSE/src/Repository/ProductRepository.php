@@ -71,6 +71,12 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('categories', $search->categories);
         }
 
+        if (!empty($search->supplier)) {
+            $query = $query
+                ->andWhere('s.id IN (:supplier)')
+                ->setParameter('supplier', $search->supplier);
+        }
+
         $query = $query->getQuery();
         return $this->paginator->paginate(
             $query,
@@ -91,7 +97,7 @@ class ProductRepository extends ServiceEntityRepository
         ->createQueryBuilder('p')
         ->select('c', 'p')
         ->join('p.categories', 'c')
-        ->andWhere('p.discount = 1');
+        ->andWhere('p.discountRate != 0');
 
     $query = $query->getQuery();
         return $this->paginator->paginate(

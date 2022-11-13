@@ -20,6 +20,11 @@ class SearchData
     public $categories = [];
 
     /**
+     * @var Supplier[]
+     */
+    public $supplier = [];
+
+    /**
      * @var null|integer
      */
     public $max;

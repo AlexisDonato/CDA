@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Data\SearchData;
 use App\Entity\Category;
+use App\Entity\Supplier;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,6 +33,15 @@ class SearchType extends AbstractType
                     'class' => Category::class,
                     'expanded' => true,
                     'multiple' => true
+                ])
+
+                ->add('supplier', EntityType::class, [
+                    'label' => false,
+                    'required' => false,
+                    'class' => Supplier::class,
+                    'mapped' =>false,
+                    'multiple' => false,
+                    'choice_label' => 'name',
                 ])
 
                 ->add('min', NumberType::class, [

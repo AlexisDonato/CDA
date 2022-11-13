@@ -50,7 +50,7 @@ class ProductController extends AbstractController
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
-
+        // $discount2 =$productRepository->findBy(['discountRate' != 0 ]);
         $cartService->setUser($user);
         
         return $this->render('product/index.html.twig', [

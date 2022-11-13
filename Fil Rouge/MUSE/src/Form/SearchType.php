@@ -41,7 +41,7 @@ class SearchType extends AbstractType
                     'class' => Supplier::class,
                     'mapped' =>false,
                     'multiple' => false,
-                    'choice_label' => 'name',
+                    'choice_label' => 'name'
                 ])
 
                 ->add('min', NumberType::class, [

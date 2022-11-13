@@ -6,8 +6,9 @@
 	<div class="card-body d-flex flex-column">
 		<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}">
 			<h3 class="card-title Hl">{{ product.name }}</h3>
+			<small class="float-right"><i>{{product.supplier.name}} ©</i></small>
 		</a>
-		<div class="card-text text-primary" style="font-weight: bold; font-size: 2rem; text-align: right;">
+		<div class="card-text text-primary mt-2" style="font-weight: bold; font-size: 2rem; text-align: right;">
 			{% if product.discountRate != 0 %}
 				<small>
 					<s class="text-warning digital">

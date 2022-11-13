@@ -11,7 +11,12 @@ App\Entity\Product:
     discountRate: '20%? 0.2 : 0'
     content: "H:<numberBetween(0, 50)>, L:<numberBetween(0, 50)>, l:<numberBetween(0, 50)>"
     quantity: <numberBetween(0, 50)>
+    supplier: '@supplier_*'
 
 App\Entity\Category:
   category_{1..12}:
     name: <category()>
+
+App\Entity\Supplier:
+  supplier_{1..12}:
+    name: <text(10)>

@@ -79,8 +79,8 @@
 		</div>
 	</div>
 
-<div class="row mt-2">
-<div class="col-sm-6 col-xl-6 mb-2 bg-dark rounded border border-secondary mt-2">
+<div class="row d-flex justify-content-around align-items-center rounded bg-dark">
+<div class="col-sm-6 col-xl-5 mb-2 bg-dark rounded border border-secondary mt-2">
 <div><b>Top 10 des clients par C.A.</b></div>
     <table class="table table-dark darker table-striped">
         <thead>
@@ -96,7 +96,7 @@
 			{% set rank = rank + 1 %}
             <tr>
 			<td>{{rank}}
-                <td>{{ sbu.email }}</td>
+                <td class="text-break">{{ sbu.email }}</td>
                 <td>{{ sbu.Total }} €</td>
 
             </tr>
@@ -104,7 +104,7 @@
         </tbody>
     </table>
 </div>
-<div class="col-sm-6 col-xl-6 mb-2 bg-dark rounded border border-secondary mt-2">
+<div class="col-sm-6 col-xl-5 mb-2 bg-dark rounded border border-secondary mt-2">
 <div><b>Top 10 des clients par commandes</b></div>
     <table class="table table-dark darker table-striped">
         <thead>
@@ -121,7 +121,7 @@
 			{% set rank = rank + 1 %}
             <tr>
 			<td>{{rank}}
-                <td>{{ obu.email }}</td>
+                <td class="text-break">{{ obu.email }}</td>
                 <td>{{ obu.Orders }}</td>
             </tr>
 			{% endfor %}

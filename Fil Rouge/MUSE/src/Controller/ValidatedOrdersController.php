@@ -42,7 +42,7 @@ class ValidatedOrdersController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
         $cartService->setUser($user);
         $info = [
-            'details'     => $cartService->getFullCart($orderDetails),
+            // 'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
             'products'  => $products,

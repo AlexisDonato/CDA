@@ -26,7 +26,7 @@
 		<thead>
 			<tr id="audioFont" class="text-primary surround">
 				<th>Produit</th>
-				<th>Prix</th>
+				<th>Prix HT</th>
 				<th>Promotion</th>
 				{% for item in items|slice(0, 1) %}
 					{% if item.cart.additionalDiscountRate != 0 %}
@@ -203,7 +203,7 @@
 
 	{# *** NEW ADDRESS FORM *** #}
 	<div class="text-center mb-5">
-		<button class="btn btn-primary border-light btn-md text-center mt-3 productHl" id="newAddressButton" onclick="newAddress()">Ajouter une adresse ?</button>
+		<button class="btn btn-primary border-light btn-md text-center mt-3 Hl" id="newAddressButton" onclick="newAddress()">Ajouter une adresse ?</button>
 			<br><small class="text-light">(Domicile, facturation, livraison, ...)
 				</small>
 	</div>
@@ -213,7 +213,7 @@
 
 	{# *** PAYMENT CARD FORM *** #}
 	<div class="text-center">
-		<button class="btn btn-primary border-light btn-lg text-center productHl" id="payCardButton" onclick="payCard()">Paiement par carte</button>
+		<button class="btn btn-primary border-light btn-lg text-center Hl" id="payCardButton" onclick="payCard()">Paiement par carte</button>
 	</div>
 	<div id="payCardForm">
 		<div class="container">

@@ -50,10 +50,10 @@
 
 	<body>
 		<div id="div1">
-			{{app.user.userName}}, {{app.user.userLastName}}<br>
-			{{app.user.birthdate|date('d-m-Y')}}<br>
-			{{app.user.phoneNumber}}<br>
-			{{app.user.email}}<br>
+			<b>{{app.user.userName}}, {{app.user.userLastName}}</b><br>
+			Date de naissance : {{app.user.birthdate|date('d-m-Y')}}<br>
+			Tel : {{app.user.phoneNumber}}<br>
+			Mail : {{app.user.email}}<br>
 			{% if app.user.pro == true %}
 			Société : {{app.user.proCompanyName}}<br>
 			DUNS : {{app.user.proDuns}}<br>
@@ -69,7 +69,7 @@
 		<h4 class="text-center text-secondary mb-5">Date de commande : {{order.orderDate|date('d-m-Y')}}</h4>
 
 			<div id="div3">
-			Muse<br>
+			<b>Muse</b><br>
 			123 Bis Avenue du Voyage<br>
 			75000 Paris<br>
 			Tel : +33-987654321<br>
@@ -80,7 +80,7 @@
 				<thead>
 					<tr class="text-primary">
 						<th>Produit</th>
-						<th>Prix</th>
+						<th>Prix HT</th>
 						<th>Promotion</th>
 						{% for detail in details|slice(0, 1) %}{% if detail.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
 						<th>TVA</th>
@@ -92,7 +92,7 @@
 					{% for detail in details %}
 						<tr>
 							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p >{{detail.product.name}}</p></a></td>
-							<td>{{detail.product.price}}</td>
+							<td>{{detail.product.price}} €</td>
 							{% if detail.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
 							{% else %}<td>-

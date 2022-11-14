@@ -87,31 +87,17 @@ class ValidatedOrdersController extends AbstractController
     {
         $orderId = $request->attributes->get('id');
         $details = $orderDetails->findBy(['cart' => $orderId]);
-        $orderDate = $details[0]->getCart()->getOrderDate();
+
         $cartService->setUser($user);
-        $clientOrderId = $cart->getClientOrderId();
-
-        $carrier = $cart->getCarrier();
-        $carrierShipmentId= $cart->getCarrierShipmentId();
-        $shipmentDate = $cart->getShipmentDate();
-
-        $total = $cart->getTotal();
 
         $user = $cart->getUser();
 
         return $this->render(
             'validated_orders/show.html.twig',
             $this->getData($cartRepository, $cartService, $user, $orderDetails, $productRepository, $categoryRepository) + [
-                'order_id' => $clientOrderId,
-                'cart_id' => $orderId,
                 'details' => $details,
-                'orderDate' => $orderDate,
-                'shipped' => $cart->isShipped(),
-                'shipmentDate' => $shipmentDate,
-                'carrier' =>$carrier,
-                'carrierShipmentId' => $carrierShipmentId,
                 'user' => $user,
-                'total' => $total,
+                'cart' => $cart,
             ]
         );
     }

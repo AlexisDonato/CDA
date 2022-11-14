@@ -22,7 +22,7 @@
 				<thead>
 					<tr id="audioFont" class="text-primary surround">
 						<th>Produit</th>
-						<th>Prix</th>
+						<th>Prix HT</th>
 						<th>Promotion</th>
 						{% for item in items|slice(0, 1) %}{% if item.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
 						<th>TVA</th>
@@ -35,7 +35,7 @@
 					{% for item in items %}
 						<tr>
 							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.product.name}}</p></a></td>
-							<td>{{item.product.price}}</td>
+							<td>{{item.product.price}} €</td>
 							{% if item.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h5 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
 							{% else %}<td>-

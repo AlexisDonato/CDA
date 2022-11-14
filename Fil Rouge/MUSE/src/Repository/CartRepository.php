@@ -112,4 +112,31 @@ class CartRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+    // Sales by product
+    public function findSalesByProduct()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('p.name, SUM(c.total) AS Total')
+        ->join(OrderDetails::class, 'o', 'WITH', 'o.cart = c.id')
+        ->join(Product::class, 'p', 'WITH', 'p.id = o.product')
+        ->where('c.validated = 1')
+        ->groupBy('p.name')
+        ->orderBy('Total', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
+    // Sales by product
+    public function findSalesByUser()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('u.email, SUM(c.total) AS Total')
+        ->join(User::class, 'u', 'WITH', 'u.id = c.user')
+        ->where('c.validated = 1')
+        ->groupBy('u.email')
+        ->orderBy('Total', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
 }

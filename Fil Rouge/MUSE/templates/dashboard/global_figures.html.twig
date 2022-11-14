@@ -178,6 +178,24 @@
 			</div>
 		</div>
 	</div>
+	{% include '/dashboard/products_piebar_chart.html.twig' %}
+		<div class="col-sm-6 col-xl-9 mb-2">
+			<table class="columns">
+				<tr>
+					<td>
+						<div id="products_piechart_div" style="border: 1px solid #ccc" class=""></div>
+					</td>
+					<td>
+						<div id="products_barchart_div" style="border: 1px solid #ccc"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	{# <div>
+		{% for sbp in salesByProduct %}
+			{{sbp.name}}, {{sbp.Total}};<br>
+		{% endfor %}
+	</div> #}
 </div>
 
 <hr>
@@ -209,6 +227,19 @@
 			</div>
 		</div>
 	</div>
+	{% include '/dashboard/users_piebar_chart.html.twig' %}
+		<div class="col-sm-6 col-xl-9 mb-2">
+			<table class="columns">
+				<tr>
+					<td>
+						<div id="users_piechart_div" style="border: 1px solid #ccc" class=""></div>
+					</td>
+					<td>
+						<div id="users_barchart_div" style="border: 1px solid #ccc"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
 </div>
 
 <hr>

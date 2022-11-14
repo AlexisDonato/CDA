@@ -86,9 +86,9 @@
 	</table>
 
 	<div class="text-center mt-2 mb-2">
-		<button class="btn btn-primary border-light btn-lg text-center">
+		<button class="btn btn-primary border-light btn-lg text-center" >
 		<i class="fa-solid fa-download"></i>
-			<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{% for detail in details|slice(0, 1) %}{{ detail.cart.invoice }}{% endfor %}" download="">Votre facture Pdf</a>
+			<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{{ cart.invoice }}" download="">Votre facture Pdf</a>
 		</button>
 	</div>
 

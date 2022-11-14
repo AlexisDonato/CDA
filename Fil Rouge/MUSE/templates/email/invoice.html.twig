@@ -9,45 +9,76 @@
 		<title>Invoice</title>
 
 		<style>
-		body{
-		    background: url('');
-		}
+			body{
+				background: url('');
+			}
+
 			#div1 {
 				position: absolute;
-				top: 20cm;
-				left: 10cm;
+				top: 3cm;
+				left: 0cm;
 				width: 5cm;
-				border: 1px solid #AAAAAA;
 			}
 
 			#div2 {
 				position: absolute;
-				top: 15cm;
-				left: 2cm;
-				width: 5cm;
-				border: 1px solid #AAAAAA;
+				justify-content: center;
+				top: 30cm;
+				left: 9cm;
+				width: 10cm;
 			}
+			
+			#div3 {
+				position: absolute;
+				text-align: end;
+				top: 3cm;
+				left: 20cm;
+				width: 8cm;
+			}
+
+
+			table {
+				position: absolute;
+				top: 10cm;
+			}
+
+			/* img {
+				border: 1px solid #000000;
+			} */
 		</style>
 	</head>
+
 	<body>
 		<div id="div1">
-			texte<br>
-			texte<br>
-			texte<br>
-			texte<br>
+			{{app.user.userName}}, {{app.user.userLastName}}<br>
+			{{app.user.birthdate|date('d-m-Y')}}<br>
+			{{app.user.phoneNumber}}<br>
+			{{app.user.email}}<br>
+			{% if app.user.pro == true %}
+			Société : {{app.user.proCompanyName}}<br>
+			DUNS : {{app.user.proDuns}}<br>
+			{% endif %}
+			Vos adresses :
+			<ul>
+				<li>Adresse de facturation : {{order.billingAddress}}</li>
+				<li>Adresse de liivraison : {{order.deliveryAddress}}</li>
 		</div>
 
-		<div id="div2">
-			texte<br>
-			texte<br>
-			texte<br>
-			texte<br>
-		</div>
+		<h1 class="text-center text-light mt-5 pt-5 mb-2">Votre Facture :</h1>
+		<h4 class="text-center text-secondary mb-1">Réf.: {{order.clientOrderId}}</h4>
+		<h4 class="text-center text-secondary mb-5">Date de commande : {{order.orderDate|date('d-m-Y')}}</h4>
 
-		<h1 class="text-center text-primary mt-5 pt-5 mb-5">Votre Panier :</h1>
-			<table class="table table-dark darker border border-info">
+			<div id="div3">
+			Muse<br>
+			123 Bis Avenue du Voyage<br>
+			75000 Paris<br>
+			Tel : +33-987654321<br>
+			Mail : info@Muse.com
+			</div>
+
+			<table border="1" class="table table-striped table-bordered table-secondary border border-secondary mt-5 pt-5">
 				<thead>
-					<tr class="text-primary surround">
+					<tr class="text-primary">
 						<th>Produit</th>
 						<th>Prix</th>
 						<th>Promotion</th>
@@ -55,13 +86,12 @@
 						<th>TVA</th>
 						<th>Quantité</th>
 						<th>Sous-total</th>
-						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for detail in details %}
 						<tr>
-							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p class="productHl">{{detail.product.name}}</p></a></td>
+							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p >{{detail.product.name}}</p></a></td>
 							<td>{{detail.product.price}}</td>
 							{% if detail.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
@@ -72,15 +102,13 @@
 							<td>{{detail.quantity}} {% if detail.product.quantity == 0 %} ({{detail.product.quantity}} left in stock) {% endif %}</td>
 							<td class="h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 								€</h4></td>
-							<td>
-								</td>
 							</td>
 						</tr>
-											{% endfor %}
+					{% endfor %}
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" class="text-right surround h4"><b class="">Total :</b>
+						<td colspan="3" class="text-right h4"><b>Total :</b>
 						</td>
 						<td class="roboto h4">{{ order.total|number_format(2, '.', '') }}
 							€</td>{% for detail in details|slice(0, 1) %}
@@ -94,6 +122,19 @@
 					</tr>
 				</tfoot>
 			</table>
+
+
+		<div id="div2">
+		{# <hr> #}
+			<img src="https://localhost:8000/img/Muse_rect_trans.png" class="img-thumbnail">
+			<div class="text-center">
+			L'entreprise "Muse"<br>
+			Située : 123 Bis Avenue du Voyage, 75000 Paris<br>
+			immatriculée au RCS de Paris 89870953601032<br>
+			n° de téléphone : +33-987654321<br>
+			adresse mail : info@Muse.com
+			</div>
+		</div>
 
 	</body>
 </html>

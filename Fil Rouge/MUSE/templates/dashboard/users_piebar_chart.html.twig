@@ -11,7 +11,7 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
-        data.addColumn('number', 'Slices');
+        data.addColumn('number', 'Revenus');
         data.addRows([
         {% for sbu in salesByUser %}
           ['{{sbu.email}}', {{sbu.Total}}],

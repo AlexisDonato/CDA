@@ -42,7 +42,7 @@ class ValidatedOrdersController extends AbstractController
         $discount2 =$productRepository->findBy(['discount' => true]);
         $cartService->setUser($user);
         $info = [
-            'items'     => $cartService->getFullCart($orderDetails),
+            'details'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
             'products'  => $products,
@@ -118,15 +118,11 @@ class ValidatedOrdersController extends AbstractController
         $cart->setCarrierShipmentId(uniqid('SHIP::'));
         $cart->setCarrier(uniqid('CARRIER::'));
 
-        // $cart->setInvoice('Invoice-'. $orderId .'.pdf');
-
         $entityManager->persist($cart);
         $entityManager->flush();
 
         $orderId = $cart->getId();
         $details = $orderDetails->findBy(['cart' => $orderId]);
-        
-        // $pdf = $this->pdf->getOutputFromHtml($html);
 
         $email = (new TemplatedEmail())
         ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))

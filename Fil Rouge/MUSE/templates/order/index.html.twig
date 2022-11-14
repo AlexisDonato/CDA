@@ -28,8 +28,8 @@
 				<th>Produit</th>
 				<th>Prix HT</th>
 				<th>Promotion</th>
-				{% for item in items|slice(0, 1) %}
-					{% if item.cart.additionalDiscountRate != 0 %}
+				{% for detail in details|slice(0, 1) %}
+					{% if detail.cart.additionalDiscountRate != 0 %}
 						<th class="text-success">Remise</th>
 					{% endif %}
 				{% endfor %}
@@ -40,43 +40,43 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for item in items %}
+			{% for detail in details %}
 				<tr>
 					<td>
-						<a class="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}">
-							<p class="productHl">{{item.product.name}}</p>
+						<a class="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}">
+							<p class="productHl">{{detail.product.name}}</p>
 						</a>
 					</td>
-					<td>{{item.product.price}}</td>
-					{% if item.product.discountRate != 0 %}
+					<td>{{detail.product.price}} €</td>
+					{% if detail.product.discountRate != 0 %}
 						<td class="text text-warning">
 							<div class="d-flex justify-content-start">
-								<h5 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h5>
+								<h5 class="text-warning roboto">-{{ detail.product.discountRate * 100 }}</h5>
 								<h5 class="text-warning">%</h5>
 							</div>
 						{% else %}
 							<td>-
 							{% endif %}
 						</td>
-						{% if item.cart.additionalDiscountRate != 0 %}
-							<td class="text-success">-{{item.cart.additionalDiscountRate * 100}}%</td>
+						{% if detail.cart.additionalDiscountRate != 0 %}
+							<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>
 						{% endif %}
 						<td>{{ app.user.vat * 100}}%</td>
-						<td>{{item.quantity}}
-							{% if item.product.quantity == 0 %}
-								({{item.product.quantity}}
+						<td>{{detail.quantity}}
+							{% if detail.product.quantity == 0 %}
+								({{detail.product.quantity}}
 								left in stock)
 							{% endif %}
 						</td>
-						<td class="roboto h5{% if item.product.discountRate != 0 %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate + item.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
+						<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
 						</td>
 					<td>
-						<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
+						<a href="{{ path("app_cart_add", {id: detail.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if detail.product.quantity == 0 %} disabled {% endif %}">
 							<i class="bi bi-cart-plus"></i>
 						</a>
-						<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
+						<a href="{{ path("app_cart_remove", {id: detail.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
 							<i class="bi bi-cart-dash"></i>
-						<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
+						<a href="{{ path ('app_cart_delete', {'id': detail.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
 							<i class="fas fa-trash"></i>
 						</a>
 					</td>

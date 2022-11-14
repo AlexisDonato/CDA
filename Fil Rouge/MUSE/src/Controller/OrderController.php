@@ -148,7 +148,7 @@ class OrderController extends AbstractController
             $entityManager->flush();
         }
         return $this->render('order/index.html.twig', [
-            'items'     => $cartService->getFullCart($orderDetails),
+            'details'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),
             'products' => $products,

@@ -80,41 +80,51 @@
 	</div>
 
 <div class="row mt-2">
-<div class="col-6">
+<div class="col-sm-6 col-xl-6 mb-2 bg-dark rounded border border-secondary mt-2">
 <div><b>Top 10 des clients par C.A.</b></div>
     <table class="table table-dark darker table-striped">
         <thead>
             <tr class="text-info">
+				<th>Rang</th>
                 <th>Client</th>
                 <th>C.A.</th>
             </tr>
         </thead>
         <tbody>
+			{% set rank = 0 %}
+			{% for sbu in salesByUser|slice(0, 10) %}
+			{% set rank = rank + 1 %}
             <tr>
-				{% for sbu in salesByUser|slice(0, 10) %}
+			<td>{{rank}}
                 <td>{{ sbu.email }}</td>
                 <td>{{ sbu.Total }} €</td>
-				{% endfor %}
+
             </tr>
+			{% endfor %}
         </tbody>
     </table>
 </div>
-<div class="col-6">
+<div class="col-sm-6 col-xl-6 mb-2 bg-dark rounded border border-secondary mt-2">
 <div><b>Top 10 des clients par commandes</b></div>
     <table class="table table-dark darker table-striped">
         <thead>
             <tr class="text-info">
+				<th>Rang</th>
                 <th>Client</th>
                 <th>Nbr commandes</th>
             </tr>
         </thead>
         <tbody>
+
+ 			{% set rank = 0 %}
+			{% for obu in ordersByUser|slice(0, 10) %}
+			{% set rank = rank + 1 %}
             <tr>
-				{% for obu in ordersByUser|slice(0, 10) %}
+			<td>{{rank}}
                 <td>{{ obu.email }}</td>
                 <td>{{ obu.Orders }}</td>
-								{% endfor %}
             </tr>
+			{% endfor %}
         </tbody>
     </table>
 </div>

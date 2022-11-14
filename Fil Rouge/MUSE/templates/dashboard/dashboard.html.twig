@@ -164,7 +164,7 @@ Nombre de commandes en cours de livraison. #}
         </thead>
         <tbody>
             <tr>
-                <td class="text-warning">{% if sumShip != 0 %}{{ sumVal - sumShip }}{% endif %}</td>
+                <td class="text-warning">{{ sumVal - sumShip }}</td>
                 <td class="text-warning">{{sumPro}} €</td>
                 <td class="text-warning">{{sumClient}} €</td>
                 <td></td>
@@ -183,7 +183,7 @@ Nombre de commandes en cours de livraison. #}
 </div>
 
         {% for odb in ordersByDate %}
-            {{odb.orderDate|date('d-m-Y')}}, {{odb.Total}} €<br>
+            {{odb.orderDate|date('d-m-Y H:i:s')}}, {{odb.Total}} €<br>
         {% endfor %}
 
 </div>

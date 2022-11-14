@@ -79,6 +79,46 @@
 		</div>
 	</div>
 
+<div class="row mt-2">
+<div class="col-6">
+<div><b>Top 10 des clients par C.A.</b></div>
+    <table class="table table-dark darker table-striped">
+        <thead>
+            <tr class="text-info">
+                <th>Client</th>
+                <th>C.A.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+				{% for sbu in salesByUser|slice(0, 10) %}
+                <td>{{ sbu.email }}</td>
+                <td>{{ sbu.Total }} €</td>
+				{% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-6">
+<div><b>Top 10 des clients par commandes</b></div>
+    <table class="table table-dark darker table-striped">
+        <thead>
+            <tr class="text-info">
+                <th>Client</th>
+                <th>Nbr commandes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+				{% for obu in ordersByUser|slice(0, 10) %}
+                <td>{{ obu.email }}</td>
+                <td>{{ obu.Orders }}</td>
+								{% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 	<hr>
 
 	<div class="row d-flex justify-content-around align-items-center rounded bg-dark">

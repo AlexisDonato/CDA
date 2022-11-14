@@ -10,12 +10,12 @@
       function drawPieBarChart() {
 
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
+        data.addColumn('string', 'Name');
         data.addColumn('number', 'Slices');
         data.addRows([
-           {% for sbs in salesBySupplier %}
+        {% for sbs in salesBySupplier %}
           ['{{sbs.name}}', {{sbs.Total}}],
-		    	{% endfor %}
+		    {% endfor %}
           // ['Produit 1', 5],
           // ['Produit 2', 1],
           // ['Produit 3', 2],

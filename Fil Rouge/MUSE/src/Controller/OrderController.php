@@ -197,7 +197,7 @@ class OrderController extends AbstractController
 
         $cart = $cartService->getClientCart();
 
-        // if ($this->cart->isBillingAddress(null) && $this->cart->isDeliveryAddress(null)) {
+        // if ($this->isBillingAddress(null) && $this->isDeliveryAddress(null)) {
 
         //     $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
         //     $route = $request->headers->get('referer');
@@ -243,6 +243,7 @@ class OrderController extends AbstractController
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');
+        
         // }
         
     }

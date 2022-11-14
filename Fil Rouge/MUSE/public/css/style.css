@@ -133,6 +133,7 @@ h2:hover {
 .cartoon {
     transform: translatey(0px);
     animation: cartoon 6s ease-in-out infinite;
+    animation-iteration-count: 1;
 }
 
 @keyframes cartoon {
@@ -207,6 +208,7 @@ h2:hover {
         transform: translatex(+800px);
         width: 15%;
     }
+    
 }
 
 /* NAVBAR */

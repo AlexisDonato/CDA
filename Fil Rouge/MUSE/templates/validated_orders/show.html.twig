@@ -86,13 +86,13 @@
 	</table>
 
 	<div class="text-center mt-2 mb-2">
-		<button class="btn btn-primary border-light btn-lg text-center">
+		<button class="btn btn-info border-light btn-lg text-center">
 		<i class="fa-solid fa-download"></i>
 			<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{{ cart.invoice }}" download="">Votre facture Pdf</a>
 		</button>
 	</div>
 
-<button class="btn btn-primary border-light btn-lg text-center" onclick="location.href='https://localhost:8000/invoices/{{ cart.invoice }}'">Voir ma facture</button>
+<button class="btn btn-info border-light btn-lg text-center" onclick="location.href='https://localhost:8000/invoices/{{ cart.invoice }}'">Voir ma facture</button>
 
 	{% if (cart.shipped == 0) and (is_granted('ROLE_SHIP')) %}
 		<div class="d-flex justify-content-center">
@@ -151,4 +151,4 @@
 		</button>
 	</div>
 {% endif %}<div class="text-center">
-<button class="btn btn-primary border-light mb-1" onclick="history.back()">Retour</button></div></div>{% endblock %}
+<button class="btn btn-info border-light mb-1" onclick="history.back()">Retour</button></div></div>{% endblock %}

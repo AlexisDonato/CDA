@@ -27,7 +27,7 @@
                     <td>{{order.ClientOrderId}}</td>
                     <td>{{order.orderDate|format_datetime('short', 'none', locale='fr')}}</td>
                     <td>{% if order.shipped == 1 %}{{order.shipmentDate|format_datetime('short', 'none', locale='fr')}}{% else %} - {% endif %}</td>
-                    <td><button title="Détails" class="btn btn-primary border-light mb-1"><a class="text-decoration-none text-light" href="
+                    <td><button title="Détails" class="btn btn-info border-light mb-1"><a class="text-decoration-none text-light" href="
                     {{ path('app_validated_orders_show', {'id': order.id}) }}
                     "><i class="fa-solid fa-eye"></i></a></button></td>
                 </tr>

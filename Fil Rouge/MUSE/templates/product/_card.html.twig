@@ -22,7 +22,7 @@
 					</s>
 				</small>
 			{% else %}
-				<b class="digital">{{ (product.price * 1.2)|number_format(2, '.', '') }} €</b>
+				<b class="digital text-warning">{{ (product.price * 1.2)|number_format(2, '.', '') }} €</b>
 			{% endif %}
 
 			{% if product.discountRate != 0 %}
@@ -30,12 +30,12 @@
 				<h4 class="text-warning digital">-{{ product.discountRate * 100 }}</h4><h5 class="text-warning">% !</h5>
 				</div>
 				{% if app.user %}
-					<h4 class="text text-warning">
-						<b class="digital h2">{{ (product.price * ( 1 - product.discountRate) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
+					<p class="h4 text-warning">
+						<b class="text-warning digital h2">{{ (product.price * ( 1 - product.discountRate) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
 							€</b>
 					</h4>
 				{% else %}
-					<h4 class="text-warning digital">
+					<p class="h4 text-warning digital">
 						<b>{{ (product.price * ( 1 - product.discountRate) * 1.2)|number_format(2, '.', '') }}
 							€</b>
 					</h4>
@@ -46,12 +46,12 @@
 		<div>
 			{% for c in product.categories %}
 				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': c.id}) }}">
-					<em class="text-info text-primary text-italic">#{{ c.name }}</em>
+					<em class="text-primary text-primary text-italic">#{{ c.name }}</em>
 				</a>
 			{% endfor %}
 		</div>
 		<div class="card-footer mt-auto">
-			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-primary float-right border-light Hl{% if product.quantity == 0 %} disabled btn-secondary{% endif %}">
+			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-info float-right border-light Hl{% if product.quantity == 0 %} disabled btn-secondary{% endif %}">
 				<i class="fa-solid fa-cart-plus"></i>
 			</a>
 

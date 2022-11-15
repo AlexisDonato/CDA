@@ -7,7 +7,7 @@
 	<div class="container">
 		{% if categories|length > 0 %}
 
-			<h1 class="text-info mb-3 mt-3">Catégories :</h1>
+			<h1 class="text-primary mb-3 mt-3">Catégories :</h1>
 
 			{% set col = 1 %}
 			{% for category in categories %}
@@ -28,11 +28,11 @@
 								<div class="dropdown-menu ddmenu border border-dark">
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
-											<a class="text-info dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">
+											<a class="text-primary dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">
 												<div class="d-flex justify-content-start">{{category.parentCategory}}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.parentCategory.products|length }}</h2>
 												</div>
 											</a>
-											<a class="text-info dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.id}) }}">
+											<a class="text-primary dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.id}) }}">
 												<div class="d-flex justify-content-start">{{ category.name }}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.products|length }}</h2>
 												</div>
 											</a>

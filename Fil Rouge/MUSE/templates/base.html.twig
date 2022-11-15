@@ -11,7 +11,7 @@
 			<div class="alert alert-success text-center">{{ message }}</div>
 		{% endfor %}
 		{% for message in app.flashes('info') %}
-			<div class="alert alert-info text-center">{{ message }}</div>
+			<div class="alert alert-primary text-center">{{ message }}</div>
 		{% endfor %}
 		{% for message in app.flashes('error') %}
 			<div class="alert alert-danger text-center">{{ message }}</div>
@@ -27,17 +27,17 @@
 								<ol class="breadcrumb">
 
 									<li class="breadcrumb-item">
-										<a class="text-info" href="{{path('app_home')}}">Accueil</a>
+										<a class="text-primary text-decoration-none" href="{{path('app_home')}}">Accueil</a>
 									</li>
 
 									<li class="breadcrumb-item">
-										<a class="text-info" href="{{path('app_category')}}">Catégories</a>
+										<a class="text-primary text-decoration-none" href="{{path('app_category')}}">Catégories</a>
 									</li>
 
 									{% for category in categories %}
 									{% if category.parentCategory %}
 									<li class="breadcrumb-item">
-										<a class="text-info" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">{{category.parentCategory}}</a>
+										<a class="text-primary text-decoration-none" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">{{category.parentCategory}}</a>
 									</li>
 									{% endif %}
 									{% endfor %}

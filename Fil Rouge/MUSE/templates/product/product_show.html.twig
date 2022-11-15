@@ -64,13 +64,13 @@
 							</tr>
 							<tr>
 								<th>En stock</th>
-									{% if product.quantity > 0 %}<td>Oui ({{ product.quantity }}){% else %}<td class="text-danger">Non
+									{% if product.quantity > 0 %}<td>{{ product.quantity }}{% else %}<td class="text-danger">Non
 									{% endif %}
 								</td>
 							</tr>
 							<tr>
 								<th>Promotion</th>
-								{% if product.discount %}<td class="text-warning">-{{ product.discountRate *100}}%</td>{% else %}<td>{{ product.discount ? 'Oui' : 'Non' }}{% endif %}</td>
+								{% if product.discount %}<td class="text-warning">-{{ product.discountRate *100}}%</td>{% else %}<td>{{ product.discount ? 'Oui' : '-' }}{% endif %}</td>
 							</tr>
 							<tr>
 								<th>TVA</th>

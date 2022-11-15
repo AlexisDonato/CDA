@@ -25,13 +25,13 @@
 			<div class="col-md-12">
 			<h1 class="text-light text-center pb-5">Meilleures ventes</h1>
 				{% if salesByProduct|length > 0 %}
-					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
+					<div id="carouselExampleIndicators-1" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+							<li data-target="#carouselExampleIndicators-1" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators-1" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators-1" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators-1" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators-1" data-slide-to="4"></li>
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
@@ -59,11 +59,11 @@
 							{% endfor %}
 						</div>
 
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators-1" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<a class="carousel-control-next" href="#carouselExampleIndicators-1" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -77,20 +77,20 @@
 			<div class="col-md-12">
 			<h1 class="text-light text-center pb-5">Produits les plus commandés</h1>
 				{% if orderedProducts|length > 0 %}
-					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
+					<div id="carouselExampleIndicators-2" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+							<li data-target="#carouselExampleIndicators-2" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators-2" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators-2" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators-2" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators-2" data-slide-to="4"></li>
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome2.jpg" alt="...">
+								<img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile.jpeg" alt="...">
 								<div class="carousel-caption d-none d-md-block">
-									{# <h1 id="audioFont" class="text-danger">MUSE</h1> #}
-									<img src="/img/Muse_trans3.png" style="width: 15rem;">
+									<h1 id="audioFont" class="text-light">Produits les plus commandés</h1>
+									{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
@@ -111,11 +111,11 @@
 							{% endfor %}
 						</div>
 
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators-2" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<a class="carousel-control-next" href="#carouselExampleIndicators-2" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -127,22 +127,22 @@
 
 				<div class="row mt-5">
 			<div class="col-md-12">
-			<h1 class="text-light text-center pb-5 Hl">Promotions exclusives !</h1>
+			<h1 class="text-warning text-center pb-5 Hl">Promotions exclusives !</h1>
 				{% if productsDiscount|length > 0 %}
-					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
+					<div id="carouselExampleIndicators-3" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
-							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+							<li data-target="#carouselExampleIndicators-3" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators-3" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators-3" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators-3" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators-3" data-slide-to="4"></li>
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome2.jpg" alt="...">
+								<img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile2.webp" alt="...">
 								<div class="carousel-caption d-none d-md-block">
-									{# <h1 id="audioFont" class="text-danger">MUSE</h1> #}
-									<img src="/img/Muse_trans3.png" style="width: 15rem;">
+									<h1 id="audioFont" class="text-warning">Promotions exclusives</h1>
+									{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
@@ -156,18 +156,18 @@
 												€</i>
 										</h3>
 										<p>
-											<i>{{ pd.description }}</i>
+											<i class="text-warning">{{ pd.description }}</i>
 										</p>
 									</div>
 								</div>
 							{% endfor %}
 						</div>
 
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators-3" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<a class="carousel-control-next" href="#carouselExampleIndicators-3" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>

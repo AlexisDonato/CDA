@@ -206,7 +206,7 @@
 
 	{# *** NEW ADDRESS FORM *** #}
 	<div class="text-center mb-5">
-		<button class="btn btn-primary border-light btn-md text-center mt-3 Hl" id="newAddressButton" onclick="newAddress()">Ajouter une adresse ?</button>
+		<button class="btn btn-info border-light btn-md text-center mt-3 Hl" id="newAddressButton" onclick="newAddress()">Ajouter une adresse ?</button>
 			<br><small class="text-light">(Domicile, facturation, livraison, ...)
 				</small>
 	</div>
@@ -216,7 +216,7 @@
 
 	{# *** PAYMENT CARD FORM *** #}
 	<div class="text-center">
-		<button class="btn btn-primary border-light btn-lg text-center Hl" id="payCardButton" onclick="payCard()">Paiement par carte</button>
+		<button class="btn btn-info border-light btn-lg text-center Hl" id="payCardButton" onclick="payCard()">Paiement par carte</button>
 	</div>
 	<div id="payCardForm">
 		<div class="container">
@@ -233,7 +233,7 @@
 
 	{# *** STRIPE PAYMENT CARD FORM *** #}
 	<div class="text-center">
-		<div class="btn btn-primary btn-lg border-light mt-3 mb-3">
+		<div class="btn btn-info btn-lg border-light mt-3 mb-3">
 			<form action="{{ path("app_order_validated") }}" method="POST">
 				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HxZzNHy8LImKK9LDtgMDRBwd" data-amount="{{ total * 100 }}" data-name="Muse check-out" data-description="(4242 4242 4242 4242+any CVC/valid future expiration)" data-image="/img/Muse_fav.png" data-locale="auto"></script>
 			</form>

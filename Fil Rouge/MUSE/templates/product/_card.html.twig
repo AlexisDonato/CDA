@@ -51,11 +51,9 @@
 			{% endfor %}
 		</div>
 		<div class="card-footer mt-auto">
-			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-info float-right border-light Hl{% if product.quantity == 0 %} disabled btn-secondary{% endif %}">
+			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-info float-right border-light Hl{% if product.quantity == 0 %} disabled btn-dark{% endif %}">
 				<i class="fa-solid fa-cart-plus"></i>
 			</a>
-
-
 			<span class="position-relative d-flex justify-content-middle">
 				{% if product.quantity == 0 %}
 					<br><h3 class="text-secondary">Rupture de stock !</h3>

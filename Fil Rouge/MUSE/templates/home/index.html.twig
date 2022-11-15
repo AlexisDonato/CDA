@@ -6,39 +6,24 @@
 
 {% block body %}
 <style>
-hr {
-	display: block;
-	clear: both;
-	height: 0;
-	margin: 40px 0 80px;
-	padding: 0;
-	border: 0;
-	font-family: arial;
-	text-align: center;
-	font-size: 60px;
-	line-height: 1;
-}
-hr:after {
-	/* content: "\273D \273D \273D"; */
-	height: 0;			
-	letter-spacing: 1em;
-	color: 
-#aaa;
-}
+	/* body{
+		background: url('');
+		background: rgb(0,0,0);
+    	background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(50,50,61,1) 0%, rgba(0,0,0,1) 100%);
+	} */
 </style>
 	<div class="container">
 	<div class="text-center">
 	<img id="homeLogo" src ="/img/Muse_rect_trans.png" style="width: 250px; height: 100px;" class="cartoon mb-1" >
 	</div>
 	<hr>
-	<hr>
 		{# <h1 class="text-center mt-1 hometitle slideIn">Muse...</h1>
 		<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
 
 
-		<div class="row">
+		<div class="row d-flex justify-content-around align-items-center rounded">
 			<div class="col-md-12">
-			<h1 class="text-primary text-center">Meilleures ventes</h1>
+			<h1 class="text-light text-center pb-5">Meilleures ventes</h1>
 				{% if salesByProduct|length > 0 %}
 					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
@@ -90,8 +75,8 @@ hr:after {
 
 		<div class="row mt-5">
 			<div class="col-md-12">
-			<h1 class="text-primary text-center">Produits les plus commandés</h1>
-				{% if salesByProduct|length > 0 %}
+			<h1 class="text-light text-center pb-5">Produits les plus commandés</h1>
+				{% if orderedProducts|length > 0 %}
 					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -140,47 +125,56 @@ hr:after {
 		</div>
 	<hr>
 
-		<div class="row">
+				<div class="row mt-5">
 			<div class="col-md-12">
-				<a class="text-decoration-none" href="{{ path('app_discount') }}">
-					<h2 class="mt-5 mb-5 text-center hometitle2">Nos promotions exclusives !</h2>
-				</a>
-				<div id="carouselExampleIndicators" class="carousel slide mb-5 text-center" data-ride="carousel" data-interval="5000">
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-					</ol>
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<a href="{{ path('app_discount') }}"><img class="img-thumbnail border border-danger" style="width: 15rem; height: 10rem;" src="/img/Discount.jpeg" alt="..."></a>
-							<div class="carousel-caption d-none d-md-block"></div>
+			<h1 class="text-light text-center pb-5 Hl">Promotions exclusives !</h1>
+				{% if productsDiscount|length > 0 %}
+					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
+						<ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome2.jpg" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									{# <h1 id="audioFont" class="text-danger">MUSE</h1> #}
+									<img src="/img/Muse_trans3.png" style="width: 15rem;">
+									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
+								</div>
+							</div>
+							{% for pd in productsDiscount|slice(5,5) %}
+								<div class="carousel-item">
+									<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
+									<div class="carousel-caption d-none d-md-block">
+										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}"><h1 class="text-warning mb-3">{{ pd.name }}</h1></a>
+										<h3 class="text-white">
+											<i class="text-warning">{{ pd.price }}
+												€</i>
+										</h3>
+										<p>
+											<i>{{ pd.description }}</i>
+										</p>
+									</div>
+								</div>
+							{% endfor %}
 						</div>
-						<div class="carousel-item">
-							<a href="{{ path('app_discount') }}"><img class="img-thumbnail border border-warning" style="width: 20rem; height: 10rem;" src="/img/Discount2.jpeg" alt="..."></a>
-							<div class="carousel-caption d-none d-md-block"></div>
-						</div>
-						<div class="carousel-item">
-							<a href="{{ path('app_discount') }}"><img class="img-thumbnail border border-warning" style="width: 20rem; height: 10rem;" src="/img/Discount3.jpeg" alt="..."></a>
-							<div class="carousel-caption d-none d-md-block"></div>
-						</div>
-						<div class="carousel-item">
-							<a href="{{ path('app_discount') }}"><img class="img-thumbnail border border-warning" style="width: 10rem; height: 10rem;" src="/img/Discount4.jpeg" alt="..."></a>
-							<div class="carousel-caption d-none d-md-block"></div>
-						</div>
-					</div>
 
-					<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				{% endif %}
 			</div>
 		</div>
+	<hr>
 	</div>
 {% endblock %}

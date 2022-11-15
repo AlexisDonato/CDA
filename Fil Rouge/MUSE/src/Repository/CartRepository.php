@@ -88,6 +88,7 @@ class CartRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+
     // Revenues by date
     public function findOrdersByDate()
     {

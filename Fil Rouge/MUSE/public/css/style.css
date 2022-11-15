@@ -133,7 +133,7 @@ h2:hover {
 .cartoon {
     transform: translatey(0px);
     animation: cartoon 6s ease-in-out infinite;
-    animation-iteration-count: 1;
+    animation-iteration-count: 2;
 }
 
 @keyframes cartoon {

@@ -21,11 +21,12 @@ class HomeController extends AbstractController
 {
 
     private CartRepository $cartRepository;
+    private ProductRepository $productRepository;
 
-
-    public function __construct(CartRepository $cartRepository)
+        public function __construct(CartRepository $cartRepository, ProductRepository $productRepository)
     {
         $this->cartRepository = $cartRepository;
+        $this->productRepository = $productRepository;
     }
 
     #[Route('/', name: 'app_home')]
@@ -60,6 +61,8 @@ class HomeController extends AbstractController
 
         $orderedProducts = $this->cartRepository->findOrderedProducts();
 
+        $productsDiscount = $this->productRepository->findProductsDiscount();
+
         return $this->render('home/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
@@ -71,6 +74,7 @@ class HomeController extends AbstractController
             'discount2' => $discount2,
             'salesByProduct' => $salesByProduct,
             'orderedProducts' => $orderedProducts,
+            'productsDiscount' => $productsDiscount,
         ]);
     }
 }

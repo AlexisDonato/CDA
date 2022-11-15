@@ -106,4 +106,13 @@ class ProductRepository extends ServiceEntityRepository
             9
         );
     }
+
+        // Products on discount
+        public function findProductsDiscount()
+        {
+            return $this->createQueryBuilder('p')
+            ->where('p.discountRate != 0')
+            ->getQuery()
+            ->getResult();
+        }
 }

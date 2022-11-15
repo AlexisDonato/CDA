@@ -97,7 +97,7 @@
             <tr>
 			<td>{{rank}}
                 <td class="text-break">{{ sbu.email }}</td>
-                <td class="text-warning">{{ sbu.Total }} €</td>
+                <td class="text-warning"><strong>{{ sbu.Total }} €</strong></td>
 
             </tr>
 			{% endfor %}
@@ -122,7 +122,7 @@
             <tr>
 			<td>{{rank}}
                 <td class="text-break">{{ obu.email }}</td>
-                <td class="text-warning">{{ obu.Orders }}</td>
+                <td class="text-warning"><strong>{{ obu.Orders }}</strong></td>
             </tr>
 			{% endfor %}
         </tbody>
@@ -146,7 +146,7 @@
             <tr>
 			<td>{{rank}}
                 <td class="text-break">{{ op.name }}</td>
-                <td class="text-warning">{{ op.Ordered }}</td>
+                <td class="text-warning"><strong>{{ op.Ordered }}</strong></td>
             </tr>
 			{% endfor %}
         </tbody>
@@ -170,7 +170,7 @@
             <tr>
 			<td>{{rank}}
                 <td class="text-break">{{ sbp.name }}</td>
-                <td class="text-warning">{{ sbp.Total }} €</td>
+                <td class="text-warning"><strong>{{ sbp.Total }} €</strong></td>
             </tr>
 			{% endfor %}
         </tbody>
@@ -202,7 +202,7 @@
 							Moyenne des revenus par fournisseur:
 							<strong class="text-warning">
 								{% if suppliers|length != 0 %}
-									{{ sumTotal / suppliers|length }}
+									{{ (sumTotal / suppliers|length)|number_format(2, '.', '') }}
 									€
 								{% endif %}
 							</strong>

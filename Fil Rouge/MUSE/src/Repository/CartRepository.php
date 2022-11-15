@@ -118,7 +118,7 @@ class CartRepository extends ServiceEntityRepository
     public function findSalesByProduct()
     {
         return $this->createQueryBuilder('c')
-        ->select('p.id, p.name, p.price, p.description, p.image, SUM(c.total) AS Total')
+        ->select('p.id, p.name, p.price, p.description, p.image, SUM(o.subTotal) AS Total')
         ->join(OrderDetails::class, 'o', 'WITH', 'o.cart = c.id')
         ->join(Product::class, 'p', 'WITH', 'p.id = o.product')
         ->where('c.validated = 1')

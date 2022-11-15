@@ -57,7 +57,7 @@
 								</td>
 							</td>
 						</tr>
-
+					{% endfor %}
 				</tbody>
 				<tfoot>
 					<tr>
@@ -65,16 +65,18 @@
 						</td>
 						<td class="roboto h4">{{ total|number_format(2, '.', '') }}
 							€</td>
+							{% for item in items|slice(0, 1) %}
 							{% if item.product.discountRate != 0 %}
 							<td colspan="6">
 							{% else %}
 							<td colspan="5">
 							{% endif %}
+							{% endfor %}
 							<a href="{{ path("app_cart_deleteAll") }}" class="btn btn-danger" title="Supprimer le panier">
 								<i class="bi bi-cart-x"></i>
 							</a>
 						</td>
-					{% endfor %}
+
 					</tr>
 				</tfoot>
 			</table>

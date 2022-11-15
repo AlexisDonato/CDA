@@ -138,9 +138,12 @@
 					</div>
 					<ul class="list-group list-group-flush">
 						{% if app.user.pro %}
-							<li class="list-group-detail bg-dark text-light">
-								<b>Raison sociale :</b>
-								{{ user.proCompanyName }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">Raison sociale :</b>
+								{{ app.user.proCompanyName }}</li>
+							<li class="list-group-item bg-dark text-light">
+								<b id="audioFont" class="surround">DUNS :</b>
+								{{ app.user.proDuns }}</li>
 						{% endif %}
 						<li class="list-group-item bg-dark text-light">
 							<b id="audioFont" class="surround">Prénom :</b>

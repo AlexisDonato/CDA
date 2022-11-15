@@ -35,16 +35,16 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome2.jpg" alt="...">
+								<img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile3.jpeg" alt="...">
 								<div class="carousel-caption d-none d-md-block">
-									{# <h1 id="audioFont" class="text-danger">MUSE</h1> #}
-									<img src="/img/Muse_trans3.png" style="width: 15rem;">
+									<h1 id="audioFont" class="text-light">Meilleures ventes</h1>
+									{# <img src="/img/Muse_trans3.png" style="width: 10rem;"> #}
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
 							{% for sbp in salesByProduct|slice(5,5) %}
 								<div class="carousel-item">
-									<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
+									<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
 										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': sbp.id}) }}"><h1 class="text-light mb-3">{{ sbp.name }}</h1></a>
 										<h3 class="text-white">
@@ -96,7 +96,7 @@
 							</div>
 							{% for op in orderedProducts|slice(5,5) %}
 								<div class="carousel-item">
-									<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{op.image}}" alt="Slide n°{{op.id}}"></a>
+									<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{op.image}}" alt="Slide n°{{op.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
 										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': op.id}) }}"><h1 class="text-light mb-3">{{ op.name }}</h1></a>
 										<h3 class="text-white">
@@ -148,7 +148,7 @@
 							</div>
 							{% for pd in productsDiscount|slice(5,5) %}
 								<div class="carousel-item">
-									<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
+									<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
 										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}"><h1 class="text-warning mb-3">{{ pd.name }}</h1></a>
 										<h3 class="text-white">

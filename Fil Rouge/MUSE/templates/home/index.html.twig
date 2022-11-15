@@ -12,10 +12,12 @@
 		{# <h1 class="text-center mt-1 hometitle slideIn">Muse...</h1>
 		<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
 
+
 		<div class="row">
-			<div class="col-md-8">
-				{% if products|length > 0 %}
-					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="4000">
+			<div class="col-md-12">
+			<h1 class="text-primary text-center">Meilleures ventes</h1>
+				{% if salesByProduct|length > 0 %}
+					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -32,17 +34,17 @@
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
-							{% for product in products|slice(5,5) %}
+							{% for sbp in salesByProduct|slice(5,5) %}
 								<div class="carousel-item">
-									<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{product.image}}" alt="Slide n°{{product.id}}"></a>
+									<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
-										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': product.id}) }}"><h1 class="text-light mb-3">{{ product.name }}</h1></a>
+										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': sbp.id}) }}"><h1 class="text-light mb-3">{{ sbp.name }}</h1></a>
 										<h3 class="text-white">
-											<i>{{ product.price }}
+											<i>{{ sbp.price }}
 												€</i>
 										</h3>
 										<p>
-											<i>{{ product.description }}</i>
+											<i>{{ sbp.description }}</i>
 										</p>
 									</div>
 								</div>
@@ -60,7 +62,64 @@
 					</div>
 				{% endif %}
 			</div>
-			<div class="col-md-4">
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-md-12">
+			<h1 class="text-primary text-center">Produits les plus commandés</h1>
+				{% if salesByProduct|length > 0 %}
+					<div id="carouselExampleIndicators" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
+						<ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+							<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img class="img-thumbnail border border-danger" style="width: 20rem;" src="/img/BGHome2.jpg" alt="...">
+								<div class="carousel-caption d-none d-md-block">
+									{# <h1 id="audioFont" class="text-danger">MUSE</h1> #}
+									<img src="/img/Muse_trans3.png" style="width: 15rem;">
+									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
+								</div>
+							</div>
+							{% for op in orderedProducts|slice(5,5) %}
+								<div class="carousel-item">
+									<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 32rem;" src="{{op.image}}" alt="Slide n°{{op.id}}"></a>
+									<div class="carousel-caption d-none d-md-block">
+										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': op.id}) }}"><h1 class="text-light mb-3">{{ op.name }}</h1></a>
+										<h3 class="text-white">
+											<i>{{ op.price }}
+												€</i>
+										</h3>
+										<p>
+											<i>{{ op.description }}</i>
+										</p>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
 				<a class="text-decoration-none" href="{{ path('app_discount') }}">
 					<h2 class="mt-5 mb-5 text-center hometitle2">Nos promotions exclusives !</h2>
 				</a>

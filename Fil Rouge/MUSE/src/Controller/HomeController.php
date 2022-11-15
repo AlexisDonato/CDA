@@ -19,6 +19,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+
+    private CartRepository $cartRepository;
+
+
+    public function __construct(CartRepository $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(Request $request, ?UserInterface $user, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartRepository $cartRepository, OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
@@ -47,6 +56,10 @@ class HomeController extends AbstractController
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findBy(['discount' => true]);
 
+        $salesByProduct = $this->cartRepository->findSalesByProduct();
+
+        $orderedProducts = $this->cartRepository->findOrderedProducts();
+
         return $this->render('home/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
@@ -56,6 +69,8 @@ class HomeController extends AbstractController
             'categories' => $categories,
             'discount' => $discount,
             'discount2' => $discount2,
+            'salesByProduct' => $salesByProduct,
+            'orderedProducts' => $orderedProducts,
         ]);
     }
 }

@@ -118,7 +118,7 @@ class CartRepository extends ServiceEntityRepository
     public function findSalesByProduct()
     {
         return $this->createQueryBuilder('c')
-        ->select('p.name, SUM(c.total) AS Total')
+        ->select('p.id, p.name, p.price, p.description, p.image, SUM(c.total) AS Total')
         ->join(OrderDetails::class, 'o', 'WITH', 'o.cart = c.id')
         ->join(Product::class, 'p', 'WITH', 'p.id = o.product')
         ->where('c.validated = 1')
@@ -141,16 +141,31 @@ class CartRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-        // Orders by user
-        public function findOrdersByUser()
-        {
-            return $this->createQueryBuilder('c')
-            ->select('u.email, COUNT(c.id) AS Orders')
-            ->join(User::class, 'u', 'WITH', 'u.id = c.user')
-            ->where('c.validated = 1')
-            ->groupBy('u.email')
-            ->orderBy('Orders', 'DESC')
-            ->getQuery()
-            ->getResult();
-        }
+    // Orders by user
+    public function findOrdersByUser()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('u.email, COUNT(c.id) AS Orders')
+        ->join(User::class, 'u', 'WITH', 'u.id = c.user')
+        ->where('c.validated = 1')
+        ->groupBy('u.email')
+        ->orderBy('Orders', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
+
+    // Best ordered products
+    public function findOrderedProducts()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('p.id, p.name, p.price, p.description, p.image, c.id, (COUNT(p.id) * o.quantity) AS Ordered')
+        ->join(OrderDetails::class, 'o', 'WITH', 'o.cart = c.id')
+        ->join(Product::class, 'p', 'WITH', 'p.id = o.product')
+        ->where('c.validated = 1')
+        ->groupBy('p.id')
+        ->orderBy('Ordered', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
 }

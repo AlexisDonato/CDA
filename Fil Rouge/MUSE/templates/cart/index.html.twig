@@ -18,7 +18,7 @@
 	<div class="container">
 		<h1 class="text-center text-primary mt-3 mb-5">Votre Panier :</h1>
 		{% if count > 0 %}
-			<table class="table table-dark darker border border-info">
+			<table class="table table-dark darker border border-info align-items-center">
 				<thead>
 					<tr id="audioFont" class="text-primary surround">
 						<th>Produit</th>
@@ -34,7 +34,7 @@
 				<tbody>
 					{% for item in items %}
 						<tr>
-							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="productHl">{{item.product.name}}</p></a></td>
+							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="Hl text-light">{{item.product.name}}</p></a></td>
 							<td>{{item.product.price}} €</td>
 							{% if item.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h5 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>

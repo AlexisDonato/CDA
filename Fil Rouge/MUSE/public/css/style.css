@@ -9,7 +9,6 @@ body {
 }
 
 
-
 /* FONTS */
 
 #audioFont {
@@ -223,7 +222,7 @@ h2:hover {
 .brand {
     border: solid 2px #1f4d50;
     border-radius: 10px 40px;
-    width: 320px;
+    width: 220px;
     height: auto;
     transition: 0.3s;
 }

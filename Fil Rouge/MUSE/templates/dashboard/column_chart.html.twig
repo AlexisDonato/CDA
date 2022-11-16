@@ -44,10 +44,10 @@ var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["Particuliers", "Professionnels", "Commandes", "Commandes en cours de livraison", "C.A.- K€", "Produits en rupture"],
+      labels: ["Particuliers", "Professionnels", "Nbr commandes", "C.A.- K€", "Commandes en cours de livraison", "Produits en rupture"],
       datasets: [{
         label: 'Volume',
-        data: [{{(users|length) - pro}}, {{pro}}, {{orders}}, {{sumVal - sumShip}}, {{(sumPro + sumClient) / 1000}}, {{sumOut}}],
+        data: [{{(users|length) - pro}}, {{pro}}, {{orders}}, {{(sumPro + sumClient) / 1000}}, {{sumVal - sumShip}}, {{sumOut}}],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',

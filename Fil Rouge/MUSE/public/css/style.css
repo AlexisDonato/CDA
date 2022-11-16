@@ -48,7 +48,7 @@ h1 {
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
-    color: rgb(62, 81, 165);
+    color: rgb(255, 255, 255);
     line-height: 26.4px;
     -webkit-text-stroke: 1px rgb(0, 0, 0);
 }
@@ -59,7 +59,7 @@ h3 {
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
-    color: rgb(68, 127, 255);
+    color: rgb(255, 255, 255);
     line-height: 15.4px;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
@@ -70,7 +70,7 @@ h2 {
     font-style: normal;
     font-variant: normal;
     font-weight: 700;
-    color: rgb(162, 209, 236);
+    color: rgb(59, 175, 243);
     line-height: 20px;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
     cursor: pointer;

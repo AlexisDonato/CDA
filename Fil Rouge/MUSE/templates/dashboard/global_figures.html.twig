@@ -73,10 +73,10 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="col-sm-6 col-xl-9 mb-2 bg-dark rounded border border-secondary mt-2">
-			<canvas id="myChart"></canvas>
-		</div>
+	{% include '/dashboard/users_area_chart.html.twig' %}
+	<div class="mb-3 col-6 bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary mt-2 mb-2" 
+	id="users_area_chart_div" style="width: 800px; height: 350px;">
+	</div>
 	</div>
 
 <div class="row d-flex justify-content-around align-items-center rounded bg-dark">
@@ -379,8 +379,8 @@
 			</div>
 		</div>
 	</div>
-	{% include '/dashboard/area_chart.html.twig' %}
-	<div class="mb-3 col-6 bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary mt-2 mb-2" id="area_chart_div" style="width: 500px; height: 350px;"></div>
+	{% include '/dashboard/orders_area_chart.html.twig' %}
+	<div class="mb-3 col-6 bg-secondary rounded d-flex align-items-center justify-content-around p-4 bg-dark border border-secondary mt-2 mb-2" id="orders_area_chart_div" style="width: 800px; height: 350px;"></div>
 </div>
 
 <hr>

@@ -100,6 +100,29 @@ class CartRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    // Number of orders by date
+    public function findNumbersByDate()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('DATE(c.orderDate) AS Date, COUNT(c.id) AS Numbers')
+        ->where('c.validated = 1')
+        ->groupBy('Date')
+        ->getQuery()
+        ->getResult();
+    }
+
+    // Number of users by date
+    public function findUsersByDate()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('DATE(u.registerDate) AS Date, COUNT(u.id) AS Numbers')
+        ->join(User::class, 'u', 'WITH', 'u.id = c.user')
+        ->where('u.isVerified = 1')
+        ->groupBy('Date')
+        ->getQuery()
+        ->getResult();
+    }
+
     // Revenues by year
     public function findOrdersByYear()
     {

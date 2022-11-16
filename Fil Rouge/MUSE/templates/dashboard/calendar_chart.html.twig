@@ -27,7 +27,7 @@
           [ new Date(2022, 9, 24), 38436 ],
 
         {% for odb in ordersByDate %}
-          [ new Date({{odb.orderDate|date('Y')}}, ({{odb.orderDate|date('m')}}-1), {{odb.orderDate|date('d')}}), {{odb.Total}} ],
+          [ new Date({{odb.Date|date('Y')}}, ({{odb.Date|date('m')}}-1), {{odb.Date|date('d')}}), {{odb.Total}} ],
         {% endfor %}
 
           [ new Date(2022, 12, 31), 0 ]

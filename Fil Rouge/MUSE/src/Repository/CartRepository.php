@@ -93,9 +93,9 @@ class CartRepository extends ServiceEntityRepository
     public function findOrdersByDate()
     {
         return $this->createQueryBuilder('c')
-        ->select('c.orderDate, SUM(c.total) AS Total')
+        ->select('DATE(c.orderDate) AS Date, SUM(c.total) AS Total')
         ->where('c.validated = 1')
-        ->groupBy('c.orderDate')
+        ->groupBy('Date')
         ->getQuery()
         ->getResult();
     }

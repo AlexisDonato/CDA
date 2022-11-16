@@ -6,10 +6,18 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+/* CONTAINERS  */
+
+.container {
     -webkit-animation: fadeInDown 200ms ease-in-out;
     animation: fadeInDown 200ms ease-in-out;
 }
-
+.container-fluid {
+    -webkit-animation: fadeInDown 200ms ease-in-out;
+    animation: fadeInDown 200ms ease-in-out;
+}
 
 /* FONTS */
 

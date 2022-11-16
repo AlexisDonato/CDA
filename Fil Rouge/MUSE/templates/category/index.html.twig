@@ -4,17 +4,17 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
+	<div class="container mb-3">
 		{% if categories|length > 0 %}
 
-			<h1 class="text-primary mb-3 mt-3">Catégories :</h1>
+			<h1 class="text-primary mb-5 mt-3">Catégories :</h1>
 
 			{% set col = 1 %}
 			{% for category in categories %}
 				{% if (col == 1)%}
 					<div class="row">
 				{% endif %}
-					<div class="col-4">
+					<div class="col-md-4 mb-3">
 						{% if category.parentCategory %}
 							<div class="dropdown">
 								<button data-toggle="dropdown" id="category" class="btn btn-warning darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">

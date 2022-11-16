@@ -6,6 +6,9 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    transition: 1s;
+    -webkit-animation: fadeInDown 500ms ease-in-out;
+    animation: fadeInDown 500ms ease-in-out;
 }
 
 

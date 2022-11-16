@@ -11,7 +11,6 @@ use App\Entity\Supplier;
 use App\Entity\OrderDetails;
 use App\Repository\CartRepository;
 use App\Repository\UserRepository;
-use Symfony\UX\Chartjs\Model\Chart;
 use App\Repository\AddressRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -26,13 +25,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use Symfony\Component\Security\Core\Security as SecurityCore;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
@@ -44,9 +37,9 @@ class DashboardController extends AbstractDashboardController
     private ProductRepository $productRepository;
     private OrderDetailsRepository $orderDetails;
     private CartRepository $cartRepository;
-    private ChartBuilderInterface $chartBuilder;
 
-    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository, SupplierRepository $supplierRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartRepository $cartRepository, ChartBuilderInterface $chartBuilder)
+
+    public function __construct(UserRepository $userRepository, AddressRepository $addressRepository, SupplierRepository $supplierRepository, CategoryRepository $categoryRepository, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartRepository $cartRepository)
     {
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
@@ -55,7 +48,7 @@ class DashboardController extends AbstractDashboardController
         $this->productRepository = $productRepository;
         $this->orderDetails = $orderDetails;
         $this->cartRepository = $cartRepository;
-        $this->chartBuilder = $chartBuilder;
+
     }
 
 
@@ -133,7 +126,6 @@ class DashboardController extends AbstractDashboardController
             'orderedProducts' => $orderedProducts,
             'numbersByDate' => $numbersByDate,
             'usersByDate' => $usersByDate,
-            // 'chart' => $this->createChart(),
         ]);
     }
 

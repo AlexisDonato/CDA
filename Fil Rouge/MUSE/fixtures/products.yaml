@@ -19,5 +19,5 @@ App\Entity\Category:
     parentCategory: '@category_*'
 
 App\Entity\Supplier:
-  supplier_{1..12}:
+  supplier_{1..3}:
     name: <text(10)>

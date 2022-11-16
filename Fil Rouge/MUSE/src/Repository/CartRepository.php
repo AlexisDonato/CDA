@@ -100,6 +100,18 @@ class CartRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    // Revenues by year
+    public function findOrdersByYear()
+    {
+        return $this->createQueryBuilder('c')
+        ->select('SUBSTRING(c.orderDate, 1, 4) as Year, SUM(c.total) AS Total')
+        // ->select('DATE(c.orderDate) AS Date, DATE_FORMAT(Date, \'%Y\') As Year, SUM(c.total) AS Total')
+        ->where('c.validated = 1')
+        ->groupBy('Year')
+        ->getQuery()
+        ->getResult();
+    }
+
     // Sales by supplier
     public function findSalesBySupplier()
     {

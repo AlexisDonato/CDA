@@ -128,6 +128,30 @@
 <div class="mb-3 rounded bg-dark border border-secondary" id="calendar_basic" style="width: 1000px; height: auto;"></div>
 </div>
 </div>
+
+
+<div class="row mt-5">
+<div class="col-12">
+<h3>C.A. par année</h3>
+    <table class="table table-dark darker table-striped">
+        <thead>
+            <tr class="text-info">
+                {% for ody in ordersByYear %}
+                <th>{{ody.Year}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for ody in ordersByYear %}
+                <td class="text-warning">{{ody.Total}} €</td>
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
 	{# *** Charts.js *** #}
 
 	{# <div class="col-12">
@@ -153,14 +177,6 @@ Nombre de commandes en cours de livraison. #}
                 <th>Nombre de commandes en cours de livraison</th>
                 <th>C.A. Pro</th>
                 <th>C.A. Particuliers </th>
-                <th></th>
-                <th></th>
-                <th> </th>
-                <th></th>
-                <th></th>
-                <th> </th>
-                <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -168,24 +184,11 @@ Nombre de commandes en cours de livraison. #}
                 <td class="text-warning">{{ sumVal - sumShip }}</td>
                 <td class="text-warning">{{sumPro}} €</td>
                 <td class="text-warning">{{sumClient}} €</td>
-                <td></td>
-                <td></td>
-                <td class="text-break"></td>
-                <td class="text-break"></td>
-                <td class="text-break"></td>
-                <td></td>
-                <td></td>
-                <td>
-                </td>
             </tr>
         </tbody>
     </table>
 </div>
 </div>
-
-        {% for odb in ordersByDate %}
-            {{odb.Date|date('d-m-Y H:i:s')}}, {{odb.Total}} €<br>
-        {% endfor %}
 
 </div>
 	{% block javascripts %}

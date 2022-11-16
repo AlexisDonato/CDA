@@ -86,6 +86,8 @@ class DashboardController extends AbstractDashboardController
 
         $ordersByDate = $this->cartRepository->findOrdersByDate();
 
+        $ordersByYear = $this->cartRepository->findOrdersByYear();
+
         $salesBySupplier = $this->cartRepository->findSalesBySupplier();
 
         $salesByProduct = $this->cartRepository->findSalesByProduct();
@@ -119,6 +121,7 @@ class DashboardController extends AbstractDashboardController
             'orderDetails' => $orderDetails,
             'carts' => $carts,
             'ordersByDate' => $ordersByDate,
+            'ordersByYear' => $ordersByYear,
             'salesBySupplier' => $salesBySupplier,
             'salesByProduct' => $salesByProduct,
             'salesByUser' => $salesByUser,

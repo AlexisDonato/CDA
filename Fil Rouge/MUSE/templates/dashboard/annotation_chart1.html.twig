@@ -19,8 +19,9 @@
         {% for cart in carts %}
           {% if cart.validated %}
             {% set tot = tot + cart.total %}
-                      {% endif %}
+          {% endif %}
         {% endfor %}
+        
           [new Date(2022, 1, 1), 0, undefined, undefined,
                                   0, undefined, undefined],
           {% for odb in ordersByDate %}

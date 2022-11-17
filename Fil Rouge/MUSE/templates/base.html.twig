@@ -36,15 +36,15 @@
 									</li>
 
 									{% if path is defined %}
-
+									{% for category in categories|slice(0,1) %}
 									{% for p in path %}
 									<li class="breadcrumb-item">
 										<a class="text-primary text-decoration-none" 
-										{# href="{{ path('app_subcategory', {'category': p.category.id}) }}" #}
+										href="{{ path('app_catalogue', {'category': category.id}) }}"
 										>{{ p }}</a>
 									</li>
 									{% endfor %}
-
+									{% endfor %}
 									{% endif %}
 
 									<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>

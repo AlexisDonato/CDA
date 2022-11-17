@@ -41,7 +41,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
             $products = $productRepository->findSearch($data);
             $products2 =$productRepository->findAll();
             $discount = $productRepository->findDiscount($data);
-            $discount2 =$productRepository->findBy(['discount' => true]);
+            $discount2 =$productRepository->findProductsDiscount();
+            
             return $this->render('login/index.html.twig', getData($cartService, $orderDetails) + [
                 'last_username' => $lastUsername,
                 'error'         => $error,

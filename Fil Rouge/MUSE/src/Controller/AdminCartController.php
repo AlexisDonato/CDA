@@ -37,7 +37,7 @@ class AdminCartController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -76,7 +76,7 @@ class AdminCartController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -118,7 +118,7 @@ class AdminCartController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -153,7 +153,7 @@ class AdminCartController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);

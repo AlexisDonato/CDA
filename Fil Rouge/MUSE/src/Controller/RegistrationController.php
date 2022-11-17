@@ -51,7 +51,7 @@ class RegistrationController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
         if ($form->isSubmitted() && $form->isValid()) {
             // userName
             $user->setUserName($form->get('userName')->getData());

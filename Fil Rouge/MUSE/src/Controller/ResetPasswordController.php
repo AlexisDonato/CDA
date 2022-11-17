@@ -53,7 +53,7 @@ class ResetPasswordController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {         
             return $this->processSendingPasswordResetEmail(
@@ -87,7 +87,7 @@ class ResetPasswordController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
@@ -149,7 +149,7 @@ class ResetPasswordController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {
             // A password reset token should be used only once, remove it.

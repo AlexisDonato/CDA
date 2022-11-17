@@ -33,7 +33,7 @@ class AdminProductController extends AbstractController
         $products = $productRepository->findAll();
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         return $this->render('admin_product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -66,7 +66,7 @@ class AdminProductController extends AbstractController
         $products = $productRepository->findAll();
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -127,7 +127,7 @@ class AdminProductController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         return $this->render('admin_product/show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -160,7 +160,7 @@ class AdminProductController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
         
         if ($form->isSubmitted() && $form->isValid()) {
 

@@ -37,7 +37,7 @@ class ClientAddressController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
@@ -77,7 +77,7 @@ class ClientAddressController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -138,7 +138,7 @@ class ClientAddressController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('client_address/show.html.twig', [
@@ -173,7 +173,7 @@ class ClientAddressController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 

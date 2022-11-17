@@ -27,7 +27,7 @@ class TermsAndAgreementsController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/terms.html.twig', [
@@ -55,7 +55,7 @@ class TermsAndAgreementsController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/sustainability.html.twig', [
@@ -83,7 +83,7 @@ class TermsAndAgreementsController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/withdrawal.html.twig', [
@@ -111,7 +111,7 @@ class TermsAndAgreementsController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/shipping_options.html.twig', [
@@ -139,7 +139,7 @@ class TermsAndAgreementsController extends AbstractController
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findBy(['discount' => true]);
+        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         return $this->render('terms_and_agreements/returns.html.twig', [

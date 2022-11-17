@@ -51,6 +51,8 @@ class CategoryController extends AbstractController
     {
 
         $categories = $categoryRepository->findByParent($parent);
+        dd($categories);
+        
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);

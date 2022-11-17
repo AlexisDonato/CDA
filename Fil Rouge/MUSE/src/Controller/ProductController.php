@@ -90,7 +90,7 @@ class ProductController extends AbstractController
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
-            'path' => $product->getCategories()->first()->getPath(),
+            'path' => $product->getCategory()->getPath(),
         ]);
     }
 

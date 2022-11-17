@@ -50,7 +50,7 @@
 		</div>
 		<p class="text text-muted">{{ product.description|u.truncate(75, '...') }}</p>
 		<div>
-			{% for c in product.categories %}
+			{% for c in product.category %}
 				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': c.id}) }}">
 					<em class="text-primary text-primary text-italic">#{{ c.name }}</em>
 				</a>

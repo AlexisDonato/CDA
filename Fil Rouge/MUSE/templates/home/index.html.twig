@@ -26,7 +26,6 @@
 		<div class="row d-flex justify-content-around align-items-center rounded">
 			<div class="col-md-12">
 			<h1 class="text-light text-center pb-5">Meilleures ventes</h1>
-				{% if salesByProduct|length > 0 %}
 					<div id="carouselExampleIndicators-1" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators-1" data-slide-to="0" class="active"></li>
@@ -44,7 +43,8 @@
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
-							{% for sbp in salesByProduct|slice(5,5) %}
+							{% if salesByProduct|length > 0 %}
+							{% for sbp in salesByProduct|slice(0,5) %}
 								<div class="carousel-item">
 									<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
@@ -59,6 +59,7 @@
 									</div>
 								</div>
 							{% endfor %}
+							{% endif %}
 						</div>
 
 						<a class="carousel-control-prev" href="#carouselExampleIndicators-1" role="button" data-slide="prev">
@@ -70,7 +71,6 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-				{% endif %}
 			</div>
 		</div>
 	<hr>
@@ -78,7 +78,6 @@
 		<div class="row mt-5">
 			<div class="col-md-12">
 			<h1 class="text-light text-center pb-5">Produits les plus commandés</h1>
-				{% if orderedProducts|length > 0 %}
 					<div id="carouselExampleIndicators-2" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 						<ol class="carousel-indicators">
 							<li data-target="#carouselExampleIndicators-2" data-slide-to="0" class="active"></li>
@@ -96,7 +95,8 @@
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
-							{% for op in orderedProducts|slice(5,5) %}
+							{% if orderedProducts|length > 0 %}
+							{% for op in orderedProducts|slice(0,5) %}
 								<div class="carousel-item">
 									<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{op.image}}" alt="Slide n°{{op.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">
@@ -111,6 +111,7 @@
 									</div>
 								</div>
 							{% endfor %}
+							{% endif %}
 						</div>
 
 						<a class="carousel-control-prev" href="#carouselExampleIndicators-2" role="button" data-slide="prev">
@@ -122,7 +123,7 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-				{% endif %}
+
 			</div>
 		</div>
 	<hr>
@@ -148,7 +149,7 @@
 									{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 								</div>
 							</div>
-							{% for pd in productsDiscount|slice(5,5) %}
+							{% for pd in productsDiscount|slice(0,5) %}
 								<div class="carousel-item">
 									<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
 									<div class="carousel-caption d-none d-md-block">

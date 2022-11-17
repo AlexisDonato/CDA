@@ -22,18 +22,18 @@
 									<h2>
 										<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">
 											{{ category.parentCategory }}
-										</a><h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.parentCategory.products|length }}</h2>
+										</a><h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.parentCategory.product|length }}</h2>
 									</h2>
 								</button>
 								<div class="dropdown-menu ddmenu border border-dark">
 									<nav aria-label="breadcrumb">
 										<ol class="breadcrumb">
 											<a class="text-primary dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">
-												<div class="d-flex justify-content-start">{{category.parentCategory}}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.parentCategory.products|length }}</h2>
+												<div class="d-flex justify-content-start">{{category.parentCategory}}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.parentCategory.product|length }}</h2>
 												</div>
 											</a>
 											<a class="text-primary dropdown-item breadcrumb-item" href="{{ path('app_catalogue', {'category': category.id}) }}">
-												<div class="d-flex justify-content-start">{{ category.name }}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.products|length }}</h2>
+												<div class="d-flex justify-content-start">{{ category.name }}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-3">{{ category.product|length }}</h2>
 												</div>
 											</a>
 										</ol>
@@ -48,7 +48,7 @@
 										{{ category.name }}
 									</a>
 								</h2>
-								<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.products|length }}</h2>
+								<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
 							</button>
 						{# </div> #}
 						{% endif %}

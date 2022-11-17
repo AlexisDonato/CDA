@@ -49,12 +49,10 @@
 			{% endif %}
 		</div>
 		<p class="text text-muted">{{ product.description|u.truncate(75, '...') }}</p>
-		<div>
-			{% for c in product.category %}
-				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': c.id}) }}">
-					<em class="text-primary text-primary text-italic">#{{ c.name }}</em>
+		<div class="">
+				<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': product.category.id}) }}">
+					<em class="text-primary text-primary text-italic">#{{ product.category }}</em>
 				</a>
-			{% endfor %}
 		</div>
 		<div class="card-footer mt-auto">
 			<a href="{{ path('app_cart_add', {'id': product.id}) }}" title="Ajouter au panier" class="btn btn-info float-right border-light Hl{% if product.quantity == 0 %} disabled btn-dark{% endif %}">

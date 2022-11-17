@@ -21,7 +21,7 @@
 				<tbody>
 					{% for detail in details %}
 						<tr>
-							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p >{{detail.product.name}}</p></a></td>
+							<td><a class ="text-decoration-none"><p>{{detail.product.name}}</p></a></td>
 							<td>{{detail.product.price}} €</td>
 							{% if detail.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
 								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>

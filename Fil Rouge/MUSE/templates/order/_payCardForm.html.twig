@@ -2,7 +2,7 @@
 	<img class="card-img-top img-thumbnail border-primary ml-auto mr-auto" src="/img/Muse_rect_no.jpg" style="width: 12rem; border-radius: 30%;" alt="Card image cap">
 	<div class="card-header bg-dark">
 
-		<form action="" method="POST" class="">
+		<form action="{{ path("app_order_validated") }}" method="POST" class="">
 			<div class="row">
 				<div class="form-group">
 					<div class="input-group text-center">
@@ -17,7 +17,7 @@
 				<div class="row">
 					<div class="form-group">
 						<div class="input-group">
-							<i class="fa fa-credit-card mt-2 surround"></i>
+							<i class="fa fa-credit-card text-light mt-2 surround"></i>
 							<input type="text" autocomplete="off" class="form-control ml-3" id="card-number" required placeholder="N° de carte"/>
 						</div>
 					</div>
@@ -26,13 +26,13 @@
 				<div class="row">
 					<div class="form-group">
 						<div class="input-group">
-							<i class="fa-solid fa-calendar ml-4 mt-2 surround"></i>
+							<i class="fa-solid fa-calendar text-light ml-4 mt-2 surround"></i>
 							<input type="text" size="4" autocomplete="off" class="form-control ml-1" id="card-expiration" required="required" placeholder="mm/aaaa"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<i class="fa fa-lock ml-2 mt-2 surround"></i>
+							<i class="fa fa-lock ml-2 mt-2 text-light surround"></i>
 							<input data-stripe="cvc" type="text" size="4" autocomplete="off" class="form-control ml-1" id="card-cvc" required="required" placeholder="CVC"/>
 						</div>
 					</div>
@@ -55,8 +55,8 @@
 			</li>
 			<li class="list-group-item  darker border-primary">
 				<div class="row">
-					<button type="submit" class="btn btn-lg btn-outline-primary ml-auto mr-auto">
-						Checkout
+					<button type="submit" class="btn btn-lg btn-outline-primary ml-auto mr-auto"><a class="text-decoration-none text-secondary">
+						Payer {{ total|number_format(2, '.', '') }} €</a>
 					</button>
 				</div>
 			</li>

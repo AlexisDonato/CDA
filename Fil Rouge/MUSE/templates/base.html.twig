@@ -18,7 +18,7 @@
 		{% endfor %}
 
 		{# Bootstrap Breadcrumbs #}
-		{% if (app.request.attributes.get('_route') != 'login' and app.request.attributes.get('_route') != 'app_home' and app.request.attributes.get('_route') != 'app_register') %}
+		{# {% if (app.request.attributes.get('_route') != 'login' and app.request.attributes.get('_route') != 'app_home' and app.request.attributes.get('_route') != 'app_register') %}
 			{% block breadcrumbs %}
 				<div class="container">
 					<div class="row">
@@ -49,7 +49,7 @@
 					</div>
 				</div>
 			{% endblock %}
-		{% endif %}
+		{% endif %} #}
 
 		{% block body %}{% endblock %}
 

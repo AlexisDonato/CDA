@@ -194,7 +194,7 @@
 							Moyenne de produits par fournisseur:
 							<strong class="text-warning">
 								{% if suppliers|length != 0 %}
-									{{ products|length / suppliers|length }}
+									{{ (products|length / suppliers|length)|number_format(3, '.', '') }}
 								{% endif %}
 							</strong>
 						</li>

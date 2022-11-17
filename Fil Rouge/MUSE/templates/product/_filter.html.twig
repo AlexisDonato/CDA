@@ -1,36 +1,36 @@
-{{ form_start(form, {attr: {class: 'filter'}}) }}
+{{ form_start(searchForm, {attr: {class: 'filter'}}) }}
 
-{{ form_row(form.q) }}
+{{ form_row(searchForm.q) }}
 
 <small class="text-primary">
 	<b>Catégories</b>
 </small>
 
-<small>{{ form_row(form.categories, {attr: {class: 'filterCat'}}) }}</small>
+<small>{{ form_row(searchForm.categories, {attr: {class: 'filterCat'}}) }}</small>
 
 <small class="text-primary">
 	<b>Marques</b>
 </small>
 
-<small>{{ form_row(form.supplier) }}</small>
+<small>{{ form_row(searchForm.supplier) }}</small>
 
 <small class="text-primary">
 	<b>Prix</b>
 </small>
 <div class="row">
 	<div class="col-md-6">
-		{{ form_row(form.min) }}
+		{{ form_row(searchForm.min) }}
 	</div>
 	<div class="col-md-6">
-		{{ form_row(form.max) }}
+		{{ form_row(searchForm.max) }}
 	</div>
 </div>
 
 <small class="text-primary">
 	<b>Promotions</b>
 </small>
-<small>{{ form_row(form.discount) }}</small>
+<small>{{ form_row(searchForm.discount) }}</small>
 
 <button class="btn btn-info border border-light w-100 mb-1">Rechercher</button>
 
-{{ form_end(form) }}
+{{ form_end(searchForm) }}

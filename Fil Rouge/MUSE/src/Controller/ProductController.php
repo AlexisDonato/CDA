@@ -7,6 +7,7 @@ use App\Entity\Product;
 use App\Data\SearchData;
 use App\Entity\Category;
 use App\Form\SearchType;
+use App\Form\SearchType2;
 use App\Service\Cart\CartService;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
@@ -44,8 +45,8 @@ class ProductController extends AbstractController
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
+        $searchForm = $this->createForm(SearchType::class, $data);
+        $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
@@ -62,7 +63,7 @@ class ProductController extends AbstractController
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
-            'form'      => $form->createView()
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
@@ -99,8 +100,8 @@ class ProductController extends AbstractController
         $data = new SearchData();
         $data->categories = [$category];
         $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
+        $searchForm = $this->createForm(SearchType::class, $data);
+        $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
@@ -116,7 +117,7 @@ class ProductController extends AbstractController
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
-            'form'      => $form->createView(),
+            'searchForm'      => $searchForm->createView(),
         ]);
     }
 
@@ -137,8 +138,8 @@ class ProductController extends AbstractController
         $data->discount = $disc;
 
         $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
+        $searchForm = $this->createForm(SearchType::class, $data);
+        $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
@@ -155,7 +156,7 @@ class ProductController extends AbstractController
             'categories' => $categories,
             'discount'  => $discount,
             'discount2' => $discount2,
-            'form'      => $form->createView()
+            'searchForm'      => $searchForm->createView()
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
+use App\Form\SearchType2;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
@@ -52,6 +53,9 @@ class HomeController extends AbstractController
     
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $searchForm = $this->createForm(SearchType2::class, $data);
+        $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
@@ -75,6 +79,7 @@ class HomeController extends AbstractController
             'salesByProduct' => $salesByProduct,
             'orderedProducts' => $orderedProducts,
             'productsDiscount' => $productsDiscount,
+            'searchForm2'      => $searchForm->createView()
         ]);
     }
 }

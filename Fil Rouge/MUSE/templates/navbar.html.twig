@@ -138,6 +138,15 @@
 			{% endif %}
 		</ul>
 
+	{# <div class="row ml-3 mr-auto mt-auto mb-auto">
+		{{ form_start(searchForm2, {attr: {class: ''}}) }}
+<div class="d-flex justify-content-center align-items-center">
+
+		{{ form_row(searchForm2.q) }}
+</div>
+		{{ form_end(searchForm2) }}
+	</div> #}
+
 		<div class="row flex-row">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<a class="nav-link text-info my-auto" href="{{ path('app_logout') }}">

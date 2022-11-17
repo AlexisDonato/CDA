@@ -36,7 +36,7 @@ class ProductRepository extends ServiceEntityRepository
         $query = $this
         ->createQueryBuilder('p')
         ->select('c', 'p', 's')
-        ->join('p.categories', 'c')
+        ->join('p.category', 'c')
         ->join('p.supplier', 's');
 
         if (!empty($search->q)) {
@@ -65,10 +65,10 @@ class ProductRepository extends ServiceEntityRepository
                 ->andWhere('p.discountRate != 0');
         }
 
-        if (!empty($search->categories)) {
+        if (!empty($search->category)) {
             $query = $query
-                ->andWhere('c.id IN (:categories)')
-                ->setParameter('categories', $search->categories);
+                ->andWhere('c.id IN (:category)')
+                ->setParameter('category', $search->category);
         }
 
         if (!empty($search->supplier)) {
@@ -96,7 +96,7 @@ class ProductRepository extends ServiceEntityRepository
         $query = $this
         ->createQueryBuilder('p')
         ->select('c', 'p')
-        ->join('p.categories', 'c')
+        ->join('p.category', 'c')
         ->andWhere('p.discountRate != 0');
 
     $query = $query->getQuery();

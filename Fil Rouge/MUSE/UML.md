@@ -14,34 +14,15 @@ billingAddress
 deliveryAddress
 }
 
-class Cart{
-PK - id
-clientOrderId
-validated
-orderDetails
-user
-orderDate
-shipped
-shipmentDate
-carrier
-carrierShipmentId
-total
-billingAddress
-deliveryAddress
-additionalDiscountRate
-invoice
-}
-
-Cart -- OrderDetails
 class Category{
 PK - id
 name
-products
 parentCategory
+product
 }
 
-Category -- Product
 Category -- self
+Category -- Product
 class Contact{
 PK - id
 name
@@ -69,15 +50,14 @@ description
 content
 discount
 discountRate
-categories
 quantity
 image
 image1
 image2
 supplier
+category
 }
 
-Product -- Category
 class ResetPasswordRequest{
 PK - id
 user
@@ -111,5 +91,24 @@ address
 
 User -- Cart
 User -- Address
+class Cart{
+PK - id
+clientOrderId
+validated
+orderDetails
+user
+orderDate
+shipped
+shipmentDate
+carrier
+carrierShipmentId
+total
+billingAddress
+deliveryAddress
+additionalDiscountRate
+invoice
+}
+
+Cart -- OrderDetails
 
 ```

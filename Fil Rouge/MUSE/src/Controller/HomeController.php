@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use ConnectHolland\CookieConsentBundle\CHCookieConsentBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -33,10 +32,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Request $request, ?UserInterface $user, CartService $cartService, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartRepository $cartRepository, OrderDetailsRepository $orderDetails, EntityManagerInterface $entityManager): Response
     {
-
         if ($this->isGranted('ROLE_CLIENT')) {
             $clientCart = $cartRepository->findOneByUser($user->getId());
-
+            
             if (!isset($clientCart)) {
                 $clientCart = new Cart();
                 
@@ -45,12 +43,12 @@ class HomeController extends AbstractController
                 $entityManager->persist($clientCart);
                 $entityManager->flush();
             }
-
+            
             $cartService->setCart($clientCart);
             $cartService->setUser($user);
         }
         
-    
+        
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -60,11 +58,12 @@ class HomeController extends AbstractController
         $products2 =$productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         $discount2 =$productRepository->findProductsDiscount();
-
+        // dd("ok");
+        
         $salesByProduct = $this->cartRepository->findSalesByProduct();
-
+        
         $orderedProducts = $this->cartRepository->findOrderedProducts();
-
+        
         $productsDiscount = $this->productRepository->findProductsDiscount();
 
         return $this->render('home/index.html.twig', [

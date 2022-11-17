@@ -18,8 +18,9 @@
 		{% endfor %}
 
 		{# Bootstrap Breadcrumbs #}
-		{# {% if (app.request.attributes.get('_route') != 'login' and app.request.attributes.get('_route') != 'app_home' and app.request.attributes.get('_route') != 'app_register') %}
+		{% if (app.request.attributes.get('_route') != 'login' and app.request.attributes.get('_route') != 'app_home' and app.request.attributes.get('_route') != 'app_register') %}
 			{% block breadcrumbs %}
+		
 				<div class="container">
 					<div class="row">
 						<div class="col">
@@ -34,13 +35,17 @@
 										<a class="text-primary text-decoration-none" href="{{path('app_category')}}">Catégories</a>
 									</li>
 
-									{% for category in categories %}
-									{% if category.parentCategory %}
+									{% if path is defined %}
+
+									{% for p in path %}
 									<li class="breadcrumb-item">
-										<a class="text-primary text-decoration-none" href="{{ path('app_catalogue', {'category': category.parentCategory.id}) }}">{{category.parentCategory}}</a>
+										<a class="text-primary text-decoration-none" 
+										{# href="{{ path('app_subcategory', {'category': p.category.id}) }}" #}
+										>{{ p }}</a>
 									</li>
-									{% endif %}
 									{% endfor %}
+
+									{% endif %}
 
 									<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
 								</ol>
@@ -49,7 +54,7 @@
 					</div>
 				</div>
 			{% endblock %}
-		{% endif %} #}
+		{% endif %}
 
 		{% block body %}{% endblock %}
 

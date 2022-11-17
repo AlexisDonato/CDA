@@ -19,15 +19,16 @@ class Category
     #[ORM\Column(type: 'string', length: 100)]
     private $name;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories')]
-    private $products;
-
     #[ORM\ManyToOne(targetEntity: self::class)]
     private ?self $parentCategory = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    private Collection $product;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,33 +48,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeCategory($this);
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->name;
@@ -87,6 +61,47 @@ class Category
     public function setParentCategory(?self $parentCategory): self
     {
         $this->parentCategory = $parentCategory;
+
+        return $this;
+    }
+
+    public function getPath() {
+        if ($this->parentCategory) {
+            $tab = $this->parentCategory->getPath();
+            $tab[] = $this->name;
+            return  $tab;
+        }
+        else {
+            return [ $this->name ];
+        }
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->product->contains($product)) {
+            $this->product->add($product);
+            $product->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->product->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
+            }
+        }
 
         return $this;
     }

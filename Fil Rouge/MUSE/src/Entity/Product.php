@@ -34,9 +34,6 @@ class Product
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]
     private ?string $discountRate = '0';
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
-    private $categories;
-
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
 
@@ -52,9 +49,11 @@ class Product
     #[ORM\ManyToOne]
     private ?Supplier $supplier = null;
 
+    #[ORM\ManyToOne(inversedBy: 'product')]
+    private ?Category $category = null;
+
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,30 +133,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, category>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(category $category): self
-    {
-        $this->categories->removeElement($category);
-
-        return $this;
-    }
-
     public function __toString()
     {
         return $this->name;
@@ -224,4 +199,18 @@ class Product
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
 }

@@ -10,6 +10,7 @@ use App\Service\PdfTools;
 use App\Service\Cart\CartService;
 use Symfony\Component\Mime\Email;
 use App\Repository\CartRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -158,6 +159,20 @@ class TestController extends AbstractController
             'details' => $details,
             'user' => $user,
         ));
+
+
+
+    }
+
+    #[Route('/testc', name: 'app_testc')]
+    public function testc(CategoryRepository $repo)
+    {
+
+        $details = $repo->findByParent(13);
+
+        dd($details);
+
+        return new Response("ok");
 
 
 

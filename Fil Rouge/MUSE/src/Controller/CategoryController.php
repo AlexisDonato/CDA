@@ -51,7 +51,6 @@ class CategoryController extends AbstractController
     {
 
         $categories = $categoryRepository->findByParent($parent);
-        dd($categories);
         
         $data = new SearchData();
         $data->page = $request->get('page', 1);
@@ -63,7 +62,6 @@ class CategoryController extends AbstractController
         $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
-
 
         return $this->render('category/index2.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),

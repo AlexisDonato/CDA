@@ -25,9 +25,9 @@ class CategoryController extends AbstractController
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -41,25 +41,25 @@ class CategoryController extends AbstractController
             'products' => $products,
             'discount' => $discount,
             'discount2' => $discount2,
-            
+
         ]);
     }
 
 
-    #[Route('/subcategory/{parent}', name: 'app_subcategory' , defaults:['parent'=>null])]
+    #[Route('/subcategory/{parent}', name: 'app_subcategory', defaults: ['parent' => null])]
     public function index2($parent, CartService $cartService, CategoryRepository $categoryRepository, Request $request, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
 
         $categories = $categoryRepository->findByParent($parent);
-        
+
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -72,7 +72,7 @@ class CategoryController extends AbstractController
             'products' => $products,
             'discount' => $discount,
             'discount2' => $discount2,
-            
+
         ]);
     }
 }

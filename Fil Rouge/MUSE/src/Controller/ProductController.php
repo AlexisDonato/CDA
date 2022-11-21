@@ -31,7 +31,7 @@ class ProductController extends AbstractController
 
             if (!isset($clientCart)) {
                 $clientCart = new Cart();
-                
+
                 $clientCart->setUser($user);
                 $clientCart->setClientOrderId(strtoupper(uniqid('MUSE::')));
                 $entityManager->persist($clientCart);
@@ -51,9 +51,9 @@ class ProductController extends AbstractController
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
         // $discount2 =$productRepository->findBy(['discount' => true]);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
         $cartService->setUser($user);
-        
+
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
@@ -70,13 +70,13 @@ class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-     
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -97,16 +97,16 @@ class ProductController extends AbstractController
     #[Route('/catalogue/{category}', name: 'app_catalogue')]
     public function index2(CartService $cartService, ProductRepository $productRepository, Request $request, Category $category, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->find($category);
         $data = new SearchData();
-        $data->categories = [$category];
+        $data->category = [$category];
         $data->page = $request->get('page', 1);
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
         $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
 
         return $this->render('product/index.html.twig', [
@@ -122,16 +122,19 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/discount/{disc}', name: 'app_discount',defaults:['disc'=>1])]
+    #[Route('/discount/{disc}', name: 'app_discount', defaults: ['disc' => 1])]
     public function index3(CartService $cartService, ProductRepository $productRepository, Request $request, CategoryRepository $categoryRepository, int $disc, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-        switch($disc){
-            case "0": $disc=false;
-            break;
-            case "1": $disc=true;
-            break;
-            default: $disc= false;
-            break;
+        switch ($disc) {
+            case "0":
+                $disc = false;
+                break;
+            case "1":
+                $disc = true;
+                break;
+            default:
+                $disc = false;
+                break;
         }
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
@@ -142,9 +145,9 @@ class ProductController extends AbstractController
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -160,6 +163,4 @@ class ProductController extends AbstractController
             'searchForm'      => $searchForm->createView()
         ]);
     }
-
 }
-

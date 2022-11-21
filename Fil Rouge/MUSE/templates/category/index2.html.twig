@@ -16,42 +16,41 @@
 					{% endif %}
 					<div class="col-md-4 mb-3">
 						{% if category.parentCategory %}
-							<div class="dropdown">
-								<button data-toggle="dropdown" id="category" class="btn btn-warning darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
-									<i class="fa-solid fa-guitar text-secondary"></i>
-									<h2>
-										<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_subcategory', {'parent': category.parentCategory.id}) }}">
-											{{ category.parentCategory.name }}
-										</a>
-										<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.parentCategory|length }}</h2>
-									</h2>
-								</button>
 
-							</div>
-						{% else %}
-							<button id="category" class="btn btn-dark darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
+							<button class="btn btn-warning darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
 								<i class="fa-solid fa-guitar text-secondary"></i>
 								<h2>
 									<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">
 										{{ category.name }}
 									</a>
+									<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
 								</h2>
-								<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
 							</button>
-							{# </div> #}
-						{% endif %}
-					</div>
 
-					{% if (col == 3) %}
-					</div>
-					{% set col = 1 %}
-				{% else %}
-					{% set col = col + 1 %}
-				{% endif %}
-			{% endfor %}
+						</div>
+					{% else %}
+						<button id="category" class="btn btn-dark darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
+							<i class="fa-solid fa-guitar text-secondary"></i>
+							<h2>
+								<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_subcategory', {'parent': category.id}) }}">
+									{{ category.name }}
+								</a>
+							</h2>
+							<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
+						</button>
 
-		</div>
-	{% else %}
-		<h1 class="mt-3 mb-5">Aucune catégorie trouvée!</h1>
-	{% endif %}
-</div>{% endblock %}
+					{% endif %}
+				</div>
+
+				{% if (col == 3) %}
+				</div>
+				{% set col = 1 %}
+			{% else %}
+				{% set col = col + 1 %}
+			{% endif %}
+		{% endfor %}
+
+	</div>
+{% else %}
+	<h1 class="mt-3 mb-5">Aucune catégorie trouvée!</h1>
+{% endif %}</div>{% endblock %}

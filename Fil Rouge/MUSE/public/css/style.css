@@ -1,7 +1,7 @@
 /* BACKGROUND PICTURE */
 
 body {
-    background: url('/img/BGHome2.jpg') no-repeat center center fixed;
+    background: url('/img/BGHome22.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -14,6 +14,7 @@ body {
     -webkit-animation: fadeInDown 200ms ease-in-out;
     animation: fadeInDown 200ms ease-in-out;
 }
+
 .container-fluid {
     -webkit-animation: fadeInDown 200ms ease-in-out;
     animation: fadeInDown 200ms ease-in-out;
@@ -115,8 +116,8 @@ h2:hover {
 /* BACKGROUNDS */
 
 .darker {
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(50,50,61,1) 0%, rgba(0,0,0,1) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(50, 50, 61, 1) 0%, rgba(0, 0, 0, 1) 100%);
 }
 
 
@@ -217,7 +218,7 @@ h2:hover {
         transform: translatex(+800px);
         width: 15%;
     }
-    
+
 }
 
 /* NAVBAR */
@@ -427,7 +428,7 @@ h2:hover {
 
 .zoom:hover {
     transform: scale(1.5);
-    z-index:100
+    z-index: 100
 }
 
 

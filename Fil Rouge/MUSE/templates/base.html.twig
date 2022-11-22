@@ -8,13 +8,19 @@
 		{% include 'navbar.html.twig' %}
 
 		{% for message in app.flashes('success') %}
-			<div class="alert alert-success text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-success text-center">{{ message }}</div>
+			</div>
 		{% endfor %}
 		{% for message in app.flashes('info') %}
-			<div class="alert alert-primary text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-primary text-center">{{message}}</div>
+			</div>
 		{% endfor %}
 		{% for message in app.flashes('error') %}
-			<div class="alert alert-danger text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-danger text-center">{{ message }}</div>
+			</div>
 		{% endfor %}
 
 		{# Bootstrap Breadcrumbs #}

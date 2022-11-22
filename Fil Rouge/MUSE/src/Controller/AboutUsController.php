@@ -19,9 +19,9 @@ class AboutUsController extends AbstractController
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         return $this->render('about_us/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
@@ -25,6 +26,17 @@ class AppFixtures extends Fixture
             $product->setCategory(mt_rand(0, 9));
             $manager->persist($product);
         }
+
+
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->setName($this->faker->name())
+                ->setPseudo(mt_rand(0, 1) === 1 ? $this->faker->firstName() : null)
+                ->setEmail($this->faker->email())
+                ->setRoles(['ROLE_USER'])
+                ->setPlainPassword('password');
+        }
+
 
         // $c1 = new Category();
         // $c1->setName("Livres");

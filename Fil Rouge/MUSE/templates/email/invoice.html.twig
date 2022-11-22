@@ -9,14 +9,14 @@
 		<title>Invoice</title>
 
 		<style>
-			body{
+			body {
 				background: url('');
 			}
 
 			#div1 {
 				position: absolute;
 				top: 3cm;
-				left: 0cm;
+				left: 0;
 				width: 15cm;
 			}
 
@@ -27,7 +27,7 @@
 				left: 9cm;
 				width: 10cm;
 			}
-			
+
 			#div3 {
 				position: absolute;
 				text-align: end;
@@ -50,30 +50,40 @@
 
 	<body>
 		<div id="div1">
-			<b>{{app.user.userName}}, {{app.user.userLastName}}</b><br>
-			Date de naissance : {{app.user.birthdate|date('d-m-Y')}}<br>
-			Tel : {{app.user.phoneNumber}}<br>
-			Mail : {{app.user.email}}<br>
+			<b>{{app.user.userName}},
+				{{app.user.userLastName}}</b><br>
+			Date de naissance :
+			{{app.user.birthdate|date('d-m-Y')}}<br>
+			Tel :
+			{{app.user.phoneNumber}}<br>
+			Mail :
+			{{app.user.email}}<br>
 			{% if app.user.pro == true %}
-			Société : {{app.user.proCompanyName}}<br>
-			DUNS : {{app.user.proDuns}}<br>
+				Société :
+				{{app.user.proCompanyName}}<br>
+				DUNS :
+				{{app.user.proDuns}}<br>
 			{% endif %}
 			Vos adresses :
 			<ul>
-				<li>Adresse de facturation : {{order.billingAddress}}</li>
-				<li>Adresse de liivraison : {{order.deliveryAddress}}</li>
-		</div>
+				<li>Adresse de facturation :
+					{{order.billingAddress}}</li>
+				<li>Adresse de livraison :
+					{{order.deliveryAddress}}</li>
+			</div>
 
-		<p class="h1 text-dark text-center text-light mt-5 pt-5 mb-2">Votre Facture :</p>
-		<h4 class="text-center text-secondary mb-1">Réf.: {{order.clientOrderId}}</h4>
-		<h4 class="text-center text-secondary mb-5">Date de commande : {{order.orderDate|date('d-m-Y')}}</h4>
+			<p class="h1 text-dark text-center text-light mt-5 pt-5 mb-2">Votre Facture :</p>
+			<h4 class="text-center text-secondary mb-1">Réf.:
+				{{order.clientOrderId}}</h4>
+			<h4 class="text-center text-secondary mb-5">Date de commande :
+				{{order.orderDate|date('d-m-Y')}}</h4>
 
 			<div id="div3">
-			<b>Muse</b><br>
-			123 Bis Avenue du Voyage<br>
-			75000 Paris<br>
-			Tel : +33-987654321<br>
-			Mail : info@Muse.com
+				<b>Muse</b><br>
+				123 Bis Avenue du Voyage<br>
+				75000 Paris<br>
+				Tel : +33-987654321<br>
+				Mail : info@Muse.com
 			</div>
 
 			<table border="1" class="table table-striped table-bordered table-secondary border border-secondary mt-5 pt-5">
@@ -82,7 +92,11 @@
 						<th>Produit</th>
 						<th>Prix HT</th>
 						<th>Promotion</th>
-						{% for detail in details|slice(0, 1) %}{% if detail.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+						{% for detail in details|slice(0, 1) %}
+							{% if detail.cart.additionalDiscountRate != 0 %}
+								<th class="text-success">Remise</th>
+							{% endif %}
+						{% endfor %}
 						<th>TVA</th>
 						<th>Quantité</th>
 						<th>Sous-total</th>
@@ -91,50 +105,65 @@
 				<tbody>
 					{% for detail in details %}
 						<tr>
-							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}"><p >{{detail.product.name}}</p></a></td>
-							<td>{{detail.product.price}} €</td>
-							{% if detail.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
-								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
-							{% else %}<td>-
-							{% endif %}</td>
-							{% if detail.cart.additionalDiscountRate != 0 %}<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>{% endif %}
-							<td>{{ app.user.vat * 100}}%</td>
-							<td>{{detail.quantity}} {% if detail.product.quantity == 0 %} ({{detail.product.quantity}} left in stock) {% endif %}</td>
-							<td class="h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
-								€</h4></td>
+							<td>
+								<a class="text-decoration-none" href="{{ path('app_product_show', {'id': detail.product.id}) }}">
+									<p>{{detail.product.name}}</p>
+								</a>
 							</td>
+							<td>{{detail.product.price}}
+								€</td>
+							{% if detail.product.discountRate != 0 %}
+								<td class="text text-danger">
+									<div class="d-flex justify-content-start">
+										<h5 class="text-danger">-{{ detail.product.discountRate * 100 }}</h5>
+										<h5 class="text-danger">%</h5>
+									</div>
+								{% else %}
+									<td>-
+									{% endif %}
+								</td>
+								{% if detail.cart.additionalDiscountRate != 0 %}
+									<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>
+								{% endif %}
+								<td>{{ app.user.vat * 100}}%</td>
+								<td>{{detail.quantity}}
+									{% if detail.product.quantity == 0 %}
+										({{detail.product.quantity}}
+										left in stock)
+									{% endif %}
+								</td>
+								<td class="h5{% if detail.product.discountRate != 0 %} text-danger{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
+								</td>
+							</h4>
 						</tr>
 					{% endfor %}
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" class="text-right h4"><b>Total :</b>
+						<td colspan="3" class="text-right h4">
+							<b>Total :</b>
 						</td>
 						<td class="roboto h4">{{ order.total|number_format(2, '.', '') }}
-							€</td>{% for detail in details|slice(0, 1) %}
+							€</td>
+						{% for detail in details|slice(0, 1) %}
 							{% if detail.product.discountRate != 0 %}
-							<td colspan="6">
-							{% else %}
-							<td colspan="5">
-							{% endif %}
-							{% endfor %}
-						</td>
+								<td colspan="6">
+								{% else %}
+									<td colspan="5">
+									{% endif %}
+								{% endfor %}
+							</td>
+						</tr>
 					</tr>
 				</tfoot>
 			</table>
-
-
-		<div id="div2">
-		{# <hr> #}
-			<img src="https://localhost:8000/img/Muse_rect_trans.png" class="img-thumbnail">
-			<div class="text-center">
-			L'entreprise "Muse"<br>
-			Située : 123 Bis Avenue du Voyage, 75000 Paris<br>
-			immatriculée au RCS de Paris 89870953601032<br>
-			n° de téléphone : +33-987654321<br>
-			adresse mail : info@Muse.com
+			<div id="div2">{# <hr> #}<img src="https://localhost:8000/img/Muse_rect_trans.png" class="img-thumbnail"><div class="text-center">
+					L'entreprise "Muse"<br>
+					Située : 123 Bis Avenue du Voyage, 75000 Paris<br>
+					immatriculée au RCS de Paris 89870953601032<br>
+					n° de téléphone : +33-987654321<br>
+					adresse mail : info@Muse.com</div>
 			</div>
-		</div>
-
+		</body>
 	</body>
 </html>

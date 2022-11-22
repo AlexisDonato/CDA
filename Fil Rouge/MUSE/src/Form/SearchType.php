@@ -39,7 +39,7 @@ class SearchType extends AbstractType
                 // },
                 'choice_label' => 'name',
                 'expanded' => true,
-                'mapped' => false,
+                'mapped' => true,
                 'multiple' => true
             ])
 
@@ -47,8 +47,8 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Supplier::class,
-                'mapped' => false,
-                'multiple' => false,
+                'mapped' => true,
+                'multiple' => true,
                 'expanded' => true,
                 'choice_label' => 'name'
             ])
@@ -79,7 +79,7 @@ class SearchType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
-            'method' => 'GET',
+            'method' => 'POST',
             'csrf_protection' => false
         ]);
     }

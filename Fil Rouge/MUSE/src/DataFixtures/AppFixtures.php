@@ -297,30 +297,6 @@ private UserPasswordHasherInterface $userPasswordHasher;
         $manager->persist($p5);
 
 
-        $p6 = new Product();
-            $p6->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s1)
-            ->setCategory($c31)
-            ->setPrice('25')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0')
-            ->setQuantity('50');
-        $manager->persist($p6);
-
-        $p7 = new Product();
-            $p7->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s2)
-            ->setCategory($c31)
-            ->setPrice('25')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0.15')
-            ->setQuantity('200');
-    $manager->persist($p7);
-
         for ($i = 0; $i < 20; $i++) {
             $product = new Product();
                 $product->setName('Elec ' . $i)

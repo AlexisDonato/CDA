@@ -6,11 +6,20 @@ use DateTime;
 use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Supplier;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+private UserPasswordHasherInterface $userPasswordHasher;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->userPasswordHasher = $userPasswordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         // for ($i = 0; $i < 10; $i++) {
@@ -38,7 +47,9 @@ class AppFixtures extends Fixture
         //         ->setPlainPassword('password');
         // }
 
+
         // *** USERS *** //
+
         $user1 = new User();
             $user1
                 ->setUserName('admin')
@@ -49,7 +60,7 @@ class AppFixtures extends Fixture
                 ->setVat('0.10')
                 ->setEmail('admin@muse.com')
                 ->setRoles(["ROLE_ADMIN","ROLE_SALES","ROLE_SHIP","ROLE_PRO","ROLE_CLIENT","ROLE_USER"])
-                ->setPassword('123456')
+                ->setPassword($this->userPasswordHasher->hashPassword($user1, '123456'))
                 ->setIsVerified(true);
         $manager->persist($user1);
 
@@ -63,7 +74,7 @@ class AppFixtures extends Fixture
                 ->setVat('0.10')
                 ->setEmail('sales@muse.com')
                 ->setRoles(["ROLE_SALES","ROLE_SHIP","ROLE_PRO","ROLE_CLIENT","ROLE_USER"])
-                ->setPassword('123456')
+                ->setPassword($this->userPasswordHasher->hashPassword($user2, '123456'))
                 ->setIsVerified(true);
         $manager->persist($user2);
 
@@ -77,7 +88,7 @@ class AppFixtures extends Fixture
                 ->setVat('0.10')
                 ->setEmail('ship@muse.com')
                 ->setRoles(["ROLE_SHIP","ROLE_PRO","ROLE_CLIENT","ROLE_USER"])
-                ->setPassword('123456')
+                ->setPassword($this->userPasswordHasher->hashPassword($user3, '123456'))
                 ->setIsVerified(true);
         $manager->persist($user3);
 
@@ -91,7 +102,7 @@ class AppFixtures extends Fixture
                 ->setVat('0.10')
                 ->setEmail('pro@muse.com')
                 ->setRoles(["ROLE_PRO","ROLE_CLIENT","ROLE_USER"])
-                ->setPassword('123456')
+                ->setPassword($this->userPasswordHasher->hashPassword($user4, '123456'))
                 ->setIsVerified(true);
         $manager->persist($user4);
 
@@ -105,13 +116,14 @@ class AppFixtures extends Fixture
                 ->setVat('0.20')
                 ->setEmail('client@muse.com')
                 ->setRoles(["ROLE_CLIENT","ROLE_USER"])
-                ->setPassword('123456')
+                ->setPassword($this->userPasswordHasher->hashPassword($user5, '123456'))
                 ->setIsVerified(true);
         $manager->persist($user5);
 
 
 
         // *** CATEGORIES *** //
+
         $c1 = new Category();
             $c1->setName("Guitares")
                ->setParentCategory(null);
@@ -188,21 +200,116 @@ class AppFixtures extends Fixture
             ->setParentCategory(null);
         $manager->persist($c9);
 
-        // $c11 = new Category();
-        // $c11->setName("Motos");
-        // $c11->setParentCategory($c1->getId());
-        // $manager->persist($c11);
 
-        // $p1 = new Product();
-        // $p1->setName("Bicyclette");
-        // $p1->setCategory($c11->getId());
-        // $manager->persist($p1);
+        // *** SUPPLIERS *** //
+
+        $s1 = new Supplier();
+            $s1->setName("Fender");
+        $manager->persist($s1);
+
+        $s2 = new Supplier();
+            $s2->setName("Ibanez");
+        $manager->persist($s2);
+
+        $s3 = new Supplier();
+            $s3->setName("P.R.S.");
+        $manager->persist($s3);
+
+        $s4 = new Supplier();
+            $s4->setName("L.T.D.");
+        $manager->persist($s4);
+
+        $s5 = new Supplier();
+            $s5->setName("Cordoba");
+        $manager->persist($s5);
+
+        // *** PRODUCTS *** //
+
+        $p1 = new Product();
+            $p1->setName("Produit 1")
+               ->setSupplier($s1)
+               ->setCategory($c11)
+               ->setPrice('2500')
+               ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+               ->setContent('1 instrument')
+               ->setDiscount(false)
+               ->setDiscountRate('0.10')
+               ->setQuantity('15');
+        $manager->persist($p1);
+
+        $p2 = new Product();
+            $p2->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s2)
+            ->setCategory($c11)
+            ->setPrice('2000')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0.05')
+            ->setQuantity('30');
+        $manager->persist($p2);
+
+        $p3 = new Product();
+            $p3->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s3)
+            ->setCategory($c11)
+            ->setPrice('500')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0')
+            ->setQuantity('20');
+        $manager->persist($p3);
+
+        $p4 = new Product();
+            $p4->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s4)
+            ->setCategory($c11)
+            ->setPrice('200')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0')
+            ->setQuantity('10');
+        $manager->persist($p4);
+
+        $p5 = new Product();
+            $p5->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s5)
+            ->setCategory($c11)
+            ->setPrice('25')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0')
+            ->setQuantity('5');
+        $manager->persist($p5);
 
 
-        // $p1 = new Product();
-        // $p1->setName("Bicyclette2");
-        // $p1->setCategory($c11->getId());
-        // $manager->persist($p1);
+        $p6 = new Product();
+            $p6->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s1)
+            ->setCategory($c31)
+            ->setPrice('25')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0')
+            ->setQuantity('50');
+        $manager->persist($p6);
+
+        $p7 = new Product();
+            $p7->setName("Produit ".mt_rand(0, 100))
+            ->setSupplier($s2)
+            ->setCategory($c31)
+            ->setPrice('25')
+            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+            ->setContent('1 instrument')
+            ->setDiscount(false)
+            ->setDiscountRate('0.15')
+            ->setQuantity('200');
+    $manager->persist($p7);
+
 
         $manager->flush();
     }

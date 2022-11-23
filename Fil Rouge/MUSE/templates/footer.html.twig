@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer mt-5 pt-5">
 	<div class="container bottom_border">
 		<div class="row">
 			<div class=" col-sm-4 col-md col-sm-4  col-12 col">
@@ -42,12 +42,12 @@
 						<a class="text-decoration-none" href="{{ path('app_cart_index') }}">Panier</a>
 					</li>
 					{% if app.user %}
-					<li>
-						<a class="text-decoration-none" href="{{ path('app_client_show', {'id': app.user.id}) }}">Informations personelles</a>
-					</li>
-					<li>
-						<a class="text-decoration-none" href="{{ path('app_validated_orders') }}">Commandes</a>
-					</li>
+						<li>
+							<a class="text-decoration-none" href="{{ path('app_client_show', {'id': app.user.id}) }}">Informations personelles</a>
+						</li>
+						<li>
+							<a class="text-decoration-none" href="{{ path('app_validated_orders') }}">Commandes</a>
+						</li>
 					{% endif %}
 				</ul>
 				<!--footer_ul_amrc ends here-->
@@ -133,7 +133,9 @@
 				<a class="text-decoration-none" href="{{ path('app_contact') }}">Contact</a>
 			</li>
 		</ul><!--foote_bottom_ul_amrc ends here--><p class="text-center">Copyright @2022 | Designed With by
-			<a class="text-decoration-none text-primary h4 Hl" href="https://alexisdonato.github.io/CV/index.html"> k6<sup>©</sup></a>
+			<a class="text-decoration-none text-primary h4 Hl" href="https://alexisdonato.github.io/CV/index.html">
+				k6<sup>©</sup>
+			</a>
 		</p>
 		<ul class="social_footer_ul">
 			<li>

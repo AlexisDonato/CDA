@@ -182,7 +182,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/order/validated', name: 'app_order_validated')]
-    public function validateOrder(PdfTools $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
+    public function validateOrder(Request $request, PdfTools $pdf, EntrypointLookupInterface $entrypointLookup, ?CartService $cartService, ?CartRepository $cartRepository, ?Cart $cart, ?UserInterface $user, ?EntityManagerInterface $entityManager, OrderDetailsRepository $orderDetails, MailerInterface $mailer)
     {
         if (!$this->isGranted('ROLE_CLIENT')) {
             $this->addFlash('error', 'Accès refusé');
@@ -197,55 +197,53 @@ class OrderController extends AbstractController
 
         $cart = $cartService->getClientCart();
 
-        // if ($this->isBillingAddress(null) && $this->isDeliveryAddress(null)) {
 
-        //     $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
-        //     $route = $request->headers->get('referer');
-        //     return $this->redirect($route);
+        if ($cart->getBillingAddress() == null && $cart->getDeliveryAddress() == null) {
 
-        // } else {
+            $this->addFlash('error', "Merci d'enregister vos adresses de facturation et de livraison au préalable!");
+            $route = $request->headers->get('referer');
+            return $this->redirect($route);
+        } else {
 
-        $cart->setValidated(true);
-        $cart->setShipped(false);
-        $cart->setTotal($cartService->getTotal($orderDetails));
-        $date = new \DateTime('@' . strtotime('now'));
-        $cart->setOrderDate($date);
+            $cart->setValidated(true);
+            $cart->setShipped(false);
+            $cart->setTotal($cartService->getTotal($orderDetails));
+            $date = new \DateTime('@' . strtotime('now'));
+            $cart->setOrderDate($date);
 
-        $orderId = $cart->getId();
-        $clientOrderId = $cart->getClientOrderId();
-        $cart->setInvoice('INVOICE-' . $clientOrderId . '.pdf');
+            $orderId = $cart->getId();
+            $clientOrderId = $cart->getClientOrderId();
+            $cart->setInvoice('INVOICE-' . $clientOrderId . '.pdf');
 
-        $entityManager->persist($cart);
-        $entityManager->flush();
+            $entityManager->persist($cart);
+            $entityManager->flush();
 
-        $clientOrderId = $cart->getClientOrderId();
-        $details = $orderDetails->findBy(['cart' => $orderId]);
+            $clientOrderId = $cart->getClientOrderId();
+            $details = $orderDetails->findBy(['cart' => $orderId]);
 
-        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+            $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
-        $pdf->generateInvoice($orderId);
+            $pdf->generateInvoice($orderId);
 
-        $email = (new TemplatedEmail())
-            ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
-            ->to($user->getEmail())
-            ->cc('Shipping@muse.com')
-            ->subject('Votre commande est validée!')
-            ->htmlTemplate('email/order_validation_email.html.twig')
-            ->context([
-                'details' => $details,
-                'user' => $user,
-                'addresses' => $addresses,
-                'cart'      => $cart,
-            ])
-            ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/public/invoices/INVOICE-' . $cart->getClientOrderId() . '.pdf');
+            $email = (new TemplatedEmail())
+                ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
+                ->to($user->getEmail())
+                ->cc('Shipping@muse.com')
+                ->subject('Votre commande est validée!')
+                ->htmlTemplate('email/order_validation_email.html.twig')
+                ->context([
+                    'details' => $details,
+                    'user' => $user,
+                    'addresses' => $addresses,
+                    'cart'      => $cart,
+                ])
+                ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/public/invoices/INVOICE-' . $cart->getClientOrderId() . '.pdf');
 
-        $mailer->send($email);
+            $mailer->send($email);
 
-        $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
-        return $this->redirectToRoute('app_home');
-
-        // }
-
+            $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
+            return $this->redirectToRoute('app_home');
+        }
     }
 
     #[Route('/verify/order_email', name: 'app_verify_order_email')]

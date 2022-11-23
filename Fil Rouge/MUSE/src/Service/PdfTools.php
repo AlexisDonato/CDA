@@ -10,16 +10,17 @@ use App\Repository\CartRepository;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class PdfTools {
+class PdfTools
+{
 
     private $pdf;
     private $cartRepository;
     private $orderDetails;
     private $cartService;
     private $templating;
- 
 
-    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user, Environment $templating) 
+
+    public function __construct(Pdf $pdf, CartRepository $cartRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user, Environment $templating)
     {
         $this->pdf = $pdf;
         $this->cartRepository = $cartRepository;
@@ -29,7 +30,8 @@ class PdfTools {
         $this->templating = $templating;
     }
 
-    public function generateInvoice($orderId) {
+    public function generateInvoice($orderId)
+    {
 
         $order = $this->cartRepository->find($orderId);
 
@@ -46,8 +48,6 @@ class PdfTools {
             'user' => $user,
         ));
 
-        $this->pdf->generateFromHtml($html, '../invoices/INVOICE-'. $order->getClientOrderId() .'.pdf', [], true);
-
+        $this->pdf->generateFromHtml($html, '../public/invoices/INVOICE-' . $order->getClientOrderId() . '.pdf', [], true);
     }
- 
 }

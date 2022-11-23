@@ -37,9 +37,9 @@ class OrderController extends AbstractController
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
         $cartService->setUser($user);
         $info = [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -73,14 +73,14 @@ class OrderController extends AbstractController
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
             $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
-        
+
         $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
@@ -94,7 +94,7 @@ class OrderController extends AbstractController
 
         if ($newAddressForm->isSubmitted() && $newAddressForm->isValid()) {
 
-            $this->addFlash('success','Adresse ajoutée !');
+            $this->addFlash('success', 'Adresse ajoutée !');
 
             $address->setName($newAddressForm->get('name')->getData());
             $address->setCountry($newAddressForm->get('country')->getData());
@@ -123,19 +123,19 @@ class OrderController extends AbstractController
             }
             $entityManager->persist($cart);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute("app_order");
         }
 
         $selectForm = $this->createForm(SelectAddressType::class);
         $selectForm->handleRequest($request);
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
-        
 
-        
+
+
         if ($selectForm->isSubmitted() && $selectForm->isValid()) {
 
-            $this->addFlash('success','Adresses de FACTURATION et LIVRAISON définies!');
+            $this->addFlash('success', 'Adresses de FACTURATION et LIVRAISON définies!');
 
             $cart = $cartService->getClientCart();
 
@@ -163,16 +163,16 @@ class OrderController extends AbstractController
         ]);
     }
 
-        public function checkoutAction(Request $request)
-        {
+    public function checkoutAction(Request $request)
+    {
         if ($request->isMethod('POST')) {
             $token = $request->request->get('stripeToken');
             \Stripe\Stripe::setApiKey("pk_test_HxZzNHy8LImKK9LDtgMDRBwd");
             \Stripe\Charge::create(array(
-              "amount" => $this->get('cart')->getTotal() * 100,
-              "currency" => "eur",
-              "source" => $token,
-              "description" => "Test charge!"
+                "amount" => $this->get('cart')->getTotal() * 100,
+                "currency" => "eur",
+                "source" => $token,
+                "description" => "Test charge!"
             ));
 
             $this->getCart()->setValidated(true);
@@ -208,12 +208,12 @@ class OrderController extends AbstractController
         $cart->setValidated(true);
         $cart->setShipped(false);
         $cart->setTotal($cartService->getTotal($orderDetails));
-        $date = new \DateTime('@'.strtotime('now'));
+        $date = new \DateTime('@' . strtotime('now'));
         $cart->setOrderDate($date);
 
         $orderId = $cart->getId();
         $clientOrderId = $cart->getClientOrderId();
-        $cart->setInvoice('INVOICE-'. $clientOrderId .'.pdf');
+        $cart->setInvoice('INVOICE-' . $clientOrderId . '.pdf');
 
         $entityManager->persist($cart);
         $entityManager->flush();
@@ -222,30 +222,30 @@ class OrderController extends AbstractController
         $details = $orderDetails->findBy(['cart' => $orderId]);
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
-        
+
         $pdf->generateInvoice($orderId);
 
-            $email = (new TemplatedEmail())
-                ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
-                ->to($user->getEmail())
-                ->cc('Shipping@muse.com')
-                ->subject('Votre commande est validée!')
-                ->htmlTemplate('email/order_validation_email.html.twig')
-                ->context([
-                    'details' => $details,
-                    'user' => $user,
-                    'addresses' => $addresses,
-                    'cart'      => $cart,
-                ])
-                ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/invoices/INVOICE-'.$cart->getClientOrderId().'.pdf');
+        $email = (new TemplatedEmail())
+            ->from(new E_address('info_noreply@muse.com', 'Muse MailBot'))
+            ->to($user->getEmail())
+            ->cc('Shipping@muse.com')
+            ->subject('Votre commande est validée!')
+            ->htmlTemplate('email/order_validation_email.html.twig')
+            ->context([
+                'details' => $details,
+                'user' => $user,
+                'addresses' => $addresses,
+                'cart'      => $cart,
+            ])
+            ->attachFromPath('/home/alex/AFPA/CDA/Fil Rouge/MUSE/public/invoices/INVOICE-' . $cart->getClientOrderId() . '.pdf');
 
-            $mailer->send($email);
+        $mailer->send($email);
 
         $this->addFlash('success', 'Commande validée, merci pour votre achat! Un email de confirmation de votre commande a été envoyé sur votre adresse mail');
         return $this->redirectToRoute('app_home');
-        
+
         // }
-        
+
     }
 
     #[Route('/verify/order_email', name: 'app_verify_order_email')]

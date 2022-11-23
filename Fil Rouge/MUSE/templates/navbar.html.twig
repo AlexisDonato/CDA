@@ -58,69 +58,71 @@
 			</li>
 
 			{% if is_granted('ROLE_ADMIN') %}
-			{% else %}
-			<li class="nav-item text-center mr-3">
-				<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_cart_index' %}active{% endif %}" href="{{ path('app_cart_index') }}">
-					<div>
-						<i class="fa-solid fa-cart-shopping fa-lg mb-1"></i>
-						{% if count > 0 %}
-							<span class="badge rounded-pill badge-notification bg-danger position-absolute translate-middle border border-dark ml-2">
-								{{ count }}
-							</span>
-						{% endif %}
-					</div>
-					Votre panier
-				</a>
-			</li>
+				{% else %}
+					<li class="nav-item text-center mr-3">
+						<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_cart_index' %}active{% endif %}" href="{{ path('app_cart_index') }}">
+							<div>
+								<i class="fa-solid fa-cart-shopping fa-lg mb-1"></i>
+								{% if count > 0 %}
+									<span class="badge rounded-pill badge-notification bg-danger position-absolute translate-middle border border-dark ml-2">
+										{{ count }}
+									</span>
+								{% endif %}
+							</div>
+							Votre panier
+						</a>
+					</li>
 			{% endif %}
 
 			{% if is_granted('ROLE_SHIP') %}
-			<li class="nav-item dropdown ml-4">
-				<i class="fa-solid fa-lock-open fa-lg text-danger ml-5"></i>
-				<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<b>Back Office</b>
-				</a>
-				<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item text-primary" href="{{ path('admin') }}">
-						<strong>Tableau de bord</strong>
+				<li class="nav-item dropdown ml-4">
+					<i class="fa-solid fa-lock-open fa-lg text-danger ml-5"></i>
+					<a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<b>Back Office</b>
 					</a>
-					<div class="dropdown-divider"></div>
+					<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item text-primary" href="{{ path('admin') }}">
+							<strong>Tableau de bord</strong>
+						</a>
+						<div class="dropdown-divider"></div>
 
-					<a class="dropdown-item text-danger" href="{{ path('app_user_index') }}">
-						<b>Index des utilisateurs</b>
-					</a>
-					{% if is_granted('ROLE_SALES') %}
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item text-danger" href="{{ path('app_admin_product_index') }}">
-						<b>Index des produits</b>
-					</a>
-					<a class="dropdown-item text-danger" href="{{ path('app_admin_product_new') }}">
-						<i>Nouveau produit</i>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item text-danger" href="{{ path('app_admin_category_index') }}">
-						<b>Index des catégories</b>
-					</a>
-					<a class="dropdown-item text-danger" href="{{ path('app_admin_category_new') }}">
-						<i>Nouvelle catégorie</i>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item text-danger" href="{{ path('app_supplier_index') }}">
-						<b>Index des fournisseurs</b>
-					</a>
-					<a class="dropdown-item text-danger" href="{{ path('app_supplier_new') }}">
-						<i>Nouveau fournisseur</i>
-					</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item text-warning" href="{{ path('app_admin_cart_index') }}">
-						<i><strong>Infos Paniers/commandes</strong></i>
-					</a>
-					{% endif %}
-					<a class="dropdown-item text-warning" href="{{ path('app_validated_orders') }}">
-						<b>Commandes Clients</b>
-					</a>
-				</div>
-			</li>
+						<a class="dropdown-item text-danger" href="{{ path('app_user_index') }}">
+							<b>Index des utilisateurs</b>
+						</a>
+						{% if is_granted('ROLE_SALES') %}
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{{ path('app_admin_product_index') }}">
+								<b>Index des produits</b>
+							</a>
+							<a class="dropdown-item text-danger" href="{{ path('app_admin_product_new') }}">
+								<i>Nouveau produit</i>
+							</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{{ path('app_admin_category_index') }}">
+								<b>Index des catégories</b>
+							</a>
+							<a class="dropdown-item text-danger" href="{{ path('app_admin_category_new') }}">
+								<i>Nouvelle catégorie</i>
+							</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{{ path('app_supplier_index') }}">
+								<b>Index des fournisseurs</b>
+							</a>
+							<a class="dropdown-item text-danger" href="{{ path('app_supplier_new') }}">
+								<i>Nouveau fournisseur</i>
+							</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-warning" href="{{ path('app_admin_cart_index') }}">
+								<i>
+									<strong>Infos Paniers/commandes</strong>
+								</i>
+							</a>
+						{% endif %}
+						<a class="dropdown-item text-warning" href="{{ path('app_validated_orders') }}">
+							<b>Commandes Clients</b>
+						</a>
+					</div>
+				</li>
 			{% elseif app.user %}
 				<li class="nav-item dropdown">
 					<i class="fa-solid fa-user fa-lg text-secondary ml-5 {% if app.request.attributes.get('_route') == 'app_client_show' %}text-light{% elseif app.request.attributes.get('_route') == 'app_validated_orders' %}text-light{% else %}text-secondary{% endif %}"></i>
@@ -138,14 +140,14 @@
 			{% endif %}
 		</ul>
 
-	{# <div class="row ml-3 mr-auto mt-auto mb-auto">
-		{{ form_start(searchForm2, {attr: {class: ''}}) }}
-<div class="d-flex justify-content-center align-items-center">
-
-		{{ form_row(searchForm2.q) }}
-</div>
-		{{ form_end(searchForm2) }}
-	</div> #}
+		{# <div class="row ml-3 mr-auto mt-auto mb-auto">
+				{{ form_start(searchForm2, {attr: {class: ''}}) }}
+		<div class="d-flex justify-content-center align-items-center">
+		
+				{{ form_row(searchForm2.q) }}
+		</div>
+				{{ form_end(searchForm2) }}
+			</div> #}
 
 		<div class="row flex-row">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}

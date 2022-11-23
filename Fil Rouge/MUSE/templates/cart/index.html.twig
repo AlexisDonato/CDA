@@ -12,7 +12,6 @@
 			-o-background-size: cover;
 			background-size: cover;
 		}
-
 	</style>
 
 	<div class="container">
@@ -24,7 +23,11 @@
 						<th>Produit</th>
 						<th>Prix HT</th>
 						<th>Promotion</th>
-						{% for item in items|slice(0, 1) %}{% if item.cart.additionalDiscountRate != 0 %}<th class="text-success">Remise</th>{% endif %}{% endfor %}
+						{% for item in items|slice(0, 1) %}
+							{% if item.cart.additionalDiscountRate != 0 %}
+								<th class="text-success">Remise</th>
+							{% endif %}
+						{% endfor %}
 						<th>TVA</th>
 						<th>Quantité</th>
 						<th>Sous-total</th>
@@ -34,58 +37,72 @@
 				<tbody>
 					{% for item in items %}
 						<tr>
-							<td><a class ="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}"><p class="Hl text-light">{{item.product.name}}</p></a></td>
-							<td>{{item.product.price}} €</td>
-							{% if item.product.discountRate != 0 %}<td class="text text-warning"><div class="d-flex justify-content-start">
-								<h5 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h5><h5 class="text-warning">%</h5></div>
-							{% else %}<td>-
-							{% endif %}</td>
-							{% if item.cart.additionalDiscountRate != 0 %}<td class="text-success">-{{item.cart.additionalDiscountRate * 100}}%</td>{% endif %}
-							<td>{{ app.user.vat * 100}}%</td>
-							<td>{{item.quantity}} {% if item.product.quantity == 0 %} ({{item.product.quantity}} left in stock) {% endif %}</td>
-							<td class="roboto h5{% if item.product.discountRate != 0 %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate + item.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}
-								€</h4></td>
 							<td>
-								<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if item.product.quantity == 0 %} disabled {% endif %}">
-									<i class="bi bi-cart-plus"></i>
+								<a class="text-decoration-none" href="{{ path('app_product_show', {'id': item.product.id}) }}">
+									<p class="Hl text-light">{{item.product.name}}</p>
 								</a>
-								<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-primary btn-sm">
-									<i class="bi bi-cart-dash"></i>
-									<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger ml-1 btn-sm">
-										<i class="fas fa-trash"></i>
-									</a>
-								</td>
 							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="3" class="text-right surround h4"><b class="roboto">Total :</b>
-						</td>
-						<td class="roboto h4">{{ total|number_format(2, '.', '') }}
-							€</td>
-							{% for item in items|slice(0, 1) %}
+							<td>{{item.product.price}}
+								€</td>
 							{% if item.product.discountRate != 0 %}
-							<td colspan="6">
-							{% else %}
-							<td colspan="5">
-							{% endif %}
-							{% endfor %}
-							<a href="{{ path("app_cart_deleteAll") }}" class="btn btn-danger" title="Supprimer le panier">
-								<i class="bi bi-cart-x"></i>
+								<td class="text text-warning">
+									<div class="d-flex justify-content-start">
+										<h5 class="text-warning roboto">-{{ item.product.discountRate * 100 }}</h5>
+										<h5 class="text-warning">%</h5>
+									</div>
+								{% else %}
+									<td>-
+									{% endif %}
+								</td>
+								{% if item.cart.additionalDiscountRate != 0 %}
+									<td class="text-success">-{{item.cart.additionalDiscountRate * 100}}%</td>
+								{% endif %}
+								<td>{{ app.user.vat * 100}}%</td>
+								<td>{{item.quantity}}
+									{% if item.product.quantity == 0 %}
+										({{item.product.quantity}}
+										left in stock)
+									{% endif %}
+								</td>
+								<td class="roboto h5{% if item.product.discountRate != 0 %} text-warning{% endif %}">{{ ((item.product.price * item.quantity) * (1 - ( item.product.discountRate + item.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
+								</td>
+					<td>
+						<a href="{{ path("app_cart_add", {id: item.product.id}) }}" title="Ajouter 1" class="btn btn-primary border border-secondary btn-sm Hl {% if item.product.quantity == 0 %} disabled {% endif %}">
+							<i class="bi bi-cart-plus"></i>
+						</a>
+						<a href="{{ path("app_cart_remove", {id: item.product.id}) }}" title="Retirer 1" class="btn btn-success btn-sm border border-secondary Hl">
+							<i class="bi bi-cart-dash"></i>
+							<a href="{{ path ('app_cart_delete', {'id': item.product.id}) }}" title="Retirer la ligne" class="btn btn-danger border border-secondary ml-1 btn-sm Hl">
+								<i class="fas fa-trash"></i>
 							</a>
 						</td>
-
-					</tr>
-				</tfoot>
-			</table>
-			<div class="text-center">
-				<a href="{{ path("app_order") }}" class="btn btn-info btn-lg border-light mb-3 Hl" title="Finalisez votre commande">Finalisez votre commande</a>
-			</div>
-		{% else %}
-			<h1 class="text-center mt-5 mb-5">Votre panier est vide !</h1>
-			<br><br><br><br>
-		{% endif %}
-	</div>
-{% endblock %}
+					</td>
+		{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3" class="text-right surround h4">
+				<b class="roboto">Total :</b>
+			</td>
+			<td class="roboto h4">{{ total|number_format(2, '.', '') }}
+				€</td>
+			{% for item in items|slice(0, 1) %}
+				{% if item.product.discountRate != 0 %}
+					<td colspan="6">
+					{% else %}
+						<td colspan="5">
+						{% endif %}
+					{% endfor %}
+					<a href="{{ path("app_cart_deleteAll") }}" class="btn btn-danger border border-secondary Hl" title="Supprimer le panier">
+						<i class="bi bi-cart-x"></i>
+					</a>
+				</td>
+			</tr>
+		</tr>
+	</tfoot>
+</table>
+<div class="text-center">
+	<a href="{{ path("app_order") }}" class="btn btn-info btn-lg border-light mb-3 Hl" title="Finalisez votre commande">Finalisez votre commande</a>
+</div>{% else %}
+<h1 class="text-center pt-5 mt-5 pb-5 mb-5">Votre panier est vide !</h1>
+<br><br><br><br>{% endif %}</div>{% endblock %}

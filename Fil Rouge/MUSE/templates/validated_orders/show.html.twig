@@ -81,14 +81,14 @@
 					</td>
 					{% for detail in details|slice(0, 1) %}
 						{% if detail.product.discountRate != 0 %}
-							<td colspan="2"></td>
-						{% else %}
 							<td colspan="1"></td>
+						{% else %}
+							<td colspan="0"></td>
 						{% endif %}
 					{% endfor %}
 					<td>
-						<div class="text-right mt-2 mb-2">
-							<button class="btn btn-info border-light btn-lg text-center">
+						<div class="text-center mt-2 mb-2">
+							<button class="btn btn-info border-light btn-lg text-center Hl">
 								<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{{ cart.invoice }}" title="Votre facture ici">
 									<i class="fa-solid fa-file-pdf fa-lg"></i>
 								</a>
@@ -157,6 +157,6 @@
 		</div>
 	{% endif %}
 	<div class="text-center">
-		<button class="btn btn-info border-light mb-1" onclick="history.back()">Retour</button>
+		<button class="btn btn-info border-light mb-1 Hl" onclick="history.back()">Retour</button>
 	</div>
 </div>{% endblock %}

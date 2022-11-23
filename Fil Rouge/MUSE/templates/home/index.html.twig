@@ -18,7 +18,7 @@
 	</div>
 	<hr>
 	{# <h1 class="text-center mt-1 hometitle slideIn">Muse...</h1>
-							<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
+									<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
 
 
 	<div class="row d-flex justify-content-around align-items-center rounded">
@@ -132,7 +132,9 @@
 
 	<div class="row mt-5">
 		<div class="col-md-12">
-			<h1 class="text-warning text-center pb-5 Hl">Promotions exclusives !</h1>
+			<a class="text-decoration-none" href="{{ path('app_discount') }}">
+				<h1 class="text-warning text-center pb-5 Hl">Promotions exclusives !</h1>
+			</a>
 			{% if productsDiscount|length > 0 %}
 				<div id="carouselExampleIndicators-3" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 					<ol class="carousel-indicators">
@@ -144,48 +146,45 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							{% for pd in productsDiscount|slice(0,1) %}
-								<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}" {% endfor %}><img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile2.webp" alt="..."></a>
-								<div class="carousel-caption d-none d-md-block">
-									{% for pd in productsDiscount|slice(0,1) %}
-										<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}" {% endfor %}>
-											<h1 class="text-warning roboto Hl">Promotions exclusives</h1>
-										</a>
-										{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
-										{# <i class="fa-solid fa-guitar text-secondary"></i> #}
-									</div>
-								</div>
-								{% for pd in productsDiscount|slice(0,5) %}
-									<div class="carousel-item">
-										<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
-										<div class="carousel-caption d-none d-md-block">
-											<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}">
-												<h1 class="text-warning mb-3 Hl">{{ pd.name }}</h1>
-											</a>
-											<h3 class="text-white">
-												<i class="text-warning">{{ pd.price }}
-													€</i>
-											</h3>
-											<p>
-												<i class="text-warning">{{ pd.description }}</i>
-											</p>
-										</div>
-									</div>
-								{% endfor %}
+							<a class="text-decoration-none" href="{{ path('app_discount') }}"><img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile2.webp" alt="..."></a>
+							<div class="carousel-caption d-none d-md-block">
+								<a class="text-decoration-none" href="{{ path('app_discount') }}">
+									<h1 class="text-warning roboto Hl">Promotions exclusives</h1>
+								</a>
+								{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
+								{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 							</div>
-
-							<a class="carousel-control-prev" href="#carouselExampleIndicators-3" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="carousel-control-next" href="#carouselExampleIndicators-3" role="button" data-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="sr-only">Next</span>
-							</a>
 						</div>
-					{% endif %}
+						{% for pd in productsDiscount|slice(0,5) %}
+							<div class="carousel-item">
+								<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="width: 40rem;" src="{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
+								<div class="carousel-caption d-none d-md-block">
+									<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}">
+										<h1 class="text-warning mb-3 Hl">{{ pd.name }}</h1>
+									</a>
+									<h3 class="text-white">
+										<i class="text-warning">{{ pd.price }}
+											€</i>
+									</h3>
+									<p>
+										<i class="text-warning">{{ pd.description }}</i>
+									</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+
+					<a class="carousel-control-prev" href="#carouselExampleIndicators-3" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleIndicators-3" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
 				</div>
-			</div>
-			<hr>
+			{% endif %}
 		</div>
-	{% endblock %}
+	</div>
+	<hr>
+</div>{% endblock %}

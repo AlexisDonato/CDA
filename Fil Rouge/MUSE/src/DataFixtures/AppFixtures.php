@@ -144,6 +144,17 @@ private UserPasswordHasherInterface $userPasswordHasher;
                ->setParentCategory(null);
         $manager->persist($c2);
 
+            $c21 = new Category();
+                $c21->setName("Guitares basses accoustiques")
+                ->setParentCategory($c2);
+            $manager->persist($c21);
+
+            $c22 = new Category();
+                $c22->setName("Guitares bassesélectriques")
+                ->setParentCategory($c2);
+            $manager->persist($c22);
+
+
         $c3 = new Category();
             $c3->setName("Batteries & Percussions")
             ->setParentCategory(null);
@@ -309,6 +320,62 @@ private UserPasswordHasherInterface $userPasswordHasher;
             ->setDiscountRate('0.15')
             ->setQuantity('200');
     $manager->persist($p7);
+
+        for ($i = 0; $i < 20; $i++) {
+            $product = new Product();
+                $product->setName('Elec ' . $i)
+                ->setSupplier($s1)
+                ->setCategory($c11)
+                ->setPrice(mt_rand(25, 2750))
+                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+                ->setContent('1 instrument')
+                ->setDiscount(false)
+                ->setDiscountRate('0')
+                ->setQuantity('200');
+            $manager->persist($product);
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            $product = new Product();
+                $product->setName('Accoustique ' . $i)
+                ->setSupplier($s2)
+                ->setCategory($c12)
+                ->setPrice(mt_rand(25, 2750))
+                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+                ->setContent('1 instrument')
+                ->setDiscount(false)
+                ->setDiscountRate('0')
+                ->setQuantity('200');
+            $manager->persist($product);
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            $product = new Product();
+                $product->setName('Basse accoustique ' . $i)
+                ->setSupplier($s3)
+                ->setCategory($c21)
+                ->setPrice(mt_rand(25, 2750))
+                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+                ->setContent('1 instrument')
+                ->setDiscount(false)
+                ->setDiscountRate('0')
+                ->setQuantity('200');
+            $manager->persist($product);
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            $product = new Product();
+                $product->setName('Basse ' . $i)
+                ->setSupplier($s4)
+                ->setCategory($c22)
+                ->setPrice(mt_rand(25, 2750))
+                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+                ->setContent('1 instrument')
+                ->setDiscount(false)
+                ->setDiscountRate('0')
+                ->setQuantity('200');
+            $manager->persist($product);
+        }
 
 
         $manager->flush();

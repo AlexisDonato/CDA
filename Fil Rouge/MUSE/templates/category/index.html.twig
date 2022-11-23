@@ -17,7 +17,7 @@
 					<div class="col-md-4 mb-3">
 						{% if category.parentCategory %}
 
-							<button class="btn btn-warning darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
+							<button class="btn  darker border border-secondary d-flex mt-1 mb-1 position-relative justify-content-center align-items-center">
 								<i class="fa-solid fa-guitar text-secondary"></i>
 								<h2>
 									<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">
@@ -29,10 +29,10 @@
 
 						</div>
 					{% else %}
-						<button id="category" class="btn btn-dark darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
+						<button id="category" class="btn darker border border-secondary d-flex mt-1 mb-1 position-relative justify-content-center align-items-center">
 							<i class="fa-solid fa-guitar text-secondary"></i>
 							<h2>
-								<a class="text-decoration-none text-light ml-3 mr-3" href="{% if (category.product|length) != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
+								<a class="text-decoration-none d-flex justify-content-center text-light ml-3 mr-3" href="{% if (category.product|length) != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
 									{{ category.name }}
 								</a>
 							</h2>

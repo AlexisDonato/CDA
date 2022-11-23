@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class All extends Fixture
 {
 private UserPasswordHasherInterface $userPasswordHasher;
 
@@ -302,9 +302,9 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 $product->setName('Elec ' . $i)
                 ->setSupplier($s1)
                 ->setCategory($c11)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/290/180')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/290/180')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/290/180')
+                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
                 ->setPrice(mt_rand(25, 2750))
                 ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
                 ->setContent('1 instrument')
@@ -319,9 +319,9 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 $product->setName('Accoustique ' . $i)
                 ->setSupplier($s2)
                 ->setCategory($c12)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/290/180')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/290/180')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/290/180')
+                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
                 ->setPrice(mt_rand(25, 2750))
                 ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
                 ->setContent('1 instrument')
@@ -336,9 +336,9 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 $product->setName('Basse accoustique ' . $i)
                 ->setSupplier($s3)
                 ->setCategory($c21)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/290/180')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/290/180')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/290/180')
+                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
                 ->setPrice(mt_rand(25, 2750))
                 ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
                 ->setContent('1 instrument')
@@ -353,14 +353,14 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 $product->setName('Basse ' . $i)
                 ->setSupplier($s4)
                 ->setCategory($c22)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/290/180')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/290/180')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/290/180')
+                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
                 ->setPrice(mt_rand(25, 2750))
                 ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
                 ->setContent('1 instrument')
                 ->setDiscount(false)
-                ->setDiscountRate('0')
+                ->setDiscountRate('0.05')
                 ->setQuantity('200');
             $manager->persist($product);
         }

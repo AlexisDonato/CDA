@@ -34,6 +34,10 @@ body {
     color: #3f7db8 !important;
 }
 
+.text-warning {
+    color: #dd5600 !important;
+}
+
 .btn-outline-warning {
     color: #dd5600;
     border-color: #dd5600;

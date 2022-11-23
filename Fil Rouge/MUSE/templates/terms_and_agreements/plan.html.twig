@@ -28,17 +28,18 @@
         <ul>     
             <li>Injecter des données pour tester brièvement le site (fixtures): <p class="text-warning">"php bin/console d:f:l"</p></li>
         </ul>
+    <p><b>Pour les options précédentes, ne pas oublier de créer l'admin directement dans la BDD en lui accordant les rôles : <p class="text-warning">["ROLE_ADMIN","ROLE_SALES","ROLE_SHIP","ROLE_PRO","ROLE_CLIENT","ROLE_USER"]</b></p></p>
     <p>Option 3:</p>
         <ul>     
-            <li>Injecter des données finales via le fichier CSV : <p class="text-warning"> ... (pas encore disponible) ...</p></li>
+            <li>Injecter les données finales via le fichier CSV : <p class="text-warning"> ... (pas encore disponible) ...</p></li>
         </ul>
     <p></p>
-    <p>Ne pas oublier de créer l'admin directement dans la BDD en lui accordant les rôles : <p class="text-warning">["ROLE_ADMIN","ROLE_SALES","ROLE_SHIP","ROLE_PRO","ROLE_CLIENT","ROLE_USER"]</p></p>
+    
 
     <h3 class="text-primary mt-5">Les Rôles</h3>
     <ul>
-        <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_ADMIN","ROLE_SALES"] :</p> ont tous les droits outre mofifier directement le mdp du user.</li>
-        <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_SHIP"] :</p> ont les mêmes droits que les ["ROLE_PRO"], mais peuvent accéder aux commandes validées et aux informations du user dans le Back Office</li>
+        <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_ADMIN","ROLE_SALES"] :</p> ont tous les droits (Back Office, Dashboard, CRUDs, ...) outre mofifier directement le mdp du user. Ils peuvent accorder une remise additionelle sur les paniers via "Infos Paniers/Commandes".</li>
+        <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_SHIP"] :</p> ont les mêmes droits que les ["ROLE_PRO"], mais peuvent accéder aux commandes validées et aux informations du user dans le Back Office.</li>
         <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_PRO"] :</p> ont les mêmes droits que les ["ROLE_CLIENT"] mais ont une TVA de 10%.</li>
         <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_CLIENT"] :</p> ont les mêmes droits que les ["ROLE_USER"] mais peuvent accéder au panier, et peuvent vérifier leurs informations personnelles et leurs commandes.</li>
         <li class="mt-1 mb-2"><p class="text-warning m-0">["ROLE_USER"] :</p> peuvent naviguer sur le site (accueil, catégories, produits, pied de page).</li>

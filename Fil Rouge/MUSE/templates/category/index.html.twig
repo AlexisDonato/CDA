@@ -23,8 +23,8 @@
 									<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">
 										{{ category.name }}
 									</a>
-									<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
-								</h2>
+									{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
+								</h2>{% else %}{% endif %}
 							</button>
 
 						</div>
@@ -36,7 +36,7 @@
 									{{ category.name }}
 								</a>
 							</h2>
-							<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>
+							{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white ml-1">{{ category.product|length }}</h2>{% else %}{% endif %}
 						</button>
 
 					{% endif %}

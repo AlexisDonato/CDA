@@ -234,70 +234,10 @@ private UserPasswordHasherInterface $userPasswordHasher;
             $s5->setName("Cordoba");
         $manager->persist($s5);
 
+
         // *** PRODUCTS *** //
 
-        $p1 = new Product();
-            $p1->setName("Produit 1")
-               ->setSupplier($s1)
-               ->setCategory($c11)
-               ->setPrice('2500')
-               ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-               ->setContent('1 instrument')
-               ->setDiscount(false)
-               ->setDiscountRate('0.10')
-               ->setQuantity('15');
-        $manager->persist($p1);
-
-        $p2 = new Product();
-            $p2->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s2)
-            ->setCategory($c11)
-            ->setPrice('2000')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0.05')
-            ->setQuantity('30');
-        $manager->persist($p2);
-
-        $p3 = new Product();
-            $p3->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s3)
-            ->setCategory($c11)
-            ->setPrice('500')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0')
-            ->setQuantity('20');
-        $manager->persist($p3);
-
-        $p4 = new Product();
-            $p4->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s4)
-            ->setCategory($c11)
-            ->setPrice('200')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0')
-            ->setQuantity('10');
-        $manager->persist($p4);
-
-        $p5 = new Product();
-            $p5->setName("Produit ".mt_rand(0, 100))
-            ->setSupplier($s5)
-            ->setCategory($c11)
-            ->setPrice('25')
-            ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-            ->setContent('1 instrument')
-            ->setDiscount(false)
-            ->setDiscountRate('0')
-            ->setQuantity('5');
-        $manager->persist($p5);
-
-
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $product = new Product();
                 $product->setName('Elec ' . $i)
                 ->setSupplier($s1)
@@ -310,7 +250,7 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 ->setContent('1 instrument')
                 ->setDiscount(false)
                 ->setDiscountRate('0')
-                ->setQuantity('200');
+                ->setQuantity(mt_rand(300, 430));
             $manager->persist($product);
         }
 
@@ -327,11 +267,11 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 ->setContent('1 instrument')
                 ->setDiscount(false)
                 ->setDiscountRate('0')
-                ->setQuantity('200');
+                ->setQuantity(mt_rand(1, 100));
             $manager->persist($product);
         }
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $product = new Product();
                 $product->setName('Basse accoustique ' . $i)
                 ->setSupplier($s3)
@@ -344,11 +284,11 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 ->setContent('1 instrument')
                 ->setDiscount(false)
                 ->setDiscountRate('0')
-                ->setQuantity('200');
+                ->setQuantity(mt_rand(1, 100));
             $manager->persist($product);
         }
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $product = new Product();
                 $product->setName('Basse ' . $i)
                 ->setSupplier($s4)
@@ -361,7 +301,7 @@ private UserPasswordHasherInterface $userPasswordHasher;
                 ->setContent('1 instrument')
                 ->setDiscount(false)
                 ->setDiscountRate('0.05')
-                ->setQuantity('200');
+                ->setQuantity(mt_rand(1, 100));
             $manager->persist($product);
         }
 

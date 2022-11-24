@@ -350,6 +350,8 @@ h2:hover {
 
 .filterCat {
     max-height: 100px;
+    max-width: 2px;
+    word-break: break-all;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

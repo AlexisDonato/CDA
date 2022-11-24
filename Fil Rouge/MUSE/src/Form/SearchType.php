@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Data\SearchData;
 use App\Entity\Category;
 use App\Entity\Supplier;
+use App\Repository\CategoryRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -25,54 +26,60 @@ class SearchType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Mot-clé'
                 ]
-                ])
+            ])
 
-                ->add('category', EntityType::class, [
-                    'label' => false,
-                    'required' => false,
-                    'class' => Category::class,
-                    'expanded' => true,
-                    'multiple' => true
-                ])
+            ->add('category', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Category::class,
+                'query_builder' => function (CategoryRepository $categoryRepository) {
+                    return $categoryRepository->createQueryBuilder('c')
+                        ->join("c.product", "p")
+                        ->where('SIZE(c.product) != 0');
+                },
+                'choice_label' => 'name',
+                'expanded' => true,
+                'mapped' => true,
+                'multiple' => true
+            ])
 
-                ->add('supplier', EntityType::class, [
-                    'label' => false,
-                    'required' => false,
-                    'class' => Supplier::class,
-                    'mapped' =>false,
-                    'multiple' => false,
-                    'expanded' => true,
-                    'choice_label' => 'name'
-                ])
+            ->add('supplier', EntityType::class, [
+                'label' => false,
+                'required' => false,
+                'class' => Supplier::class,
+                'mapped' => true,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'name'
+            ])
 
-                ->add('min', NumberType::class, [
-                    'label' => false,
-                    'required' => false,
-                    'attr' => [
-                        'placeholder' => 'Prix min'
-                    ]
-                ])
+            ->add('min', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix min'
+                ]
+            ])
 
-                ->add('max', NumberType::class, [
-                    'label' => false,
-                    'required' => false,
-                    'attr' => [
-                        'placeholder' => 'Prix max'
-                    ]
-                ])
+            ->add('max', NumberType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Prix max'
+                ]
+            ])
 
-                ->add('discount', CheckboxType::class, [
-                    'label' => 'En promotion',
-                    'required' => false,
-                ])
-            ;
+            ->add('discount', CheckboxType::class, [
+                'label' => 'En promotion',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
-            'method' => 'GET',
+            'method' => 'POST',
             'csrf_protection' => false
         ]);
     }

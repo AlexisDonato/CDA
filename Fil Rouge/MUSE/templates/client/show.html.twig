@@ -42,24 +42,34 @@
 							<b id="audioFont" class="surround">Adresse(s) :</b>
 						</div>
 						<br>
-						{% for address in addresses %}-<b> {{ address.name }}{% if address.billingAddress %}<b class="text-warning"> (Facturation){% elseif address.deliveryAddress %}<b class="text-warning"> (Livraison){% endif %}</b>
-								:</b>
-							<i>{{ address.pathNumber }},
-								{{ address.pathType }}
-								{{ address.zipcode }}
-								{{ address.city }},
-								{{ address.country }}</i><br>
-						{% endfor %}
-						<div class='text-center'>
-							<a href="{{ path('app_client_address_index') }}" class="mt-2 mb-1 btn-sm">
-								<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1" title="Modifier vos adresses"></i>
-							</a>
-						</div>
+						{% for address in addresses %}-<b>
+								{{ address.name }}
+								{% if address.billingAddress %}
+									<b class="text-warning">
+										(Facturation)
+									{% elseif address.deliveryAddress %}
+										<b class="text-warning">
+											(Livraison)
+										{% endif %}
+									</b>
+									:</b>
+								<i>{{ address.pathNumber }},
+									{{ address.pathType }}
+									{{ address.zipcode }}
+									{{ address.city }},
+									{{ address.country }}</i><br>
+							{% endfor %}
+							<div class='text-center'>
+								<a href="{{ path('app_client_address_index') }}" class="mt-2 mb-1 btn-sm Hl">
+									<i class="fa-solid fa-pencil btn btn-warning border border-light mt-3 mb-1 Hl" title="Modifier vos adresses"></i>
+								</a>
+							</div>
+						</li>
 					</li>
 				</ul>
 				<div class="card-body text-center">
-					<a class="text-decoration-none text-light" href="{{ path('app_client_edit', {'id': user.id}) }}">
-						<i class="fa-solid fa-pencil btn btn-info border border-light" title="Modifier votre profil"></i>
+					<a class="text-decoration-none text-light Hl" href="{{ path('app_client_edit', {'id': user.id}) }}">
+						<i class="fa-solid fa-pencil btn btn-info border border-light Hl" title="Modifier votre profil"></i>
 					</a>
 				</div>
 			</div>

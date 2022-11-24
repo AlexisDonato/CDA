@@ -1,7 +1,7 @@
 /* BACKGROUND PICTURE */
 
 body {
-    background: url('/img/BGHome2.jpg') no-repeat center center fixed;
+    background: url('/img/BGHome22.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -14,9 +14,48 @@ body {
     -webkit-animation: fadeInDown 200ms ease-in-out;
     animation: fadeInDown 200ms ease-in-out;
 }
+
 .container-fluid {
     -webkit-animation: fadeInDown 200ms ease-in-out;
     animation: fadeInDown 200ms ease-in-out;
+}
+
+
+/* BUTTONS */
+.btn {
+    text-shadow: 0 1px 0 rgb(0 0 0 / 5%);
+}
+
+.btn-primary {
+    background-image: linear-gradient(#2b5b89, #033c73 60%, #03386c);
+}
+
+.text-primary {
+    color: #3f7db8 !important;
+}
+
+.text-warning {
+    color: #dd5600 !important;
+}
+
+.btn-outline-warning {
+    color: #dd5600;
+    border-color: #dd5600;
+}
+
+.btn-outline-warning:hover {
+    color: #f3f0ed;
+    background-color: #dd5600;
+    border-color: #dd5600;
+}
+
+.btn-warning {
+    color: #f3f0ed;
+    border-color: #dd5600;
+}
+
+.bg-warning {
+    background-color: #dd5600 !important;
 }
 
 /* FONTS */
@@ -115,8 +154,8 @@ h2:hover {
 /* BACKGROUNDS */
 
 .darker {
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(50,50,61,1) 0%, rgba(0,0,0,1) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(50, 50, 61, 1) 0%, rgba(0, 0, 0, 1) 100%);
 }
 
 
@@ -217,7 +256,7 @@ h2:hover {
         transform: translatex(+800px);
         width: 15%;
     }
-    
+
 }
 
 /* NAVBAR */
@@ -311,6 +350,8 @@ h2:hover {
 
 .filterCat {
     max-height: 100px;
+    max-width: 200px;
+    word-break: break-all;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -427,7 +468,7 @@ h2:hover {
 
 .zoom:hover {
     transform: scale(1.5);
-    z-index:100
+    z-index: 100
 }
 
 

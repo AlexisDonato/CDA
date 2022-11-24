@@ -8,51 +8,27 @@
 		{% include 'navbar.html.twig' %}
 
 		{% for message in app.flashes('success') %}
-			<div class="alert alert-success text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-success text-center">{{ message }}</div>
+			</div>
 		{% endfor %}
 		{% for message in app.flashes('info') %}
-			<div class="alert alert-primary text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-primary text-center">{{message}}</div>
+			</div>
 		{% endfor %}
 		{% for message in app.flashes('error') %}
-			<div class="alert alert-danger text-center">{{ message }}</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-6 alert alert-danger text-center">{{ message }}</div>
+			</div>
 		{% endfor %}
 
 		{# Bootstrap Breadcrumbs #}
 		{% if (app.request.attributes.get('_route') != 'login' and app.request.attributes.get('_route') != 'app_home' and app.request.attributes.get('_route') != 'app_register') %}
 			{% block breadcrumbs %}
-		
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
 
-									<li class="breadcrumb-item">
-										<a class="text-primary text-decoration-none" href="{{path('app_home')}}">Accueil</a>
-									</li>
+				{% include 'breadcrumbs.html.twig' %}
 
-									<li class="breadcrumb-item">
-										<a class="text-primary text-decoration-none" href="{{path('app_category')}}">Catégories</a>
-									</li>
-
-									{% if path is defined %}
-									{% for category in categories|slice(0,1) %}
-									{% for p in path %}
-									<li class="breadcrumb-item">
-										<a class="text-primary text-decoration-none" 
-										href="{{ path('app_catalogue', {'category': category.id}) }}"
-										>{{ p }}</a>
-									</li>
-									{% endfor %}
-									{% endfor %}
-									{% endif %}
-
-									<li class="breadcrumb-item active" aria-current="page">Page actuelle</li>
-								</ol>
-							</nav>
-						</div>
-					</div>
-				</div>
 			{% endblock %}
 		{% endif %}
 

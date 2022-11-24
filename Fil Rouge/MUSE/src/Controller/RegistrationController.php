@@ -73,12 +73,12 @@ class RegistrationController extends AbstractController
             $user->setProJobPosition($form->get('proJobPosition')->getData());
 
             // Commenting 'data_class' => User::class, from $resolver->setDefaults in the formType allows to set several classes in the controller :
-            $address->setName($form->get('address_name')->getData());
-            $address->setCountry($form->get('address_country')->getData());
-            $address->setZipcode($form->get('address_zipcode')->getData());
-            $address->setCity($form->get('address_city')->getData());
-            $address->setPathType($form->get('address_path_type')->getData());
-            $address->setPathNumber($form->get('address_path_number')->getData());
+            $address->setName($form->get('address_name')->getData())
+                    ->setCountry($form->get('address_country')->getData())
+                    ->setZipcode($form->get('address_zipcode')->getData())
+                    ->setCity($form->get('address_city')->getData())
+                    ->setPathType($form->get('address_path_type')->getData())
+                    ->setPathNumber($form->get('address_path_number')->getData());
 
             // $user->addAddress($adress); 
             // this equals to :

@@ -33,11 +33,12 @@ class ProductRepository extends ServiceEntityRepository
      */
     public function findSearch(SearchData $search): PaginationInterface
     {
+        // dd($search);
         $query = $this
-        ->createQueryBuilder('p')
-        ->select('c', 'p', 's')
-        ->join('p.category', 'c')
-        ->join('p.supplier', 's');
+            ->createQueryBuilder('p')
+            ->select('c', 'p', 's')
+            ->join('p.category', 'c')
+            ->join('p.supplier', 's');
 
         if (!empty($search->q)) {
             $query = $query
@@ -78,6 +79,7 @@ class ProductRepository extends ServiceEntityRepository
         }
 
         $query = $query->getQuery();
+        // dd($query);
         return $this->paginator->paginate(
             $query,
             $search->page,
@@ -94,12 +96,12 @@ class ProductRepository extends ServiceEntityRepository
     {
         $search->discount;
         $query = $this
-        ->createQueryBuilder('p')
-        ->select('c', 'p')
-        ->join('p.category', 'c')
-        ->andWhere('p.discountRate != 0');
+            ->createQueryBuilder('p')
+            ->select('c', 'p')
+            ->join('p.category', 'c')
+            ->andWhere('p.discountRate != 0');
 
-    $query = $query->getQuery();
+        $query = $query->getQuery();
         return $this->paginator->paginate(
             $query,
             $search->page,
@@ -107,12 +109,12 @@ class ProductRepository extends ServiceEntityRepository
         );
     }
 
-        // Products on discount
-        public function findProductsDiscount()
-        {
-            return $this->createQueryBuilder('p')
+    // Products on discount
+    public function findProductsDiscount()
+    {
+        return $this->createQueryBuilder('p')
             ->where('p.discountRate != 0')
             ->getQuery()
             ->getResult();
-        }
+    }
 }

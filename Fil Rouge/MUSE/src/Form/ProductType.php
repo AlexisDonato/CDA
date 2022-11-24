@@ -20,70 +20,75 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('content')
 
-            ->add('image',FileType::class, [
-                'mapped' => true, 
-                'required'=>false,
+            ->add('image', FileType::class, [
+                'mapped' => true,
+                'required' => false,
                 'attr' => [
-                    'accept' => 'image/*' , 
+                    'accept' => 'image/*',
                     'class' => 'form-control-file'
                 ],
                 'constraints' => [
-                    new File ([
+                    new File([
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/jpg',
                             'image/png'
                         ],
                         'mimeTypesMessage' => 'Type de fichier invalide',
-                    ])],
-                'data_class' => null])
+                    ])
+                ],
+                'data_class' => null
+            ])
 
-            ->add('image1',FileType::class, [
-                'mapped' => true, 
-                'required'=>false,
+            ->add('image1', FileType::class, [
+                'mapped' => true,
+                'required' => false,
                 'attr' => [
-                    'accept' => 'image/*' , 
+                    'accept' => 'image/*',
                     'class' => 'form-control-file'
                 ],
                 'constraints' => [
-                    new File ([
+                    new File([
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/jpg',
                             'image/png'
                         ],
                         'mimeTypesMessage' => 'Type de fichier invalide',
-                    ])],
-                'data_class' => null])
+                    ])
+                ],
+                'data_class' => null
+            ])
 
-            ->add('image2',FileType::class, [
-                'mapped' => true, 
-                'required'=>false,
+            ->add('image2', FileType::class, [
+                'mapped' => true,
+                'required' => false,
                 'attr' => [
-                    'accept' => 'image/*' , 
+                    'accept' => 'image/*',
                     'class' => 'form-control-file'
                 ],
                 'constraints' => [
-                    new File ([
+                    new File([
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/jpg',
                             'image/png'
                         ],
                         'mimeTypesMessage' => 'Type de fichier invalide',
-                    ])],
-                'data_class' => null])
+                    ])
+                ],
+                'data_class' => null
+            ])
 
             ->add('quantity')
             ->add('discount')
-            
+
             ->add('discountRate', TextType::class, [
                 'help' => 'ex: entrez 0.20 pour 20%',
-                ])
+            ])
 
             ->add('supplier')
-            ->add('categories')
-        ;
+            ->add('category');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

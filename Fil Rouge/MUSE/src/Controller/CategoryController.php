@@ -16,21 +16,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
-    public function index(CartService $cartService, CategoryRepository $categoryRepository, Request $request, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
+
+    #[Route('/category/{parent}', name: 'app_category', defaults: ['parent' => null])]
+    public function index($parent, CartService $cartService, CategoryRepository $categoryRepository, Request $request, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-        $categories = $categoryRepository->findAll();
+
+        $categories = $categoryRepository->findByParent($parent);
+
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
+        $products2 = $productRepository->findAll();
         $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
-
 
         return $this->render('category/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
@@ -41,38 +43,7 @@ class CategoryController extends AbstractController
             'products' => $products,
             'discount' => $discount,
             'discount2' => $discount2,
-            
-        ]);
-    }
 
-
-    #[Route('/subcategory/{parent}', name: 'app_subcategory' , defaults:['parent'=>null])]
-    public function index2($parent, CartService $cartService, CategoryRepository $categoryRepository, Request $request, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
-    {
-
-        $categories = $categoryRepository->findByParent($parent);
-        
-        $data = new SearchData();
-        $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
-
-        $cartService->setUser($user);
-
-        return $this->render('category/index2.html.twig', [
-            'items'     => $cartService->getFullCart($orderDetails),
-            'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'categories' => $categories,
-            'products2' => $products2,
-            'products' => $products,
-            'discount' => $discount,
-            'discount2' => $discount2,
-            
         ]);
     }
 }

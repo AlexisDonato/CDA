@@ -23,7 +23,7 @@
 							<td><a class ="text-decoration-none"><p >{{detail.product.name}}</p></a></td>
 							<td>{{detail.product.price}} €</td>
 							{% if detail.product.discountRate != 0 %}<td class="text text-warning">
-								<h5 class="text-warning">-{{ detail.product.discountRate * 100 }}%</h5>
+								<h4 class="text-warning">-{{ detail.product.discountRate * 100 }}%</h4>
 							{% else %}<td>-
 							{% endif %}</td>
 							{% if detail.cart.additionalDiscountRate != 0 %}<td class="text-success">-{{detail.cart.additionalDiscountRate * 100}}%</td>{% endif %}
@@ -37,7 +37,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" class="text-right h4"><b>Total :</b>
+						<td colspan="3" class="text-right h4" style="text-align: right;"><b>Total :</b>
 						</td>
 						<td class="roboto h4">{{ cart.total|number_format(2, '.', '') }}
 							€</td>{% for detail in details|slice(0, 1) %}

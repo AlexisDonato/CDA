@@ -40,28 +40,28 @@
 		{{ form_row(form.quantity, {
             label: "Quantité en stock"
         }) }}
-    </div>
-    <div class="form-group col-md-6">
-        {{ form_row(form.discount, {
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_row(form.discount, {
         label: "En promotion"
         }) }}
-    </div>
-    <div class="form-group col-md-6">
-        {{ form_row(form.discountRate, {
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_row(form.discountRate, {
             label: "Taux de remise"
         }) }}
-    </div>
-    <div class="form-group col-md-6">
-        {{ form_row(form.supplier, {
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_row(form.supplier, {
             label: "Fournisseur"
         }) }}
-    </div>
-    <div class="form-group col-md-6">
-        {{ form_row(form.categories, {
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_row(form.category, {
             label: "Catégorie(s)"
         }) }}
-    </div>
+	</div>
 </div>
-				{{ form_widget(form) }}
-				<button class="btn btn-warning text-primary mb-1">{{ button_label|default('Enregistrer') }}</button>
-				{{ form_end(form) }}
+{{ form_widget(form) }}
+<button class="btn btn-warning text-primary mb-1">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

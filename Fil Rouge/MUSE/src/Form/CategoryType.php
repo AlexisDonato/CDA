@@ -15,15 +15,11 @@ class CategoryType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom de la catégorie',
-                ])
-            ->add('products', null, [
-                'label' => 'Produits concernés',
-                'help' => 'Pas obligatoire ici. Vous pouvez en sélectionner plusieurs en maintenant la touche `Ctrl` enfoncée',
             ])
+
             ->add('parentCategory', null, [
                 'label' => 'Catégorie parente',
-            ])    
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

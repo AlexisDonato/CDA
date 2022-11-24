@@ -32,11 +32,11 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Category::class,
-                // 'query_builder' => function (CategoryRepository $categoryRepository) {
-                //     return $categoryRepository->createQueryBuilder('c')
-                //         ->join("c.product", "p")
-                //         ->where('c.parentCategory' != null);
-                // },
+                'query_builder' => function (CategoryRepository $categoryRepository) {
+                    return $categoryRepository->createQueryBuilder('c')
+                        ->join("c.product", "p")
+                        ->where('SIZE(c.product) != 0');
+                },
                 'choice_label' => 'name',
                 'expanded' => true,
                 'mapped' => true,

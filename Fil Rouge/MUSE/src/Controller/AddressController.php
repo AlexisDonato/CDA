@@ -170,12 +170,7 @@ class AddressController extends AbstractController
             }
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -185,11 +180,11 @@ class AddressController extends AbstractController
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
             'user'      => $user,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -206,12 +201,7 @@ class AddressController extends AbstractController
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -239,11 +229,11 @@ class AddressController extends AbstractController
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
             'user'      => $user,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

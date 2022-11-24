@@ -145,12 +145,12 @@ private UserPasswordHasherInterface $userPasswordHasher;
         $manager->persist($c2);
 
             $c21 = new Category();
-                $c21->setName("Guitares basses accoustiques")
+                $c21->setName("Basses accoustiques")
                 ->setParentCategory($c2);
             $manager->persist($c21);
 
             $c22 = new Category();
-                $c22->setName("Guitares basses électriques")
+                $c22->setName("Basses électriques")
                 ->setParentCategory($c2);
             $manager->persist($c22);
 
@@ -192,7 +192,7 @@ private UserPasswordHasherInterface $userPasswordHasher;
         $manager->persist($c5);
 
         $c6 = new Category();
-            $c6->setName("Instruments traditionnels")
+            $c6->setName("Instruments trad.")
             ->setParentCategory(null);
         $manager->persist($c6);
 

@@ -214,96 +214,96 @@ private UserPasswordHasherInterface $userPasswordHasher;
 
         // *** SUPPLIERS *** //
 
-        $s1 = new Supplier();
-            $s1->setName("Fender");
-        $manager->persist($s1);
+        // $s1 = new Supplier();
+        //     $s1->setName("Fender");
+        // $manager->persist($s1);
 
-        $s2 = new Supplier();
-            $s2->setName("Ibanez");
-        $manager->persist($s2);
+        // $s2 = new Supplier();
+        //     $s2->setName("Ibanez");
+        // $manager->persist($s2);
 
-        $s3 = new Supplier();
-            $s3->setName("P.R.S.");
-        $manager->persist($s3);
+        // $s3 = new Supplier();
+        //     $s3->setName("P.R.S.");
+        // $manager->persist($s3);
 
-        $s4 = new Supplier();
-            $s4->setName("L.T.D.");
-        $manager->persist($s4);
+        // $s4 = new Supplier();
+        //     $s4->setName("L.T.D.");
+        // $manager->persist($s4);
 
-        $s5 = new Supplier();
-            $s5->setName("Cordoba");
-        $manager->persist($s5);
+        // $s5 = new Supplier();
+        //     $s5->setName("Cordoba");
+        // $manager->persist($s5);
 
 
         // *** PRODUCTS *** //
 
-        for ($i = 0; $i < 15; $i++) {
-            $product = new Product();
-                $product->setName('Elec ' . $i)
-                ->setSupplier($s1)
-                ->setCategory($c11)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
-                ->setPrice(mt_rand(25, 2750))
-                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-                ->setContent('1 instrument')
-                ->setDiscount(false)
-                ->setDiscountRate('0')
-                ->setQuantity(mt_rand(300, 430));
-            $manager->persist($product);
-        }
+        // for ($i = 0; $i < 15; $i++) {
+        //     $product = new Product();
+        //         $product->setName('Elec ' . $i)
+        //         ->setSupplier($s1)
+        //         ->setCategory($c11)
+        //         ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+        //         ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+        //         ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
+        //         ->setPrice(mt_rand(25, 2750))
+        //         ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+        //         ->setContent('1 instrument')
+        //         ->setDiscount(false)
+        //         ->setDiscountRate('0')
+        //         ->setQuantity(mt_rand(300, 430));
+        //     $manager->persist($product);
+        // }
 
-        for ($i = 0; $i < 20; $i++) {
-            $product = new Product();
-                $product->setName('Accoustique ' . $i)
-                ->setSupplier($s2)
-                ->setCategory($c12)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
-                ->setPrice(mt_rand(25, 2750))
-                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-                ->setContent('1 instrument')
-                ->setDiscount(false)
-                ->setDiscountRate('0')
-                ->setQuantity(mt_rand(1, 100));
-            $manager->persist($product);
-        }
+        // for ($i = 0; $i < 20; $i++) {
+        //     $product = new Product();
+        //         $product->setName('Accoustique ' . $i)
+        //         ->setSupplier($s2)
+        //         ->setCategory($c12)
+        //         ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+        //         ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+        //         ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
+        //         ->setPrice(mt_rand(25, 2750))
+        //         ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+        //         ->setContent('1 instrument')
+        //         ->setDiscount(false)
+        //         ->setDiscountRate('0')
+        //         ->setQuantity(mt_rand(1, 100));
+        //     $manager->persist($product);
+        // }
 
-        for ($i = 0; $i < 25; $i++) {
-            $product = new Product();
-                $product->setName('Basse accoustique ' . $i)
-                ->setSupplier($s3)
-                ->setCategory($c21)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
-                ->setPrice(mt_rand(25, 2750))
-                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-                ->setContent('1 instrument')
-                ->setDiscount(false)
-                ->setDiscountRate('0')
-                ->setQuantity(mt_rand(1, 100));
-            $manager->persist($product);
-        }
+        // for ($i = 0; $i < 25; $i++) {
+        //     $product = new Product();
+        //         $product->setName('Basse accoustique ' . $i)
+        //         ->setSupplier($s3)
+        //         ->setCategory($c21)
+        //         ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+        //         ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+        //         ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
+        //         ->setPrice(mt_rand(25, 2750))
+        //         ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+        //         ->setContent('1 instrument')
+        //         ->setDiscount(false)
+        //         ->setDiscountRate('0')
+        //         ->setQuantity(mt_rand(1, 100));
+        //     $manager->persist($product);
+        // }
 
-        for ($i = 0; $i < 30; $i++) {
-            $product = new Product();
-                $product->setName('Basse ' . $i)
-                ->setSupplier($s4)
-                ->setCategory($c22)
-                ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
-                ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
-                ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
-                ->setPrice(mt_rand(25, 2750))
-                ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
-                ->setContent('1 instrument')
-                ->setDiscount(false)
-                ->setDiscountRate('0.05')
-                ->setQuantity(mt_rand(1, 100));
-            $manager->persist($product);
-        }
+        // for ($i = 0; $i < 30; $i++) {
+        //     $product = new Product();
+        //         $product->setName('Basse ' . $i)
+        //         ->setSupplier($s4)
+        //         ->setCategory($c22)
+        //         ->setImage('http://picsum.photos/id/'.mt_rand(100, 230).'/100/150')
+        //         ->setImage1('http://picsum.photos/id/'.mt_rand(200, 330).'/100/150')
+        //         ->setImage2('http://picsum.photos/id/'.mt_rand(300, 430).'/100/150')
+        //         ->setPrice(mt_rand(25, 2750))
+        //         ->setDescription(mt_rand(0, 10).' chance(s) sur 10 de devenir sourd')
+        //         ->setContent('1 instrument')
+        //         ->setDiscount(false)
+        //         ->setDiscountRate('0.05')
+        //         ->setQuantity(mt_rand(1, 100));
+        //     $manager->persist($product);
+        // }
 
 
         $manager->flush();

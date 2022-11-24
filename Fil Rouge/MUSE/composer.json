@@ -100,13 +100,19 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
+
         },
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "db": [
+            "php bin/console d:d:d --force",
+            "php bin/console d:d:c",
+            "php bin/console d:s:u --force"
+            ]
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -117,4 +123,5 @@
             "require": "5.4.*"
         }
     }
+
 }

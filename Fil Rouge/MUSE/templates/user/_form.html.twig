@@ -36,6 +36,7 @@
 
 <button class="btn btn-danger border-light mb-1" id="submit">{{ button_label|default('Save') }}</button>
 
+{% if (user.address)|length != 0 %}
 <table class="navbar mt-3 mb-3" border="3">
 	<tbody>
 		<th class="h2 ml-2 mr-2">Adresse(s)</th>
@@ -59,5 +60,5 @@
 				{% endfor %}
 			</td>
 		</td>
-	</tbody>
-</th></tbody></table>{{ form_end(form) }}
+</tbody></table>
+{% endif %}{{ form_end(form) }}

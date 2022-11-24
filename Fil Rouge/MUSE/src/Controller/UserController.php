@@ -29,28 +29,21 @@ class UserController extends AbstractController
         }
         $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
         
         $cartService->setUser($user);
-
-        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
         return $this->render('user/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),
             'users' => $userRepository->findAll(),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
-            'addresses' =>$addresses,
+            'products' => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount' => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
+            'addresses' =>$this->getDoctrine()->getRepository(Address::class)->findByUser($user),
         ]);
     }
 
@@ -108,33 +101,26 @@ class UserController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
-
-        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
         return $this->render('user/show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),
             'user' => $user,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
-            'addresses' =>$addresses,            
+            'products' => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount' => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
+            'addresses' =>$this->getDoctrine()->getRepository(Address::class)->findByUser($user),            
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Address $address, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, User $user, UserRepository $userRepository, OrderDetailsRepository $orderDetails): Response
+    public function edit(?Address $address, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository, Request $request, User $user, UserRepository $userRepository, OrderDetailsRepository $orderDetails): Response
     {
         if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
@@ -148,18 +134,11 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
-        $address->setUser($user);
-
-        $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
+        // $address->setUser($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -179,12 +158,12 @@ class UserController extends AbstractController
             'total' => $cartService->getTotal($orderDetails),
             'user' => $user,
             'form' => $form,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
-            'addresses' =>$addresses,
+            'products' => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount' => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
+            'addresses' =>$this->getDoctrine()->getRepository(Address::class)->findByUser($user),      
             'address'   =>$address, 
         ]);
     }

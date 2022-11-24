@@ -150,7 +150,7 @@ private UserPasswordHasherInterface $userPasswordHasher;
             $manager->persist($c21);
 
             $c22 = new Category();
-                $c22->setName("Guitares bassesélectriques")
+                $c22->setName("Guitares basses électriques")
                 ->setParentCategory($c2);
             $manager->persist($c22);
 

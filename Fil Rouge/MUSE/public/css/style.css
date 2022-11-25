@@ -371,7 +371,7 @@ h2:hover {
     transition: 0.2s;
 }
 
-.carousel-control-prev-icon,
+.carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
     text-shadow: 0 0 5px #03e9f4,
         0 0 25px #03e9f4,

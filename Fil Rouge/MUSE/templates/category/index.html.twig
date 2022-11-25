@@ -17,8 +17,8 @@
 					<div class="col-md-4 mb-3">
 
 						{% if category.parentCategory %}
-							<button class="btn  darker border border-secondary d-flex mt-1 mb-1 position-relative justify-content-center align-items-center">
-								<img src="/img/{{category.image}}" class="img-thumbnail border border-primary " style="width: 100px; height: auto;"><br>
+							<button class="btn darker border border-secondary d-flex position-relative justify-content-center align-items-center">
+								<a href="{{ path('app_catalogue', {'category': category.id}) }}"><img src="/img/{{category.image}}" class="img-thumbnail border border-primary" style="width: 100px; height: auto;"></a><br>
 								<h2>
 									<a class="text-decoration-none text-light ml-3 mr-3" href="{{ path('app_catalogue', {'category': category.id}) }}">
 										{{ category.name }}
@@ -29,8 +29,8 @@
 
 						</div>
 					{% else %}
-						<button id="category" class="btn darker border border-secondary d-flex mt-1 mb-1 position-relative align-items-center">
-								<img src="/img/{{category.image}}" class="img-thumbnail border border-primary " style="width: 100px; height: auto;"><br>
+						<button id="category" class="btn darker border border-secondary d-flex position-relative align-items-center">
+								<a href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}"><img src="/img/{{category.image}}" class="img-thumbnail border border-primary" style="width: 100px; height: auto;"></a><br>
 							<h2>
 								<a class="text-decoration-none d-flex justify-content-center text-light ml-3 mr-3" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
 									{{ category.name }}

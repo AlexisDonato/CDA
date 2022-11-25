@@ -12,19 +12,19 @@
         // here, months are -1... (indexes)
           [ new Date(2022, 1, 1), 0 ],
 
-          [ new Date(2021, 3, 13), 7032 ],
-          [ new Date(2021, 3, 14), 8024 ],
-          [ new Date(2021, 3, 15), 8024 ],
-          [ new Date(2021, 3, 16), 8108 ],
-          [ new Date(2021, 3, 17), 8229 ],
+          [ new Date(2022, 3, 13), 17032 ],
+          [ new Date(2022, 3, 14), 18024 ],
+          [ new Date(2022, 3, 15), 8024 ],
+          [ new Date(2022, 3, 16), 18108 ],
+          [ new Date(2022, 3, 17), 8229 ],
           // Many rows omitted for brevity.
-          [ new Date(2022, 9, 4), 8177 ],
+          [ new Date(2022, 9, 4), 28177 ],
           [ new Date(2022, 9, 5), 8705 ],
-          [ new Date(2022, 9, 12), 8210 ],
+          [ new Date(2022, 9, 12), 18210 ],
           [ new Date(2022, 9, 13), 8029 ],
-          [ new Date(2022, 9, 19), 823 ],
+          [ new Date(2022, 9, 19), 22823 ],
           [ new Date(2022, 9, 23), 8345 ],
-          [ new Date(2022, 9, 24), 8436 ],
+          [ new Date(2022, 9, 24), 18436 ],
 
         {% for odb in ordersByDate %}
           [ new Date({{odb.Date|date('Y')}}, ({{odb.Date|date('m')}}-1), {{odb.Date|date('d')}}), {{odb.Total}} ],

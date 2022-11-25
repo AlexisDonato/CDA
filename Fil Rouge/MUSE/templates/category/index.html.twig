@@ -4,53 +4,39 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mb-3">
+<div class="container mb-3">
 
-		<h1 class="text-primary mb-5 mt-5">Catégories :</h1>
-
-		{% if categories|length != 0 %}
-			{% set col = 1 %}
+	<h1 class="text-primary mb-5 mt-5 text-center">Catégories :</h1>
+		<div class="row row-flex justify-content-center">
 			{% for category in categories %}
-				{% if (col == 1)%}
-					<div class="row">
-					{% endif %}
-					<div class="col-md-3 col-lg-4 mb-3">
+				<div class="col-md-4">
+				{% if category.parentCategory %}
 
-						{% if category.parentCategory %}
-							<div style="width:50rem;" id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center">
-								<a href="{{ path('app_catalogue', {'category': category.id}) }}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a><br>
-								<h2>
-									<a class="text-decoration-none h3 d-flex justify-content-center align-items-center text-light ml-1 mr-2" href="{{ path('app_catalogue', {'category': category.id}) }}">
-										{{ category.name }}
-									</a>
-									{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white position-absolute">{{ category.product|length }}</h2>
-								</h2>{% else %}{% endif %}
-							</div>
-
-						</div>
-					{% else %}
-						<div style="width:320px;" id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center">
-								<a href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a><br>
+						<div id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center mt-1 mb-1">
+							<a href="{{ path('app_catalogue', {'category': category.id}) }}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a>
+							<div class="d-flex justify-content-center align-items-center">
 							<h2>
-								<a class="text-decoration-none h3 d-flex justify-content-center align-items-center text-light ml-1 mr-2" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
+								<a class="text-decoration-none d-flex justify-content-center h3 text-light ml-auto mr-auto" href="{{ path('app_catalogue', {'category': category.id}) }}">
 									{{ category.name }}
 								</a>
-							</h2>
-							{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white position-absolute">{{ category.product|length }}</h2>{% else %}{% endif %}
+							</div>
+								{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-dark text-white position-absolute mt-2">{{ category.product|length }}</h2>{% endif %}
 						</div>
-
+					{% else %}
+						<div id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center mt-1 mb-1">
+								<a href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a>
+							<div class="d-flex justify-content-center align-items-center">
+							<h2>
+								<a class="text-decoration-none d-flex justify-content-center h3 text-light ml-auto mr-auto" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
+									{{ category.name }}
+								</a>
+							</div>	
+							</h2>
+							{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white position-absolute">{{ category.product|length }}</h2>{% endif %}
+						</div>
 					{% endif %}
 				</div>
-
-				{% if (col == 3) %}
-				</div>
-				{% set col = 1 %}
-			{% else %}
-				{% set col = col + 1 %}
-			{% endif %}
-		{% endfor %}
-
-	</div>
-{% else %}
-	<h1 class="pt-5 mt-5 pb-5 mb-5">Aucune catégorie trouvée!</h1>
-{% endif %}</div>{% endblock %}
+			{% endfor %}
+		</div>
+</div>
+{% endblock %}

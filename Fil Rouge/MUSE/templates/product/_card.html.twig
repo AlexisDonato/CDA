@@ -1,6 +1,6 @@
 <div style="width:100%; text-align:center" class="card bg-dark darker border border-secondary">
 
-	<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="card-img-top img-fluid img-thumbnail border border-dark mt-1" style="height: 300px; width:auto;" src="/img/{{ product.image }}" onerror="this.onerror=null; this.remove();"></a>
+	<a href="{{ path('app_product_show', {'id': product.id}) }}"><img class="card-img-top img-fluid img-thumbnail border border-dark mt-1" style="height: auto; width:auto;" src="/img/{{ product.image }}" onerror="this.onerror=null; this.remove();"></a>
 
 	{# For Hautelook fixtures #}
 	{# <img class="card-img-top img-thumbnail border border-dark mt-1" style="height: 400px; width:auto;" src="/img/{{ product.image }}" onerror="this.onerror=null; this.src='{{ product.image }}'"> #}

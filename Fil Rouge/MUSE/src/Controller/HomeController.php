@@ -47,37 +47,24 @@ class HomeController extends AbstractController
             $cartService->setCart($clientCart);
             $cartService->setUser($user);
         }
-        
-        
-        $categories = $categoryRepository->findAll();
+
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $searchForm = $this->createForm(SearchType2::class, $data);
         $searchForm->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
-        // dd("ok");
         
-        $salesByProduct = $this->cartRepository->findSalesByProduct();
-        
-        $orderedProducts = $this->cartRepository->findOrderedProducts();
-        
-        $productsDiscount = $this->productRepository->findProductsDiscount();
-
         return $this->render('home/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
-            'salesByProduct' => $salesByProduct,
-            'orderedProducts' => $orderedProducts,
-            'productsDiscount' => $productsDiscount,
+            'products' => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount' => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
+            'salesByProduct' => $this->cartRepository->findSalesByProduct(),
+            'orderedProducts' => $this->cartRepository->findOrderedProducts(),
+            'productsDiscount' => $this->productRepository->findProductsDiscount(),
             'searchForm2'      => $searchForm->createView()
         ]);
     }

@@ -14,13 +14,13 @@
 				{% if (col == 1)%}
 					<div class="row">
 					{% endif %}
-					<div class="col-md-4 mb-3">
+					<div class="col-md-3 col-lg-4 mb-3">
 
 						{% if category.parentCategory %}
-							<div id="category" class="btn darker border border-secondary d-flex position-relative justify-content-beetween align-items-center">
+							<div style="width:50rem;" id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center">
 								<a href="{{ path('app_catalogue', {'category': category.id}) }}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a><br>
 								<h2>
-									<a class="text-decoration-none d-flex justify-content-center text-light ml-5 mr-5" href="{{ path('app_catalogue', {'category': category.id}) }}">
+									<a class="text-decoration-none h3 d-flex justify-content-center align-items-center text-light ml-1 mr-2" href="{{ path('app_catalogue', {'category': category.id}) }}">
 										{{ category.name }}
 									</a>
 									{% if (category.product|length) != 0 %}<h2 class="badge rounded-pill border border-light bg-secondary text-white position-absolute">{{ category.product|length }}</h2>
@@ -29,10 +29,10 @@
 
 						</div>
 					{% else %}
-						<div id="category" class="btn darker border border-secondary d-flex justify-content-beetween position-relative align-items-center">
+						<div style="width:320px;" id="category" class="btn darker border border-secondary d-flex justify-content-between align-items-center">
 								<a href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}"><img src="/img/{{category.image}}" class="rounded-pill border border-3 border-light" style="width: 100px; height: auto;"></a><br>
 							<h2>
-								<a class="text-decoration-none d-flex justify-content-center text-light ml-5 mr-5" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
+								<a class="text-decoration-none h3 d-flex justify-content-center align-items-center text-light ml-1 mr-2" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'parent': category.id}) }}{% endif %}">
 									{{ category.name }}
 								</a>
 							</h2>

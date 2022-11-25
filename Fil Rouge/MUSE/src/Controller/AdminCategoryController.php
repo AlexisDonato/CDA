@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderDetailsRepository;
-use App\Service\Cart\CartService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +48,7 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
-    public function new(CategoryRepository $categoryRepository, Request $request,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
+    public function new(EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, Request $request,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
         if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
@@ -69,6 +70,15 @@ class AdminCategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $categoryRepository->add($category, true);
+
+            $image = $form->get('image')->getData();
+            if ($image != null){
+                $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
+                $image->move($this->getParameter('images_directory'), $fileName);
+                $category->setImage($fileName);
+            }
+            $entityManager->persist($category);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Catégorie ajoutée!');
 
@@ -120,7 +130,7 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
+    public function edit(EntityManagerInterface $entityManager, Request $request, Category $category, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails, CartService $cartService): Response
     {
         if (!$this->isGranted('ROLE_SALES')) {
             $this->addFlash('error', 'Accès refusé');
@@ -141,6 +151,15 @@ class AdminCategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $categoryRepository->add($category, true);
+
+            $image = $form->get('image')->getData();
+            if ($image != null){
+                $fileName = $form->get('name')->getData().'.'.$image->guessExtension();
+                $image->move($this->getParameter('images_directory'), $fileName);
+                $category->setImage($fileName);
+            }
+            $entityManager->persist($category);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Catégorie modifiée!');
 

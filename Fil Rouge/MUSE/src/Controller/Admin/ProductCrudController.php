@@ -48,7 +48,7 @@ class ProductCrudController extends AbstractCrudController
         yield AssociationField::new('supplier')
         ->autocomplete();
 
-        yield AssociationField::new('categories')
+        yield AssociationField::new('category')
         ->autocomplete();
     }
     

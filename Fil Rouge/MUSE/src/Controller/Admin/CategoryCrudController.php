@@ -23,7 +23,7 @@ class CategoryCrudController extends AbstractCrudController
 
         yield TextField::new('name');
 
-        yield AssociationField::new('products')
+        yield AssociationField::new('product')
         ->autocomplete();
 
         yield AssociationField::new('parentCategory')

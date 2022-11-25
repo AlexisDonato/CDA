@@ -10,11 +10,11 @@
 			<h3 class="card-title Hl">{{ product.name }}</h3>
 		</a>
 		<a class="text-decoration-none" href="{{ path('app_product', {'id': product.supplier.id}) }}">
-			<small class="text-center text-secondary Hl">
+			<p class="text-center text-secondary roboto h5 Hl">
 				<i>{{product.supplier.name}}
 					<sup>©</sup>
 				</i>
-			</small>
+			</p>
 		</a>
 		<div class="card-text text-primary mt-2" style="font-weight: bold; font-size: 2rem; text-align: right;">
 			{% if product.discountRate != 0 %}

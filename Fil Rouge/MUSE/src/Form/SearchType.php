@@ -49,7 +49,7 @@ class SearchType extends AbstractType
                 'class' => Supplier::class,
                 'mapped' => true,
                 'multiple' => true,
-                'expanded' => true,
+                'expanded' => false,
                 'choice_label' => 'name'
             ])
 

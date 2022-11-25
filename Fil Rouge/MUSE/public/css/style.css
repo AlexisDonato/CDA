@@ -344,7 +344,7 @@ h2:hover {
 .filter {
     display: block;
     position: sticky;
-    top: 153px;
+    top: 115px;
     scale: 0, 8;
 }
 

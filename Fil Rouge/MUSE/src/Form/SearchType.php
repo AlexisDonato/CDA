@@ -38,7 +38,7 @@ class SearchType extends AbstractType
                         ->where('SIZE(c.product) != 0');
                 },
                 'choice_label' => 'name',
-                'expanded' => true,
+                'expanded' => false,
                 'mapped' => true,
                 'multiple' => true
             ])

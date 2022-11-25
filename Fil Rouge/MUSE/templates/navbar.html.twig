@@ -25,7 +25,7 @@
 				<a class="nav-link text-decoration-none{% if app.request.attributes.get('_route') == 'app_category' %}active{% endif %}" href="{{ path('app_category') }}">
 					<div>
 						<i class="fa-solid fa-list-ul fa-lg mb-1"></i>
-						<span class="badge rounded-pill badge-notification bg-secondary position-absolute translate-middle border border-dark ml-3">
+						<span class="badge rounded-pill badge-notification bg-light text-dark position-absolute translate-middle border border-dark ml-3">
 							{{ categories|length }}
 						</span>
 					</div>
@@ -37,7 +37,7 @@
 				<a class="nav-link text-decoration-none {% if app.request.attributes.get('_route') == 'app_product' %}active{% endif %}" href="{{ path('app_product') }}">
 					<div>
 						<i class="fa-solid fa-eye fa-lg mb-1"></i>
-						<span class="badge rounded-pill badge-notification bg-secondary position-absolute translate-middle border border-dark ml-3">
+						<span class="badge rounded-pill badge-notification bg-light text-dark position-absolute translate-middle border border-dark ml-3">
 							{{ products2|length }}
 						</span>
 					</div>

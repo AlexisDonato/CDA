@@ -5,21 +5,11 @@
 {% endblock %}
 
 {% block body %}
-	<style>/* body {
-    background: url('/img/BGHome2.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-} */</style>
 <div class="container">
 	<div class="text-center">
 		<img id="homeLogo" src="/img/Muse_rect_trans.png" style="width: 250px; height: 100px;" class="cartoon mb-1">
 	</div>
 	<hr>
-	{# <h1 class="text-center mt-1 hometitle slideIn">Muse...</h1>
-										<small id="audioFont" class="d-flex justify-content-center mb-1 text-secondary slideIn">as we see you stride !</small> #}
-
 
 	<div class="row d-flex justify-content-around align-items-center rounded">
 		<div class="col-md-12">
@@ -38,8 +28,6 @@
 						<img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile3.jpeg" alt="...">
 						<div class="carousel-caption d-none d-md-block">
 							<h1 class="text-light roboto">Ventes ++</h1>
-							{# <img src="/img/Muse_trans3.png" style="width: 10rem;"> #}
-							{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 						</div>
 					</div>
 					{% if salesByProduct|length > 0 %}
@@ -93,8 +81,6 @@
 						<img class="img-thumbnail border border-danger" style="width: 50rem;" src="/img/tile.jpeg" alt="...">
 						<div class="carousel-caption d-none d-md-block">
 							<h1 class="text-light roboto">Commandes ++</h1>
-							{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
-							{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 						</div>
 					</div>
 					{% if orderedProducts|length > 0 %}
@@ -190,8 +176,6 @@
 								<a class="text-decoration-none" href="{{ path('app_discount') }}">
 									<h1 class="text-warning roboto Hl">Promotions</h1>
 								</a>
-								{# <img src="/img/Muse_trans3.png" style="width: 15rem;"> #}
-								{# <i class="fa-solid fa-guitar text-secondary"></i> #}
 							</div>
 						</div>
 						{% for pd in productsDiscount|slice(0,10) %}

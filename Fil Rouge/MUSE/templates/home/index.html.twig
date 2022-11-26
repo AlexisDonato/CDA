@@ -27,10 +27,11 @@
 			<div id="carouselExampleIndicators-1" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 				<ol class="carousel-indicators">
 					<li data-target="#carouselExampleIndicators-1" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators-1" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators-1" data-slide-to="2"></li>
-					<li data-target="#carouselExampleIndicators-1" data-slide-to="3"></li>
-					<li data-target="#carouselExampleIndicators-1" data-slide-to="4"></li>
+					{% set i = 0 %}
+					{% for sbp in salesByProduct|slice(0,5) %}
+					{% set i = i + 1 %}
+					<li data-target="#carouselExampleIndicators-1" data-slide-to="{{i}}"></li>
+					{% endfor %}
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
@@ -81,10 +82,11 @@
 			<div id="carouselExampleIndicators-2" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 				<ol class="carousel-indicators">
 					<li data-target="#carouselExampleIndicators-2" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators-2" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators-2" data-slide-to="2"></li>
-					<li data-target="#carouselExampleIndicators-2" data-slide-to="3"></li>
-					<li data-target="#carouselExampleIndicators-2" data-slide-to="4"></li>
+					{% set i = 0 %}
+					{% for op in orderedProducts|slice(0,5) %}
+					{% set i = i + 1 %}
+					<li data-target="#carouselExampleIndicators-2" data-slide-to="{{i}}"></li>
+					{% endfor %}
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">

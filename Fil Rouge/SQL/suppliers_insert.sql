@@ -14,10 +14,46 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table MUSE.product : ~1 rows (environ)
-INSERT INTO `product` (`id`, `supplier_id`, `category_id`, `name`, `price`, `description`, `content`, `discount`, `discount_rate`, `quantity`, `image`, `image1`, `image2`) VALUES
-	(1, 1, NULL, 'Ignition Cavern SE', 347, '4 cordes - Table en épicéa - Fond et éclisses en érable flammé - Manche 1 pièce en érable - Touche en jatoba - Filets de table et de fond blancs - Diapason: 760 mm (30") - Largeur au sillet: 42 mm - 22 frettes - 2 micros double bobinage Höfner', 'Conditionnement (UVC) - 1 Pièce(s) - Couleur Sunburst - Corps Erable - Manche Erable - Touche Jatoba - Frettes 22 - Diapason Short scale - Micros HH - Electronique Passif - Étui inclus Non - Housse incluse Non', 0, 0.000, 20, 'Ignition Cavern SE.jpg', 'Ignition Cavern SE-1.jpg', 'Ignition Cavern SE-2.jpg');
-	
+-- Listage des données de la table MUSE.supplier : ~38 rows (environ)
+INSERT INTO `supplier` (`id`, `name`) VALUES
+	(1, 'Höfner'),
+	(2, 'Ibanez'),
+	(3, 'Marcus Miller'),
+	(4, 'Music Man'),
+	(5, 'Warwick'),
+	(6, 'LP'),
+	(7, 'Millenium'),
+	(8, 'Pearl'),
+	(9, 'Sonor'),
+	(10, 'Toca'),
+	(11, 'Clavia'),
+	(12, 'Viscount'),
+	(13, 'Yamaha'),
+	(14, 'Cordoba'),
+	(15, 'Ovation'),
+	(16, 'Richwood'),
+	(17, 'Gibson'),
+	(18, 'Gretsch'),
+	(19, 'Harley Benton'),
+	(20, 'Melton'),
+	(21, 'Ocarinamus'),
+	(22, 'Thomann'),
+	(23, 'Gewa'),
+	(24, 'Ns Design'),
+	(25, 'Salvi'),
+	(26, 'Scala'),
+	(27, 'Hercules'),
+	(28, 'The T.Mix'),
+	(29, 'Neumann'),
+	(30, 'Rode'),
+	(31, 'Sennheiser'),
+	(32, 'Shure'),
+	(33, 'Bose'),
+	(34, 'LD Systems'),
+	(35, 'Takamine'),
+	(36, 'The Sssnake'),
+	(37, 'Ernie Ball'),
+	(38, 'GHS');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

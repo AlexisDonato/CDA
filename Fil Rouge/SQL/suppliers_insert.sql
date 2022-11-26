@@ -14,7 +14,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table MUSE.supplier : ~38 rows (environ)
+-- Listage des données de la table MUSE.supplier : ~53 rows (environ)
 INSERT INTO `supplier` (`id`, `name`) VALUES
 	(1, 'Höfner'),
 	(2, 'Ibanez'),
@@ -53,7 +53,22 @@ INSERT INTO `supplier` (`id`, `name`) VALUES
 	(35, 'Takamine'),
 	(36, 'The Sssnake'),
 	(37, 'Ernie Ball'),
-	(38, 'GHS');
+	(38, 'GHS'),
+	(39, 'Epiphone'),
+	(40, 'ESP'),
+	(41, 'Jackson'),
+	(42, 'Deering'),
+	(43, 'Gold Tone'),
+	(44, 'Duesenberg'),
+	(45, 'Baton Rouge'),
+	(46, 'Cort'),
+	(47, 'Technics'),
+	(48, 'Omnitronic'),
+	(49, 'Boss'),
+	(50, 'ADJ'),
+	(51, 'Denon'),
+	(52, 'Roland'),
+	(53, 'Native Instruments');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

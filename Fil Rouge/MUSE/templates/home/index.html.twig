@@ -44,17 +44,17 @@
 					{% if salesByProduct|length > 0 %}
 						{% for sbp in salesByProduct|slice(0,5) %}
 							<div class="carousel-item">
-								<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="height:500px; width:auto;" src="/img/{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
+								<a href="{{ path('app_product_show', {'id': sbp.id}) }}"><img class="img-thumbnail border border-secondary" style="height: 20rem; width:auto;" src="/img/{{sbp.image}}" alt="Slide n°{{sbp.id}}"></a>
 								<div class="carousel-caption d-none d-md-block">
 									<a class="text-decoration-none" href="{{ path('app_product_show', {'id': sbp.id}) }}">
-										<h1 class="text-light mb-3 Hl">{{ sbp.name }}</h1>
+										<h2 class="text-light surround mb-3 Hl">{{ sbp.name }}</h2>
 									</a>
-									<h3 class="text-white">
+									<h3 class="surround text-white">
 										<i>{{ sbp.price }}
 											€</i>
 									</h3>
 									<p>
-										<i>{{ sbp.description|u.truncate(75, '...') }}</i>
+										<i class="text-primary">{{ sbp.description|u.truncate(75, '...') }}</i>
 									</p>
 								</div>
 							</div>
@@ -98,17 +98,17 @@
 					{% if orderedProducts|length > 0 %}
 						{% for op in orderedProducts|slice(0,5) %}
 							<div class="carousel-item">
-								<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="height:500px; width:auto;" src="/img/{{op.image}}" alt="Slide n°{{op.id}}"></a>
+								<a href="{{ path('app_product_show', {'id': op.id}) }}"><img class="img-thumbnail border border-secondary" style="height: 20rem; width:auto;" src="/img/{{op.image}}" alt="Slide n°{{op.id}}"></a>
 								<div class="carousel-caption d-none d-md-block">
 									<a class="text-decoration-none" href="{{ path('app_product_show', {'id': op.id}) }}">
-										<h1 class="text-light mb-3 Hl">{{ op.name }}</h1>
+										<h2 class="text-light mb-3 Hl">{{ op.name }}</h2>
 									</a>
 									<h3 class="text-white">
 										<i>{{ op.price }}
 											€</i>
 									</h3>
 									<p>
-										<i>{{ op.description|u.truncate(75, '...') }}</i>
+										<i class="text-primary">{{ op.description|u.truncate(75, '...') }}</i>
 									</p>
 								</div>
 							</div>
@@ -130,7 +130,7 @@
 	</div>
 	<hr>
 	<hr>
-	
+
 	<h1 class="text-primary mb-5 mt-5 text-center">Catégories :</h1>
 		<div class="row row-flex justify-content-center">
 			{% for category in categories %}
@@ -175,10 +175,11 @@
 				<div id="carouselExampleIndicators-3" class="carousel slide mb-3 text-center" data-ride="carousel" data-interval="8000">
 					<ol class="carousel-indicators">
 						<li data-target="#carouselExampleIndicators-3" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators-3" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators-3" data-slide-to="2"></li>
-						<li data-target="#carouselExampleIndicators-3" data-slide-to="3"></li>
-						<li data-target="#carouselExampleIndicators-3" data-slide-to="4"></li>
+						{% set i = 0 %}
+						{% for pd in productsDiscount|slice(0,10) %}
+						{% set i = i + 1 %}
+						<li data-target="#carouselExampleIndicators-3" data-slide-to="{{i}}"></li>
+						{% endfor %}
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
@@ -193,10 +194,10 @@
 						</div>
 						{% for pd in productsDiscount|slice(0,10) %}
 							<div class="carousel-item">
-								<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="height:500px; width:auto;" src="/img/{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
+								<a href="{{ path('app_product_show', {'id': pd.id}) }}"><img class="img-thumbnail border border-secondary" style="height: 20rem; width:auto;" src="/img/{{pd.image}}" alt="Slide n°{{pd.id}}"></a>
 								<div class="carousel-caption d-none d-md-block">
 									<a class="text-decoration-none" href="{{ path('app_product_show', {'id': pd.id}) }}">
-										<h1 class="text-warning mb-3 Hl">{{ pd.name }}</h1>
+										<h2 class="text-warning mb-3 Hl">{{ pd.name }}</h2>
 									</a>
 									<h3 class="text-white">
 										<i class="text-warning">{{ pd.price }}

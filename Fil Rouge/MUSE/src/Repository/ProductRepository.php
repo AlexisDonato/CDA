@@ -79,7 +79,6 @@ class ProductRepository extends ServiceEntityRepository
         }
 
         $query = $query->getQuery();
-        // dd($query);
         return $this->paginator->paginate(
             $query,
             $search->page,
@@ -113,8 +112,20 @@ class ProductRepository extends ServiceEntityRepository
     public function findProductsDiscount()
     {
         return $this->createQueryBuilder('p')
-            ->where('p.discountRate != 0')
-            ->getQuery()
-            ->getResult();
+                    ->where('p.discountRate != 0')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    // Accessories
+    public function findAccessories()
+    {
+        return $this->createQueryBuilder('p')
+                    ->select('c', 'p')
+                    ->join('p.category', 'c')
+                    ->andWhere('c.name LIKE :val')
+                    ->setParameter('val', "%accessoires%")
+                    ->getQuery()
+                    ->getResult();
     }
 }

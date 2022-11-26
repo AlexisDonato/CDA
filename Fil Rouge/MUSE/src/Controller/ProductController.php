@@ -43,27 +43,23 @@ class ProductController extends AbstractController
             $cartService->setUser($user);
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
+
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        // $discount2 =$productRepository->findBy(['discount' => true]);
-        $discount2 = $productRepository->findProductsDiscount();
+ 
         $cartService->setUser($user);
 
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             'searchForm' => $searchForm->createView(),
         ]);
     }
@@ -71,54 +67,44 @@ class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product, ProductRepository $productRepository, CategoryRepository $categoryRepository, CartService $cartService, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
-
+// dd($productRepository->findAccessories());
         return $this->render('product/product_show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
             'product'   => $product,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             'path' => $product->getCategory()->getPath(),
+            'accessories' => $productRepository->findAccessories(),
         ]);
     }
 
     #[Route('/catalogue/{category}', name: 'app_catalogue')]
     public function index2(CartService $cartService, ProductRepository $productRepository, Request $request, Category $category, CategoryRepository $categoryRepository, OrderDetailsRepository $orderDetails): Response
     {
-        $categories = $categoryRepository->find($category);
         $data = new SearchData();
         $data->category = [$category];
         $data->page = $request->get('page', 1);
+
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
-
 
         return $this->render('product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->find($category),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             'searchForm' => $searchForm->createView(),
         ]);
     }
@@ -137,18 +123,13 @@ class ProductController extends AbstractController
                 $disc = false;
                 break;
         }
-        $categories = $categoryRepository->findAll();
+
         $data = new SearchData();
-
         $data->discount = $disc;
-
         $data->page = $request->get('page', 1);
+
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
@@ -156,11 +137,11 @@ class ProductController extends AbstractController
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             'searchForm'      => $searchForm->createView()
         ]);
     }

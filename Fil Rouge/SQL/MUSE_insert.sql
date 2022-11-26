@@ -14,12 +14,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table MUSE.address : ~0 rows (environ)
+-- Listage des données de la table MUSE.address : ~2 rows (environ)
 INSERT INTO `address` (`id`, `user_id`, `name`, `country`, `zipcode`, `city`, `path_type`, `path_number`, `billing_address`, `delivery_address`) VALUES
 	(1, 4, 'Bureau', 'France', '60210', 'Grandvilliers', 'Rue du Poulet', '12', 1, 1),
 	(2, 5, 'Domicile', 'France', '60000', 'Beauvais', 'Avenue de la Plèbe', '21', 1, 1);
 
--- Listage des données de la table MUSE.cart : ~1 rows (environ)
+-- Listage des données de la table MUSE.cart : ~5 rows (environ)
 INSERT INTO `cart` (`id`, `user_id`, `billing_address_id`, `delivery_address_id`, `client_order_id`, `validated`, `order_date`, `shipped`, `shipment_date`, `carrier`, `carrier_shipment_id`, `total`, `additional_discount_rate`, `invoice`) VALUES
 	(1, 1, NULL, NULL, 'MUSE::63807EDC0CB50', 0, NULL, 0, NULL, NULL, NULL, NULL, 0.000, NULL),
 	(2, 4, 1, 1, 'MUSE::638113B285855', 1, '2022-11-25 19:15:15', 0, NULL, NULL, NULL, 44627.00, 0.000, 'INVOICE-MUSE::638113B285855.pdf'),
@@ -27,7 +27,7 @@ INSERT INTO `cart` (`id`, `user_id`, `billing_address_id`, `delivery_address_id`
 	(4, 5, 2, 2, 'MUSE::6381154008A40', 1, '2022-11-25 19:21:44', 0, NULL, NULL, NULL, 1401.90, 0.000, 'INVOICE-MUSE::6381154008A40.pdf'),
 	(5, 5, NULL, NULL, 'MUSE::638115D17D613', 0, NULL, 0, NULL, NULL, NULL, NULL, 0.000, NULL);
 
--- Listage des données de la table MUSE.category : ~17 rows (environ)
+-- Listage des données de la table MUSE.category : ~18 rows (environ)
 INSERT INTO `category` (`id`, `parent_category_id`, `name`, `image`) VALUES
 	(1, NULL, 'Guitares', 'Guitares.jpg'),
 	(2, 1, 'Guitares Electriques', 'Guitares Electriques.jpg'),
@@ -45,18 +45,19 @@ INSERT INTO `category` (`id`, `parent_category_id`, `name`, `image`) VALUES
 	(14, NULL, 'Instruments trad.', 'Instruments trad..jpg'),
 	(15, NULL, 'Matériel DJ', 'Matériel DJ.jpg'),
 	(16, NULL, 'Microphones', 'Microphones.jpg'),
-	(17, NULL, 'Sonorisation', 'Sonorisation.jpg');
+	(17, NULL, 'Sonorisation', 'Sonorisation.jpg'),
+	(18, NULL, 'Accessoires', 'Accessoires.jpg');
 
 -- Listage des données de la table MUSE.contact : ~0 rows (environ)
 
--- Listage des données de la table MUSE.order_details : ~0 rows (environ)
+-- Listage des données de la table MUSE.order_details : ~4 rows (environ)
 INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_total`) VALUES
 	(1, 27, 2, 10, 748),
 	(2, 14, 2, 1, 43879),
 	(3, 24, 4, 1, 916.98),
 	(4, 40, 4, 1, 484.92);
 
--- Listage des données de la table MUSE.product : ~57 rows (environ)
+-- Listage des données de la table MUSE.product : ~63 rows (environ)
 INSERT INTO `product` (`id`, `supplier_id`, `category_id`, `name`, `price`, `description`, `content`, `discount`, `discount_rate`, `quantity`, `image`, `image1`, `image2`) VALUES
 	(1, 1, 6, 'Ignition Cavern SE', 347, '4 cordes - Table en épicéa - Fond et éclisses en érable flammé - Manche 1 pièce en érable - Touche en jatoba - Filets de table et de fond blancs - Diapason: 760 mm (30") - Largeur au sillet: 42 mm - 22 frettes - 2 micros double bobinage Höfner', 'Conditionnement (UVC) - 1 Pièce(s) - Couleur Sunburst - Corps Erable - Manche Erable - Touche Jatoba - Frettes 22 - Diapason Short scale - Micros HH - Electronique Passif - Étui inclus Non - Housse incluse Non', 0, 0.000, 20, 'Ignition Cavern SE.jpg', 'Ignition Cavern SE-1.jpg', 'Ignition Cavern SE-2.jpg'),
 	(2, 2, 6, 'BTB846-CBL', 1099, '6 cordes Série BTB Corps en frêne avec ailes en okoumé Table en peuplier veiné Manche traversant en érable/noyer Touche en palissandre Diapason: 889 mm (35") Rayon de la touche: 950 mm (37,4") Largeur au sillet: 54 mm (2,13") 24 frettes Medium en acier in', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nForme\r\nBTB\r\nCouleur\r\nBleu\r\nCorps\r\nFrêne, okoumé\r\nManche\r\nErable, noyer\r\nTouche\r\nPalissandre\r\nFrettes\r\n24\r\nDiapason\r\nExtra long scale\r\nMicros\r\nHH\r\nÉlectronique\r\nActive\r\nÉtui inclus\r\nNon\r\nHousse incluse\r\nNon', 0, 0.050, 35, 'BTB846-CBL.jpg', 'BTB846-CBL-1.jpg', 'BTB846-CBL-2.jpg'),
@@ -114,7 +115,13 @@ INSERT INTO `product` (`id`, `supplier_id`, `category_id`, `name`, `price`, `des
 	(54, 22, 17, 'Band Bundle M', 1444, 'Millenium BS-2211B MKII Set 2 pièce Behringer Eurolive VS1520 2 pièce Behringer Eurolive VS1220F Behringer Xenyx X2222USB the t.amp TSA 4-700 4 pièce the sssnake SLP21510 2 pièce the sssnake MXP1015', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nChassis plastique\r\nNon\r\nMixer amplifiée inclus\r\nNon\r\nAmpli inclus\r\nOui\r\nPieds incl.\r\nOui\r\nTweeter 1" et plus\r\nOui\r\nTaille du HP médium du satellite\r\n1 x 15"', 0, 0.000, 12, 'Band Bundle M.jpg', 'Band Bundle M-1.jpg', 'Band Bundle M-2.jpg'),
 	(55, 35, 5, 'TB10', 2588, '4 cordes Jumbo Pan coupé Table bombée en épicéa de Sitka Fond bombé et éclisses en érable flammé Manche en érable Touche en ébène Diapason: 864 mm Sillet en os Largeur au sillet: 46,35 mm Préamplificateur CTP-2 Cool Tube', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nCordes\r\n4\r\nVersion gaucher\r\nNon\r\nCouleur\r\nRouge\r\nTable\r\nEpicéa\r\nDos et éclisses\r\nErable\r\nManche\r\nÉrable\r\nTouche\r\nEbène\r\nMicros\r\nOui\r\nÉtui inclus\r\nOui\r\nHousse incluse\r\nNon', 0, 0.000, 38, 'TB10.jpg', 'TB10-1.jpg', 'TB10-2.jpg'),
 	(56, 5, 5, 'Alien Deluxe 6 NT', 1599, '6 cordes Série RockBass Table en épicéa de Sitka AA massif Fond et éclisses en noyer Manche collé en acajou Touche en wenge Rayon de la touche: 47" Diapason: 34" (Long Scale) Largeur au sillet: 52 mm Sillet Just-A-Nut III en Tedur', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nCouleur\r\nNaturel\r\nTable\r\nEpicéa, Massif\r\nFond et éclisses\r\nNoyer\r\nManche\r\nAcajou\r\nTouche\r\nWenge\r\nFrettes\r\n24\r\nDiapason\r\n864 cm\r\nLargeur du manche\r\n52 mm\r\nSystème de micro\r\nOui\r\nEtui inclus\r\nNon\r\nHousse incluse\r\nOui', 0, 0.000, 84, 'Alien Deluxe 6 NT.jpg', 'Alien Deluxe 6 NT-1.jpg', 'Alien Deluxe 6 NT-2.jpg'),
-	(57, 5, 5, 'RB Star Bass 5 SCWHP', 1049, '5 cordes Table, fond et éclisses en érable Manche 4 pièces collé en érable laminé avec bandes en placage d\'ekanga Touche en wenge 21 frettes Extra High Jumbo en maillechort Diapason: 864 mm (Long Scale) Largeur au sillet: 45 mm', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nCouleur\r\nBlanc\r\nCorps\r\nErable\r\nManche\r\nErable, ekanga\r\nTouche\r\nWenge\r\nFrettes\r\n21\r\nDiapason\r\nLong scale\r\nMicros\r\nSS\r\nElectronique\r\nPassive\r\nEtui inclu\r\nNon\r\nHousse incluse\r\nNon', 0, 0.000, 95, 'RB Star Bass 5 SCWHP.jpg', 'RB Star Bass 5 SCWHP-1.jpg', 'RB Star Bass 5 SCWHP-2.jpg');
+	(57, 5, 5, 'RB Star Bass 5 SCWHP', 1049, '5 cordes Table, fond et éclisses en érable Manche 4 pièces collé en érable laminé avec bandes en placage d\'ekanga Touche en wenge 21 frettes Extra High Jumbo en maillechort Diapason: 864 mm (Long Scale) Largeur au sillet: 45 mm', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nCouleur\r\nBlanc\r\nCorps\r\nErable\r\nManche\r\nErable, ekanga\r\nTouche\r\nWenge\r\nFrettes\r\n21\r\nDiapason\r\nLong scale\r\nMicros\r\nSS\r\nElectronique\r\nPassive\r\nEtui inclu\r\nNon\r\nHousse incluse\r\nNon', 0, 0.000, 95, 'RB Star Bass 5 SCWHP.jpg', 'RB Star Bass 5 SCWHP-1.jpg', 'RB Star Bass 5 SCWHP-2.jpg'),
+	(58, 36, 18, 'IPP1030', 4, 'Longueur: 3 m Jack 6,3 mm - Jack 6,3 mm Section de câble: 0,22 mm² / AWG 24 Diamètre extérieur: 6 mm Couleur: Noir', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nCouleur\r\nNoir\r\nLongueur\r\n3,00 m\r\nDe la connectique\r\nJack TS 6,3 mm mâle\r\nVers la connectique\r\nJack TS 6,3 mm mâle', 0, 0.000, 1254, 'IPP1030.jpg', 'IPP1030-1.jpg', 'IPP1030-2.jpg'),
+	(59, 7, 18, 'GS-2001 E', 8, 'Support robuste pour guitare électrique Poids: 1,3 kg Couleur: Noir', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nMatériau\r\nMétal\r\nType\r\nSupport 1 instrument\r\nCompatible avec\r\nGuitare électrique\r\nPour guitares avec laque nitro\r\nNon', 0, 0.000, 77, 'GS-2001 E.jpg', 'GS-2001 E-1.jpg', 'GS-2001 E-2.jpg'),
+	(60, 37, 18, 'Regular Slinky 2221', 6, 'Pour guitare électrique Regular Slinky Tirants: 010 - 013 - 017 - 026 - 036 - 046 Acier plaqué nickel', 'Tirant des cordes\r\n010 - 046\r\nTirant max. - Tirant des cordes de\r\n0,010" – 0,046"\r\nMatériau\r\nAcier nickelé\r\nCorde de sol filetée\r\nNon', 0, 0.020, 840, 'Regular Slinky 2221.jpg', 'Regular Slinky 2221-1.jpg', 'Regular Slinky 2221-2.jpg'),
+	(61, 38, 18, 'Fast Fret', 10, 'Lubrifiant/nettoyant Pour cordes et touche de guitare et basse Sans silicone Elimine la saleté/crasse accumulée Prolonge la durée de vie de toutes les cordes Lubrifie les cordes pour un jeu rapide Réduit le bruit des doigts', 'Set\r\nOui\r\nHuile\r\nNon\r\nPolissage\r\nNon\r\nNettoyant\r\nNon\r\nNettoyant cordes\r\nOui\r\nChiffon\r\nOui\r\nCire\r\nNon', 0, 0.020, 731, 'Fast Fret.jpg', 'Fast Fret-1.jpg', 'Fast Fret-2.jpg'),
+	(62, 19, 18, 'Nylon Player Pick Set Mixed', 2, 'Set de 12 médiators d\'epaisseurs différentes En nylon Contenu du set:  2 x 0,58 mm 2 x 0,71 mm 2 x 0,81 mm 2 x 0,96 mm 2 x 1,2 mm 2 x 1,5 mm', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nDureté - Epaisseur\r\nVariable\r\nQuantité\r\n12', 0, 0.000, 2684, 'Nylon Player Pick Set Mixed.jpg', 'Nylon Player Pick Set Mixed-1.jpg', 'Nylon Player Pick Set Mixed-2.jpg'),
+	(63, 22, 18, 'CTG-10 Clip Tuner', 5, 'Accordeur chromatique à pince Pour guitares et basses Accordage via capteur de vibration Grand écran deux couleurs pivotant (360°) Pile CR2032 incl.', 'Conditionnement (UVC)\r\n1 Pièce(s)\r\nChromatique\r\nOui\r\nÉcran\r\nLCD\r\nMicro intégré\r\nNon\r\nMétronome intégré\r\nNon\r\nConnectique pour alimentation\r\nNon\r\nType de construction\r\nClip', 0, 0.000, 891, 'CTG-10 Clip Tuner.jpg', 'CTG-10 Clip Tuner-1.jpg', 'CTG-10 Clip Tuner-2.jpg');
 
 -- Listage des données de la table MUSE.rememberme_token : ~0 rows (environ)
 
@@ -156,7 +163,10 @@ INSERT INTO `supplier` (`id`, `name`) VALUES
 	(32, 'Shure'),
 	(33, 'Bose'),
 	(34, 'LD Systems'),
-	(35, 'Takamine');
+	(35, 'Takamine'),
+	(36, 'The Sssnake'),
+	(37, 'Ernie Ball'),
+	(38, 'GHS');
 
 -- Listage des données de la table MUSE.user : ~5 rows (environ)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `user_name`, `user_lastname`, `birthdate`, `phone_number`, `is_verified`, `register_date`, `vat`, `pro`, `pro_company_name`, `pro_duns`, `pro_job_position`) VALUES

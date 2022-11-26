@@ -67,7 +67,7 @@
 	<p class="text text-muted">{{ product.description|u.truncate(75, '...') }}</p>
 	<div class="text-center">
 		<a class="text-decoration-none" href="{{ path('app_catalogue', {'category': product.category.id}) }}">
-			<em class="text-primary text-primary text-italic">#{{ product.category }}</em>
+			<em class="text-primary text-primary text-italic Hl">#{{ product.category }}</em>
 		</a>
 	</div>
 	<div class="card-footer mt-auto">

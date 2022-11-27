@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Repository\SupplierRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
@@ -81,13 +82,21 @@ class ProductType extends AbstractType
             ])
 
             ->add('quantity')
+            
             ->add('discount')
 
             ->add('discountRate', TextType::class, [
                 'help' => 'ex: entrez 0.20 pour 20%',
             ])
 
-            ->add('supplier')
+            ->add('supplier', null, [
+                'query_builder' => function (SupplierRepository $supplierRepository) {
+                    return $supplierRepository->createQueryBuilder('s')
+                    ->orderBy('s.name', 'ASC');
+                }
+            ]
+            )
+
             ->add('category');
     }
 

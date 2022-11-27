@@ -80,10 +80,10 @@
 						</tr>
 						<tr>
 							<th>Promotion</th>
-							{% if product.discount %}
+							{% if product.discountRate != 0 %}
 								<td class="text-warning">-{{ product.discountRate *100}}%</td>
 							{% else %}
-								<td>{{ product.discount ? 'Oui' : '-' }}
+								<td>-
 								{% endif %}
 							</td>
 						</tr>
@@ -103,11 +103,11 @@
 							<th>Prix
 								<small>TTC</small>
 							</th>
-							{% if product.discount %}
+							{% if product.discountRate != 0 %}
 								<td class="text-warning roboto">
 									<s>{{ product.price }}
 										€</s>
-									<i class="fa-solid fa-arrow-right"></i>
+									<i class="fa-solid fa-angles-right"></i>
 									<b>
 									{% else %}
 										<td class="roboto h5">

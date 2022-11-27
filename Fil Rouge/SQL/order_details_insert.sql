@@ -14,7 +14,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table MUSE.order_details : ~9 rows (environ)
+-- Listage des données de la table MUSE.order_details : ~19 rows (environ)
 INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_total`) VALUES
 	(1, 27, 2, 10, 748),
 	(2, 14, 2, 1, 43879),
@@ -24,7 +24,17 @@ INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_tot
 	(6, 58, 5, 5, 24),
 	(7, 38, 3, 1, 1507.88),
 	(8, 37, 3, 1, 5478),
-	(9, 40, 3, 1, 444.51);
+	(9, 40, 3, 1, 444.51),
+	(10, 88, 6, 1, 900),
+	(11, 58, 6, 1, 4.8),
+	(12, 59, 6, 1, 9.6),
+	(13, 60, 6, 1, 7.056),
+	(14, 61, 6, 1, 11.76),
+	(15, 62, 6, 1, 2.4),
+	(16, 63, 6, 1, 6),
+	(17, 89, 6, 1, 544.8),
+	(18, 50, 7, 1, 103.455),
+	(19, 84, 7, 1, 1130.822);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

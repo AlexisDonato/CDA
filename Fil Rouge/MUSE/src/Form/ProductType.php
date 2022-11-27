@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Repository\CategoryRepository;
 use App\Repository\SupplierRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -82,7 +83,7 @@ class ProductType extends AbstractType
             ])
 
             ->add('quantity')
-            
+
             ->add('discount')
 
             ->add('discountRate', TextType::class, [
@@ -97,7 +98,13 @@ class ProductType extends AbstractType
             ]
             )
 
-            ->add('category');
+            ->add('category', null, [
+                'query_builder' => function (CategoryRepository $categoryRepository) {
+                    return $categoryRepository->createQueryBuilder('c')
+                    ->orderBy('c.name', 'ASC');
+                }
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

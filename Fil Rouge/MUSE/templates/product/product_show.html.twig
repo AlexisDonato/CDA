@@ -137,7 +137,7 @@
 	</div>
 
 
-	<h3 class="text-center">Ces produits pourraient également vous intéresser</h3>
+	<h3 class="text-center h2">Ces produits pourraient également vous intéresser</h3>
 
 	<div class="row d-flex align-items-center justify-content-center">
 		<div class="col-6">
@@ -155,15 +155,15 @@
 					<div class="carousel-item active">
 								<a href="/catalogue/18"><img style="height: 20rem; width: auto;" class="img-thumbnail border border-secondary bg darker" src="/img/Accessoires.jpg"></a>
 								<div class="carousel-caption d-none d-md-block">
-								<a class="text-decoration-none" href="/catalogue/18"><h3 id="audioFont" class="text-info Hl">Accessoires</h3></a>
+								<a class="text-decoration-none" href="/catalogue/18"><h3 id="audioFont" class="text-light Hl h2">Accessoires</h3></a>
 					</div>
 					</div>
 					{% for accessory in accessories %}
 						<div class="carousel-item">
 							<a href="{{ path('app_product_show', {'id': accessory.id}) }}"><img style="height: 20rem; width: auto;" class="img-thumbnail border border-secondary bg darker" src="/img/{{ accessory.image }}" onerror="this.onerror=null; this.src='{{ accessory.image1 }}'" alt="..."></a>
 							<div class="carousel-caption d-none d-md-block">
-							<a class="text-decoration-none" href="{{ path('app_product_show', {'id': accessory.id}) }}"><h3  id="audioFont" class="text-info Hl shadow">{{accessory.name}}</h3></a>
-							<h3 class="text-info">{{accessory.price}} €</h3>
+							<a class="text-decoration-none" href="{{ path('app_product_show', {'id': accessory.id}) }}"><h3  id="audioFont" class="text-light Hl shadow">{{accessory.name}}</h3></a>
+							<h3 class="text-light surround">{{accessory.price}} €</h3>
 							<a href="{{ path('app_cart_add', {'id': accessory.id}) }}" title="Ajouter au panier" class="btn btn-info border-light Hl{% if accessory.quantity == 0 %} disabled btn-dark{% endif %}">
 								<i class="fa-solid fa-cart-plus fa-sm"></i>
 							</a>

@@ -15,8 +15,9 @@
 					{% if path is defined %}
 						{% for category in categories|slice(0,1) %}
 							{% for p in path %}
+							{# {{dump(category)}} #}
 								<li class="breadcrumb-item">
-									<a class="text-primary text-decoration-none" href="{{ path('app_catalogue', {'category': category.id}) }}">{{ p }}</a>
+									<a class="text-primary text-decoration-none" href="{% if (category.product)|length != 0 %}{{ path('app_catalogue', {'category': category.id}) }}{% else %}{{ path('app_category', {'category': category.id}) }}{% endif %}">{{ p }}</a>
 								</li>
 							{% endfor %}
 						{% endfor %}

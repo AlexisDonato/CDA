@@ -70,13 +70,22 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3" class="text-right roboto h5">
+					<td colspan="3" class="text-right roboto h5" style="vertical-align: middle;">
 						<b>Total TTC:</b>
 					</td>
-					<td class="roboto h4">
+					<td class="roboto h4" style="vertical-align: middle;">
 						<div class="d-flex align-items-center">
 							{{ cart.total }}
 							€
+						</div>
+					</td>
+					<td style="vertical-align: middle;">
+						<div class="text-center mt-2 mb-2">
+							<button class="btn btn-info border-light btn-lg text-center Hl">
+								<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{{ cart.invoice }}" title="Votre facture ici">
+									<i class="fa-solid fa-file-pdf fa-lg"></i>
+								</a>
+							</button>
 						</div>
 					</td>
 					{% for detail in details|slice(0, 1) %}
@@ -86,15 +95,7 @@
 							<td colspan="0"></td>
 						{% endif %}
 					{% endfor %}
-					<td>
-						<div class="text-center mt-2 mb-2">
-							<button class="btn btn-info border-light btn-lg text-center Hl">
-								<a class="text-decoration-none text-light" href="https://localhost:8000/invoices/{{ cart.invoice }}" title="Votre facture ici">
-									<i class="fa-solid fa-file-pdf fa-lg"></i>
-								</a>
-							</button>
-						</div>
-					</td>
+					
 				</tr>
 			</tfoot>
 		</table>

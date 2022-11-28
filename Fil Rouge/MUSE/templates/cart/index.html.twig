@@ -83,10 +83,10 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="3" class="text-right surround h4">
+			<td colspan="3" class="text-right surround h4" style="vertical-align: middle;">
 				<b class="roboto">Total TTC :</b>
 			</td>
-			<td class="roboto h4">{{ total|number_format(2, '.', '') }}
+			<td class="roboto h4" style="vertical-align: middle;">{{ total|number_format(2, '.', '') }}
 				€</td>
 			{% for item in items|slice(0, 1) %}
 				{% if item.product.discountRate != 0 %}

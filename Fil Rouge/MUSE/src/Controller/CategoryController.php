@@ -37,7 +37,6 @@ class CategoryController extends AbstractController
             'products' => $productRepository->findSearch($data),
             'discount' => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
-
         ]);
     }
 }

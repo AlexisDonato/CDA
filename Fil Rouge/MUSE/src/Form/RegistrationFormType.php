@@ -56,6 +56,10 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern' => '/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
+                        'message' => '6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum'
+                    ]),
                 ],
             ])
 

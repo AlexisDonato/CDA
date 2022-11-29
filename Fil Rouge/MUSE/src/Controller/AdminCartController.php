@@ -39,7 +39,7 @@ class AdminCartController extends AbstractController
         $total = $cartService->getTotal($orderDetails);
 
         return $this->render('admin_cart/index.html.twig', [
-            'carts' => $cartRepository->findAll(),
+            'carts'     => $cartRepository->findAll(),
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
@@ -84,8 +84,8 @@ class AdminCartController extends AbstractController
         }
 
         return $this->renderForm('admin_cart/new.html.twig', [
-            'cart' => $cart,
-            'form' => $form,
+            'cart'      => $cart,
+            'form'      => $form,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
@@ -120,7 +120,7 @@ class AdminCartController extends AbstractController
         $total = $cartService->getTotal($orderDetails);
 
         return $this->render('admin_cart/show.html.twig', [
-            'cart' => $cart,
+            'cart'      => $cart,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
@@ -164,8 +164,8 @@ class AdminCartController extends AbstractController
         }
 
         return $this->renderForm('admin_cart/edit.html.twig', [
-            'cart' => $cart,
-            'form' => $form,
+            'cart'      => $cart,
+            'form'      => $form,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,

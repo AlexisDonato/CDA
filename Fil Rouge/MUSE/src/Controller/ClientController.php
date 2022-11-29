@@ -23,12 +23,7 @@ class ClientController extends AbstractController
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(AddressRepository $addressRepository, CartService $cartService, User $user, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
@@ -48,11 +43,11 @@ class ClientController extends AbstractController
                 'count'     => $cartService->getItemCount($orderDetails),
                 'total'     => $cartService->getTotal($orderDetails),
                 'user'      => $user,
-                'products'  => $products,
-                'products2' => $products2,
-                'categories' => $categories,
-                'discount'  => $discount,
-                'discount2' => $discount2,
+                'products'  => $productRepository->findSearch($data),
+                'products2' => $productRepository->findAll(),
+                'categories' => $categoryRepository->findAll(),
+                'discount'  => $productRepository->findDiscount($data),
+                'discount2' => $productRepository->findProductsDiscount(),
                 'addresses' => $addresses,
         ]);
         } else {
@@ -68,12 +63,7 @@ class ClientController extends AbstractController
     #[Route('/{id}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
     public function edit(CartService $cartService, Request $request, User $user, UserRepository $userRepository, CategoryRepository $categoryRepository,ProductRepository $productRepository, OrderDetailsRepository $orderDetails): Response
     {
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
         
@@ -101,15 +91,15 @@ class ClientController extends AbstractController
             return $this->renderForm('client/edit.html.twig', [
                 'items'     => $cartService->getFullCart($orderDetails),
                 'count'     => $cartService->getItemCount($orderDetails),
-                'total' => $cartService->getTotal($orderDetails),
-                'user' => $user,
-                'form' => $form,
-                'user' => $user,
-                'products' => $products,
-                'products2' => $products2,
-                'categories' => $categories,
-                'discount' => $discount,
-                'discount2' => $discount2,
+                'total'     => $cartService->getTotal($orderDetails),
+                'user'      => $user,
+                'form'      => $form,
+                'user'      => $user,
+                'products'  => $productRepository->findSearch($data),
+                'products2' => $productRepository->findAll(),
+                'categories' => $categoryRepository->findAll(),
+                'discount'  => $productRepository->findDiscount($data),
+                'discount2' => $productRepository->findProductsDiscount(),
                 'addresses' => $addresses,
         ]);
         } else {

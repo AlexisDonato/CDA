@@ -31,11 +31,11 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
             'categories' => $categoryRepository->findByParent($parent),
             'products2' => $productRepository->findAll(),
-            'products' => $productRepository->findSearch($data),
-            'discount' => $productRepository->findDiscount($data),
+            'products'  => $productRepository->findSearch($data),
+            'discount'  => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }

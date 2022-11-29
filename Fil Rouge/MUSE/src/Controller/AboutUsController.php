@@ -22,11 +22,11 @@ class AboutUsController extends AbstractController
         return $this->render('about_us/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $productRepository->findSearch($data),
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $productRepository->findSearch($data),
             'products2' => $productRepository->findAll(),
             'categories' => $categoryRepository->findAll(),
-            'discount' => $productRepository->findDiscount($data),
+            'discount'  => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }

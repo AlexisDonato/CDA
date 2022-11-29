@@ -46,31 +46,27 @@ class RegistrationController extends AbstractController
 
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
+
         if ($form->isSubmitted() && $form->isValid()) {
             // userName
-            $user->setUserName($form->get('userName')->getData());
-            $user->setUserLastName($form->get('userLastName')->getData());
-            $user->setEmail($form->get('email')->getData());
+            $user->setUserName($form->get('userName')->getData())
+                ->setUserLastName($form->get('userLastName')->getData())
+                ->setEmail($form->get('email')->getData())
             // encode the plain password
-            $user->setPassword(
+                ->setPassword(
                 $userPasswordHasher->hashPassword(
                         $user,
                         $form->get('plainPassword')->getData()
                     )
-                );
-            $user->setBirthdate($form->get('birthdate')->getData());
-            $user->setPhoneNumber($form->get('phoneNumber')->getData());
+                )
+                ->setBirthdate($form->get('birthdate')->getData())
+                ->setPhoneNumber($form->get('phoneNumber')->getData())
 
-            $user->setPro($form->get('pro')->getData());
-            $user->setProCompanyName($form->get('proCompanyName')->getData());
-            $user->setProDuns($form->get('proDuns')->getData());
-            $user->setProJobPosition($form->get('proJobPosition')->getData());
+                ->setPro($form->get('pro')->getData())
+                ->setProCompanyName($form->get('proCompanyName')->getData())
+                ->setProDuns($form->get('proDuns')->getData())
+                ->setProJobPosition($form->get('proJobPosition')->getData());
 
             // Commenting 'data_class' => User::class, from $resolver->setDefaults in the formType allows to set several classes in the controller :
             $address->setName($form->get('address_name')->getData())
@@ -113,15 +109,15 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'items' => $cartService->getFullCart($orderDetails),
+            'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
             'registrationForm' => $form->createView(),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

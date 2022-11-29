@@ -19,6 +19,7 @@ PK - id
 name
 parentCategory
 product
+image
 }
 
 Category -- self
@@ -33,6 +34,25 @@ subject
 enquiryDate
 }
 
+class Cart{
+PK - id
+clientOrderId
+validated
+orderDetails
+user
+orderDate
+shipped
+shipmentDate
+carrier
+carrierShipmentId
+total
+billingAddress
+deliveryAddress
+additionalDiscountRate
+invoice
+}
+
+Cart -- OrderDetails
 class OrderDetails{
 PK - id
 productId
@@ -40,6 +60,17 @@ quantity
 cart
 product
 subTotal
+}
+
+class ResetPasswordRequest{
+PK - id
+user
+}
+
+ResetPasswordRequest -- User
+class Supplier{
+PK - id
+name
 }
 
 class Product{
@@ -56,17 +87,6 @@ image1
 image2
 supplier
 category
-}
-
-class ResetPasswordRequest{
-PK - id
-user
-}
-
-ResetPasswordRequest -- User
-class Supplier{
-PK - id
-name
 }
 
 class User{
@@ -91,24 +111,5 @@ address
 
 User -- Cart
 User -- Address
-class Cart{
-PK - id
-clientOrderId
-validated
-orderDetails
-user
-orderDate
-shipped
-shipmentDate
-carrier
-carrierShipmentId
-total
-billingAddress
-deliveryAddress
-additionalDiscountRate
-invoice
-}
-
-Cart -- OrderDetails
 
 ```

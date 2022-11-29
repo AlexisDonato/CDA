@@ -327,9 +327,29 @@ h2:hover {
 
 /* CATEGORIES */
 
+#q {
+    animation-duration: 0.5s;
+    animation-name: fadeInDown;
+}
+
 #category {
     animation-duration: 0.5s;
     animation-name: catslidein;
+}
+
+#supplier {
+    animation-duration: 0.5s;
+    animation-name: catslidein;
+}
+
+#min {
+    animation-duration: 0.5s;
+    animation-name: fadeInUp;
+}
+
+#max {
+    animation-duration: 0.5s;
+    animation-name: fadeInUp;
 }
 
 @keyframes catslidein {

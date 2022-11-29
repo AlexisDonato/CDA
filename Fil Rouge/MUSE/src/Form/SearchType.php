@@ -6,6 +6,7 @@ use App\Data\SearchData;
 use App\Entity\Category;
 use App\Entity\Supplier;
 use App\Repository\CategoryRepository;
+use App\Repository\SupplierRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,7 +36,8 @@ class SearchType extends AbstractType
                 'query_builder' => function (CategoryRepository $categoryRepository) {
                     return $categoryRepository->createQueryBuilder('c')
                         ->join("c.product", "p")
-                        ->where('SIZE(c.product) != 0');
+                        ->where('SIZE(c.product) != 0')
+                        ->orderBy('c.name', 'ASC');
                 },
                 'choice_label' => 'name',
                 'expanded' => false,
@@ -47,6 +49,10 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Supplier::class,
+                'query_builder' => function (SupplierRepository $supplierRepository) {
+                    return $supplierRepository->createQueryBuilder('s')
+                    ->orderBy('s.name', 'ASC');
+                },
                 'mapped' => true,
                 'multiple' => true,
                 'expanded' => false,

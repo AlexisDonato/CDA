@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-// use App\Entity\Cart;
 use App\Data\SearchData;
 use App\Service\Cart\CartService;
-// use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderDetailsRepository;
@@ -30,12 +28,7 @@ class CartController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -44,11 +37,11 @@ class CartController extends AbstractController
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

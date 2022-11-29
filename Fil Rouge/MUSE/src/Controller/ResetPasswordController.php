@@ -48,12 +48,7 @@ class ResetPasswordController extends AbstractController
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {         
             return $this->processSendingPasswordResetEmail(
@@ -64,15 +59,15 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/request.html.twig', [
-            'items' => $cartService->getFullCart($orderDetails),
+            'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
             'requestForm' => $form->createView(),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -82,12 +77,7 @@ class ResetPasswordController extends AbstractController
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(OrderDetailsRepository $orderDetails, CartService $cartService, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         // Generate a fake token if the user does not exist or someone hit this page directly.
         // This prevents exposing whether or not a user was found with the given email address or not
@@ -96,15 +86,15 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/check_email.html.twig', [
-            'items' => $cartService->getFullCart($orderDetails),
+            'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
             'resetToken' => $resetToken,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -144,12 +134,7 @@ class ResetPasswordController extends AbstractController
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {
             // A password reset token should be used only once, remove it.
@@ -171,15 +156,15 @@ class ResetPasswordController extends AbstractController
         }
 
         return $this->render('reset_password/reset.html.twig', [
-            'items' => $cartService->getFullCart($orderDetails),
+            'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
+            'total'     => $cartService->getTotal($orderDetails),
             'resetForm' => $form->createView(),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

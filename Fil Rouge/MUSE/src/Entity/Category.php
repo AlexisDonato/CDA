@@ -19,7 +19,7 @@ class Category
     #[ORM\Column(type: 'string', length: 100)]
     private $name;
 
-    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\ManyToOne(targetEntity: self::class, fetch: "EAGER")]
     private ?self $parentCategory = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]

@@ -28,12 +28,7 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $name = $contact->getName();
         $refEmail = $contact->getEmail();
@@ -75,15 +70,15 @@ class ContactController extends AbstractController
         }
 
         return $this->render('contact/index.html.twig', [
-            'contact' => $form->createView(),
-            'items' => $cartService->getFullCart($orderDetails),
+            'contact'   => $form->createView(),
+            'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 }

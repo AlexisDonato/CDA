@@ -31,7 +31,7 @@ class Address
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $pathNumber = null;
 
-    #[ORM\ManyToOne(inversedBy: 'address')]
+    #[ORM\ManyToOne(inversedBy: 'address', fetch: "EAGER")]
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]

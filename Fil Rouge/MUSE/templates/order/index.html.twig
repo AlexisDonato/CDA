@@ -68,7 +68,7 @@
 								left in stock)
 							{% endif %}
 						</td>
-						<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|number_format(2, '.', '') }}€
+						<td class="roboto h5{% if detail.product.discountRate != 0 %} text-warning{% endif %}">{{ ((detail.product.price * detail.quantity) * (1 - ( detail.product.discountRate + detail.cart.additionalDiscountRate)) * (1 +  app.user.vat ))|format_currency('EUR', locale='fr') }}
 						</td>
 					<td>
 						<a href="{{ path("app_cart_add", {id: detail.product.id}) }}" title="Ajouter 1" class="btn btn-success btn-sm {% if detail.product.quantity == 0 %} disabled {% endif %}">
@@ -88,7 +88,7 @@
 				<td colspan="3" class="text-right surround h3">
 					<b class="roboto">Total TTC:</b>
 				</td>
-				<td class="roboto h3">{{ total|number_format(2, '.', '') }}
+				<td class="roboto h3">{{ total|format_currency('EUR', locale='fr') }}
 					€
 				</td>
 				<td colspan="5">
@@ -216,7 +216,7 @@
 
 	{# *** PAYMENT CARD FORM *** #}
 	<div class="text-center">
-		<button class="btn btn-info border-light btn-lg text-center Hl" id="payCardButton" onclick="payCard()">Paiement par carte</button>
+		<button class="btn btn-info border-light btn-lg text-center Hl mt-5" id="payCardButton" onclick="payCard()">Paiement par carte</button>
 	</div>
 	<div id="payCardForm">
 		<div class="container">

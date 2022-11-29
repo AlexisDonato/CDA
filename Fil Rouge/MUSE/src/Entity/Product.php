@@ -46,10 +46,10 @@ class Product
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $image2 = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: "EAGER")]
     private ?Supplier $supplier = null;
 
-    #[ORM\ManyToOne(inversedBy: 'product')]
+    #[ORM\ManyToOne(inversedBy: 'product', fetch: "EAGER")]
     private ?Category $category = null;
 
     public function __construct()

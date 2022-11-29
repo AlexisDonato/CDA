@@ -28,22 +28,17 @@ class AdminProductController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findAll();
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         return $this->render('admin_product/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $productRepository->findAll(),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             ]);
     }
 
@@ -61,12 +56,7 @@ class AdminProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findAll();
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -101,14 +91,14 @@ class AdminProductController extends AbstractController
         return $this->renderForm('admin_product/new.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'product' => $product,
-            'form' => $form,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'product'   => $product,
+            'form'      => $form,
+            'products'  => $productRepository->findAll(),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -122,23 +112,18 @@ class AdminProductController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         return $this->render('admin_product/show.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'product' => $product,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'product'   => $product,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -155,12 +140,7 @@ class AdminProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
         
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -193,15 +173,15 @@ class AdminProductController extends AbstractController
         return $this->renderForm('admin_product/edit.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'product' => $product,
-            'form' => $form,
-            'product' => $product,
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'product'   => $product,
+            'form'      => $form,
+            'product'   => $product,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

@@ -27,7 +27,7 @@ class Cart
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: OrderDetails::class, orphanRemoval: true)]
     private Collection $orderDetails;
 
-    #[ORM\ManyToOne(inversedBy: 'carts')]
+    #[ORM\ManyToOne(inversedBy: 'carts', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
@@ -49,10 +49,10 @@ class Cart
     #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 2, nullable: true)]
     private ?string $total = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: "EAGER")]
     private ?Address $billingAddress = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: "EAGER")]
     private ?Address $deliveryAddress = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 3)]

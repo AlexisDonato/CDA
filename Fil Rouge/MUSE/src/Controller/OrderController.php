@@ -33,22 +33,19 @@ class OrderController extends AbstractController
 {
     public function getData(CartService $cartService, ?UserInterface $user, ?OrderDetailsRepository $orderDetails, ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
+
         $cartService->setUser($user);
+
         $info = [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ];
 
         return $info;
@@ -73,13 +70,8 @@ class OrderController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
         $data->page = $request->get('page', 1);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
 
         $addresses = $this->getDoctrine()->getRepository(Address::class)->findByUser($user);
 
@@ -95,15 +87,15 @@ class OrderController extends AbstractController
 
             $this->addFlash('success', 'Adresse ajoutée !');
 
-            $address->setName($newAddressForm->get('name')->getData());
-            $address->setCountry($newAddressForm->get('country')->getData());
-            $address->setZipcode($newAddressForm->get('zipcode')->getData());
-            $address->setCity($newAddressForm->get('city')->getData());
-            $address->setPathType($newAddressForm->get('pathType')->getData());
-            $address->setPathNumber($newAddressForm->get('pathNumber')->getData());
+            $address->setName($newAddressForm->get('name')->getData())
+                    ->setCountry($newAddressForm->get('country')->getData())
+                    ->setZipcode($newAddressForm->get('zipcode')->getData())
+                    ->setCity($newAddressForm->get('city')->getData())
+                    ->setPathType($newAddressForm->get('pathType')->getData())
+                    ->setPathNumber($newAddressForm->get('pathNumber')->getData())
 
-            $address->setBillingAddress($newAddressForm->get('billingAddress')->getData());
-            $address->setDeliveryAddress($newAddressForm->get('deliveryAddress')->getData());
+                    ->setBillingAddress($newAddressForm->get('billingAddress')->getData())
+                    ->setDeliveryAddress($newAddressForm->get('deliveryAddress')->getData());
 
 
             // $user->addAddress($address); 
@@ -138,8 +130,8 @@ class OrderController extends AbstractController
 
             $cart = $cartService->getClientCart();
 
-            $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getData());
-            $cart->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData());
+            $cart->setBillingAddress($selectForm->get('selectBillingAddress')->getData())
+                ->setDeliveryAddress($selectForm->get('selectDeliveryAddress')->getData());
 
             $address->setUser($user);
 
@@ -149,14 +141,14 @@ class OrderController extends AbstractController
         return $this->render('order/index.html.twig', [
             'details'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount' => $discount,
-            'discount2' => $discount2,
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
             'addresses' => $addresses,
-            'cart' => $cart,
+            'cart'      => $cart,
             'newAddressForm' => $newAddressForm->createView(),
             'selectForm' => $selectForm->createView(),
         ]);

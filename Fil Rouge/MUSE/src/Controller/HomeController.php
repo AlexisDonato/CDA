@@ -53,15 +53,15 @@ class HomeController extends AbstractController
         $searchForm = $this->createForm(SearchType2::class, $data);
         $searchForm->handleRequest($request);
         
-        // dd($this->cartRepository->findOrderedProducts());
+        //dd($this->cartRepository->findOrderedProducts());
         return $this->render('home/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'products' => $productRepository->findSearch($data),
+            'total'     => $cartService->getTotal($orderDetails),
+            'products'  => $productRepository->findSearch($data),
             'products2' => $productRepository->findAll(),
             'categories' => $categoryRepository->findAll(),
-            'discount' => $productRepository->findDiscount($data),
+            'discount'  => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
             'salesByProduct' => $this->cartRepository->findSalesByProduct(),
             'orderedProducts' => $this->cartRepository->findOrderedProducts(),

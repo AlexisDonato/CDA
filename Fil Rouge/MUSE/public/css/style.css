@@ -178,7 +178,7 @@ h2:hover {
     animation-name: slidein;
 }
 
-@keyframes slidein {
+@keyframes slideIn {
     from {
         margin-left: 100%;
         width: 300%;
@@ -327,9 +327,29 @@ h2:hover {
 
 /* CATEGORIES */
 
+#q {
+    animation-duration: 0.5s;
+    animation-name: fadeInDown;
+}
+
 #category {
     animation-duration: 0.5s;
     animation-name: catslidein;
+}
+
+#supplier {
+    animation-duration: 0.5s;
+    animation-name: catslidein;
+}
+
+#min {
+    animation-duration: 0.5s;
+    animation-name: fadeInUp;
+}
+
+#max {
+    animation-duration: 0.5s;
+    animation-name: fadeInUp;
 }
 
 @keyframes catslidein {
@@ -340,7 +360,7 @@ h2:hover {
 
     to {
         margin-left: 0%;
-        width: 75%;
+        width: 100%;
     }
 }
 

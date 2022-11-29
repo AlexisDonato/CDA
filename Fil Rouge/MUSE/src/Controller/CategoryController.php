@@ -20,30 +20,23 @@ class CategoryController extends AbstractController
     #[Route('/category/{parent}', name: 'app_category', defaults: ['parent' => null])]
     public function index($parent, CartService $cartService, CategoryRepository $categoryRepository, Request $request, ProductRepository $productRepository, OrderDetailsRepository $orderDetails, ?UserInterface $user): Response
     {
-
-        $categories = $categoryRepository->findByParent($parent);
-
         $data = new SearchData();
         $data->page = $request->get('page', 1);
+
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
-        $products = $productRepository->findSearch($data);
-        $products2 = $productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 = $productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
 
         return $this->render('category/index.html.twig', [
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
-            'total' => $cartService->getTotal($orderDetails),
-            'categories' => $categories,
-            'products2' => $products2,
-            'products' => $products,
-            'discount' => $discount,
-            'discount2' => $discount2,
-
+            'total'     => $cartService->getTotal($orderDetails),
+            'categories' => $categoryRepository->findByParent($parent),
+            'products2' => $productRepository->findAll(),
+            'products'  => $productRepository->findSearch($data),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 }

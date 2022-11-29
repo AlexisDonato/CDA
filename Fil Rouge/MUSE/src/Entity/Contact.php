@@ -24,7 +24,7 @@ class Contact
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: "EAGER")]
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]

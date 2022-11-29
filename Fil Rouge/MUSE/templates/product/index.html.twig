@@ -19,6 +19,7 @@
 							{{ knp_pagination_sortable(products, 'Prix', 'p.price') }}
 							{{ knp_pagination_sortable(products, 'Libellé', 'p.name' ) }}
 							{{ knp_pagination_sortable(products, 'Stock', 'p.quantity' ) }}
+							{{ knp_pagination_sortable(products, 'Promo', 'p.discountRate' ) }}
 						</div>
 						<div class="grid ml-3">
 							{% for product in products %}

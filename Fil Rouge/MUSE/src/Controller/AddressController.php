@@ -137,8 +137,8 @@ class AddressController extends AbstractController
         }
 
         return $this->renderForm('address/new.html.twig', [
-            'address' => $address,
-            'form' => $form,
+            'address'   => $address,
+            'form'      => $form,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
@@ -175,7 +175,7 @@ class AddressController extends AbstractController
         $cartService->setUser($user);
 
         return $this->render('address/show.html.twig', [
-            'address' => $address,
+            'address'   => $address,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),
@@ -223,8 +223,8 @@ class AddressController extends AbstractController
         }
 
         return $this->renderForm('address/edit.html.twig', [
-            'address' => $address,
-            'form' => $form,
+            'address'   => $address,
+            'form'      => $form,
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $cartService->getTotal($orderDetails),

@@ -54,10 +54,10 @@ INSERT INTO `category` (`id`, `parent_category_id`, `name`, `image`) VALUES
 -- Listage des données de la table MUSE.contact : ~0 rows (environ)
 
 -- Listage des données de la table MUSE.doctrine_migration_versions : ~3 rows (environ)
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20221123115808', '2022-11-25 09:32:10', 614),
-	('DoctrineMigrations\\Version20221125083232', '2022-11-25 09:32:44', 62),
-	('DoctrineMigrations\\Version20221125122619', '2022-11-25 13:26:28', 14324);
+-- INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+-- 	('DoctrineMigrations\\Version20221123115808', '2022-11-25 09:32:10', 614),
+-- 	('DoctrineMigrations\\Version20221125083232', '2022-11-25 09:32:44', 62),
+-- 	('DoctrineMigrations\\Version20221125122619', '2022-11-25 13:26:28', 14324);
 
 -- Listage des données de la table MUSE.order_details : ~9 rows (environ)
 INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_total`) VALUES

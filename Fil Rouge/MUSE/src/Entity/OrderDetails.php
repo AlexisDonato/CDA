@@ -22,11 +22,11 @@ class OrderDetails
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderDetails')]
+    #[ORM\ManyToOne(inversedBy: 'orderDetails', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Cart $cart = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 

@@ -36,7 +36,7 @@ function checkForm(event) {
     if (!nameRE.test(name.value)) {
         event.preventDefault();
         wrongName.style.color = "orange";
-        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés)";
+        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
         name.focus();
     } else wrongName.textContent = "";
 
@@ -49,7 +49,7 @@ function checkForm(event) {
     if (!firstNameRE.test(firstName.value)) {
         event.preventDefault();
         wrongFirstName.style.color = "orange";
-        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés)";
+        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
         firstName.focus();
     } else wrongFirstName.textContent = "";
 

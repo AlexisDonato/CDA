@@ -88,7 +88,7 @@ function checkForm(event) {
     if (!phoneRE.test(phone.value)) {
         event.preventDefault();
         wrongPhone.style.color = "orange";
-        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
+        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, ou +33(0) 123 456 789)";
         phone.focus();
     } else wrongPhone.textContent = "";
     if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {

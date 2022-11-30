@@ -30,71 +30,71 @@ function checkForm(event) {
     if (name.validity.valueMissing) {
         event.preventDefault();
         wrongName.style.color = "red";
-        wrongName.textContent = "Nom requis";
+        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom requis";
         name.focus();
     }
     if (!nameRE.test(name.value)) {
         event.preventDefault();
         wrongName.style.color = "orange";
-        wrongName.textContent = "Nom invalide (numéros non autorisés)";
+        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés)";
         name.focus();
     } else wrongName.textContent = "";
 
     if (firstName.validity.valueMissing) {
         event.preventDefault();
         wrongFirstName.style.color = "red";
-        wrongFirstName.textContent = "Prénom requis";
+        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom requis";
         firstName.focus();
     }
     if (!firstNameRE.test(firstName.value)) {
         event.preventDefault();
         wrongFirstName.style.color = "orange";
-        wrongFirstName.textContent = "Prénom invalide (numéros non autorisés)";
+        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés)";
         firstName.focus();
     } else wrongFirstName.textContent = "";
 
     if (email.validity.valueMissing) {
         event.preventDefault();
         wrongEmail.style.color = "red";
-        wrongEmail.textContent = "Email requis";
+        wrongEmail.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Email requis";
         email.focus();
     }
     if (!emailRE.test(email.value)) {
         event.preventDefault();
         wrongEmail.style.color = "orange";
-        wrongEmail.textContent = "Email invalide (ex: info_noreply@muse.com)";
+        wrongEmail.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Email invalide (ex: info_noreply@muse.com)";
         email.focus();
     } else wrongEmail.textContent = "";
 
     if (password.validity.valueMissing) {
         event.preventDefault();
         wrongPassword.style.color = "red";
-        wrongPassword.textContent = "Mot de passe requis";
+        wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe requis";
         password.focus();
     }
     if (!passwordRE.test(password.value)) {
         event.preventDefault();
         wrongPassword.style.color = "orange";
-        wrongPassword.textContent = "Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
+        wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
         password.focus();
     } else wrongPassword.textContent = "";
 
     if (phone.validity.valueMissing) {
         event.preventDefault();
         wrongPhone.style.color = "red";
-        wrongPhone.textContent = "Numéro de téléphone requis";
+        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone requis";
         phone.focus();
     }
     if (!phoneRE.test(phone.value)) {
         event.preventDefault();
         wrongPhone.style.color = "orange";
-        wrongPhone.textContent = "Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
+        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, or +33(0) 123 456 789)";
         phone.focus();
     } else wrongPhone.textContent = "";
     if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {
         event.preventDefault();
         wrongDuns.style.color = "orange";
-        wrongDuns.textContent = 'Numéro invalide : entrée à 9 chiffres (ex: "123456789")';
+        wrongDuns.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> Numéro invalide : entrée à 9 chiffres (ex: "123456789")`;
         pro_form.style.display="block";
         duns.focus();
     } else wrongDuns.textContent = "";

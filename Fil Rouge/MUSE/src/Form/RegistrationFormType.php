@@ -71,7 +71,7 @@ class RegistrationFormType extends AbstractType
                     'constraints' => [
                         new Regex([
                             'pattern' => "/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/",
-                            'message' => 'Prénom invalide (numéros non autorisés)'
+                            'message' => "Prénom invalide (numéros non autorisés, n'oubliez pas les majuscules)"
                         ]),
                     ]
                 ])
@@ -82,7 +82,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => "/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/",
-                        'message' => 'Nom invalide (numéros non autorisés)'
+                        'message' => "Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)"
                     ]),
                 ]
             ])

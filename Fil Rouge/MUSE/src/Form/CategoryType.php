@@ -37,7 +37,7 @@ class CategoryType extends AbstractType
                             'image/jpg',
                             'image/png'
                         ],
-                        'mimeTypesMessage' => 'Type de fichier invalide',
+                        'mimeTypesMessage' => 'Type de fichier invalide (uniquement jpeg, jpg ou png)',
                     ])
                 ],
                 'data_class' => null

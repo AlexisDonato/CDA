@@ -81,7 +81,7 @@ class ProductController extends AbstractController
             'categories' => $categoryRepository->findAll(),
             'discount'  => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
-            'path' => $product->getCategory()->getPath(),
+            'path'      => $product->getCategory()->getPath(),
             'accessories' => $productRepository->findAccessories(),
         ]);
     }

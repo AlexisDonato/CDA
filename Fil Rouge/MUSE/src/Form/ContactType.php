@@ -21,8 +21,8 @@ class ContactType extends AbstractType
                 'attr' => ['class' => 'FirstNameField'],
                     'constraints' => [
                         new Regex([
-                            'pattern' => "/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/",
-                            'message' => 'Invalid first name (numbers are not granted)'
+                            'pattern' => "/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/",
+                            'message' => "Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)"
                         ]),
                     ]
                 ])
@@ -33,7 +33,7 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
-                        'message' => 'Invalid email'
+                        'message' => 'Email invalide'
                     ]),
                 ]
             ])

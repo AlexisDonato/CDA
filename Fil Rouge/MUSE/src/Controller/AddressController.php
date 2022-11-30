@@ -46,7 +46,7 @@ class AddressController extends AbstractController
             'categories' => $categoryRepository->findAll(),
             'discount'  => $productRepository->findDiscount($data),
             'discount2' => $productRepository->findProductsDiscount(),
-            'addresses' => $addresses = $addressRepository->findAll(),
+            'addresses' => $addressRepository->findAll(),
         ]);
     }
 

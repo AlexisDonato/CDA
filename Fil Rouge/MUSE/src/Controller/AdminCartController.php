@@ -67,12 +67,7 @@ class AdminCartController extends AbstractController
         $form = $this->createForm(CartType::class, $cart);
         $form->handleRequest($request);
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -89,11 +84,11 @@ class AdminCartController extends AbstractController
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -109,12 +104,7 @@ class AdminCartController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -124,11 +114,11 @@ class AdminCartController extends AbstractController
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 
@@ -144,12 +134,7 @@ class AdminCartController extends AbstractController
             $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
-        $categories = $categoryRepository->findAll();
         $data = new SearchData();
-        $products = $productRepository->findSearch($data);
-        $products2 =$productRepository->findAll();
-        $discount = $productRepository->findDiscount($data);
-        $discount2 =$productRepository->findProductsDiscount();
 
         $cartService->setUser($user);
         $total = $cartService->getTotal($orderDetails);
@@ -169,11 +154,11 @@ class AdminCartController extends AbstractController
             'items'     => $cartService->getFullCart($orderDetails),
             'count'     => $cartService->getItemCount($orderDetails),
             'total'     => $total,
-            'products'  => $products,
-            'products2' => $products2,
-            'categories' => $categories,
-            'discount'  => $discount,
-            'discount2' => $discount2,
+            'products'  => $productRepository->findSearch($data),
+            'products2' => $productRepository->findAll(),
+            'categories' => $categoryRepository->findAll(),
+            'discount'  => $productRepository->findDiscount($data),
+            'discount2' => $productRepository->findProductsDiscount(),
         ]);
     }
 

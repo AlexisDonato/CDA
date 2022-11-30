@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Hôte:                         127.0.0.1
--- Version du serveur:           10.3.37-MariaDB-0ubuntu0.20.04.1 - Ubuntu 20.04
+-- Version du serveur:           10.6.11-MariaDB-0ubuntu0.22.04.1 - Ubuntu 22.04
 -- SE du serveur:                debian-linux-gnu
 -- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------
@@ -14,7 +14,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table MUSE.order_details : ~19 rows (environ)
+-- Listage des données de la table MUSE.order_details : ~23 rows (environ)
 INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_total`) VALUES
 	(1, 27, 2, 10, 748),
 	(2, 14, 2, 1, 43879),
@@ -34,7 +34,11 @@ INSERT INTO `order_details` (`id`, `product_id`, `cart_id`, `quantity`, `sub_tot
 	(16, 63, 6, 1, 6),
 	(17, 89, 6, 1, 544.8),
 	(18, 50, 7, 1, 103.455),
-	(19, 84, 7, 1, 1130.822);
+	(19, 84, 7, 1, 1130.822),
+	(20, 1, 8, 3, 1249.2),
+	(21, 2, 8, 1, 1252.86),
+	(22, 3, 8, 1, 718.8),
+	(23, 5, 8, 3, 4424.4);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

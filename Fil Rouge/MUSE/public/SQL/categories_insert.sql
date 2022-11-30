@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Hôte:                         127.0.0.1
--- Version du serveur:           10.3.37-MariaDB-0ubuntu0.20.04.1 - Ubuntu 20.04
+-- Version du serveur:           10.6.11-MariaDB-0ubuntu0.22.04.1 - Ubuntu 22.04
 -- SE du serveur:                debian-linux-gnu
 -- HeidiSQL Version:             12.1.0.6537
 -- --------------------------------------------------------

@@ -29,7 +29,7 @@ class AdminCartController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_ADMIN');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         $data = new SearchData();
@@ -60,7 +60,7 @@ class AdminCartController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         $cart = new Cart();
@@ -106,7 +106,7 @@ class AdminCartController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         $categories = $categoryRepository->findAll();
@@ -141,7 +141,7 @@ class AdminCartController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         $categories = $categoryRepository->findAll();
@@ -186,7 +186,7 @@ class AdminCartController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         if ($this->isCsrfTokenValid('delete'.$cart->getId(), $request->request->get('_token'))) {

@@ -26,7 +26,7 @@ class AdminCategoryController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $data = new SearchData();
         
@@ -97,7 +97,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $data = new SearchData();
 
@@ -121,7 +121,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -167,7 +167,7 @@ class AdminCategoryController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);

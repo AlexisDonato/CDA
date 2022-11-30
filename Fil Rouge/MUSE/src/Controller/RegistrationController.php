@@ -124,7 +124,7 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(AddressRepository $addressRepository, Request $request, TranslatorInterface $translator, MailerInterface $mailer, ?UserInterface $user): Response
     {       
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {

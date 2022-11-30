@@ -27,7 +27,7 @@ class UserController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
+        $this->denyAccessUnlessGranted('ROLE_SHIP', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $data = new SearchData();
         
@@ -94,11 +94,11 @@ class UserController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
+        $this->denyAccessUnlessGranted('ROLE_SHIP', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         // The user cannot access other users infos:
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SHIP', null, 'User tried to access a page without having ROLE_SHIP');
+            $this->denyAccessUnlessGranted('ROLE_SHIP', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
 
         $data = new SearchData();
@@ -126,10 +126,10 @@ class UserController extends AbstractController
             $this->addFlash('error', 'Accès refusé');
             return $this->redirectToRoute('login');  
         }
-        $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+        $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);

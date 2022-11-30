@@ -30,7 +30,7 @@ class ClientAddressController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, 'User tried to access a page without having ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $data = new SearchData();
 
@@ -61,7 +61,7 @@ class ClientAddressController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, 'User tried to access a page without having ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $address = new Address();
         $form = $this->createForm(Address1Type::class, $address);
@@ -112,14 +112,14 @@ class ClientAddressController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, 'User tried to access a page without having ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         // The user cannot access other users infos:
         if (!$this->isGranted('ROLE_ADMIN')) {
             if ($this->getUser()->getUserIdentifier() != $address->getUser()->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+                $this->denyAccessUnlessGranted('ROLE_ADMIN', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
             }
         }
 
@@ -149,7 +149,7 @@ class ClientAddressController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, 'User tried to access a page without having ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         $form = $this->createForm(Address1Type::class, $address);
         $form->handleRequest($request);
@@ -197,7 +197,7 @@ class ClientAddressController extends AbstractController
             return $this->redirectToRoute('login');  
         }
 
-        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, 'User tried to access a page without having ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_CLIENT', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
         if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
             $addressRepository->remove($address, true);

@@ -30,13 +30,13 @@ class ClientController extends AbstractController
         $cartService->setUser($user);
 
         if ($this->getUser()->isVerified()) {
-            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
             // The user cannot access other users infos:
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+                $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
             }
             return $this->render('client/show.html.twig', [
                 'items'     => $cartService->getFullCart($orderDetails),
@@ -70,14 +70,14 @@ class ClientController extends AbstractController
         $cartService->setUser($user);
 
         if ($this->getUser()->isVerified()) {
-            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
 
 
             // The user cannot access other users infos:
             if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
                 $this->addFlash('error', 'Accès refusé');
                 return $this->redirectToRoute('login');  
-                $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+                $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
             }
             $form = $this->createForm(User1Type::class, $user);
             $form->handleRequest($request);

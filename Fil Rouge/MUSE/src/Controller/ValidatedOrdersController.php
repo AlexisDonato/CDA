@@ -64,7 +64,7 @@ class ValidatedOrdersController extends AbstractController
         }
 
         if ($this->getUser()->getUserIdentifier() != $user->getUserIdentifier()) {
-            $this->denyAccessUnlessGranted('ROLE_SALES', null, 'User tried to access a page without having ROLE_SALES');
+            $this->denyAccessUnlessGranted('ROLE_SALES', null, "Vous n'avez pas les autorisations nécessaires pour accéder à la page");
         }
         if ($this->isGranted('ROLE_CLIENT')) {
             $clientCarts = $cartRepository->findAllByUser($user->getId(), true);

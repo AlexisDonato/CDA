@@ -44,7 +44,9 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'first_options'  => ['label' => 'Saisir le mot de passe'],
                 'second_options' => ['label' => 'Saisir à nouveau'],
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password',
+                           'class' => 'PasswordField',
+                ],
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
@@ -58,20 +60,17 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
-                        'message' => '6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum'
+                        'message' => '6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum',
                     ]),
-                ],
+                ]
             ])
-
+           
             ->add('userName', TextType::class, [
                 'required' => true,
-                // 'row_attr' => [
-                //     'class' => 'col-6 ml-3',
-                //     ],
                 'attr' => ['class' => 'FirstNameField'],
                     'constraints' => [
                         new Regex([
-                            'pattern' => "/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/",
+                            'pattern' => "/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/",
                             'message' => 'Prénom invalide (numéros non autorisés)'
                         ]),
                     ]
@@ -82,7 +81,7 @@ class RegistrationFormType extends AbstractType
             'attr' => ['class' => 'LastNameField'],
                 'constraints' => [
                     new Regex([
-                        'pattern' => "/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/",
+                        'pattern' => "/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/",
                         'message' => 'Nom invalide (numéros non autorisés)'
                     ]),
                 ]

@@ -3,15 +3,19 @@
 function checkForm(event) {
     let name = document.querySelector(".LastNameField");
     let wrongName = document.getElementById('wrongName');
-    let nameRE = new RegExp(/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/);
+    let nameRE = new RegExp(/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/);
 
     let firstName = document.querySelector(".FirstNameField");
     let wrongFirstName = document.getElementById("wrongFirstName");
-    let firstNameRE = new RegExp(/^([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[A-Za-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$/);
+    let firstNameRE = new RegExp(/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/);
 
     let email = document.querySelector(".EmailField");
     let wrongEmail = document.getElementById("wrongEmail");
     let emailRE = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/);
+
+    let password = document.querySelector(".password-field");
+    let wrongPassword = document.getElementById("wrongPassword");
+    let passwordRE = new RegExp(/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/);
 
     let phone = document.querySelector(".PhoneField");
     let wrongPhone = document.getElementById("wrongPhone");
@@ -61,6 +65,19 @@ function checkForm(event) {
         wrongEmail.textContent = "Email invalide (ex: info_noreply@muse.com)";
         email.focus();
     } else wrongEmail.textContent = "";
+
+    if (password.validity.valueMissing) {
+        event.preventDefault();
+        wrongPassword.style.color = "red";
+        wrongPassword.textContent = "Mot de passe requis";
+        password.focus();
+    }
+    if (!passwordRE.test(password.value)) {
+        event.preventDefault();
+        wrongPassword.style.color = "orange";
+        wrongPassword.textContent = "Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
+        password.focus();
+    } else wrongPassword.textContent = "";
 
     if (phone.validity.valueMissing) {
         event.preventDefault();

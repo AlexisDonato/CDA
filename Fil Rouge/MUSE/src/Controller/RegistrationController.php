@@ -66,7 +66,8 @@ class RegistrationController extends AbstractController
                 ->setPro($form->get('pro')->getData())
                 ->setProCompanyName($form->get('proCompanyName')->getData())
                 ->setProDuns($form->get('proDuns')->getData())
-                ->setProJobPosition($form->get('proJobPosition')->getData());
+                ->setProJobPosition($form->get('proJobPosition')->getData())
+                ->setAgreeTerms($form->get('agreeTerms')->getData());
 
             // Commenting 'data_class' => User::class, from $resolver->setDefaults in the formType allows to set several classes in the controller :
             $address->setName($form->get('address_name')->getData())

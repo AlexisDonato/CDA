@@ -70,6 +70,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
     private Collection $address;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $agreeTerms = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -366,5 +369,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->email;
+    }
+
+    public function isAgreeTerms(): ?bool
+    {
+        return $this->agreeTerms;
+    }
+
+    public function setAgreeTerms(?bool $agreeTerms): self
+    {
+        $this->agreeTerms = $agreeTerms;
+
+        return $this;
     }
 }

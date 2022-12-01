@@ -52,15 +52,17 @@
         }) }}
 
 		<div id="proForm" class='col-6 ml-5'>
-			{{ form_row(registrationForm.proCompanyName, {
+			<span id="wrongProCompanyName"></span>{{ form_row(registrationForm.proCompanyName, {
 				label: "Raison sociale"
 			}) }}
-			{{ form_row(registrationForm.proJobPosition, {
+
+			<span id="wrongProJobPosition"></span>{{ form_row(registrationForm.proJobPosition, {
 				label: "Votre poste au sein de la société"
 			}) }}
-			{{ form_row(registrationForm.proDuns, {
+
+			<span id="wrongDuns"></span>{{ form_row(registrationForm.proDuns, {
 				label: "Numéro DUNS (SIRET International)"
-			}) }}<span id="wrongDuns"></span>
+			}) }}
 		</div>
 
 		<h2 class="text-center mt-3">

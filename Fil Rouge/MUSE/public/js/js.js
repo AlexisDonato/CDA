@@ -27,11 +27,21 @@ function checkForm(event) {
     let wrongDuns = document.getElementById("wrongDuns");
     let dunsRE = new RegExp(/^[0-9]{9}$/);
 
+    let proCompanyName = document.getElementById("registration_form_proCompanyName");
+    let wrongProCompanyName = document.getElementById("wrongProCompanyName");
+
+    let proJobPosition = document.getElementById("registration_form_proJobPosition");
+    let wrongProJobPosition = document.getElementById("wrongProJobPosition");
+
+
     wrongFirstName.textContent = "";
     wrongName.textContent = "";
     wrongEmail.textContent = "";
     wrongPassword.textContent = "";
     wrongPhone.textContent = "";
+    wrongProCompanyName.textContent = "";
+    wrongDuns.textContent = "";
+    wrongProJobPosition.textContent = "";
 
     if (!nameRE.test(name.value)) {
         event.preventDefault();
@@ -106,13 +116,38 @@ function checkForm(event) {
         phone.focus();
     }
 
+    if ((pro_cb.checked==true) && proCompanyName.validity.valueMissing) {
+        event.preventDefault();
+        wrongProCompanyName.style.color = "red";
+        wrongProCompanyName.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> Raison sociale requise`;
+        pro_form.style.display="block";
+        email.focus();
+        proCompanyName.focus();
+    }
+    if ((pro_cb.checked==true) && proJobPosition.validity.valueMissing) {
+        event.preventDefault();
+        wrongProJobPosition.style.color = "red";
+        wrongProJobPosition.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> Poste requis`;
+        pro_form.style.display="block";
+        email.focus();
+        proJobPosition.focus();
+    }
     if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {
         event.preventDefault();
         wrongDuns.style.color = "orange";
         wrongDuns.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> Numéro invalide : entrée à 9 chiffres (ex: "123456789")`;
         pro_form.style.display="block";
+        email.focus();
         duns.focus();
-    } else wrongDuns.textContent = "";
+    }
+    if ((pro_cb.checked==true) && dunsRE.test(duns.valueMissing)) {
+        event.preventDefault();
+        wrongDuns.style.color = "red";
+        wrongDuns.innerHTML = `<i class='fa-solid fa-circle-exclamation'></i> DUNS requis : entrée à 9 chiffres (ex: "123456789")`;
+        pro_form.style.display="block";
+        email.focus();
+        duns.focus();
+    }
 }
 
 if (document.getElementById("submit")) {

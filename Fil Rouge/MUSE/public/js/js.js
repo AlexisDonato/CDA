@@ -1,6 +1,7 @@
 // Client side forms check
 
 function checkForm(event) {
+
     let name = document.querySelector(".LastNameField");
     let wrongName = document.getElementById('wrongName');
     let nameRE = new RegExp(/^[A-Z][a-zàéèêëîïôöûüùç.]+([ -][A-Z][a-zàéèêëîïôöûüùç.])*/);
@@ -23,16 +24,15 @@ function checkForm(event) {
 
     let pro_cb =document.getElementById("registration_form_pro");
 
-    let duns = document.getElementById("registration_form_proDuns");
-    let wrongDuns = document.getElementById("wrongDuns");
-    let dunsRE = new RegExp(/^[0-9]{9}$/);
-
     let proCompanyName = document.getElementById("registration_form_proCompanyName");
     let wrongProCompanyName = document.getElementById("wrongProCompanyName");
 
     let proJobPosition = document.getElementById("registration_form_proJobPosition");
     let wrongProJobPosition = document.getElementById("wrongProJobPosition");
 
+    let duns = document.getElementById("registration_form_proDuns");
+    let wrongDuns = document.getElementById("wrongDuns");
+    let dunsRE = new RegExp(/^[0-9]{9}$/);
 
     wrongFirstName.textContent = "";
     wrongName.textContent = "";
@@ -257,22 +257,3 @@ function payCard() {
             payCardForm.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
         }
 }
-
-
-// Nouislider
-
-// import noUiSlider from 'nouislider'
-// import 'nouislider/distribute/nouislider.css'
-
-// const slider = document.getElementById('price-slider');
-
-// if (slider) {
-//     noUiSlider.create(slider, {
-//         start: [20, 80],
-//         connect: true,
-//         range: {
-//             'min': 0,
-//             'max': 100
-//         }
-//     })
-// };

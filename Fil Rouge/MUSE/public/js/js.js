@@ -1,4 +1,4 @@
-// Client side Forms verification
+// Client side forms check
 
 function checkForm(event) {
     let name = document.querySelector(".LastNameField");
@@ -27,70 +27,77 @@ function checkForm(event) {
     let wrongDuns = document.getElementById("wrongDuns");
     let dunsRE = new RegExp(/^[0-9]{9}$/);
 
+    wrongFirstName.textContent = "";
+    wrongName.textContent = "";
+    wrongEmail.textContent = "";
+    wrongPassword.textContent = "";
+    wrongPhone.textContent = "";
+
+    if (!nameRE.test(name.value)) {
+        event.preventDefault();
+        wrongName.style.color = "orange";
+        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
+        name.focus();
+    }
     if (name.validity.valueMissing) {
         event.preventDefault();
         wrongName.style.color = "red";
         wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom requis";
         name.focus();
     }
-    if (!nameRE.test(name.value)) {
-        event.preventDefault();
-        wrongName.style.color = "orange";
-        wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
-        name.focus();
-    } else wrongName.textContent = "";
 
+    if (!firstNameRE.test(firstName.value)) {
+        event.preventDefault();
+        wrongFirstName.style.color = "orange";
+        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
+        firstName.focus();
+    }
     if (firstName.validity.valueMissing) {
         event.preventDefault();
         wrongFirstName.style.color = "red";
         wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom requis";
         firstName.focus();
     }
-    if (!firstNameRE.test(firstName.value)) {
-        event.preventDefault();
-        wrongFirstName.style.color = "orange";
-        wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
-        firstName.focus();
-    } else wrongFirstName.textContent = "";
 
+    if (!emailRE.test(email.value)) {
+        event.preventDefault();
+        wrongEmail.style.color = "orange";
+        wrongEmail.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Email invalide (ex: info_noreply@muse.com)";
+        email.focus();
+    }
     if (email.validity.valueMissing) {
         event.preventDefault();
         wrongEmail.style.color = "red";
         wrongEmail.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Email requis";
         email.focus();
     }
-    if (!emailRE.test(email.value)) {
-        event.preventDefault();
-        wrongEmail.style.color = "orange";
-        wrongEmail.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Email invalide (ex: info_noreply@muse.com)";
-        email.focus();
-    } else wrongEmail.textContent = "";
 
+    if (!passwordRE.test(password.value)) {
+        event.preventDefault();
+        wrongPassword.style.color = "orange";
+        wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
+        password.focus();
+    }
     if (password.validity.valueMissing) {
         event.preventDefault();
         wrongPassword.style.color = "red";
         wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe requis";
         password.focus();
     }
-    if (!passwordRE.test(password.value)) {
-        event.preventDefault();
-        wrongPassword.style.color = "orange";
-        wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
-        password.focus();
-    } else wrongPassword.textContent = "";
 
+    if (!phoneRE.test(phone.value)) {
+        event.preventDefault();
+        wrongPhone.style.color = "orange";
+        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, ou +33(0) 123 456 789)";
+        phone.focus();
+    }
     if (phone.validity.valueMissing) {
         event.preventDefault();
         wrongPhone.style.color = "red";
         wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone requis";
         phone.focus();
     }
-    if (!phoneRE.test(phone.value)) {
-        event.preventDefault();
-        wrongPhone.style.color = "orange";
-        wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, ou +33(0) 123 456 789)";
-        phone.focus();
-    } else wrongPhone.textContent = "";
+
     if ((pro_cb.checked==true) && !dunsRE.test(duns.value)) {
         event.preventDefault();
         wrongDuns.style.color = "orange";

@@ -37,12 +37,14 @@ function checkForm(event) {
         event.preventDefault();
         wrongName.style.color = "orange";
         wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
+        email.focus();
         name.focus();
     }
     if (name.validity.valueMissing) {
         event.preventDefault();
         wrongName.style.color = "red";
         wrongName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Nom requis";
+        email.focus();
         name.focus();
     }
 
@@ -50,12 +52,14 @@ function checkForm(event) {
         event.preventDefault();
         wrongFirstName.style.color = "orange";
         wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom invalide (numéros non autorisés, n'oubliez pas les majuscules)";
+        email.focus();
         firstName.focus();
     }
     if (firstName.validity.valueMissing) {
         event.preventDefault();
         wrongFirstName.style.color = "red";
         wrongFirstName.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Prénom requis";
+        email.focus();
         firstName.focus();
     }
 
@@ -76,12 +80,14 @@ function checkForm(event) {
         event.preventDefault();
         wrongPassword.style.color = "orange";
         wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe invalide (6 caractères, 1 majuscule, 1 minuscule et 1 chiffre minimum)";
+        email.focus();
         password.focus();
     }
     if (password.validity.valueMissing) {
         event.preventDefault();
         wrongPassword.style.color = "red";
         wrongPassword.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Mot de passe requis";
+        email.focus();
         password.focus();
     }
 
@@ -89,12 +95,14 @@ function checkForm(event) {
         event.preventDefault();
         wrongPhone.style.color = "orange";
         wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone invalide (ex: 0123456789, 01.23.45.67.89, ou +33(0) 123 456 789)";
+        email.focus();
         phone.focus();
     }
     if (phone.validity.valueMissing) {
         event.preventDefault();
         wrongPhone.style.color = "red";
         wrongPhone.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Numéro de téléphone requis";
+        email.focus();
         phone.focus();
     }
 
